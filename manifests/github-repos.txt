@@ -1,0 +1,6 @@
+git@github.com:jetteim/codex.git
+git@github.com:jetteim/skills.git
+git@github.com:jetteim/superpowers.git
+git@github.com:jetteim/playwright-mcp.git
+git@github.com:jetteim/servers.git
+

@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# User-wide Git safety net. Keep project-specific lint/test logic in each repo.
+
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  exit 0
+fi
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+staged_files=()
+while IFS= read -r file; do
+  staged_files+=("$file")
+done < <(git diff --cached --name-only --diff-filter=ACMR)
+
+if [ "${#staged_files[@]}" -eq 0 ]; then
+  exit 0
+fi
+
+fail=0
+warn=0
+
+echo "[global-hook] safety checks"
+
+secret_name_regex='(^|/)(\.env(\.|$)|id_rsa|id_ed25519|.*\.pem|.*\.p12|.*\.pfx|.*\.key)$'
+secret_content_regex='(-----BEGIN [A-Z ]*PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9_-]{20,}|xox[baprs]-[A-Za-z0-9-]{20,}|https://hooks\.slack\.com/services/[A-Za-z0-9/]+|AKIA[0-9A-Z]{16}|(api[_-]?key|secret|token|password|passwd)[[:space:]]*[:=][[:space:]]*['\''"]?[^'\'':"[:space:]]{12,})'
+
+for file in "${staged_files[@]}"; do
+  if [[ "$file" =~ $secret_name_regex ]]; then
+    case "$file" in
+      *.example|*.sample|*.template|*/fixtures/*|*/testdata/*)
+        ;;
+      *)
+        echo "[global-hook] blocked likely secret file: $file"
+        fail=1
+        ;;
+    esac
+  fi
+
+  if git show ":$file" 2>/dev/null | grep -nE '^(<<<<<<<|=======|>>>>>>>)' >/tmp/platform-hook-conflict.$$; then
+    echo "[global-hook] conflict markers in $file"
+    cat /tmp/platform-hook-conflict.$$ || true
+    fail=1
+  fi
+
+  if git show ":$file" 2>/dev/null | grep -q 'secret-scan: allow-patterns'; then
+    :
+  elif git show ":$file" 2>/dev/null | LC_ALL=C grep -nE "$secret_content_regex" >/tmp/platform-hook-secret.$$; then
+    echo "[global-hook] blocked high-confidence secret-like content in $file"
+    sed 's/:.*/:<REDACTED>/' /tmp/platform-hook-secret.$$ || true
+    fail=1
+  fi
+
+  size="$(git cat-file -s ":$file" 2>/dev/null || echo 0)"
+  if [ "$size" -gt 10485760 ]; then
+    echo "[global-hook] warning: staged file exceeds 10 MiB: $file ($size bytes)"
+    warn=1
+  fi
+done
+
+rm -f /tmp/platform-hook-conflict.$$ /tmp/platform-hook-secret.$$ 2>/dev/null || true
+
+if [ "$fail" -ne 0 ]; then
+  echo "[global-hook] failed"
+  exit 1
+fi
+
+if [ -x ".githooks/pre-commit" ]; then
+  echo "[global-hook] delegating to .githooks/pre-commit"
+  ".githooks/pre-commit"
+fi
+
+if [ -x ".git/hooks/pre-commit.local" ]; then
+  echo "[global-hook] delegating to .git/hooks/pre-commit.local"
+  ".git/hooks/pre-commit.local"
+fi
+
+if [ "$warn" -ne 0 ]; then
+  echo "[global-hook] passed with warnings"
+else
+  echo "[global-hook] passed"
+fi
