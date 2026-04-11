@@ -39,3 +39,23 @@ Current local pins:
 - MCP memory server npm package: `@modelcontextprotocol/server-memory@2026.1.26`
 - MCP GitHub server npm package: `@modelcontextprotocol/server-github@2025.4.8`
 
+## Vendored Skill Bundles
+
+This repository vendors full copies of the installed skill bundles so a clean machine can bootstrap from the repository even before plugin caches or external checkouts are populated.
+
+Vendored paths:
+
+```text
+skills/superpowers/
+skills/codex/
+skills/plugins/github/
+skills/plugins/google-drive/
+```
+
+`skills/superpowers/` comes from local Superpowers commit `eafe962b18f6c5dc70fb7c8cc7e83e61f4cdde06`.
+
+`skills/codex/` comes from the local Codex user skill directory, including system skills and installed document/spreadsheet/PDF/notebook skills.
+
+`skills/plugins/github/` and `skills/plugins/google-drive/` come from the enabled OpenAI-curated plugin cache.
+
+The vendored bundles are fallback/bootstrap material. Prefer refreshing the upstream forks first, then use these copies when a clean machine has not yet populated Codex skills or plugin caches.

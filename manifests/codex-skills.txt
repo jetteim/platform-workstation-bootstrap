@@ -1,4 +1,5 @@
 superpowers:brainstorming
+vendored:brainstorming
 superpowers:dispatching-parallel-agents
 superpowers:executing-plans
 superpowers:finishing-a-development-branch
@@ -32,4 +33,3 @@ plugin-google-drive:google-slides-import-presentation
 plugin-google-drive:google-slides-template-migration
 plugin-google-drive:google-slides-template-surgery
 plugin-google-drive:google-slides-visual-iteration
-
