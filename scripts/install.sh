@@ -25,20 +25,35 @@ import re
 import sys
 
 path = Path(sys.argv[1])
+required_features = {
+    "codex_hooks": "true",
+    "multi_agent": "true",
+}
+
 if not path.exists():
-    path.write_text('[features]\ncodex_hooks = true\n', encoding='utf-8')
+    path.write_text(
+        "[features]\n"
+        + "".join(f"{key} = {value}\n" for key, value in required_features.items()),
+        encoding="utf-8",
+    )
     raise SystemExit(0)
 
 text = path.read_text(encoding='utf-8')
 if re.search(r'(?m)^\[features\]\s*$', text):
-    if re.search(r'(?m)^codex_hooks\s*=', text):
-        text = re.sub(r'(?m)^codex_hooks\s*=.*$', 'codex_hooks = true', text)
-    else:
-        text = re.sub(r'(?m)^\[features\]\s*$', '[features]\ncodex_hooks = true', text, count=1)
+    for key, value in required_features.items():
+        replacement = f"{key} = {value}"
+        if re.search(rf'(?m)^{re.escape(key)}\s*=', text):
+            text = re.sub(rf'(?m)^{re.escape(key)}\s*=.*$', replacement, text)
+        else:
+            text = re.sub(r'(?m)^\[features\]\s*$', f'[features]\n{replacement}', text, count=1)
 else:
-    text = text.rstrip() + '\n\n[features]\ncodex_hooks = true\n'
+    text = (
+        text.rstrip()
+        + "\n\n[features]\n"
+        + "".join(f"{key} = {value}\n" for key, value in required_features.items())
+    )
 path.write_text(text, encoding='utf-8')
 PY
 
-echo "[install] installed Codex hooks, vendored skills, and global Git safety hook"
+echo "[install] installed Codex hooks, skills, source mirrors, and global Git safety hook"
 echo "[install] review codex/config.example.toml before changing live ~/.codex/config.toml further"

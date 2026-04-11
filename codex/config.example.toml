@@ -3,6 +3,7 @@ model_reasoning_effort = "high"
 
 [features]
 codex_hooks = true
+multi_agent = true
 
 [projects."/Users/maximlee"]
 trust_level = "trusted"
@@ -33,4 +34,3 @@ enabled = true
 
 [plugins."google-drive@openai-curated"]
 enabled = true
-

@@ -12,6 +12,18 @@ The bootstrap process expects these forks to exist and stay synced.
 | `microsoft/playwright-mcp` | `jetteim/playwright-mcp` | `@playwright/mcp` repository |
 | `modelcontextprotocol/servers` | `jetteim/servers` | MCP reference server repository |
 
+`scripts/refresh-github.sh` creates or syncs these forks. `scripts/install-skills.sh` then clones or updates the forks into the local source mirror locations below.
+
+| Fork | Local path | Role |
+| --- | --- | --- |
+| `jetteim/superpowers` | `~/.codex/superpowers` | Live native Codex skill source via `~/.agents/skills/superpowers` symlink |
+| `jetteim/skills` | `~/.codex/vendor_imports/skills` | OpenAI skills provenance and reinstall source |
+| `jetteim/codex` | `~/.codex/vendor_imports/repos/codex` | Codex source/reference mirror |
+| `jetteim/playwright-mcp` | `~/.codex/vendor_imports/repos/playwright-mcp` | Playwright MCP source/reference mirror |
+| `jetteim/servers` | `~/.codex/vendor_imports/repos/servers` | MCP reference server source mirror |
+
+The installer uses HTTPS clone URLs by default so a clean machine does not need SSH keys before bootstrap. GitHub CLI authentication is still required for fork refresh.
+
 ## NPM Packages
 
 Current Codex MCP config uses:
@@ -33,8 +45,12 @@ For repeatable setup:
 Current local pins:
 
 - Superpowers local commit: `eafe962b18f6c5dc70fb7c8cc7e83e61f4cdde06`
-- OpenAI skills local commit: `c207989386b30063bcecaf6b1977d761b244732e`
+- OpenAI skills local commit: `0ed2046f287a92b5f4bcace213dcb3cc5f094cb9`
+- Codex source mirror commit: `be13f03c396b54b85b858bd023bf930b06164e33`
+- Playwright MCP source mirror commit: `d3782155c40aabc3945673998bdbae83cb0dc94c`
+- MCP servers source mirror commit: `f4244583a6af9425633e433a3eec000d23f4e011`
 - Codex CLI npm package: `@openai/codex@0.120.0`
+- Codex Homebrew cask present: `codex 0.111.0`
 - Playwright MCP npm package: `@playwright/mcp@0.0.70`
 - MCP memory server npm package: `@modelcontextprotocol/server-memory@2026.1.26`
 - MCP GitHub server npm package: `@modelcontextprotocol/server-github@2025.4.8`
@@ -59,3 +75,5 @@ skills/plugins/google-drive/
 `skills/plugins/github/` and `skills/plugins/google-drive/` come from the enabled OpenAI-curated plugin cache.
 
 The vendored bundles are fallback/bootstrap material. Prefer refreshing the upstream forks first, then use these copies when a clean machine has not yet populated Codex skills or plugin caches.
+
+For the line-by-line comparison with original install instructions, see `docs/original-install-comparison.md`.

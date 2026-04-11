@@ -10,6 +10,12 @@ bash -n "$repo_root/scripts/install.sh"
 bash -n "$repo_root/scripts/verify.sh"
 bash -n "$repo_root/git/hooks/pre-commit"
 
+test -f "$repo_root/docs/original-install-comparison.md"
+grep -q 'SUPERPOWERS_REPO' "$repo_root/scripts/install-skills.sh"
+grep -q 'https://github.com/jetteim/superpowers.git' "$repo_root/scripts/install-skills.sh"
+grep -q 'multi_agent = true' "$repo_root/codex/config.example.toml"
+grep -q 'https://github.com/obra/superpowers/blob/main/.codex/INSTALL.md' "$repo_root/docs/original-install-comparison.md"
+
 test -f "$repo_root/skills/superpowers/brainstorming/SKILL.md"
 test -f "$repo_root/skills/superpowers/brainstorming/visual-companion.md"
 test -f "$repo_root/skills/superpowers/brainstorming/spec-document-reviewer-prompt.md"

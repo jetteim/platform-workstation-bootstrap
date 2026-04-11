@@ -24,22 +24,34 @@ That script checks `gh auth status`, creates missing forks, and syncs known depe
 ## Install
 
 ```bash
-./scripts/install-skills.sh
+gh auth login
+./scripts/refresh-github.sh
 ./scripts/install.sh
 ./scripts/verify.sh
 ```
 
-`install-skills.sh` is the explicit skill installer. It installs all vendored skills into local Codex/agent skill locations.
+`install-skills.sh` is the explicit skill installer. `install.sh` runs it automatically.
+
+The skill install order mirrors the original upstream setup:
+
+- Clone or update the Superpowers fork into `~/.codex/superpowers`.
+- Symlink `~/.agents/skills/superpowers` to `~/.codex/superpowers/skills`.
+- Clone or update source mirrors under `~/.codex/vendor_imports`.
+- Install vendored Codex and plugin skill fallback copies.
 
 `install.sh` installs:
 
 - `~/.codex/hooks.json`
 - `~/.codex/hooks/*.py`
-- vendored skills through `scripts/install-skills.sh`
+- source-backed skills and fallback skill bundles through `scripts/install-skills.sh`
 - `~/.config/git/hooks/pre-commit`
 - `git config --global core.hooksPath ~/.config/git/hooks`
+- `features.codex_hooks = true`
+- `features.multi_agent = true`
 
 It does not overwrite live credentials or private config files.
+
+See `docs/original-install-comparison.md` for the upstream install-step comparison.
 
 ## Included Skills
 
@@ -57,7 +69,9 @@ The Superpowers `brainstorming` skill is included with its full bundle:
 - `skills/superpowers/brainstorming/spec-document-reviewer-prompt.md`
 - `skills/superpowers/brainstorming/scripts/*`
 
-`scripts/install-skills.sh` installs vendored local Codex skills into `~/.codex/skills`, installs Superpowers skills into `~/.codex/superpowers/skills`, and places plugin-skill fallbacks under `~/.agents/skills`.
+`scripts/install-skills.sh` installs Superpowers from the forked source repo first. The vendored Superpowers copy is fallback material for offline or damaged-bootstrap cases.
+
+It also installs vendored local Codex skills into `~/.codex/skills` and places plugin-skill fallbacks under `~/.agents/skills`.
 
 ## Important Repositories
 
