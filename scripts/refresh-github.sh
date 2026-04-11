@@ -35,6 +35,6 @@ fork_or_sync "openai/skills" "skills" "main"
 fork_or_sync "openai/codex" "codex" "main"
 fork_or_sync "microsoft/playwright-mcp" "playwright-mcp" "main"
 fork_or_sync "modelcontextprotocol/servers" "servers" "main"
+fork_or_sync "diana-random1st/brain-skill" "brain-skill" "main"
 
 echo "[github] refresh complete"
-

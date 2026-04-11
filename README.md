@@ -71,7 +71,7 @@ The Superpowers `brainstorming` skill is included with its full bundle:
 
 `scripts/install-skills.sh` installs Superpowers from the forked source repo first. The vendored Superpowers copy is fallback material for offline or damaged-bootstrap cases.
 
-It also installs vendored local Codex skills into `~/.codex/skills` and places plugin-skill fallbacks under `~/.agents/skills`.
+It also installs vendored local Codex skills into `~/.codex/skills`, installs the external `brain` skill from its forked source mirror when available, and places plugin-skill fallbacks under `~/.agents/skills`.
 
 ## Important Repositories
 
@@ -84,6 +84,7 @@ The clean-machine path depends on these forks:
 | Superpowers skills, including full brainstorming bundle | `obra/superpowers` | `jetteim/superpowers` |
 | Playwright MCP server | `microsoft/playwright-mcp` | `jetteim/playwright-mcp` |
 | MCP reference servers | `modelcontextprotocol/servers` | `jetteim/servers` |
+| Local micro-model training skill | `diana-random1st/brain-skill` | `jetteim/brain-skill` |
 
 ## Why Keep A User-Wide Git Hook
 

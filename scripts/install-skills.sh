@@ -14,6 +14,7 @@ OPENAI_SKILLS_REPO="${OPENAI_SKILLS_REPO:-https://github.com/jetteim/skills.git}
 CODEX_REPO="${CODEX_REPO:-https://github.com/jetteim/codex.git}"
 PLAYWRIGHT_MCP_REPO="${PLAYWRIGHT_MCP_REPO:-https://github.com/jetteim/playwright-mcp.git}"
 MCP_SERVERS_REPO="${MCP_SERVERS_REPO:-https://github.com/jetteim/servers.git}"
+BRAIN_SKILL_REPO="${BRAIN_SKILL_REPO:-https://github.com/jetteim/brain-skill.git}"
 USE_VENDORED_FALLBACK="${USE_VENDORED_FALLBACK:-1}"
 
 clone_or_update() {
@@ -113,12 +114,19 @@ mkdir -p "$HOME/.codex/vendor_imports/repos"
 for mirror in \
   "$CODEX_REPO|$HOME/.codex/vendor_imports/repos/codex|Codex source mirror" \
   "$PLAYWRIGHT_MCP_REPO|$HOME/.codex/vendor_imports/repos/playwright-mcp|Playwright MCP source mirror" \
-  "$MCP_SERVERS_REPO|$HOME/.codex/vendor_imports/repos/servers|MCP servers source mirror"; do
+  "$MCP_SERVERS_REPO|$HOME/.codex/vendor_imports/repos/servers|MCP servers source mirror" \
+  "$BRAIN_SKILL_REPO|$HOME/.codex/vendor_imports/repos/brain-skill|Brain skill source mirror"; do
   IFS='|' read -r mirror_repo mirror_destination mirror_label <<<"$mirror"
   if ! clone_or_update "$mirror_repo" "$mirror_destination" "main" "$mirror_label"; then
     echo "[skills] ${mirror_label} was not refreshed; continuing with configured package install path" >&2
   fi
 done
+
+if [ -d "$HOME/.codex/vendor_imports/repos/brain-skill/skill" ]; then
+  install_tree "$HOME/.codex/vendor_imports/repos/brain-skill/skill" "$HOME/.codex/skills/brain" "Brain skill from source mirror"
+elif [ -d "$skills_root/codex/brain" ]; then
+  install_tree "$skills_root/codex/brain" "$HOME/.codex/skills/brain" "vendored Brain skill fallback"
+fi
 
 chmod_shebang_scripts "$HOME/.codex/skills"
 chmod_shebang_scripts "$HOME/.codex/superpowers/skills"

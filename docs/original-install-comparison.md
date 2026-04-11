@@ -149,6 +149,37 @@ Bootstrap match:
 
 Intentional difference: plugin fallback skills are not a replacement for enabling plugins. They only preserve the local skill instructions if plugin cache hydration changes or is temporarily unavailable.
 
+## Brain Skill
+
+Original source: <https://github.com/diana-random1st/brain-skill>
+
+Original install:
+
+```bash
+git clone https://github.com/diana-random1st/brain-skill.git
+cd brain-skill && ./install.sh
+```
+
+Original installer behavior:
+
+- If `~/.claude/skills` exists, install to `~/.claude/skills/brain`.
+- Else if `~/.codex/skills` exists, install to `~/.codex/skills/brain`.
+- Else create `~/.claude/skills` and install there.
+- Copy the repository `skill/` directory into the target.
+
+Bootstrap match:
+
+- Uses the fork `https://github.com/jetteim/brain-skill.git`.
+- Mirrors the full repo to `~/.codex/vendor_imports/repos/brain-skill`.
+- Installs `skill/` to `~/.codex/skills/brain`, which matches the Codex branch of the original installer.
+- Vendors the same `skill/` directory under `skills/codex/brain` for fallback installs.
+- Does not install heavy ML prerequisites automatically.
+
+Assessment and smoke-test results:
+
+- `docs/brain-skill-assessment.md`
+- `docs/brain-skill-smoke-test.md`
+
 ## Clean-Machine Sequence
 
 Use this order:

@@ -26,7 +26,7 @@ warn=0
 echo "[global-hook] safety checks"
 
 secret_name_regex='(^|/)(\.env(\.|$)|id_rsa|id_ed25519|.*\.pem|.*\.p12|.*\.pfx|.*\.key)$'
-secret_content_regex='(-----BEGIN [A-Z ]*PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9_-]{20,}|xox[baprs]-[A-Za-z0-9-]{20,}|https://hooks\.slack\.com/services/[A-Za-z0-9/]+|AKIA[0-9A-Z]{16}|(api[_-]?key|secret|token|password|passwd)[[:space:]]*[:=][[:space:]]*['\''"]?[^'\'':"[:space:]]{12,})'
+secret_content_regex='(-----BEGIN [A-Z ]*PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9_-]{20,}|xox[baprs]-[A-Za-z0-9-]{20,}|https://hooks\.slack\.com/services/[A-Za-z0-9/]+|AKIA[0-9A-Z]{16}|(api[_-]?key|secret|password|passwd|access[_-]?token|refresh[_-]?token|auth[_-]?token|github[_-]?token|slack[_-]?token)[[:space:]]*[:=][[:space:]]*['\''"]?[^'\'':"[:space:]]{12,})'
 
 for file in "${staged_files[@]}"; do
   if [[ "$file" =~ $secret_name_regex ]]; then

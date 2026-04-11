@@ -23,7 +23,7 @@ SECRET_REGEXES = [
     re.compile(r"\bxox[baprs]-[A-Za-z0-9-]{20,}\b"),
     re.compile(r"https://hooks\.slack\.com/services/[A-Za-z0-9/]+"),
     re.compile(r"\bAKIA[0-9A-Z]{16}\b"),
-    re.compile(r"(?i)(api[_-]?key|secret|token|password|passwd)\s*[:=]\s*['\"]?[^'\"\s]{12,}"),
+    re.compile(r"(?i)(api[_-]?key|secret|password|passwd|access[_-]?token|refresh[_-]?token|auth[_-]?token|github[_-]?token|slack[_-]?token)\s*[:=]\s*['\"]?[^'\"\s]{12,}"),
 ]
 
 DANGEROUS_COMMAND_REGEXES = [

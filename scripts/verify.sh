@@ -7,14 +7,20 @@ python3 -m py_compile "$repo_root/codex/hooks/codex_hook.py" "$repo_root/codex/h
 bash -n "$repo_root/scripts/refresh-github.sh"
 bash -n "$repo_root/scripts/install-skills.sh"
 bash -n "$repo_root/scripts/install.sh"
+bash -n "$repo_root/scripts/test-brain-skill.sh"
 bash -n "$repo_root/scripts/verify.sh"
 bash -n "$repo_root/git/hooks/pre-commit"
 
 test -f "$repo_root/docs/original-install-comparison.md"
+test -f "$repo_root/docs/brain-skill-assessment.md"
+test -f "$repo_root/docs/brain-skill-smoke-test.md"
 grep -q 'SUPERPOWERS_REPO' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/superpowers.git' "$repo_root/scripts/install-skills.sh"
+grep -q 'https://github.com/jetteim/brain-skill.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'multi_agent = true' "$repo_root/codex/config.example.toml"
 grep -q 'https://github.com/obra/superpowers/blob/main/.codex/INSTALL.md' "$repo_root/docs/original-install-comparison.md"
+grep -q 'diana-random1st/brain-skill' "$repo_root/scripts/refresh-github.sh"
+grep -q 'Outcome Score: 32/35' "$repo_root/docs/brain-skill-smoke-test.md"
 
 test -f "$repo_root/skills/superpowers/brainstorming/SKILL.md"
 test -f "$repo_root/skills/superpowers/brainstorming/visual-companion.md"
@@ -24,13 +30,14 @@ test -x "$repo_root/skills/superpowers/brainstorming/scripts/stop-server.sh"
 grep -q '^name: brainstorming$' "$repo_root/skills/superpowers/brainstorming/SKILL.md"
 
 skill_count="$(find "$repo_root/skills" -name SKILL.md | wc -l | tr -d ' ')"
-if [ "$skill_count" -lt 39 ]; then
-  echo "expected at least 39 vendored skills, found $skill_count" >&2
+if [ "$skill_count" -lt 40 ]; then
+  echo "expected at least 40 vendored skills, found $skill_count" >&2
   exit 1
 fi
 
 for required in \
   "$repo_root/skills/codex/.system/openai-docs/SKILL.md" \
+  "$repo_root/skills/codex/brain/SKILL.md" \
   "$repo_root/skills/plugins/github/yeet/SKILL.md" \
   "$repo_root/skills/plugins/google-drive/google-drive/SKILL.md" \
   "$repo_root/skills/superpowers/test-driven-development/SKILL.md"; do
