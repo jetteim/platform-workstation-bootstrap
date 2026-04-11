@@ -24,14 +24,18 @@ That script checks `gh auth status`, creates missing forks, and syncs known depe
 ## Install
 
 ```bash
+./scripts/install-skills.sh
 ./scripts/install.sh
 ./scripts/verify.sh
 ```
+
+`install-skills.sh` is the explicit skill installer. It installs all vendored skills into local Codex/agent skill locations.
 
 `install.sh` installs:
 
 - `~/.codex/hooks.json`
 - `~/.codex/hooks/*.py`
+- vendored skills through `scripts/install-skills.sh`
 - `~/.config/git/hooks/pre-commit`
 - `git config --global core.hooksPath ~/.config/git/hooks`
 
@@ -53,7 +57,7 @@ The Superpowers `brainstorming` skill is included with its full bundle:
 - `skills/superpowers/brainstorming/spec-document-reviewer-prompt.md`
 - `skills/superpowers/brainstorming/scripts/*`
 
-`install.sh` installs vendored local Codex skills into `~/.codex/skills`, installs Superpowers skills into `~/.codex/superpowers/skills` on clean machines, and places plugin-skill fallbacks under `~/.agents/skills`.
+`scripts/install-skills.sh` installs vendored local Codex skills into `~/.codex/skills`, installs Superpowers skills into `~/.codex/superpowers/skills`, and places plugin-skill fallbacks under `~/.agents/skills`.
 
 ## Important Repositories
 

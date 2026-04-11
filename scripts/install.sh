@@ -8,30 +8,12 @@ if [ "${SKIP_GITHUB_REFRESH:-0}" != "1" ]; then
 fi
 
 mkdir -p "$HOME/.codex/hooks" "$HOME/.config/git/hooks"
-mkdir -p "$HOME/.codex/skills" "$HOME/.agents/skills"
 
 cp "$repo_root/codex/hooks/"*.py "$HOME/.codex/hooks/"
 chmod +x "$HOME/.codex/hooks/codex_hook.py"
 cp "$repo_root/codex/hooks.json" "$HOME/.codex/hooks.json"
 
-cp -R "$repo_root/skills/codex/." "$HOME/.codex/skills/"
-
-if [ ! -d "$HOME/.codex/superpowers/.git" ]; then
-  mkdir -p "$HOME/.codex/superpowers/skills"
-  cp -R "$repo_root/skills/superpowers/." "$HOME/.codex/superpowers/skills/"
-else
-  echo "[install] existing ~/.codex/superpowers git checkout found; leaving it managed by GitHub refresh"
-fi
-
-if [ ! -e "$HOME/.agents/skills/superpowers" ]; then
-  ln -s "$HOME/.codex/superpowers/skills" "$HOME/.agents/skills/superpowers"
-fi
-
-mkdir -p "$HOME/.agents/skills/plugin-github" "$HOME/.agents/skills/plugin-google-drive"
-cp -R "$repo_root/skills/plugins/github/." "$HOME/.agents/skills/plugin-github/"
-cp -R "$repo_root/skills/plugins/google-drive/." "$HOME/.agents/skills/plugin-google-drive/"
-
-find "$HOME/.codex/skills" "$HOME/.agents/skills" -type f -path "*/scripts/*" -exec chmod +x {} \; 2>/dev/null || true
+"$repo_root/scripts/install-skills.sh"
 
 cp "$repo_root/git/hooks/pre-commit" "$HOME/.config/git/hooks/pre-commit"
 chmod +x "$HOME/.config/git/hooks/pre-commit"

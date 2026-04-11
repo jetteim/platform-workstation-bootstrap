@@ -5,6 +5,7 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 python3 -m py_compile "$repo_root/codex/hooks/codex_hook.py" "$repo_root/codex/hooks/policy.py" "$repo_root/codex/hooks/redact.py"
 bash -n "$repo_root/scripts/refresh-github.sh"
+bash -n "$repo_root/scripts/install-skills.sh"
 bash -n "$repo_root/scripts/install.sh"
 bash -n "$repo_root/scripts/verify.sh"
 bash -n "$repo_root/git/hooks/pre-commit"
@@ -21,6 +22,14 @@ if [ "$skill_count" -lt 39 ]; then
   echo "expected at least 39 vendored skills, found $skill_count" >&2
   exit 1
 fi
+
+for required in \
+  "$repo_root/skills/codex/.system/openai-docs/SKILL.md" \
+  "$repo_root/skills/plugins/github/yeet/SKILL.md" \
+  "$repo_root/skills/plugins/google-drive/google-drive/SKILL.md" \
+  "$repo_root/skills/superpowers/test-driven-development/SKILL.md"; do
+  test -f "$required"
+done
 
 python3 "$repo_root/codex/hooks/codex_hook.py" UserPromptSubmit <<'JSON' >/tmp/platform-hook-test.out
 {"session_id":"test","turn_id":"test","cwd":"/tmp","model":"test","permission_mode":"default","prompt":"please check production terraform reliability and logs"}
