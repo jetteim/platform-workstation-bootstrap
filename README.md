@@ -53,6 +53,16 @@ It does not overwrite live credentials or private config files.
 
 See `docs/original-install-comparison.md` for the upstream install-step comparison.
 
+Optional Brain/MLX validation:
+
+```bash
+./scripts/install-brain-prereqs.sh
+./scripts/run-brain-mlx-smoke.sh
+./scripts/test-brain-skill.sh
+```
+
+This installs the local MLX training environment under `~/.codex/mlx`, mirrors `llama.cpp`, trains a small Kubernetes command-risk classifier, fuses the adapter, and exports a Q8 GGUF model under `~/.codex/mlx/runs/k8s-risk-classifier`.
+
 ## Included Skills
 
 This repo vendors full installable skill bundles, not only prompts:
@@ -85,6 +95,7 @@ The clean-machine path depends on these forks:
 | Playwright MCP server | `microsoft/playwright-mcp` | `jetteim/playwright-mcp` |
 | MCP reference servers | `modelcontextprotocol/servers` | `jetteim/servers` |
 | Local micro-model training skill | `diana-random1st/brain-skill` | `jetteim/brain-skill` |
+| GGUF conversion for local model runs | `ggml-org/llama.cpp` | `jetteim/llama.cpp` |
 
 ## Why Keep A User-Wide Git Hook
 

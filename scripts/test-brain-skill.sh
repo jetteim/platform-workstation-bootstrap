@@ -5,6 +5,7 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 codex_home="${CODEX_HOME:-$HOME/.codex}"
 skill_path="$codex_home/skills/brain/SKILL.md"
 mirror_path="$codex_home/vendor_imports/repos/brain-skill"
+brain_python="$codex_home/mlx/brain-venv/bin/python"
 
 require_file() {
   local path="$1"
@@ -50,13 +51,21 @@ for command in uv cmake; do
   fi
 done
 
+if [ ! -x "$brain_python" ]; then
+  echo "[brain-test] prereq python venv: missing at $brain_python"
+  missing_prereqs=1
+  brain_python="python3"
+else
+  echo "[brain-test] prereq python venv: present"
+fi
+
 set +e
-python3 - <<'PY'
+"$brain_python" - <<'PY'
+import importlib.util
+
 missing = []
-for mod in ("mlx", "mlx_lm"):
-    try:
-        __import__(mod)
-    except Exception:
+for mod in ("mlx", "mlx_lm", "torch"):
+    if importlib.util.find_spec(mod) is None:
         missing.append(mod)
 if missing:
     print("[brain-test] prereq python modules: missing " + ", ".join(missing))

@@ -15,6 +15,7 @@ CODEX_REPO="${CODEX_REPO:-https://github.com/jetteim/codex.git}"
 PLAYWRIGHT_MCP_REPO="${PLAYWRIGHT_MCP_REPO:-https://github.com/jetteim/playwright-mcp.git}"
 MCP_SERVERS_REPO="${MCP_SERVERS_REPO:-https://github.com/jetteim/servers.git}"
 BRAIN_SKILL_REPO="${BRAIN_SKILL_REPO:-https://github.com/jetteim/brain-skill.git}"
+LLAMA_CPP_REPO="${LLAMA_CPP_REPO:-https://github.com/jetteim/llama.cpp.git}"
 USE_VENDORED_FALLBACK="${USE_VENDORED_FALLBACK:-1}"
 
 clone_or_update() {
@@ -112,12 +113,13 @@ fi
 
 mkdir -p "$HOME/.codex/vendor_imports/repos"
 for mirror in \
-  "$CODEX_REPO|$HOME/.codex/vendor_imports/repos/codex|Codex source mirror" \
-  "$PLAYWRIGHT_MCP_REPO|$HOME/.codex/vendor_imports/repos/playwright-mcp|Playwright MCP source mirror" \
-  "$MCP_SERVERS_REPO|$HOME/.codex/vendor_imports/repos/servers|MCP servers source mirror" \
-  "$BRAIN_SKILL_REPO|$HOME/.codex/vendor_imports/repos/brain-skill|Brain skill source mirror"; do
-  IFS='|' read -r mirror_repo mirror_destination mirror_label <<<"$mirror"
-  if ! clone_or_update "$mirror_repo" "$mirror_destination" "main" "$mirror_label"; then
+  "$CODEX_REPO|$HOME/.codex/vendor_imports/repos/codex|main|Codex source mirror" \
+  "$PLAYWRIGHT_MCP_REPO|$HOME/.codex/vendor_imports/repos/playwright-mcp|main|Playwright MCP source mirror" \
+  "$MCP_SERVERS_REPO|$HOME/.codex/vendor_imports/repos/servers|main|MCP servers source mirror" \
+  "$BRAIN_SKILL_REPO|$HOME/.codex/vendor_imports/repos/brain-skill|main|Brain skill source mirror" \
+  "$LLAMA_CPP_REPO|$HOME/.codex/vendor_imports/repos/llama.cpp|master|llama.cpp source mirror"; do
+  IFS='|' read -r mirror_repo mirror_destination mirror_branch mirror_label <<<"$mirror"
+  if ! clone_or_update "$mirror_repo" "$mirror_destination" "$mirror_branch" "$mirror_label"; then
     echo "[skills] ${mirror_label} was not refreshed; continuing with configured package install path" >&2
   fi
 done

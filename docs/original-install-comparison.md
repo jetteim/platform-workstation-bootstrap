@@ -173,7 +173,8 @@ Bootstrap match:
 - Mirrors the full repo to `~/.codex/vendor_imports/repos/brain-skill`.
 - Installs `skill/` to `~/.codex/skills/brain`, which matches the Codex branch of the original installer.
 - Vendors the same `skill/` directory under `skills/codex/brain` for fallback installs.
-- Does not install heavy ML prerequisites automatically.
+- Keeps heavy ML prerequisites in explicit script `scripts/install-brain-prereqs.sh`.
+- Mirrors `https://github.com/jetteim/llama.cpp.git` to `~/.codex/vendor_imports/repos/llama.cpp` for GGUF conversion.
 
 Assessment and smoke-test results:
 
