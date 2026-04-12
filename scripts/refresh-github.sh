@@ -59,5 +59,7 @@ ensure_owned_repo() {
 
 ensure_owned_repo "platform-observability-model" "private" "Platform-agnostic observability intent model"
 ensure_owned_repo "observability-engineering" "public" "Codex skill for platform-agnostic observability engineering"
+ensure_owned_repo "platform-reliability-model" "private" "Platform-agnostic reliability intent model"
+ensure_owned_repo "reliability-engineering" "public" "Codex skill for platform-agnostic reliability engineering"
 
 echo "[github] refresh complete"

@@ -24,6 +24,8 @@ The bootstrap also expects these owned repositories. They are not forks.
 | --- | --- | --- |
 | `jetteim/platform-observability-model` | Private | Platform-agnostic observability intent model |
 | `jetteim/observability-engineering` | Public | Codex skill for building observability from the model |
+| `jetteim/platform-reliability-model` | Private | Platform-agnostic reliability intent model |
+| `jetteim/reliability-engineering` | Public | Codex skill for building reliability from the model |
 
 | Fork | Local path | Role |
 | --- | --- | --- |
@@ -36,6 +38,8 @@ The bootstrap also expects these owned repositories. They are not forks.
 | `jetteim/llama.cpp` | `~/.codex/vendor_imports/repos/llama.cpp` | llama.cpp source mirror for GGUF conversion |
 | `jetteim/platform-observability-model` | `~/.codex/vendor_imports/repos/platform-observability-model` | Private source-of-truth observability model |
 | `jetteim/observability-engineering` | `~/.codex/vendor_imports/repos/observability-engineering` | Observability engineering skill source mirror |
+| `jetteim/platform-reliability-model` | `~/.codex/vendor_imports/repos/platform-reliability-model` | Private source-of-truth reliability model |
+| `jetteim/reliability-engineering` | `~/.codex/vendor_imports/repos/reliability-engineering` | Reliability engineering skill source mirror |
 
 The installer uses HTTPS clone URLs by default so a clean machine does not need SSH keys before bootstrap. GitHub CLI authentication is still required for fork refresh.
 
@@ -92,6 +96,8 @@ skills/plugins/google-drive/
 `skills/codex/brain/` comes from `jetteim/brain-skill` commit `73789527637114b2a3745b2da9afa64fa8c1b7fa`.
 
 `skills/codex/observability-engineering/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
+
+`skills/codex/reliability-engineering/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
 
 `skills/plugins/github/` and `skills/plugins/google-drive/` come from the enabled OpenAI-curated plugin cache.
 

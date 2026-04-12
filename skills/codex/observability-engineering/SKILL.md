@@ -31,6 +31,8 @@ Use this skill for:
 
 Do not use this skill for one-off debugging of a single incident unless the task asks to improve the observability model or generated artifacts.
 
+If the task is primarily about incident aftercare, postmortems, miss-policy, action items, resilience experiments, or operational readiness, use `reliability-engineering` instead. Use this skill only for the telemetry, SLO binding, alert, dashboard, or backend artifact portions.
+
 ## Core Rules
 
 1. Start from intent, not backend syntax.

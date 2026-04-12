@@ -27,6 +27,7 @@ This is a practical prompt map for the vendored skills in this workstation boots
 | --- | --- |
 | `brain` | "Train a micro classifier for risky kubectl commands", "Fine-tune a local model for alert triage", "Build a local command router", "Export a GGUF classifier" |
 | `observability-engineering` | "Build observability for this platform", "Define SLOs for this service", "Generate telemetry backend artifacts", "Migrate sre-rules into SLO intents", "Enforce OpenTelemetry semantic conventions" |
+| `reliability-engineering` | "Build reliability model", "Assess service reliability", "Write a postmortem from incident evidence", "Turn postmortem findings into action items", "Define a miss policy", "Plan a resilience experiment" |
 | `openai-docs` | "What is the current OpenAI API for responses?", "How do I upgrade this prompt to GPT-5.4?", "Which current OpenAI model should I use?" |
 | `imagegen` | "Generate a transparent icon", "Create a raster illustration", "Edit this image into variants" |
 | `skill-installer` | "Install a skill from openai/skills", "List curated skills", "Install this skill from a GitHub URL" |
