@@ -55,6 +55,7 @@ test -d "$HOME/Library/CloudStorage/OneDrive-Personal/Pet projects/platform-obse
 If present, read only the relevant files:
 
 - `docs/intent/principles.md`
+- `docs/usage-scenarios/service-onboarding-to-observability.md` when onboarding or preparing service observability
 - `docs/intent/semantic-conventions.md`
 - `docs/intent/alert-context-contract.md`
 - `docs/intent/decision-dashboard-model.md`
@@ -64,6 +65,8 @@ If present, read only the relevant files:
 - `docs/migration/*.md` when SRE rules are involved
 
 If missing, use `references/observability-model-summary.md`.
+
+When a usage scenario applies, follow it as the execution contract. The scenario defines expected inputs, outputs, refusal conditions, human review gates, and completion criteria.
 
 ### 2. Discover Current Reality
 
@@ -103,6 +106,8 @@ Separate:
 - `GeneratedArtifactManifest`
 
 Record instrumentation gaps instead of inventing fake telemetry bindings.
+
+For service onboarding, produce the artifacts described by `docs/usage-scenarios/service-onboarding-to-observability.md`: service intent, semantic convention updates, SLO intent, SLI query bindings, alert or notification classifications, decision dashboard intent, generated artifact manifest, and enforcement recommendations.
 
 ### 5. Classify Alerts
 
@@ -148,4 +153,3 @@ Before claiming completion, check:
 - Paging on symptoms that do not require immediate human action.
 - Creating alerts without playbook actions or scoped dashboards.
 - Migrating old SRE rules one-to-one instead of reclassifying them by intent.
-
