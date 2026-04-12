@@ -16,6 +16,8 @@ PLAYWRIGHT_MCP_REPO="${PLAYWRIGHT_MCP_REPO:-https://github.com/jetteim/playwrigh
 MCP_SERVERS_REPO="${MCP_SERVERS_REPO:-https://github.com/jetteim/servers.git}"
 BRAIN_SKILL_REPO="${BRAIN_SKILL_REPO:-https://github.com/jetteim/brain-skill.git}"
 LLAMA_CPP_REPO="${LLAMA_CPP_REPO:-https://github.com/jetteim/llama.cpp.git}"
+PLATFORM_OBSERVABILITY_MODEL_REPO="${PLATFORM_OBSERVABILITY_MODEL_REPO:-https://github.com/jetteim/platform-observability-model.git}"
+OBSERVABILITY_ENGINEERING_REPO="${OBSERVABILITY_ENGINEERING_REPO:-https://github.com/jetteim/observability-engineering.git}"
 USE_VENDORED_FALLBACK="${USE_VENDORED_FALLBACK:-1}"
 
 clone_or_update() {
@@ -117,7 +119,9 @@ for mirror in \
   "$PLAYWRIGHT_MCP_REPO|$HOME/.codex/vendor_imports/repos/playwright-mcp|main|Playwright MCP source mirror" \
   "$MCP_SERVERS_REPO|$HOME/.codex/vendor_imports/repos/servers|main|MCP servers source mirror" \
   "$BRAIN_SKILL_REPO|$HOME/.codex/vendor_imports/repos/brain-skill|main|Brain skill source mirror" \
-  "$LLAMA_CPP_REPO|$HOME/.codex/vendor_imports/repos/llama.cpp|master|llama.cpp source mirror"; do
+  "$LLAMA_CPP_REPO|$HOME/.codex/vendor_imports/repos/llama.cpp|master|llama.cpp source mirror" \
+  "$PLATFORM_OBSERVABILITY_MODEL_REPO|$HOME/.codex/vendor_imports/repos/platform-observability-model|main|Platform observability model source mirror" \
+  "$OBSERVABILITY_ENGINEERING_REPO|$HOME/.codex/vendor_imports/repos/observability-engineering|main|Observability engineering skill source mirror"; do
   IFS='|' read -r mirror_repo mirror_destination mirror_branch mirror_label <<<"$mirror"
   if ! clone_or_update "$mirror_repo" "$mirror_destination" "$mirror_branch" "$mirror_label"; then
     echo "[skills] ${mirror_label} was not refreshed; continuing with configured package install path" >&2
@@ -128,6 +132,12 @@ if [ -d "$HOME/.codex/vendor_imports/repos/brain-skill/skill" ]; then
   install_tree "$HOME/.codex/vendor_imports/repos/brain-skill/skill" "$HOME/.codex/skills/brain" "Brain skill from source mirror"
 elif [ -d "$skills_root/codex/brain" ]; then
   install_tree "$skills_root/codex/brain" "$HOME/.codex/skills/brain" "vendored Brain skill fallback"
+fi
+
+if [ -d "$HOME/.codex/vendor_imports/repos/observability-engineering/skill/observability-engineering" ]; then
+  install_tree "$HOME/.codex/vendor_imports/repos/observability-engineering/skill/observability-engineering" "$HOME/.codex/skills/observability-engineering" "Observability engineering skill from source mirror"
+elif [ -d "$skills_root/codex/observability-engineering" ]; then
+  install_tree "$skills_root/codex/observability-engineering" "$HOME/.codex/skills/observability-engineering" "vendored Observability engineering skill fallback"
 fi
 
 chmod_shebang_scripts "$HOME/.codex/skills"

@@ -22,10 +22,14 @@ grep -q 'SUPERPOWERS_REPO' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/superpowers.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/brain-skill.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/llama.cpp.git' "$repo_root/scripts/install-skills.sh"
+grep -q 'https://github.com/jetteim/platform-observability-model.git' "$repo_root/scripts/install-skills.sh"
+grep -q 'https://github.com/jetteim/observability-engineering.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'multi_agent = true' "$repo_root/codex/config.example.toml"
 grep -q 'https://github.com/obra/superpowers/blob/main/.codex/INSTALL.md' "$repo_root/docs/original-install-comparison.md"
 grep -q 'diana-random1st/brain-skill' "$repo_root/scripts/refresh-github.sh"
 grep -q 'ggml-org/llama.cpp' "$repo_root/scripts/refresh-github.sh"
+grep -q 'platform-observability-model' "$repo_root/scripts/refresh-github.sh"
+grep -q 'observability-engineering' "$repo_root/scripts/refresh-github.sh"
 grep -q 'Outcome Score: 32/35' "$repo_root/docs/brain-skill-smoke-test.md"
 
 brain_run_summary="$HOME/.codex/mlx/runs/k8s-risk-classifier/reports/run-summary.json"
@@ -50,6 +54,7 @@ fi
 for required in \
   "$repo_root/skills/codex/.system/openai-docs/SKILL.md" \
   "$repo_root/skills/codex/brain/SKILL.md" \
+  "$repo_root/skills/codex/observability-engineering/SKILL.md" \
   "$repo_root/skills/plugins/github/yeet/SKILL.md" \
   "$repo_root/skills/plugins/google-drive/google-drive/SKILL.md" \
   "$repo_root/skills/superpowers/test-driven-development/SKILL.md"; do

@@ -16,6 +16,15 @@ The bootstrap process expects these forks to exist and stay synced.
 
 `scripts/refresh-github.sh` creates or syncs these forks. `scripts/install-skills.sh` then clones or updates the forks into the local source mirror locations below.
 
+## Owned Repositories
+
+The bootstrap also expects these owned repositories. They are not forks.
+
+| Repository | Visibility | Why |
+| --- | --- | --- |
+| `jetteim/platform-observability-model` | Private | Platform-agnostic observability intent model |
+| `jetteim/observability-engineering` | Public | Codex skill for building observability from the model |
+
 | Fork | Local path | Role |
 | --- | --- | --- |
 | `jetteim/superpowers` | `~/.codex/superpowers` | Live native Codex skill source via `~/.agents/skills/superpowers` symlink |
@@ -25,6 +34,8 @@ The bootstrap process expects these forks to exist and stay synced.
 | `jetteim/servers` | `~/.codex/vendor_imports/repos/servers` | MCP reference server source mirror |
 | `jetteim/brain-skill` | `~/.codex/vendor_imports/repos/brain-skill` | Brain skill source mirror; installs `skill/` to `~/.codex/skills/brain` |
 | `jetteim/llama.cpp` | `~/.codex/vendor_imports/repos/llama.cpp` | llama.cpp source mirror for GGUF conversion |
+| `jetteim/platform-observability-model` | `~/.codex/vendor_imports/repos/platform-observability-model` | Private source-of-truth observability model |
+| `jetteim/observability-engineering` | `~/.codex/vendor_imports/repos/observability-engineering` | Observability engineering skill source mirror |
 
 The installer uses HTTPS clone URLs by default so a clean machine does not need SSH keys before bootstrap. GitHub CLI authentication is still required for fork refresh.
 
@@ -79,6 +90,8 @@ skills/plugins/google-drive/
 `skills/codex/` comes from the local Codex user skill directory, including system skills and installed document/spreadsheet/PDF/notebook skills.
 
 `skills/codex/brain/` comes from `jetteim/brain-skill` commit `73789527637114b2a3745b2da9afa64fa8c1b7fa`.
+
+`skills/codex/observability-engineering/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
 
 `skills/plugins/github/` and `skills/plugins/google-drive/` come from the enabled OpenAI-curated plugin cache.
 

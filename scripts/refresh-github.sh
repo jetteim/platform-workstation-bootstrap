@@ -38,4 +38,25 @@ fork_or_sync "modelcontextprotocol/servers" "servers" "main"
 fork_or_sync "diana-random1st/brain-skill" "brain-skill" "main"
 fork_or_sync "ggml-org/llama.cpp" "llama.cpp" "master"
 
+ensure_owned_repo() {
+  local name="$1"
+  local visibility="$2"
+  local description="$3"
+  local repo="${owner}/${name}"
+
+  echo "[github] ensure ${repo}"
+  if gh repo view "$repo" --json nameWithOwner >/dev/null 2>&1; then
+    return 0
+  fi
+
+  if [ "$visibility" = "private" ]; then
+    gh repo create "$repo" --private --description "$description"
+  else
+    gh repo create "$repo" --public --description "$description"
+  fi
+}
+
+ensure_owned_repo "platform-observability-model" "private" "Platform-agnostic observability intent model"
+ensure_owned_repo "observability-engineering" "public" "Codex skill for platform-agnostic observability engineering"
+
 echo "[github] refresh complete"

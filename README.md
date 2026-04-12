@@ -38,6 +38,7 @@ The skill install order mirrors the original upstream setup:
 - Symlink `~/.agents/skills/superpowers` to `~/.codex/superpowers/skills`.
 - Clone or update source mirrors under `~/.codex/vendor_imports`.
 - Install vendored Codex and plugin skill fallback copies.
+- Clone the private platform observability model and public observability engineering skill repos when GitHub access allows.
 
 `install.sh` installs:
 
@@ -96,6 +97,8 @@ The clean-machine path depends on these forks:
 | MCP reference servers | `modelcontextprotocol/servers` | `jetteim/servers` |
 | Local micro-model training skill | `diana-random1st/brain-skill` | `jetteim/brain-skill` |
 | GGUF conversion for local model runs | `ggml-org/llama.cpp` | `jetteim/llama.cpp` |
+| Platform observability model | owned repo | `jetteim/platform-observability-model` |
+| Observability engineering skill | owned repo | `jetteim/observability-engineering` |
 
 ## Why Keep A User-Wide Git Hook
 
