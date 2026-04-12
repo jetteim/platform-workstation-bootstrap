@@ -29,6 +29,7 @@ fork_or_sync() {
 
 require gh
 gh auth status
+gh auth setup-git
 
 fork_or_sync "obra/superpowers" "superpowers" "main"
 fork_or_sync "openai/skills" "skills" "main"

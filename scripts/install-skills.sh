@@ -83,6 +83,10 @@ chmod_shebang_scripts() {
 
 mkdir -p "$HOME/.codex/skills" "$HOME/.agents/skills"
 
+if command -v gh >/dev/null 2>&1; then
+  gh auth setup-git >/dev/null 2>&1 || true
+fi
+
 superpowers_ready=0
 if clone_or_update "$SUPERPOWERS_REPO" "$HOME/.codex/superpowers" "main" "Superpowers repo"; then
   superpowers_ready=1

@@ -19,7 +19,7 @@ Always refresh GitHub and dependency forks first:
 ./scripts/refresh-github.sh
 ```
 
-That script checks `gh auth status`, creates missing forks, and syncs known dependency forks from upstream.
+That script checks `gh auth status`, runs `gh auth setup-git` so private HTTPS clones can use GitHub CLI credentials, creates missing forks, and syncs known dependency forks from upstream.
 
 ## Install
 
