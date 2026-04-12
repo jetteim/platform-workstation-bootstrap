@@ -1,6 +1,6 @@
 ---
 name: reliability-engineering
-description: Use when building reliability models, assessing service reliability, handling incident aftercare, writing postmortems, creating action items, defining miss-policy, planning resilience experiments, or reviewing operational readiness.
+description: Use when building reliability models, choosing SLIs/SLOs, assessing service reliability, handling incident aftercare, writing postmortems, creating action items, defining miss-policy, planning resilience experiments, or reviewing operational readiness.
 ---
 
 # Reliability Engineering
@@ -22,6 +22,8 @@ Preferred model path:
 Use this skill for:
 
 - service reliability onboarding
+- SLI/SLO definition and review
+- generating SLI/SLO candidates from measured service telemetry
 - operational readiness reviews
 - dependency resilience reviews
 - incident record normalization
@@ -44,6 +46,7 @@ Do not use this skill for generating telemetry backend monitors, dashboards, or 
 6. Treat SLO misses and incidents as related but not identical.
 7. Use miss-policy as a pre-agreed operating mode.
 8. Use observability artifacts as evidence, not as the reliability model itself.
+9. Reliability owns SLI/SLO choice, objective realism, calculation basis, error-budget policy, and miss-policy.
 
 ## Workflow
 
@@ -60,7 +63,13 @@ If present, read only the relevant files:
 - `docs/intent/principles.md`
 - `docs/intent/reliability-boundaries.md`
 - `docs/usage-scenarios/service-reliability-onboarding.md` when onboarding or reviewing a service
+- `docs/usage-scenarios/telemetry-derived-sli-slo-onboarding.md` when generating SLIs/SLOs from measured telemetry
+- `docs/usage-scenarios/sli-slo-definition-and-review.md` when defining or reviewing SLIs/SLOs
 - `docs/usage-scenarios/incident-to-postmortem-to-learning.md` when working on incidents or postmortems
+- `docs/intent/service-level-definition-model.md`
+- `docs/intent/sli-slo-selection-model.md`
+- `docs/intent/error-budget-alerting-model.md`
+- `docs/intent/reliability-recommendations-model.md`
 - `docs/intent/incident-model.md`
 - `docs/intent/postmortem-model.md`
 - `docs/intent/contributing-causes-model.md`
@@ -79,6 +88,8 @@ When a usage scenario applies, follow it as the execution contract. The scenario
 Classify the work before producing output:
 
 - service reliability profile
+- telemetry-derived SLI/SLO onboarding
+- SLI/SLO definition or review
 - operational readiness review
 - dependency resilience review
 - incident record
@@ -94,6 +105,7 @@ Inventory only what is needed:
 
 - service ownership and escalation
 - affected capabilities and users
+- measured service telemetry and historical behavior
 - dependencies and failure modes
 - timeline events
 - deployments and changes
@@ -109,6 +121,7 @@ Preserve links, screenshots, logs, traces, metrics, and relevant notes before re
 Produce neutral objects as needed:
 
 - `ServiceReliabilityProfile`
+- `ServiceLevelDefinition`
 - `DependencyProfile`
 - `OperationalReadinessCheck`
 - `IncidentRecord`
@@ -121,7 +134,30 @@ Produce neutral objects as needed:
 
 Record gaps instead of inventing missing facts.
 
-### 5. Analyze And Review
+### 5. Define Or Review SLIs And SLOs
+
+When the task involves service reliability, always check whether SLI/SLO work is needed.
+
+Follow these rules:
+
+- inventory measured telemetry before generating candidates
+- map measured telemetry to latency, traffic, errors, saturation, freshness, availability, and user journeys
+- reject telemetry that cannot be explained as user-visible service quality
+- choose SLIs from the user's point of view
+- keep SLIs unqualified; define success in the SLO
+- consider latency, traffic, errors, saturation, and user journeys
+- define SLI instances when one indicator has multiple measured scopes
+- record measurement details that affect interpretation, including active probe interval and timeout
+- check historical behavior before accepting objectives
+- check dependencies and dependency SLOs
+- check user and product expectations
+- choose realistic objectives with meaningful error budgets
+- choose observations-based or time-slice-based calculation deliberately
+- use time-slice-based calculation when very low volume would make one or two failures trigger alerts
+- define miss-policy with trigger, response, authority, and exit condition
+- hand telemetry query binding and backend artifact generation to `observability-engineering`
+
+### 6. Analyze And Review
 
 For incidents and postmortems:
 
@@ -136,13 +172,17 @@ For incidents and postmortems:
 For service reliability:
 
 - identify dependencies
+- review SLI/SLO rationale and calculation basis
 - review graceful degradation
 - review timeout, retry, and circuit breaker policy
+- review cache-on-failure and asynchronous degradation options
 - review rollback and release safety
+- review workload isolation for critical and slow paths
+- review error reporting quality
 - review observability/SLO support
 - propose action items for gaps
 
-### 6. Use Observability Deliberately
+### 7. Use Observability Deliberately
 
 When the reliability work needs telemetry, SLOs, alert context, or decision dashboards:
 
@@ -152,10 +192,12 @@ When the reliability work needs telemetry, SLOs, alert context, or decision dash
 
 Do not duplicate the observability model inside reliability output.
 
-### 7. Validate
+### 8. Validate
 
 Before claiming completion, check:
 
+- service reliability output includes SLI/SLO rationale or explicitly defers it
+- every SLO has success condition, objective ratio, window, calculation basis, and reality-check notes
 - incidents include impact, urgency, affected entities, and timeline
 - postmortems include resolution, impact, contributing causes, lessons, and action items
 - action items have owner, evidence, category, and verification method
@@ -171,4 +213,3 @@ Before claiming completion, check:
 - Using blame or vague advice as lessons.
 - Treating an SLO miss as automatically identical to an incident.
 - Lowering an SLO without consumer impact review and an expiration or review date.
-
