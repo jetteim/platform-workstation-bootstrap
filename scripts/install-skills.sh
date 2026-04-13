@@ -109,6 +109,12 @@ chmod_shebang_scripts() {
   done < <(find "$root" -type f -path "*/scripts/*" -print0)
 }
 
+project_codex_skills() {
+  install_tree "$canonical_skills_root/codex-curated" "$CODEX_HOME/skills" "Codex curated/user skills"
+  install_tree "$AGENTS_HOME/skills" "$CODEX_HOME/skills" "Codex projection from canonical skills"
+  install_tree "$AGENTS_HOME/skills/superpowers" "$CODEX_HOME/skills/superpowers" "Codex Superpowers projection"
+}
+
 mkdir -p "$AGENTS_HOME/skills" "$AGENTS_HOME/vendor_imports/repos" "$CODEX_HOME/skills" "$CLAUDE_HOME/skills"
 
 if command -v gh >/dev/null 2>&1; then
@@ -133,9 +139,6 @@ else
   exit 1
 fi
 
-install_tree "$canonical_skills_root/codex-curated" "$CODEX_HOME/skills" "Codex curated/user skills"
-install_tree "$AGENTS_HOME/skills" "$CODEX_HOME/skills" "Codex projection from canonical skills"
-
 if [ "$superpowers_ready" = "1" ] && { [ -L "$AGENTS_HOME/skills/superpowers" ] || [ ! -e "$AGENTS_HOME/skills/superpowers" ]; }; then
   rm -f "$AGENTS_HOME/skills/superpowers"
   ln -s "$CODEX_HOME/superpowers/skills" "$AGENTS_HOME/skills/superpowers"
@@ -143,8 +146,6 @@ if [ "$superpowers_ready" = "1" ] && { [ -L "$AGENTS_HOME/skills/superpowers" ] 
 elif [ "$superpowers_ready" = "1" ]; then
   echo "[skills] $AGENTS_HOME/skills/superpowers exists and is not a symlink; leaving it unchanged" >&2
 fi
-
-install_tree "$AGENTS_HOME/skills/superpowers" "$CODEX_HOME/skills/superpowers" "Codex Superpowers projection"
 
 install_tree "$skills_root/plugins/github" "$AGENTS_HOME/skills/plugin-github" "GitHub plugin skill fallback"
 install_tree "$skills_root/plugins/google-drive" "$AGENTS_HOME/skills/plugin-google-drive" "Google Drive plugin skill fallback"
@@ -205,6 +206,8 @@ else
     fi
   done
 fi
+
+project_codex_skills
 
 chmod_shebang_scripts "$CODEX_HOME/skills"
 chmod_shebang_scripts "$CODEX_HOME/superpowers/skills"

@@ -9,6 +9,7 @@ python3 -m py_compile \
   "$repo_root/agents/adapters/codex/hooks/redact.py"
 test -f "$repo_root/agents/adapters/codex/hooks.json"
 test -f "$repo_root/agents/adapters/codex/config.example.toml"
+test -x "$repo_root/agents/adapters/codex/hooks/codex_hook.py"
 grep -q 'multi_agent = true' "$repo_root/agents/adapters/codex/config.example.toml"
 python3 -m py_compile "$repo_root/codex/hooks/codex_hook.py" "$repo_root/codex/hooks/policy.py" "$repo_root/codex/hooks/redact.py"
 bash -n "$repo_root/scripts/refresh-github.sh"
@@ -127,5 +128,17 @@ if ! grep -q "UserPromptSubmit" /tmp/platform-hook-test.out; then
 fi
 
 rm -f /tmp/platform-hook-test.out
+
+python3 "$repo_root/agents/adapters/codex/hooks/codex_hook.py" UserPromptSubmit <<'JSON' >/tmp/platform-adapter-hook-test.out
+{"session_id":"test","turn_id":"test","cwd":"/tmp","model":"test","permission_mode":"default","prompt":"please check production terraform reliability and logs"}
+JSON
+
+if ! grep -q "UserPromptSubmit" /tmp/platform-adapter-hook-test.out; then
+  echo "Codex adapter prompt hook smoke test did not emit expected context" >&2
+  cat /tmp/platform-adapter-hook-test.out >&2
+  exit 1
+fi
+
+rm -f /tmp/platform-adapter-hook-test.out
 
 echo "[verify] ok"
