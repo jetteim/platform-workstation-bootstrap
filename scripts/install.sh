@@ -39,7 +39,10 @@ codex_hooks_source="$repo_root/codex/hooks"
 codex_hooks_json="$repo_root/codex/hooks.json"
 codex_adapter_hooks_source="$repo_root/agents/adapters/codex/hooks"
 codex_adapter_hooks_json="$repo_root/agents/adapters/codex/hooks.json"
-if [ -d "$codex_adapter_hooks_source" ] && [ -n "$(find "$codex_adapter_hooks_source" -maxdepth 1 -name '*.py' -print -quit)" ]; then
+# A broad find "$codex_adapter_hooks_source" -maxdepth 1 -name '*.py' check is not enough here.
+if [ -f "$codex_adapter_hooks_source/codex_hook.py" ] &&
+  [ -f "$codex_adapter_hooks_source/policy.py" ] &&
+  [ -f "$codex_adapter_hooks_source/redact.py" ]; then
   codex_hooks_source="$codex_adapter_hooks_source"
 fi
 if [ -f "$codex_adapter_hooks_json" ]; then
