@@ -30,7 +30,7 @@ The bootstrap also expects these owned repositories. They are not forks.
 
 | Fork | Local path | Role |
 | --- | --- | --- |
-| `jetteim/superpowers` | `~/.codex/superpowers` | Live native Codex skill source via `~/.agents/skills/superpowers` symlink |
+| `jetteim/superpowers` | `~/.codex/superpowers` | Live native Codex skill source installed into `~/.agents/skills/superpowers`; legacy symlink states remain compatible |
 | `jetteim/skills` | `~/.agents/vendor_imports/skills` | OpenAI skills provenance and reinstall source |
 | `jetteim/codex` | `~/.agents/vendor_imports/repos/codex` | Codex source/reference mirror |
 | `jetteim/playwright-mcp` | `~/.agents/vendor_imports/repos/playwright-mcp` | Playwright MCP source/reference mirror |

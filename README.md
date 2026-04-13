@@ -38,7 +38,8 @@ gh auth login
 The skill install order mirrors the original upstream setup:
 
 - Clone or update the Superpowers fork into `~/.codex/superpowers`.
-- Symlink `~/.agents/skills/superpowers` to `~/.codex/superpowers/skills`.
+- Install canonical Superpowers into `~/.agents/skills/superpowers` as a real directory on fresh installs.
+- Preserve legacy symlink compatibility for existing `~/.agents/skills/superpowers` states.
 - Install canonical shared skills under `~/.agents/skills`.
 - Install source mirrors under `~/.agents/vendor_imports`.
 - Project compatible skills into `~/.codex/skills` and `~/.claude/skills`.

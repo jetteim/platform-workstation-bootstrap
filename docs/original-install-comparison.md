@@ -35,8 +35,9 @@ multi_agent = true
 Bootstrap match:
 
 - Uses the fork `https://github.com/jetteim/superpowers.git` as the primary clone source.
-- Installs to the same destination: `~/.codex/superpowers`.
-- Creates the same native skill discovery symlink: `~/.agents/skills/superpowers -> ~/.codex/superpowers/skills`.
+- Keeps the source checkout at `~/.codex/superpowers`.
+- Installs canonical Superpowers into `~/.agents/skills/superpowers` as a real directory on fresh installs.
+- Preserves legacy symlink compatibility when `~/.agents/skills/superpowers` already exists as a symlink.
 - Sets `features.multi_agent = true` alongside `features.codex_hooks = true`.
 - Uses vendored `skills/superpowers/` only if no usable clone exists and `USE_VENDORED_FALLBACK=1`.
 
@@ -54,7 +55,7 @@ Original install model:
 
 Bootstrap match:
 
-- Refreshes the fork `https://github.com/jetteim/skills.git` into `~/.codex/vendor_imports/skills` for provenance and future reinstall work.
+- Refreshes the fork `https://github.com/jetteim/skills.git` into `~/.agents/vendor_imports/skills` for provenance and future reinstall work.
 - Installs the currently captured local Codex skill overlay from `skills/codex/` into `~/.codex/skills`.
 - Keeps the vendored overlay explicit because this repo is meant to reproduce the current workstation, not only the default Codex distribution.
 
@@ -75,7 +76,7 @@ Bootstrap match:
 
 - Does not install Codex itself. Codex is a prerequisite for running this repo through Codex.
 - Records the current source fork at `https://github.com/jetteim/codex.git`.
-- Mirrors that fork to `~/.codex/vendor_imports/repos/codex` for clean-machine source reference.
+- Mirrors that fork to `~/.agents/vendor_imports/repos/codex` for clean-machine source reference.
 - Preserves the current operational path where npm supplies `@openai/codex`.
 
 ## Playwright MCP
@@ -100,7 +101,7 @@ Bootstrap match:
 
 - Keeps Playwright MCP package execution through `npx`.
 - Uses `args = ["-y", "@playwright/mcp@latest"]` in the example config so a fresh npm cache does not prompt interactively.
-- Mirrors `https://github.com/jetteim/playwright-mcp.git` under `~/.codex/vendor_imports/repos/playwright-mcp` for source provenance.
+- Mirrors `https://github.com/jetteim/playwright-mcp.git` under `~/.agents/vendor_imports/repos/playwright-mcp` for source provenance.
 
 ## MCP Reference Servers
 
@@ -129,7 +130,7 @@ Bootstrap match:
 
 - Uses `npx -y @modelcontextprotocol/server-memory`.
 - Uses `npx -y @modelcontextprotocol/server-github`.
-- Mirrors `https://github.com/jetteim/servers.git` under `~/.codex/vendor_imports/repos/servers`.
+- Mirrors `https://github.com/jetteim/servers.git` under `~/.agents/vendor_imports/repos/servers`.
 
 Note: `@modelcontextprotocol/server-github` did not expose repository metadata in npm during the original assessment. The package still follows the MCP server package pattern and is documented as an npm package dependency.
 
@@ -174,11 +175,11 @@ Original installer behavior:
 Bootstrap match:
 
 - Uses the fork `https://github.com/jetteim/brain-skill.git`.
-- Mirrors the full repo to `~/.codex/vendor_imports/repos/brain-skill`.
+- Mirrors the full repo to `~/.agents/vendor_imports/repos/brain-skill`.
 - Installs `skill/` to `~/.codex/skills/brain`, which matches the Codex branch of the original installer.
 - Vendors the same `skill/` directory under `skills/codex/brain` for fallback installs.
 - Keeps heavy ML prerequisites in explicit script `scripts/install-brain-prereqs.sh`.
-- Mirrors `https://github.com/jetteim/llama.cpp.git` to `~/.codex/vendor_imports/repos/llama.cpp` for GGUF conversion.
+- Mirrors `https://github.com/jetteim/llama.cpp.git` to `~/.agents/vendor_imports/repos/llama.cpp` for GGUF conversion.
 
 Assessment and smoke-test results:
 

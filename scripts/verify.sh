@@ -33,6 +33,7 @@ test -f "$repo_root/agents/manifests/skill-projections.tsv"
 test -f "$repo_root/agents/adapters/claude/CLAUDE.md.template"
 test -f "$repo_root/agents/adapters/codex/README.md"
 grep -Fq '`~/.agents` is the canonical agent-neutral layer' "$repo_root/README.md"
+grep -Fq 'Install canonical Superpowers into `~/.agents/skills/superpowers` as a real directory on fresh installs.' "$repo_root/README.md"
 grep -q 'Build a context map before exploring a codebase' "$repo_root/agents/rules/codebase-exploration.md"
 grep -q 'orchestrating-architecture-execution' "$repo_root/agents/manifests/skill-projections.tsv"
 grep -q '~/.agents' "$repo_root/agents/adapters/claude/CLAUDE.md.template"
@@ -50,6 +51,15 @@ grep -q 'https://github.com/obra/superpowers/blob/main/.codex/INSTALL.md' "$repo
 grep -q 'agents/skills/platform' "$repo_root/docs/external-dependencies.md"
 grep -q 'Agent-Agnostic Bootstrap' "$repo_root/docs/original-install-comparison.md"
 grep -q 'Codebase Exploration Rules' "$repo_root/docs/decisions.md"
+grep -q '~/.agents/vendor_imports' "$repo_root/docs/original-install-comparison.md"
+if grep -q '~/.codex/vendor_imports/' "$repo_root/docs/original-install-comparison.md"; then
+  echo "stale ~/.codex/vendor_imports path remains in docs/original-install-comparison.md" >&2
+  exit 1
+fi
+if grep -Fq 'Symlink `~/.agents/skills/superpowers` to `~/.codex/superpowers/skills`' "$repo_root/README.md"; then
+  echo "README still claims Superpowers normally installs as a symlink" >&2
+  exit 1
+fi
 grep -q 'diana-random1st/brain-skill' "$repo_root/scripts/refresh-github.sh"
 grep -q 'ggml-org/llama.cpp' "$repo_root/scripts/refresh-github.sh"
 grep -q 'gh auth setup-git' "$repo_root/scripts/refresh-github.sh"
