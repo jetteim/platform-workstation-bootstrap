@@ -1,0 +1,36 @@
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+
+[features]
+codex_hooks = true
+multi_agent = true
+
+[projects."/Users/maximlee"]
+trust_level = "trusted"
+
+[projects."/Users/maximlee/Library/CloudStorage/OneDrive-Personal/NEW_WORK"]
+trust_level = "trusted"
+
+[projects."/Users/maximlee/Library/CloudStorage/OneDrive-Personal/Pet projects/telegram-message-cleaner"]
+trust_level = "trusted"
+
+[projects."/Users/maximlee/Library/CloudStorage/OneDrive-Personal/Pet projects/video/poc-macbook"]
+trust_level = "trusted"
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["-y", "@playwright/mcp@latest"]
+
+[mcp_servers.github]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-github"]
+
+[mcp_servers.memory]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-memory"]
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[plugins."google-drive@openai-curated"]
+enabled = true

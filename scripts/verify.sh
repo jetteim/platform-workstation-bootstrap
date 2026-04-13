@@ -3,6 +3,13 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+python3 -m py_compile \
+  "$repo_root/agents/adapters/codex/hooks/codex_hook.py" \
+  "$repo_root/agents/adapters/codex/hooks/policy.py" \
+  "$repo_root/agents/adapters/codex/hooks/redact.py"
+test -f "$repo_root/agents/adapters/codex/hooks.json"
+test -f "$repo_root/agents/adapters/codex/config.example.toml"
+grep -q 'multi_agent = true' "$repo_root/agents/adapters/codex/config.example.toml"
 python3 -m py_compile "$repo_root/codex/hooks/codex_hook.py" "$repo_root/codex/hooks/policy.py" "$repo_root/codex/hooks/redact.py"
 bash -n "$repo_root/scripts/refresh-github.sh"
 bash -n "$repo_root/scripts/install-brain-prereqs.sh"
