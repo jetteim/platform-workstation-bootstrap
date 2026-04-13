@@ -4,7 +4,8 @@ Reproducible setup notes and guardrails for my macOS platform engineering workst
 
 This repository is intentionally explicit about:
 
-- Codex configuration, hooks, skills, plugins, and MCP dependencies.
+- Agent-neutral rules, skills, prompts, hooks, and source mirrors under `~/.agents`.
+- Adapter projections for Codex, Claude, plugins, and MCP dependencies.
 - User-wide Git safety hooks.
 - Reliability and observability-oriented defaults.
 - External dependency forks to use on a clean development machine.
@@ -30,13 +31,17 @@ gh auth login
 ./scripts/verify.sh
 ```
 
+`~/.agents` is the canonical agent-neutral layer. Codex and Claude are adapter targets projected from that layer.
+
 `install-skills.sh` is the explicit skill installer. `install.sh` runs it automatically.
 
 The skill install order mirrors the original upstream setup:
 
 - Clone or update the Superpowers fork into `~/.codex/superpowers`.
 - Symlink `~/.agents/skills/superpowers` to `~/.codex/superpowers/skills`.
-- Clone or update source mirrors under `~/.codex/vendor_imports`.
+- Install canonical shared skills under `~/.agents/skills`.
+- Install source mirrors under `~/.agents/vendor_imports`.
+- Project compatible skills into `~/.codex/skills` and `~/.claude/skills`.
 - Install vendored Codex and plugin skill fallback copies.
 - Clone the private platform observability/reliability model repos and public engineering skill repos when GitHub access allows.
 - Clone the public architectural execution skill pipeline and install it from source when GitHub access allows.

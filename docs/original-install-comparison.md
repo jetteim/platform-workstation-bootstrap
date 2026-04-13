@@ -9,6 +9,10 @@ This compares the bootstrap repository against the current install instructions 
 3. Configure package-based tools exactly as their original docs recommend.
 4. Use vendored skill copies only as fallback or to recreate the current local user overlay.
 
+## Agent-Agnostic Bootstrap
+
+The current bootstrap installs `~/.agents` first, then projects compatible assets into Codex and Claude. Codex remains a supported adapter, not the canonical model for shared rules, skills, hooks, prompts, or source mirrors.
+
 ## Superpowers
 
 Original source: <https://github.com/obra/superpowers/blob/main/.codex/INSTALL.md>

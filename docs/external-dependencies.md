@@ -31,17 +31,21 @@ The bootstrap also expects these owned repositories. They are not forks.
 | Fork | Local path | Role |
 | --- | --- | --- |
 | `jetteim/superpowers` | `~/.codex/superpowers` | Live native Codex skill source via `~/.agents/skills/superpowers` symlink |
-| `jetteim/skills` | `~/.codex/vendor_imports/skills` | OpenAI skills provenance and reinstall source |
-| `jetteim/codex` | `~/.codex/vendor_imports/repos/codex` | Codex source/reference mirror |
-| `jetteim/playwright-mcp` | `~/.codex/vendor_imports/repos/playwright-mcp` | Playwright MCP source/reference mirror |
-| `jetteim/servers` | `~/.codex/vendor_imports/repos/servers` | MCP reference server source mirror |
-| `jetteim/brain-skill` | `~/.codex/vendor_imports/repos/brain-skill` | Brain skill source mirror; installs `skill/` to `~/.codex/skills/brain` |
-| `jetteim/llama.cpp` | `~/.codex/vendor_imports/repos/llama.cpp` | llama.cpp source mirror for GGUF conversion |
-| `jetteim/platform-observability-model` | `~/.codex/vendor_imports/repos/platform-observability-model` | Private source-of-truth observability model |
-| `jetteim/observability-engineering` | `~/.codex/vendor_imports/repos/observability-engineering` | Observability engineering skill source mirror |
-| `jetteim/platform-reliability-model` | `~/.codex/vendor_imports/repos/platform-reliability-model` | Private source-of-truth reliability model |
-| `jetteim/reliability-engineering` | `~/.codex/vendor_imports/repos/reliability-engineering` | Reliability engineering skill source mirror |
-| `jetteim/architectural-execution-skills` | `~/.codex/vendor_imports/repos/architectural-execution-skills` | Architectural execution skills source mirror |
+| `jetteim/skills` | `~/.agents/vendor_imports/skills` | OpenAI skills provenance and reinstall source |
+| `jetteim/codex` | `~/.agents/vendor_imports/repos/codex` | Codex source/reference mirror |
+| `jetteim/playwright-mcp` | `~/.agents/vendor_imports/repos/playwright-mcp` | Playwright MCP source/reference mirror |
+| `jetteim/servers` | `~/.agents/vendor_imports/repos/servers` | MCP reference server source mirror |
+| `jetteim/brain-skill` | `~/.agents/vendor_imports/repos/brain-skill` | Brain skill source mirror; installs `skill/` to `~/.codex/skills/brain` |
+| `jetteim/llama.cpp` | `~/.agents/vendor_imports/repos/llama.cpp` | llama.cpp source mirror for GGUF conversion |
+| `jetteim/platform-observability-model` | `~/.agents/vendor_imports/repos/platform-observability-model` | Private source-of-truth observability model |
+| `jetteim/observability-engineering` | `~/.agents/vendor_imports/repos/observability-engineering` | Observability engineering skill source mirror |
+| `jetteim/platform-reliability-model` | `~/.agents/vendor_imports/repos/platform-reliability-model` | Private source-of-truth reliability model |
+| `jetteim/reliability-engineering` | `~/.agents/vendor_imports/repos/reliability-engineering` | Reliability engineering skill source mirror |
+| `jetteim/architectural-execution-skills` | `~/.agents/vendor_imports/repos/architectural-execution-skills` | Architectural execution skills source mirror |
+
+Canonical v1 skill sources are copied under `agents/skills/superpowers/`, `agents/skills/platform/`, `agents/skills/plugins/`, and `agents/skills/codex-curated/`.
+
+`agents/skills/platform` includes the architectural execution pipeline: `orchestrating-architecture-execution`, value stream discovery, capability shaping, feature shaping, C4 modeling, story slicing, and traceability review.
 
 The installer uses HTTPS clone URLs by default so a clean machine does not need SSH keys before bootstrap. GitHub CLI authentication is still required for fork refresh.
 

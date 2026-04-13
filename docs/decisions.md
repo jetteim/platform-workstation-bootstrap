@@ -57,3 +57,8 @@ For platform engineering work, generated guidance should push toward:
 - Rollback and blast-radius notes for infra changes.
 - Explicit caveats when verification was not run.
 
+## Codebase Exploration Rules
+
+Reusable agent guidance lives in `agents/rules/codebase-exploration.md` and installs to `~/.agents/rules`.
+
+Agents should build a context map first, search with `rg` or grep before reading files, prefer targeted ranges for large files, avoid repeated identical searches, and reuse search results within a task.
