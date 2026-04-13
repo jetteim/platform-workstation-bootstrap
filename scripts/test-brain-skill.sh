@@ -3,8 +3,9 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 codex_home="${CODEX_HOME:-$HOME/.codex}"
+agents_home="${AGENTS_HOME:-$HOME/.agents}"
 skill_path="$codex_home/skills/brain/SKILL.md"
-mirror_path="$codex_home/vendor_imports/repos/brain-skill"
+mirror_path="$agents_home/vendor_imports/repos/brain-skill"
 brain_python="$codex_home/mlx/brain-venv/bin/python"
 
 require_file() {

@@ -2,9 +2,10 @@
 set -euo pipefail
 
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
+AGENTS_HOME="${AGENTS_HOME:-$HOME/.agents}"
 venv_path="${BRAIN_MLX_VENV:-$CODEX_HOME/mlx/brain-venv}"
 llama_repo="${LLAMA_CPP_REPO:-https://github.com/jetteim/llama.cpp.git}"
-llama_path="${LLAMA_CPP_PATH:-$CODEX_HOME/vendor_imports/repos/llama.cpp}"
+llama_path="${LLAMA_CPP_PATH:-$AGENTS_HOME/vendor_imports/repos/llama.cpp}"
 
 if ! command -v brew >/dev/null 2>&1; then
   echo "[brain-prereqs] Homebrew is required to install uv and cmake" >&2

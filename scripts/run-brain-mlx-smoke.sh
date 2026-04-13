@@ -2,11 +2,12 @@
 set -euo pipefail
 
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
+AGENTS_HOME="${AGENTS_HOME:-$HOME/.agents}"
 venv_path="${BRAIN_MLX_VENV:-$CODEX_HOME/mlx/brain-venv}"
 run_root="${BRAIN_MLX_RUN_ROOT:-$CODEX_HOME/mlx/runs/k8s-risk-classifier}"
 model="${BRAIN_MLX_MODEL:-mlx-community/Qwen3-0.6B-bf16}"
 iters="${BRAIN_MLX_ITERS:-300}"
-llama_cpp_path="${LLAMA_CPP_PATH:-$CODEX_HOME/vendor_imports/repos/llama.cpp}"
+llama_cpp_path="${LLAMA_CPP_PATH:-$AGENTS_HOME/vendor_imports/repos/llama.cpp}"
 
 python_bin="$venv_path/bin/python"
 
