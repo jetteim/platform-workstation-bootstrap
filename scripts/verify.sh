@@ -68,6 +68,22 @@ if [ "$skill_count" -lt 40 ]; then
   exit 1
 fi
 
+test -f "$repo_root/agents/skills/superpowers/brainstorming/SKILL.md"
+test -f "$repo_root/agents/skills/platform/orchestrating-architecture-execution/SKILL.md"
+test -f "$repo_root/agents/skills/platform/discovering-value-streams/SKILL.md"
+test -f "$repo_root/agents/skills/platform/shaping-capabilities/SKILL.md"
+test -f "$repo_root/agents/skills/platform/shaping-features/SKILL.md"
+test -f "$repo_root/agents/skills/platform/modeling-c4-architecture/SKILL.md"
+test -f "$repo_root/agents/skills/platform/slicing-stories/SKILL.md"
+test -f "$repo_root/agents/skills/platform/reviewing-traceability/SKILL.md"
+test -f "$repo_root/agents/skills/plugins/github/yeet/SKILL.md"
+test -f "$repo_root/agents/skills/plugins/google-drive/google-drive/SKILL.md"
+canonical_skill_count="$(find "$repo_root/agents/skills" -name SKILL.md | wc -l | tr -d ' ')"
+if [ "$canonical_skill_count" -lt 40 ]; then
+  echo "expected at least 40 canonical skills, found $canonical_skill_count" >&2
+  exit 1
+fi
+
 for required in \
   "$repo_root/skills/codex/.system/openai-docs/SKILL.md" \
   "$repo_root/skills/codex/brain/SKILL.md" \

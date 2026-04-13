@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reviewing Traceability"
+  short_description: "Check vertical coherence before coding"
+  default_prompt: "Use $reviewing-traceability to verify this artifact chain before implementation."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Slicing Stories"
+  short_description: "Create human-sized implementation slices"
+  default_prompt: "Use $slicing-stories to turn this feature into stories and implementation handoff artifacts."

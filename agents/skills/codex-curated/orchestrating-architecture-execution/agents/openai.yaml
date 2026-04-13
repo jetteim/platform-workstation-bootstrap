@@ -1,0 +1,4 @@
+interface:
+  display_name: "Orchestrating Architecture Execution"
+  short_description: "Run a value-to-implementation skill pipeline"
+  default_prompt: "Use $orchestrating-architecture-execution to turn this initiative into a staged artifact pipeline."

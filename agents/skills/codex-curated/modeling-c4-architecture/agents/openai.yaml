@@ -1,0 +1,4 @@
+interface:
+  display_name: "Modeling C4 Architecture"
+  short_description: "Create C4 views for delivery decisions"
+  default_prompt: "Use $modeling-c4-architecture to make the architecture context clear for this initiative."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shaping Capabilities"
+  short_description: "Split outcomes into capability increments"
+  default_prompt: "Use $shaping-capabilities to convert this value stream into capability options."
