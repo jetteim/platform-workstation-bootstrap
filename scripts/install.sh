@@ -2,16 +2,51 @@
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+AGENTS_HOME="${AGENTS_HOME:-$HOME/.agents}"
+CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
+
+# Canonical agent roots default under ~/.agents/rules.
+install_tree() {
+  local source="$1"
+  local destination="$2"
+  local label="$3"
+
+  if [ ! -d "$source" ]; then
+    echo "[install] missing source for ${label}: ${source}" >&2
+    exit 1
+  fi
+
+  mkdir -p "$destination"
+  cp -R "$source/." "$destination/"
+  echo "[install] installed ${label}: ${destination}"
+}
 
 if [ "${SKIP_GITHUB_REFRESH:-0}" != "1" ]; then
   "$repo_root/scripts/refresh-github.sh"
 fi
 
-mkdir -p "$HOME/.codex/hooks" "$HOME/.config/git/hooks"
+mkdir -p "$AGENTS_HOME/rules" "$AGENTS_HOME/hooks" "$AGENTS_HOME/prompts" "$CODEX_HOME/hooks" "$HOME/.config/git/hooks"
 
-cp "$repo_root/codex/hooks/"*.py "$HOME/.codex/hooks/"
-chmod +x "$HOME/.codex/hooks/codex_hook.py"
-cp "$repo_root/codex/hooks.json" "$HOME/.codex/hooks.json"
+install_tree "$repo_root/agents/rules" "$AGENTS_HOME/rules" "agent rules"
+if [ -d "$repo_root/agents/hooks" ]; then
+  install_tree "$repo_root/agents/hooks" "$AGENTS_HOME/hooks" "agent hooks"
+fi
+if [ -d "$repo_root/agents/prompts" ]; then
+  install_tree "$repo_root/agents/prompts" "$AGENTS_HOME/prompts" "agent prompts"
+fi
+
+codex_hooks_source="$repo_root/agents/adapters/codex/hooks"
+codex_hooks_json="$repo_root/agents/adapters/codex/hooks.json"
+if [ ! -d "$codex_hooks_source" ]; then
+  codex_hooks_source="$repo_root/codex/hooks"
+fi
+if [ ! -f "$codex_hooks_json" ]; then
+  codex_hooks_json="$repo_root/codex/hooks.json"
+fi
+
+cp "$codex_hooks_source/"*.py "$CODEX_HOME/hooks/"
+chmod +x "$CODEX_HOME/hooks/codex_hook.py"
+cp "$codex_hooks_json" "$CODEX_HOME/hooks.json"
 
 "$repo_root/scripts/install-skills.sh"
 
@@ -19,7 +54,7 @@ cp "$repo_root/git/hooks/pre-commit" "$HOME/.config/git/hooks/pre-commit"
 chmod +x "$HOME/.config/git/hooks/pre-commit"
 git config --global core.hooksPath "$HOME/.config/git/hooks"
 
-python3 - "$HOME/.codex/config.toml" <<'PY'
+python3 - "$CODEX_HOME/config.toml" <<'PY'
 from pathlib import Path
 import re
 import sys
@@ -55,5 +90,5 @@ else:
 path.write_text(text, encoding='utf-8')
 PY
 
-echo "[install] installed Codex hooks, skills, source mirrors, and global Git safety hook"
-echo "[install] review codex/config.example.toml before changing live ~/.codex/config.toml further"
+echo "[install] installed canonical agent layer, adapter projections, and global Git safety hook"
+echo "[install] review agents/adapters/codex/config.example.toml before changing live $CODEX_HOME/config.toml further"
