@@ -4,6 +4,7 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 AGENTS_HOME="${AGENTS_HOME:-$HOME/.agents}"
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
+CLAUDE_HOME="${CLAUDE_HOME:-$HOME/.claude}"
 
 # Canonical agent roots default under ~/.agents/rules.
 install_tree() {
@@ -28,6 +29,9 @@ fi
 mkdir -p "$AGENTS_HOME/rules" "$AGENTS_HOME/hooks" "$AGENTS_HOME/prompts" "$CODEX_HOME/hooks" "$HOME/.config/git/hooks"
 
 install_tree "$repo_root/agents/rules" "$AGENTS_HOME/rules" "agent rules"
+mkdir -p "$CLAUDE_HOME"
+cp "$repo_root/agents/adapters/claude/CLAUDE.md.template" "$CLAUDE_HOME/CLAUDE.md.template"
+echo "[install] installed Claude rule template: $CLAUDE_HOME/CLAUDE.md.template"
 if [ -d "$repo_root/agents/hooks" ]; then
   install_tree "$repo_root/agents/hooks" "$AGENTS_HOME/hooks" "agent hooks"
 fi

@@ -208,6 +208,7 @@ else
 fi
 
 project_codex_skills
+install_tree "$AGENTS_HOME/skills" "$CLAUDE_HOME/skills" "Claude skill projection from canonical skills"
 
 chmod_shebang_scripts "$CODEX_HOME/skills"
 chmod_shebang_scripts "$CODEX_HOME/superpowers/skills"

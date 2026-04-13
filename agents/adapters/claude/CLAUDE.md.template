@@ -13,3 +13,7 @@ Read and follow:
 ## Skills
 
 Reusable skills are installed under `~/.claude/skills` from `~/.agents/skills`.
+
+## Adapter Boundary
+
+Do not assume Codex hook events exist in Claude. Use the shared rules and skills first, then Claude-native capabilities where available.
