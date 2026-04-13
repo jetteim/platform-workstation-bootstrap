@@ -1,0 +1,15 @@
+# Agent Workstation Rules
+
+This workstation uses `~/.agents` as the canonical source for reusable rules and skills.
+
+## Required Shared Rules
+
+Read and follow:
+
+- `~/.agents/rules/codebase-exploration.md`
+- `~/.agents/rules/reliability-observability.md`
+- `~/.agents/rules/secrets-and-safety.md`
+
+## Skills
+
+Reusable skills are installed under `~/.claude/skills` from `~/.agents/skills`.

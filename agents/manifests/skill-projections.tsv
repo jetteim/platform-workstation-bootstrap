@@ -1,0 +1,15 @@
+# skill	source	codex	claude	category
+superpowers	skills/superpowers	yes	yes	superpowers
+plugin-github	skills/plugins/github	yes	yes	plugin-fallback
+plugin-google-drive	skills/plugins/google-drive	yes	yes	plugin-fallback
+brain	skills/codex/brain	yes	yes	platform
+observability-engineering	skills/codex/observability-engineering	yes	yes	platform
+reliability-engineering	skills/codex/reliability-engineering	yes	yes	platform
+orchestrating-architecture-execution	skills/codex/orchestrating-architecture-execution	yes	yes	platform
+discovering-value-streams	skills/codex/discovering-value-streams	yes	yes	platform
+shaping-capabilities	skills/codex/shaping-capabilities	yes	yes	platform
+shaping-features	skills/codex/shaping-features	yes	yes	platform
+modeling-c4-architecture	skills/codex/modeling-c4-architecture	yes	yes	platform
+slicing-stories	skills/codex/slicing-stories	yes	yes	platform
+reviewing-traceability	skills/codex/reviewing-traceability	yes	yes	platform
+codex-curated	skills/codex	yes	no	codex-curated
