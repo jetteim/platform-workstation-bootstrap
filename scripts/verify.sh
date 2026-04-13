@@ -52,6 +52,8 @@ grep -q 'agents/skills/platform' "$repo_root/docs/external-dependencies.md"
 grep -q 'Agent-Agnostic Bootstrap' "$repo_root/docs/original-install-comparison.md"
 grep -q 'Codebase Exploration Rules' "$repo_root/docs/decisions.md"
 grep -q '~/.agents/vendor_imports' "$repo_root/docs/original-install-comparison.md"
+grep -q '~/.agents/vendor_imports/repos/brain-skill' "$repo_root/docs/brain-skill-assessment.md"
+grep -q '~/.agents/vendor_imports/repos/llama.cpp' "$repo_root/docs/brain-skill-smoke-test.md"
 if grep -q '~/.codex/vendor_imports/' "$repo_root/docs/original-install-comparison.md"; then
   echo "stale ~/.codex/vendor_imports path remains in docs/original-install-comparison.md" >&2
   exit 1

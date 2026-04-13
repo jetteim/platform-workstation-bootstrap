@@ -40,7 +40,7 @@ Risks:
 The bootstrap now:
 
 - refreshes the upstream fork through `scripts/refresh-github.sh`
-- clones the fork into `~/.codex/vendor_imports/repos/brain-skill`
+- clones the fork into `~/.agents/vendor_imports/repos/brain-skill`
 - installs the live skill into `~/.codex/skills/brain`
 - vendors a fallback copy under `skills/codex/brain`
 - verifies the skill package through `scripts/test-brain-skill.sh`

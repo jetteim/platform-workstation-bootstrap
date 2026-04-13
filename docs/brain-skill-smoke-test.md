@@ -70,7 +70,7 @@ Prerequisites installed and verified:
 - `mlx 0.29.3`
 - `mlx-lm 0.29.1`
 - `torch 2.8.0`
-- `llama.cpp` source mirror at `~/.codex/vendor_imports/repos/llama.cpp`
+- `llama.cpp` source mirror at `~/.agents/vendor_imports/repos/llama.cpp`
 
 ## Full MLX Run
 
@@ -140,4 +140,4 @@ Result:
 
 ## Verdict
 
-The skill is worth keeping. It adds a useful path from deterministic hooks to learned local classifiers, but it should stay optional and source-backed. Do not make the default bootstrap install model weights by default; use `scripts/install-brain-prereqs.sh` and `scripts/run-brain-mlx-smoke.sh` when validating the ML path.
+The skill is worth keeping. It adds a useful path from deterministic hooks to learned local classifiers, but it should stay optional and source-backed. Do not make the default bootstrap install model weights by default; use `scripts/install-brain-prereqs.sh` and `scripts/run-brain-mlx-smoke.sh` when validating the ML path. Brain runtime outputs remain under `~/.codex/mlx`.
