@@ -26,6 +26,7 @@ The bootstrap also expects these owned repositories. They are not forks.
 | `jetteim/observability-engineering` | Public | Codex skill for building observability from the model |
 | `jetteim/platform-reliability-model` | Private | Platform-agnostic reliability intent model |
 | `jetteim/reliability-engineering` | Public | Codex skill for building reliability from the model |
+| `jetteim/architectural-execution-skills` | Public | Codex skill pipeline from value stream and architecture to implementation |
 
 | Fork | Local path | Role |
 | --- | --- | --- |
@@ -40,6 +41,7 @@ The bootstrap also expects these owned repositories. They are not forks.
 | `jetteim/observability-engineering` | `~/.codex/vendor_imports/repos/observability-engineering` | Observability engineering skill source mirror |
 | `jetteim/platform-reliability-model` | `~/.codex/vendor_imports/repos/platform-reliability-model` | Private source-of-truth reliability model |
 | `jetteim/reliability-engineering` | `~/.codex/vendor_imports/repos/reliability-engineering` | Reliability engineering skill source mirror |
+| `jetteim/architectural-execution-skills` | `~/.codex/vendor_imports/repos/architectural-execution-skills` | Architectural execution skills source mirror |
 
 The installer uses HTTPS clone URLs by default so a clean machine does not need SSH keys before bootstrap. GitHub CLI authentication is still required for fork refresh.
 
@@ -98,6 +100,8 @@ skills/plugins/google-drive/
 `skills/codex/observability-engineering/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
 
 `skills/codex/reliability-engineering/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
+
+`skills/codex/orchestrating-architecture-execution/` and its companion value-stream, capability, feature, C4, story-slicing, and traceability skills come from `jetteim/architectural-execution-skills` and are installed as fallbacks when the source mirror is unavailable.
 
 `skills/plugins/github/` and `skills/plugins/google-drive/` come from the enabled OpenAI-curated plugin cache.
 

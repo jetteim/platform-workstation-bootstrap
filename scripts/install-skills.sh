@@ -20,6 +20,7 @@ PLATFORM_OBSERVABILITY_MODEL_REPO="${PLATFORM_OBSERVABILITY_MODEL_REPO:-https://
 OBSERVABILITY_ENGINEERING_REPO="${OBSERVABILITY_ENGINEERING_REPO:-https://github.com/jetteim/observability-engineering.git}"
 PLATFORM_RELIABILITY_MODEL_REPO="${PLATFORM_RELIABILITY_MODEL_REPO:-https://github.com/jetteim/platform-reliability-model.git}"
 RELIABILITY_ENGINEERING_REPO="${RELIABILITY_ENGINEERING_REPO:-https://github.com/jetteim/reliability-engineering.git}"
+ARCHITECTURAL_EXECUTION_SKILLS_REPO="${ARCHITECTURAL_EXECUTION_SKILLS_REPO:-https://github.com/jetteim/architectural-execution-skills.git}"
 USE_VENDORED_FALLBACK="${USE_VENDORED_FALLBACK:-1}"
 
 clone_or_update() {
@@ -129,7 +130,8 @@ for mirror in \
   "$PLATFORM_OBSERVABILITY_MODEL_REPO|$HOME/.codex/vendor_imports/repos/platform-observability-model|main|Platform observability model source mirror" \
   "$OBSERVABILITY_ENGINEERING_REPO|$HOME/.codex/vendor_imports/repos/observability-engineering|main|Observability engineering skill source mirror" \
   "$PLATFORM_RELIABILITY_MODEL_REPO|$HOME/.codex/vendor_imports/repos/platform-reliability-model|main|Platform reliability model source mirror" \
-  "$RELIABILITY_ENGINEERING_REPO|$HOME/.codex/vendor_imports/repos/reliability-engineering|main|Reliability engineering skill source mirror"; do
+  "$RELIABILITY_ENGINEERING_REPO|$HOME/.codex/vendor_imports/repos/reliability-engineering|main|Reliability engineering skill source mirror" \
+  "$ARCHITECTURAL_EXECUTION_SKILLS_REPO|$HOME/.codex/vendor_imports/repos/architectural-execution-skills|main|Architectural execution skills source mirror"; do
   IFS='|' read -r mirror_repo mirror_destination mirror_branch mirror_label <<<"$mirror"
   if ! clone_or_update "$mirror_repo" "$mirror_destination" "$mirror_branch" "$mirror_label"; then
     echo "[skills] ${mirror_label} was not refreshed; continuing with configured package install path" >&2
@@ -152,6 +154,23 @@ if [ -d "$HOME/.codex/vendor_imports/repos/reliability-engineering/skill/reliabi
   install_tree "$HOME/.codex/vendor_imports/repos/reliability-engineering/skill/reliability-engineering" "$HOME/.codex/skills/reliability-engineering" "Reliability engineering skill from source mirror"
 elif [ -d "$skills_root/codex/reliability-engineering" ]; then
   install_tree "$skills_root/codex/reliability-engineering" "$HOME/.codex/skills/reliability-engineering" "vendored Reliability engineering skill fallback"
+fi
+
+if [ -d "$HOME/.codex/vendor_imports/repos/architectural-execution-skills/skills" ]; then
+  install_tree "$HOME/.codex/vendor_imports/repos/architectural-execution-skills/skills" "$HOME/.codex/skills" "Architectural execution skills from source mirror"
+else
+  for architectural_skill in \
+    discovering-value-streams \
+    modeling-c4-architecture \
+    orchestrating-architecture-execution \
+    reviewing-traceability \
+    shaping-capabilities \
+    shaping-features \
+    slicing-stories; do
+    if [ -d "$skills_root/codex/$architectural_skill" ]; then
+      install_tree "$skills_root/codex/$architectural_skill" "$HOME/.codex/skills/$architectural_skill" "vendored ${architectural_skill} skill fallback"
+    fi
+  done
 fi
 
 chmod_shebang_scripts "$HOME/.codex/skills"

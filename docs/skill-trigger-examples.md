@@ -34,6 +34,18 @@ This is a practical prompt map for the vendored skills in this workstation boots
 | `skill-creator` | "Help me design a new skill", "What should go into a SKILL.md?" |
 | `plugin-creator` | "Scaffold a Codex plugin", "Create plugin.json and plugin folders" |
 
+## Architectural Execution Pipeline
+
+| Skill | Example prompts that should trigger it |
+| --- | --- |
+| `orchestrating-architecture-execution` | "Turn this initiative into a value-to-implementation pipeline", "Route this roadmap idea through value stream, capability, feature, story, and implementation artifacts" |
+| `discovering-value-streams` | "Frame this product idea as a value stream", "Identify the customer outcome, trigger, flow, and measures for this platform initiative" |
+| `shaping-capabilities` | "Convert this value stream into capabilities", "Split this strategic outcome into capability increments" |
+| `shaping-features` | "Turn this capability into feature packets", "Define feature-sized delivery slices with acceptance criteria and NFRs" |
+| `modeling-c4-architecture` | "Create C4 views for this feature", "Clarify containers, components, integrations, and architecture decisions" |
+| `slicing-stories` | "Slice this feature into 7-10 implementation stories", "Create a story packet for planning" |
+| `reviewing-traceability` | "Check traceability before implementation", "Verify these stories connect back to value, capability, feature, architecture, and tests" |
+
 ## File Format Skills
 
 | Skill | Example prompts that should trigger it |

@@ -39,6 +39,7 @@ The skill install order mirrors the original upstream setup:
 - Clone or update source mirrors under `~/.codex/vendor_imports`.
 - Install vendored Codex and plugin skill fallback copies.
 - Clone the private platform observability/reliability model repos and public engineering skill repos when GitHub access allows.
+- Clone the public architectural execution skill pipeline and install it from source when GitHub access allows.
 
 `install.sh` installs:
 
@@ -83,6 +84,7 @@ The Superpowers `brainstorming` skill is included with its full bundle:
 `scripts/install-skills.sh` installs Superpowers from the forked source repo first. The vendored Superpowers copy is fallback material for offline or damaged-bootstrap cases.
 
 It also installs vendored local Codex skills into `~/.codex/skills`, installs the external `brain` skill from its forked source mirror when available, and places plugin-skill fallbacks under `~/.agents/skills`.
+The architectural execution skill pipeline is installed from `jetteim/architectural-execution-skills` when the source mirror is available, with vendored fallback copies under `skills/codex/`.
 
 ## Important Repositories
 
@@ -101,6 +103,7 @@ The clean-machine path depends on these forks:
 | Observability engineering skill | owned repo | `jetteim/observability-engineering` |
 | Platform reliability model | owned repo | `jetteim/platform-reliability-model` |
 | Reliability engineering skill | owned repo | `jetteim/reliability-engineering` |
+| Architectural execution skills | owned repo | `jetteim/architectural-execution-skills` |
 
 ## Why Keep A User-Wide Git Hook
 

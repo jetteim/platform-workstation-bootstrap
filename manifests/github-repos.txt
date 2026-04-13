@@ -9,3 +9,4 @@ git@github.com:jetteim/platform-observability-model.git
 git@github.com:jetteim/observability-engineering.git
 git@github.com:jetteim/platform-reliability-model.git
 git@github.com:jetteim/reliability-engineering.git
+git@github.com:jetteim/architectural-execution-skills.git

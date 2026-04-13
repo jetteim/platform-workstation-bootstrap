@@ -15,6 +15,13 @@ superpowers:writing-plans
 superpowers:writing-skills
 local:doc
 local:gh-fix-ci
+local:orchestrating-architecture-execution
+local:discovering-value-streams
+local:shaping-capabilities
+local:shaping-features
+local:modeling-c4-architecture
+local:slicing-stories
+local:reviewing-traceability
 local:jupyter-notebook
 local:pdf
 local:spreadsheet
