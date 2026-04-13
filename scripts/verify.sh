@@ -63,6 +63,17 @@ grep -q 'AGENTS_HOME/vendor_imports/skills' "$repo_root/scripts/install-skills.s
 grep -q 'AGENTS_HOME/vendor_imports/repos/llama.cpp' "$repo_root/scripts/install-skills.sh"
 grep -q 'AGENTS_HOME/vendor_imports/repos/llama.cpp' "$repo_root/scripts/install-brain-prereqs.sh"
 grep -q 'AGENTS_HOME/vendor_imports/repos/llama.cpp' "$repo_root/scripts/run-brain-mlx-smoke.sh"
+grep -q 'agents_home/vendor_imports/repos/brain-skill' "$repo_root/scripts/test-brain-skill.sh"
+for touched_script in \
+  "$repo_root/scripts/install-skills.sh" \
+  "$repo_root/scripts/install-brain-prereqs.sh" \
+  "$repo_root/scripts/run-brain-mlx-smoke.sh" \
+  "$repo_root/scripts/test-brain-skill.sh"; do
+  if grep -Eq 'CODEX_HOME/vendor_imports/repos/(llama\.cpp|brain-skill)|codex_home/vendor_imports/repos/brain-skill' "$touched_script"; then
+    echo "old CODEX_HOME vendor mirror path remains in $touched_script" >&2
+    exit 1
+  fi
+done
 grep -q 'prepare_canonical_destination' "$repo_root/scripts/install-skills.sh"
 grep -q 'find "$codex_adapter_hooks_source" -maxdepth 1 -name' "$repo_root/scripts/install.sh"
 grep -q 'platform-observability-model' "$repo_root/scripts/refresh-github.sh"
