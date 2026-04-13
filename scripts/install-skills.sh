@@ -8,7 +8,7 @@ canonical_skills_root="$agents_root/skills"
 AGENTS_HOME="${AGENTS_HOME:-$HOME/.agents}"
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 CLAUDE_HOME="${CLAUDE_HOME:-$HOME/.claude}"
-# Canonical installs default under ~/.agents/skills and ~/.agents/vendor_imports.
+# Canonical skills install under ~/.agents/skills; ~/.agents/vendor_imports is reserved for mirror migration.
 
 if [ ! -d "$skills_root" ]; then
   echo "[skills] missing vendored skills directory: $skills_root" >&2
@@ -77,6 +77,25 @@ install_tree() {
   echo "[skills] installed ${label}: ${count} skills -> ${destination}"
 }
 
+prepare_canonical_destination() {
+  local destination="$1"
+  local label="$2"
+
+  if [ -L "$destination" ]; then
+    rm "$destination"
+    echo "[skills] replaced legacy symlink for ${label}: ${destination}"
+  fi
+}
+
+install_canonical_tree() {
+  local source="$1"
+  local destination="$2"
+  local label="$3"
+
+  prepare_canonical_destination "$destination" "$label"
+  install_tree "$source" "$destination" "$label"
+}
+
 chmod_shebang_scripts() {
   local root="$1"
 
@@ -96,10 +115,10 @@ if command -v gh >/dev/null 2>&1; then
   gh auth setup-git >/dev/null 2>&1 || true
 fi
 
-install_tree "$canonical_skills_root/superpowers" "$AGENTS_HOME/skills/superpowers" "canonical Superpowers skills"
-install_tree "$canonical_skills_root/plugins/github" "$AGENTS_HOME/skills/plugin-github" "canonical GitHub plugin fallback skills"
-install_tree "$canonical_skills_root/plugins/google-drive" "$AGENTS_HOME/skills/plugin-google-drive" "canonical Google Drive plugin fallback skills"
-install_tree "$canonical_skills_root/platform" "$AGENTS_HOME/skills" "canonical platform skills"
+install_canonical_tree "$canonical_skills_root/superpowers" "$AGENTS_HOME/skills/superpowers" "canonical Superpowers skills"
+install_canonical_tree "$canonical_skills_root/plugins/github" "$AGENTS_HOME/skills/plugin-github" "canonical GitHub plugin fallback skills"
+install_canonical_tree "$canonical_skills_root/plugins/google-drive" "$AGENTS_HOME/skills/plugin-google-drive" "canonical Google Drive plugin fallback skills"
+install_canonical_tree "$canonical_skills_root/platform" "$AGENTS_HOME/skills" "canonical platform skills"
 
 superpowers_ready=0
 if clone_or_update "$SUPERPOWERS_REPO" "$CODEX_HOME/superpowers" "main" "Superpowers repo"; then

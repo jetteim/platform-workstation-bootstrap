@@ -35,13 +35,15 @@ if [ -d "$repo_root/agents/prompts" ]; then
   install_tree "$repo_root/agents/prompts" "$AGENTS_HOME/prompts" "agent prompts"
 fi
 
-codex_hooks_source="$repo_root/agents/adapters/codex/hooks"
-codex_hooks_json="$repo_root/agents/adapters/codex/hooks.json"
-if [ ! -d "$codex_hooks_source" ]; then
-  codex_hooks_source="$repo_root/codex/hooks"
+codex_hooks_source="$repo_root/codex/hooks"
+codex_hooks_json="$repo_root/codex/hooks.json"
+codex_adapter_hooks_source="$repo_root/agents/adapters/codex/hooks"
+codex_adapter_hooks_json="$repo_root/agents/adapters/codex/hooks.json"
+if [ -d "$codex_adapter_hooks_source" ] && [ -n "$(find "$codex_adapter_hooks_source" -maxdepth 1 -name '*.py' -print -quit)" ]; then
+  codex_hooks_source="$codex_adapter_hooks_source"
 fi
-if [ ! -f "$codex_hooks_json" ]; then
-  codex_hooks_json="$repo_root/codex/hooks.json"
+if [ -f "$codex_adapter_hooks_json" ]; then
+  codex_hooks_json="$codex_adapter_hooks_json"
 fi
 
 cp "$codex_hooks_source/"*.py "$CODEX_HOME/hooks/"
