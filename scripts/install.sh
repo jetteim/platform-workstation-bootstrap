@@ -38,6 +38,20 @@ validate_home_dir() {
   esac
 }
 
+reject_symlink_path() {
+  local path="$1"
+  local label="$2"
+  local current="$path"
+
+  while [ "$current" != "/" ] && [ "$current" != "$HOME" ] && [ "$current" != "/tmp" ] && [ "$current" != "/var/folders" ]; do
+    if [ -L "$current" ]; then
+      echo "[install] refusing symlinked ${label}: ${current}" >&2
+      exit 1
+    fi
+    current="$(dirname "$current")"
+  done
+}
+
 # Canonical agent roots default under ~/.agents.
 install_tree() {
   local source="$1"
@@ -55,7 +69,9 @@ install_tree() {
       ;;
   esac
 
+  reject_symlink_path "$destination" "$label destination"
   mkdir -p "$destination"
+  reject_symlink_path "$destination" "$label destination"
   find "$destination" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +
   cp -R "$source/." "$destination/"
   echo "[install] installed ${label}: ${destination}"
@@ -64,6 +80,9 @@ install_tree() {
 validate_home_dir "AGENTS_HOME" "$AGENTS_HOME"
 validate_home_dir "CODEX_HOME" "$CODEX_HOME"
 validate_home_dir "CLAUDE_HOME" "$CLAUDE_HOME"
+reject_symlink_path "$AGENTS_HOME" "AGENTS_HOME"
+reject_symlink_path "$CODEX_HOME" "CODEX_HOME"
+reject_symlink_path "$CLAUDE_HOME" "CLAUDE_HOME"
 
 if [ "${SKIP_GITHUB_REFRESH:-0}" != "1" ]; then
   "$repo_root/scripts/refresh-github.sh"

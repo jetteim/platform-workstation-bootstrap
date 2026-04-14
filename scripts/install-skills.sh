@@ -61,6 +61,20 @@ validate_home_dir() {
   esac
 }
 
+reject_symlink_path() {
+  local path="$1"
+  local label="$2"
+  local current="$path"
+
+  while [ "$current" != "/" ] && [ "$current" != "$HOME" ] && [ "$current" != "/tmp" ] && [ "$current" != "/var/folders" ]; do
+    if [ -L "$current" ]; then
+      echo "[skills] refusing symlinked ${label}: ${current}" >&2
+      exit 1
+    fi
+    current="$(dirname "$current")"
+  done
+}
+
 clone_or_update() {
   local repo="$1"
   local destination="$2"
@@ -119,7 +133,9 @@ clear_destination() {
       ;;
   esac
 
+  reject_symlink_path "$destination" "managed destination"
   mkdir -p "$destination"
+  reject_symlink_path "$destination" "managed destination"
   find "$destination" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +
 }
 
@@ -217,6 +233,9 @@ project_codex_skills() {
 validate_home_dir "AGENTS_HOME" "$AGENTS_HOME"
 validate_home_dir "CODEX_HOME" "$CODEX_HOME"
 validate_home_dir "CLAUDE_HOME" "$CLAUDE_HOME"
+reject_symlink_path "$AGENTS_HOME" "AGENTS_HOME"
+reject_symlink_path "$CODEX_HOME" "CODEX_HOME"
+reject_symlink_path "$CLAUDE_HOME" "CLAUDE_HOME"
 
 mkdir -p "$AGENTS_HOME/skills" "$AGENTS_HOME/vendor_imports/repos" "$CODEX_HOME/skills" "$CLAUDE_HOME/skills"
 stage_root="$(mktemp -d "${TMPDIR:-/tmp}/platform-bootstrap-skills.XXXXXX")"
