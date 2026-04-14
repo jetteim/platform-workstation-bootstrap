@@ -37,7 +37,7 @@ Use this skill for:
 - contributing causes analysis
 - lessons learned and action item extraction
 - miss-policy definition or activation
-- resilience experiment planning
+- resilience experiment planning, including ambient failure experiments
 - reliability model creation or migration
 
 Do not use this skill for generating telemetry backend monitors, dashboards, or SLO query bindings directly. Use `observability-engineering` for that work and reference its outputs as reliability evidence.
@@ -53,6 +53,8 @@ Do not use this skill for generating telemetry backend monitors, dashboards, or 
 7. Use miss-policy as a pre-agreed operating mode.
 8. Use observability artifacts as evidence, not as the reliability model itself.
 9. Reliability owns SLI/SLO choice, objective realism, calculation basis, error-budget policy, and miss-policy.
+10. Treat the principle that failure is normal as a design constraint: any dependency, platform primitive, or owned workload can be a failure source.
+11. Use resilience experiments to prove expected behavior under bounded failure, not to surprise teams with unmanaged outages.
 
 ## Workflow
 
@@ -81,6 +83,7 @@ If a private checkout is present, read only the relevant files:
 - `docs/usage-scenarios/service-reliability-onboarding.md` when onboarding or reviewing a service
 - `docs/usage-scenarios/telemetry-derived-sli-slo-onboarding.md` when generating SLIs/SLOs from measured telemetry
 - `docs/usage-scenarios/sli-slo-definition-and-review.md` when defining or reviewing SLIs/SLOs
+- `docs/usage-scenarios/resilience-experiment-planning.md` when planning directed or ambient resilience experiments
 - `docs/usage-scenarios/incident-to-postmortem-to-learning.md` when working on incidents or postmortems
 - `docs/intent/service-level-definition-model.md`
 - `docs/intent/sli-slo-selection-model.md`
@@ -129,6 +132,7 @@ Inventory only what is needed:
 - response communications
 - resolution steps
 - prior incidents and action items
+- proposed failure mode, cadence, exposure, jitter, blast radius, and pause authority when planning resilience experiments
 
 Preserve links, screenshots, logs, traces, metrics, and relevant notes before retention expires.
 
@@ -198,6 +202,17 @@ For service reliability:
 - review observability/SLO support
 - propose action items for gaps
 
+For resilience experiments:
+
+- classify the experiment as directed failure or ambient failure
+- state the hypothesis and expected behavior in user-visible or consumer-visible terms
+- define the failure model before choosing an injection mechanism
+- for ambient failure, define cadence, exposure, jitter, target selection, exclusion windows, and pause or skip authority
+- bound blast radius and maximum concurrent impact
+- verify safety preconditions, abort criteria, and accepted risks
+- tie evidence to SLOs, user journeys, dependency behavior, retries, circuit breakers, fallback paths, logs, and traces
+- convert failed expectations into owned action items with verification methods
+
 ### 7. Use Observability Deliberately
 
 When the reliability work needs telemetry, SLOs, alert context, or decision dashboards:
@@ -218,7 +233,8 @@ Before claiming completion, check:
 - postmortems include resolution, impact, contributing causes, lessons, and action items
 - action items have owner, evidence, category, and verification method
 - miss-policy has trigger, response, authority, and exit condition
-- resilience experiments have hypothesis, safety preconditions, abort criteria, and evidence plan
+- resilience experiments have hypothesis, experiment type, expected behavior, failure model, safety preconditions, abort criteria, blast radius, evidence plan, and learning loop
+- ambient failure experiments include cadence, exposure, jitter, target selection, exclusion windows, and pause or skip authority
 - accepted risks are explicit
 
 ## Common Mistakes

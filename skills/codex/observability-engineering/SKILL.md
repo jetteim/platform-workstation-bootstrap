@@ -49,6 +49,8 @@ If the task is primarily about incident aftercare, postmortems, miss-policy, act
 6. Page-worthy alerts must include action context, owner, playbook, and a dynamic decision dashboard.
 7. Dashboards support incident response; they are not manual overview loops.
 8. SRE rules are generated outputs from SLO and alert intent.
+9. Infra observability must cover hosting, routing, capacity, control-plane, telemetry pipeline, policy, event, inventory, and change signals.
+10. Infrastructure alert context contract has the same rigor as application alert context: owner, impact, current state, change context, evidence, decision support, dashboard, and playbook.
 
 ## Workflow
 
@@ -73,7 +75,9 @@ test -d "$model_repo/docs"
 If a private checkout is present, read only the relevant files:
 
 - `docs/intent/principles.md`
+- `docs/usage-scenarios/infra-observability-readiness.md` when building or reviewing infrastructure observability
 - `docs/usage-scenarios/service-onboarding-to-observability.md` when onboarding or preparing service observability
+- `docs/intent/infra-observability.md` when building or reviewing infrastructure observability
 - `docs/intent/semantic-conventions.md`
 - `docs/intent/alert-context-contract.md`
 - `docs/intent/decision-dashboard-model.md`
@@ -96,6 +100,8 @@ Inventory only what is needed for the request:
 - existing metrics, logs, traces, RUM, synthetics, probes, and events
 - current monitors, dashboards, rules, and playbooks
 - CI, admission policy, and validation paths
+- topology correlation across metrics, logs, traces, events, inventory, routes, workloads, owners, and changes
+- telemetry pipeline health for collectors, receivers, processors, queues, exporters, sampling, dropped data, freshness, and backend delivery
 
 Summarize current implementation as evidence. Do not let vendor-specific resources become the model.
 
@@ -125,6 +131,8 @@ Separate:
 
 Record instrumentation gaps instead of inventing fake telemetry bindings.
 
+For infrastructure observability, produce the artifacts described by `docs/usage-scenarios/infra-observability-readiness.md`: platform observability intent, infrastructure signal inventory, metadata coverage assessment, topology correlation requirements, telemetry pipeline health requirements, infrastructure alert context contract, decision dashboard intent, signal classifications, instrumentation gaps, enforcement gaps, and generated artifact manifest or backend generation request.
+
 For service onboarding, produce the artifacts described by `docs/usage-scenarios/service-onboarding-to-observability.md`: service intent, semantic convention updates, SLO intent, SLI query bindings, alert or notification classifications, decision dashboard intent, generated artifact manifest, and enforcement recommendations.
 
 ### 5. Classify Alerts
@@ -136,6 +144,12 @@ Use this taxonomy:
 - **Finding:** standard, policy, or telemetry drift handled through DevEx or backlog.
 
 Do not page on job failures, restarts, partial replica loss, or telemetry drift by default. Promote them only when user impact, owner, playbook, and decision context are explicit.
+
+For infrastructure signals, also keep these defaults:
+
+- classify isolated restarts, node pressure, quota pressure, collector drops, policy drift, and metadata drift as notifications or findings unless they have direct or highly probable impact
+- promote route-to-zero-ready-backend, platform-wide scheduling failure, control-plane unavailability, critical telemetry loss, or capacity exhaustion only when owner, action, playbook, and scoped dashboard are complete
+- treat missing telemetry as its own signal; do not infer healthy infrastructure from absent data
 
 ### 6. Generate Backend Artifacts
 
@@ -162,6 +176,7 @@ Before claiming completion, check:
 - every dashboard opens from alert dimensions, not manual overview assumptions
 - semantic conventions are enforced at appropriate layers
 - generated artifacts are reproducible from the model
+- infrastructure work includes metadata coverage, topology correlation, telemetry pipeline health, and infrastructure alert context contract checks
 
 ## Common Mistakes
 

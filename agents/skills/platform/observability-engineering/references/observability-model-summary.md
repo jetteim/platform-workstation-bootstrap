@@ -12,6 +12,8 @@ Use this file when the private `platform-observability-model` repository is unav
 - Findings are policy or standards drift.
 - Dashboards are incident decision surfaces, not manual overview loops.
 - Backend resources are generated artifacts.
+- Infra observability covers hosting, routing, capacity, control-plane, telemetry pipeline, policy, event, inventory, and change signals.
+- Infrastructure alert context contract has the same rigor as application alert context.
 
 ## Required Alert Context
 
@@ -42,6 +44,19 @@ SLO intent should define:
 - playbook action
 
 Backend rules are generated from this interface.
+
+## Infra Observability Readiness Pattern
+
+When preparing infrastructure observability:
+
+1. Establish platform owner, escalation, environments, and topology boundaries.
+2. Inventory signal layers: platform, cluster, namespace, node, workload, pod, container, route, network, telemetry pipeline, policy, event, inventory, and change.
+3. Check metadata coverage for stable identity, readable names, owner, environment, workload, route, node, cluster, version, and change context.
+4. Define topology correlation across metrics, logs, traces, events, inventory, routes, workloads, owners, and changes.
+5. Define telemetry pipeline health for collector health, receiver health, queue pressure, dropped metrics/logs/spans, exporter errors, sampling, freshness, and backend delivery.
+6. Apply infrastructure alert context contract before paging: identity, ownership, impact, current state, change context, evidence, decision support, dashboard, and playbook.
+7. Classify isolated restarts, node pressure, quota pressure, collector drops, policy drift, and metadata drift as notifications or findings unless impact and action are explicit.
+8. Generate backend artifacts only after neutral intent, classification, context, and dashboard requirements are complete.
 
 ## Reliability Boundary
 
