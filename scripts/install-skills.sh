@@ -29,6 +29,26 @@ RELIABILITY_ENGINEERING_REPO="${RELIABILITY_ENGINEERING_REPO:-https://github.com
 ARCHITECTURAL_EXECUTION_SKILLS_REPO="${ARCHITECTURAL_EXECUTION_SKILLS_REPO:-https://github.com/jetteim/architectural-execution-skills.git}"
 USE_VENDORED_FALLBACK="${USE_VENDORED_FALLBACK:-1}"
 
+validate_home_dir() {
+  local name="$1"
+  local path="$2"
+
+  case "$path" in
+    /*) ;;
+    *)
+      echo "[skills] ${name} must be an absolute path: ${path}" >&2
+      exit 1
+      ;;
+  esac
+
+  case "$path" in
+    ""|"/"|"/bin"|"/etc"|"/opt"|"/tmp"|"/usr"|"/var"|"$HOME")
+      echo "[skills] refusing unsafe ${name}: ${path}" >&2
+      exit 1
+      ;;
+  esac
+}
+
 clone_or_update() {
   local repo="$1"
   local destination="$2"
@@ -58,6 +78,13 @@ clone_or_update() {
   mkdir -p "$(dirname "$destination")"
   git clone --branch "$branch" "$repo" "$destination" || return 1
   echo "[skills] cloned ${label}: ${destination}"
+}
+
+clean_git_mirror() {
+  local destination="$1"
+
+  [ -d "$destination/.git" ] || return 1
+  [ -z "$(git -C "$destination" status --porcelain)" ]
 }
 
 require_source_dir() {
@@ -175,6 +202,10 @@ project_codex_skills() {
   install_tree "$codex_skills_stage" "$CODEX_HOME/skills" "Codex skills"
 }
 
+validate_home_dir "AGENTS_HOME" "$AGENTS_HOME"
+validate_home_dir "CODEX_HOME" "$CODEX_HOME"
+validate_home_dir "CLAUDE_HOME" "$CLAUDE_HOME"
+
 mkdir -p "$AGENTS_HOME/skills" "$AGENTS_HOME/vendor_imports/repos" "$CODEX_HOME/skills" "$CLAUDE_HOME/skills"
 stage_root="$(mktemp -d "${TMPDIR:-/tmp}/platform-bootstrap-skills.XXXXXX")"
 trap 'rm -rf "$stage_root"' EXIT
@@ -235,25 +266,29 @@ for mirror in \
   fi
 done
 
-if [ -d "$AGENTS_HOME/vendor_imports/repos/brain-skill/skill" ]; then
+if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/brain-skill" &&
+  [ -d "$AGENTS_HOME/vendor_imports/repos/brain-skill/skill" ]; then
   stage_tree "$AGENTS_HOME/vendor_imports/repos/brain-skill/skill" "$agent_skills_stage/brain" "Brain skill from source mirror"
 elif [ -d "$canonical_skills_root/platform/brain" ]; then
   stage_tree "$canonical_skills_root/platform/brain" "$agent_skills_stage/brain" "vendored Brain skill fallback"
 fi
 
-if [ -d "$AGENTS_HOME/vendor_imports/repos/observability-engineering/skill/observability-engineering" ]; then
+if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/observability-engineering" &&
+  [ -d "$AGENTS_HOME/vendor_imports/repos/observability-engineering/skill/observability-engineering" ]; then
   stage_tree "$AGENTS_HOME/vendor_imports/repos/observability-engineering/skill/observability-engineering" "$agent_skills_stage/observability-engineering" "Observability engineering skill from source mirror"
 elif [ -d "$canonical_skills_root/platform/observability-engineering" ]; then
   stage_tree "$canonical_skills_root/platform/observability-engineering" "$agent_skills_stage/observability-engineering" "vendored Observability engineering skill fallback"
 fi
 
-if [ -d "$AGENTS_HOME/vendor_imports/repos/reliability-engineering/skill/reliability-engineering" ]; then
+if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/reliability-engineering" &&
+  [ -d "$AGENTS_HOME/vendor_imports/repos/reliability-engineering/skill/reliability-engineering" ]; then
   stage_tree "$AGENTS_HOME/vendor_imports/repos/reliability-engineering/skill/reliability-engineering" "$agent_skills_stage/reliability-engineering" "Reliability engineering skill from source mirror"
 elif [ -d "$canonical_skills_root/platform/reliability-engineering" ]; then
   stage_tree "$canonical_skills_root/platform/reliability-engineering" "$agent_skills_stage/reliability-engineering" "vendored Reliability engineering skill fallback"
 fi
 
-if [ -d "$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills/skills" ]; then
+if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills" &&
+  [ -d "$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills/skills" ]; then
   stage_skill_collection "$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills/skills" "$agent_skills_stage" "Architectural execution skills from source mirror"
 else
   for architectural_skill in "${ARCHITECTURAL_SKILLS[@]}"; do

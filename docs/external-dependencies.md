@@ -113,4 +113,6 @@ The vendored bundles are fallback/bootstrap material. Prefer refreshing the upst
 
 Managed skill destinations are synced from staged bootstrap trees, not overlaid indefinitely. Reinstalling prunes files that were removed from the managed source bundles.
 
+Dirty source mirrors are preserved but skipped as install inputs. This prevents local mirror edits from leaking into projected skills while keeping those edits available for manual recovery.
+
 For the line-by-line comparison with original install instructions, see `docs/original-install-comparison.md`.

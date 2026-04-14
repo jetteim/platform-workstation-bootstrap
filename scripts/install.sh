@@ -6,6 +6,26 @@ AGENTS_HOME="${AGENTS_HOME:-$HOME/.agents}"
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 CLAUDE_HOME="${CLAUDE_HOME:-$HOME/.claude}"
 
+validate_home_dir() {
+  local name="$1"
+  local path="$2"
+
+  case "$path" in
+    /*) ;;
+    *)
+      echo "[install] ${name} must be an absolute path: ${path}" >&2
+      exit 1
+      ;;
+  esac
+
+  case "$path" in
+    ""|"/"|"/bin"|"/etc"|"/opt"|"/tmp"|"/usr"|"/var"|"$HOME")
+      echo "[install] refusing unsafe ${name}: ${path}" >&2
+      exit 1
+      ;;
+  esac
+}
+
 # Canonical agent roots default under ~/.agents.
 install_tree() {
   local source="$1"
@@ -28,6 +48,10 @@ install_tree() {
   cp -R "$source/." "$destination/"
   echo "[install] installed ${label}: ${destination}"
 }
+
+validate_home_dir "AGENTS_HOME" "$AGENTS_HOME"
+validate_home_dir "CODEX_HOME" "$CODEX_HOME"
+validate_home_dir "CLAUDE_HOME" "$CLAUDE_HOME"
 
 if [ "${SKIP_GITHUB_REFRESH:-0}" != "1" ]; then
   "$repo_root/scripts/refresh-github.sh"

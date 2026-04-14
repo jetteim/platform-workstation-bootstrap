@@ -40,6 +40,7 @@ The skill install order mirrors the original upstream setup:
 - Clone or update the Superpowers fork into `~/.codex/superpowers`.
 - Install canonical Superpowers into `~/.agents/skills/superpowers` as a real directory on fresh installs.
 - Replace a legacy `~/.agents/skills/superpowers` symlink with the canonical real directory during migration.
+- Refuse unsafe `AGENTS_HOME`, `CODEX_HOME`, and `CLAUDE_HOME` overrides before creating directories.
 - Install canonical shared skills under `~/.agents/skills`.
 - Install source mirrors under `~/.agents/vendor_imports`.
 - Project compatible skills into `~/.codex/skills` and `~/.claude/skills`.
@@ -60,6 +61,8 @@ The skill install order mirrors the original upstream setup:
 - `features.multi_agent = true`
 
 It does not overwrite live credentials or private config files.
+
+Dirty source mirrors are refreshed neither destructively nor used as source-backed skill inputs; the installer falls back to vendored canonical copies when a mirror has local changes.
 
 See `docs/original-install-comparison.md` for the upstream install-step comparison.
 
