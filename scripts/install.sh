@@ -9,6 +9,7 @@ CLAUDE_HOME="${CLAUDE_HOME:-$HOME/.claude}"
 validate_home_dir() {
   local name="$1"
   local path="$2"
+  local default_path
 
   case "$path" in
     /*) ;;
@@ -18,8 +19,19 @@ validate_home_dir() {
       ;;
   esac
 
+  case "$name" in
+    AGENTS_HOME) default_path="$HOME/.agents" ;;
+    CODEX_HOME) default_path="$HOME/.codex" ;;
+    CLAUDE_HOME) default_path="$HOME/.claude" ;;
+    *)
+      echo "[install] unknown managed home variable: ${name}" >&2
+      exit 1
+      ;;
+  esac
+
   case "$path" in
-    ""|"/"|"/bin"|"/etc"|"/opt"|"/tmp"|"/usr"|"/var"|"$HOME")
+    "$default_path"|"$default_path"/*|/tmp/*|/var/folders/*) ;;
+    *)
       echo "[install] refusing unsafe ${name}: ${path}" >&2
       exit 1
       ;;
@@ -44,7 +56,7 @@ install_tree() {
   esac
 
   mkdir -p "$destination"
-  find "$destination" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
+  find "$destination" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +
   cp -R "$source/." "$destination/"
   echo "[install] installed ${label}: ${destination}"
 }

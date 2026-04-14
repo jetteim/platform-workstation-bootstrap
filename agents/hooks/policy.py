@@ -118,9 +118,11 @@ def completion_needs_evidence(message: str | None) -> bool:
         for phrase in [
             "tested",
             "verified",
-            "ran ",
-            "command",
             "checks",
+            "passed",
+            "failed",
+            "exit 0",
+            "[verify] ok",
             "not run",
             "could not run",
             "unable to run",

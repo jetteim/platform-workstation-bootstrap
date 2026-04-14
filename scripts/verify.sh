@@ -88,13 +88,17 @@ grep -q 'codebase-exploration.md' "$repo_root/agents/adapters/claude/CLAUDE.md.t
 grep -q 'AGENTS_HOME/rules' "$repo_root/scripts/install.sh"
 grep -q 'install_tree "$repo_root/agents/hooks" "$AGENTS_HOME/hooks" "agent hooks"' "$repo_root/scripts/install.sh"
 grep -q 'install_tree "$repo_root/agents/prompts" "$AGENTS_HOME/prompts" "agent prompts"' "$repo_root/scripts/install.sh"
-grep -Fq 'find "$destination" -mindepth 1 -maxdepth 1 -exec rm -rf {} +' "$repo_root/scripts/install.sh"
+grep -Fq 'find "$destination" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +' "$repo_root/scripts/install.sh"
 grep -q 'canonical_hooks_source="$repo_root/agents/hooks"' "$repo_root/scripts/install.sh"
 grep -q 'cp "$canonical_hooks_source/policy.py" "$CODEX_HOME/hooks/policy.py"' "$repo_root/scripts/install.sh"
 grep -q '\.agents/skills' "$repo_root/scripts/install-skills.sh"
 grep -q 'stage_skill_collection' "$repo_root/scripts/install-skills.sh"
 grep -q 'clean_git_mirror' "$repo_root/scripts/install-skills.sh"
-grep -Fq 'find "$destination" -mindepth 1 -maxdepth 1 -exec rm -rf {} +' "$repo_root/scripts/install-skills.sh"
+grep -Fq 'find "$destination" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +' "$repo_root/scripts/install-skills.sh"
+if grep -q '"command"' "$repo_root/agents/hooks/policy.py"; then
+  echo "canonical hook policy treats bare command wording as verification evidence" >&2
+  exit 1
+fi
 grep -q '\.agents/vendor_imports' "$repo_root/scripts/install-skills.sh"
 grep -q 'AGENTS_HOME/vendor_imports/skills' "$repo_root/scripts/install-skills.sh"
 grep -q 'AGENTS_HOME/vendor_imports/repos/llama.cpp' "$repo_root/scripts/install-skills.sh"
