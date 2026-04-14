@@ -1,4 +1,0 @@
-interface:
-  display_name: "Shaping Features"
-  short_description: "Turn capabilities into feature packets"
-  default_prompt: "Use $shaping-features to split this capability into feature-sized delivery packets."

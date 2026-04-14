@@ -109,6 +109,29 @@ chmod_shebang_scripts() {
   done < <(find "$root" -type f -path "*/scripts/*" -print0)
 }
 
+ARCHITECTURAL_SKILLS=(
+  discovering-value-streams
+  modeling-c4-architecture
+  orchestrating-architecture-execution
+  reviewing-traceability
+  shaping-capabilities
+  shaping-features
+  slicing-stories
+)
+
+remove_architectural_agent_metadata() {
+  local root
+  local skill
+
+  for root in "$AGENTS_HOME/skills" "$CODEX_HOME/skills" "$CLAUDE_HOME/skills"; do
+    [ -d "$root" ] || continue
+    for skill in "${ARCHITECTURAL_SKILLS[@]}"; do
+      rm -f "$root/$skill/agents/openai.yaml"
+      rmdir "$root/$skill/agents" 2>/dev/null || true
+    done
+  done
+}
+
 project_codex_skills() {
   install_tree "$canonical_skills_root/codex-curated" "$CODEX_HOME/skills" "Codex curated/user skills"
   install_tree "$AGENTS_HOME/skills" "$CODEX_HOME/skills" "Codex projection from canonical skills"
@@ -139,12 +162,8 @@ else
   exit 1
 fi
 
-if [ "$superpowers_ready" = "1" ] && { [ -L "$AGENTS_HOME/skills/superpowers" ] || [ ! -e "$AGENTS_HOME/skills/superpowers" ]; }; then
-  rm -f "$AGENTS_HOME/skills/superpowers"
-  ln -s "$CODEX_HOME/superpowers/skills" "$AGENTS_HOME/skills/superpowers"
-  echo "[skills] linked Superpowers skills -> $AGENTS_HOME/skills/superpowers"
-elif [ "$superpowers_ready" = "1" ]; then
-  echo "[skills] $AGENTS_HOME/skills/superpowers exists and is not a symlink; leaving it unchanged" >&2
+if [ "$superpowers_ready" = "1" ]; then
+  echo "[skills] canonical Superpowers is installed as a real directory: $AGENTS_HOME/skills/superpowers"
 fi
 
 install_tree "$skills_root/plugins/github" "$AGENTS_HOME/skills/plugin-github" "GitHub plugin skill fallback"
@@ -193,14 +212,7 @@ fi
 if [ -d "$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills/skills" ]; then
   install_tree "$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills/skills" "$AGENTS_HOME/skills" "Architectural execution skills from source mirror"
 else
-  for architectural_skill in \
-    discovering-value-streams \
-    modeling-c4-architecture \
-    orchestrating-architecture-execution \
-    reviewing-traceability \
-    shaping-capabilities \
-    shaping-features \
-    slicing-stories; do
+  for architectural_skill in "${ARCHITECTURAL_SKILLS[@]}"; do
     if [ -d "$canonical_skills_root/platform/$architectural_skill" ]; then
       install_tree "$canonical_skills_root/platform/$architectural_skill" "$AGENTS_HOME/skills/$architectural_skill" "vendored ${architectural_skill} skill fallback"
     fi
@@ -209,6 +221,7 @@ fi
 
 project_codex_skills
 install_tree "$AGENTS_HOME/skills" "$CLAUDE_HOME/skills" "Claude skill projection from canonical skills"
+remove_architectural_agent_metadata
 
 chmod_shebang_scripts "$CODEX_HOME/skills"
 chmod_shebang_scripts "$CODEX_HOME/superpowers/skills"

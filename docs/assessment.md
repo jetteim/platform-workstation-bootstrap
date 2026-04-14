@@ -36,7 +36,7 @@ Observed settings:
 
 ## Skills And Plugins
 
-Local Superpowers skills are installed at `~/.codex/superpowers/skills` and symlinked from `~/.agents/skills/superpowers`.
+Local Superpowers source is mirrored at `~/.codex/superpowers/skills`. The agent-agnostic bootstrap migrates `~/.agents/skills/superpowers` to a real canonical directory and replaces legacy symlinks during install.
 
 External provenance:
 
@@ -127,4 +127,3 @@ User pip packages:
 - `pypdf 6.8.0`
 - `Pyrogram 2.0.106`
 - `TgCrypto 1.2.5`
-

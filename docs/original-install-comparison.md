@@ -37,7 +37,7 @@ Bootstrap match:
 - Uses the fork `https://github.com/jetteim/superpowers.git` as the primary clone source.
 - Keeps the source checkout at `~/.codex/superpowers`.
 - Installs canonical Superpowers into `~/.agents/skills/superpowers` as a real directory on fresh installs.
-- Preserves legacy symlink compatibility when `~/.agents/skills/superpowers` already exists as a symlink.
+- Replaces a legacy `~/.agents/skills/superpowers` symlink with a canonical real directory during migration.
 - Sets `features.multi_agent = true` alongside `features.codex_hooks = true`.
 - Uses vendored `skills/superpowers/` only if no usable clone exists and `USE_VENDORED_FALLBACK=1`.
 

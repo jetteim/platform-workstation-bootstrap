@@ -39,7 +39,7 @@ The skill install order mirrors the original upstream setup:
 
 - Clone or update the Superpowers fork into `~/.codex/superpowers`.
 - Install canonical Superpowers into `~/.agents/skills/superpowers` as a real directory on fresh installs.
-- Preserve legacy symlink compatibility for existing `~/.agents/skills/superpowers` states.
+- Replace a legacy `~/.agents/skills/superpowers` symlink with the canonical real directory during migration.
 - Install canonical shared skills under `~/.agents/skills`.
 - Install source mirrors under `~/.agents/vendor_imports`.
 - Project compatible skills into `~/.codex/skills` and `~/.claude/skills`.
@@ -50,7 +50,8 @@ The skill install order mirrors the original upstream setup:
 `install.sh` installs:
 
 - `~/.codex/hooks.json`
-- `~/.codex/hooks/*.py`
+- `~/.agents/hooks/*` and `~/.agents/prompts/*`
+- `~/.codex/hooks/*.py`, combining shared hook policy with the Codex event dispatcher
 - source-backed skills and fallback skill bundles through `scripts/install-skills.sh`
 - `~/.config/git/hooks/pre-commit`
 - `git config --global core.hooksPath ~/.config/git/hooks`

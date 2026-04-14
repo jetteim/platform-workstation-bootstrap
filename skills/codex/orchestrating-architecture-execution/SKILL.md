@@ -9,7 +9,7 @@ description: Use when an idea, initiative, architecture change, roadmap item, ep
 
 Use this skill as the router for an architecture-to-execution pipeline. Treat SAFe and C4 as useful abstraction vocabularies, not as ceremony to reproduce.
 
-Core principle: keep each level human-sized, then hand off to the existing Superpowers skills that already handle brainstorming, specs, implementation plans, TDD, subagent-driven development, and verification.
+Core principle: keep each level human-sized, then hand off to the existing workflow skills that already handle brainstorming, specs, implementation plans, TDD, plan execution, and verification.
 
 ## Pipeline
 
@@ -21,7 +21,7 @@ Core principle: keep each level human-sized, then hand off to the existing Super
 | Architecture | `modeling-c4-architecture` | C4 decision views | Diagrams answer specific stakeholder questions at the right zoom level |
 | Implementation | `slicing-stories` | Story packets and spec handoff | No more than 7-10 active stories are needed to hold the implementation context |
 | Integrity | `reviewing-traceability` | Traceability review | Every story traces upward and every architecture decision traces downward |
-| Code | Existing Superpowers | Design spec, plan, implementation | Use `brainstorming`, `writing-plans`, `subagent-driven-development` or `executing-plans`, `test-driven-development`, and `verification-before-completion` |
+| Code | Existing workflow skills | Design spec, plan, implementation | Use `brainstorming`, `writing-plans`, plan execution, `test-driven-development`, and `verification-before-completion` or your runtime's equivalents |
 
 ## Routing Rules
 
@@ -34,15 +34,15 @@ Start at the highest level that is unclear. Do not create all artifacts by defau
 - If the user brings a feature and wants implementation, use `slicing-stories`, then hand off to `writing-plans`.
 - Before implementation, use `reviewing-traceability` when there is more than one abstraction level or more than 7-10 stories.
 
-## Existing Skills To Incorporate
+## Complementary Workflow Skills
 
 Do not reimplement these workflows:
 
-- **REQUIRED SUB-SKILL when shaping ambiguous levels:** Use `superpowers:brainstorming`.
-- **REQUIRED SUB-SKILL when turning approved specs into implementation work:** Use `superpowers:writing-plans`.
-- **REQUIRED SUB-SKILL when coding features or fixes:** Use `superpowers:test-driven-development`.
-- **Recommended for executing plans:** Use `superpowers:subagent-driven-development` when independent task execution is available; otherwise use `superpowers:executing-plans`.
-- **REQUIRED before claiming completion:** Use `superpowers:verification-before-completion`.
+- **Required when shaping ambiguous levels:** Use `brainstorming` or an equivalent design-discovery workflow.
+- **Required when turning approved specs into implementation work:** Use `writing-plans` or an equivalent implementation-planning workflow.
+- **Required when coding features or fixes:** Use `test-driven-development` or an equivalent test-first workflow.
+- **Recommended for executing plans:** Use parallel task execution when independent tasks are available; otherwise use a sequential plan-execution workflow.
+- **Required before claiming completion:** Use `verification-before-completion` or an equivalent evidence-before-claims workflow.
 
 ## Anti-Cliches
 
@@ -70,4 +70,3 @@ Keep artifacts compact. Prefer this structure:
 **Evidence:** <metric, demo, test, or verification command>
 **Open questions:** <only blockers, not a parking lot>
 ```
-

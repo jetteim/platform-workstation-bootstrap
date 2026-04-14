@@ -4,6 +4,8 @@ set -euo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 python3 -m py_compile \
+  "$repo_root/agents/hooks/policy.py" \
+  "$repo_root/agents/hooks/redact.py" \
   "$repo_root/agents/adapters/codex/hooks/codex_hook.py" \
   "$repo_root/agents/adapters/codex/hooks/policy.py" \
   "$repo_root/agents/adapters/codex/hooks/redact.py"
@@ -29,12 +31,18 @@ test -f "$repo_root/docs/skill-trigger-examples.md"
 test -f "$repo_root/agents/rules/codebase-exploration.md"
 test -f "$repo_root/agents/rules/reliability-observability.md"
 test -f "$repo_root/agents/rules/secrets-and-safety.md"
+test -f "$repo_root/agents/hooks/policy.py"
+test -f "$repo_root/agents/hooks/redact.py"
+test -f "$repo_root/agents/prompts/platform-guardrails.md"
 test -f "$repo_root/agents/manifests/skill-projections.tsv"
 test -f "$repo_root/agents/adapters/claude/CLAUDE.md.template"
 test -f "$repo_root/agents/adapters/codex/README.md"
 grep -Fq '`~/.agents` is the canonical agent-neutral layer' "$repo_root/README.md"
 grep -Fq 'Install canonical Superpowers into `~/.agents/skills/superpowers` as a real directory on fresh installs.' "$repo_root/README.md"
+grep -Fq 'Replace a legacy `~/.agents/skills/superpowers` symlink with the canonical real directory during migration.' "$repo_root/README.md"
 grep -q 'Build a context map before exploring a codebase' "$repo_root/agents/rules/codebase-exploration.md"
+grep -q 'completion_needs_evidence' "$repo_root/agents/hooks/policy.py"
+grep -q 'Treat secrets as toxic' "$repo_root/agents/prompts/platform-guardrails.md"
 grep -q 'orchestrating-architecture-execution' "$repo_root/agents/manifests/skill-projections.tsv"
 grep -q '~/.agents' "$repo_root/agents/adapters/claude/CLAUDE.md.template"
 grep -q 'SUPERPOWERS_REPO' "$repo_root/scripts/install-skills.sh"
@@ -72,7 +80,11 @@ grep -q 'CLAUDE_HOME' "$repo_root/scripts/install-skills.sh"
 grep -q 'CLAUDE_HOME' "$repo_root/scripts/install.sh"
 grep -q '~/.claude/skills' "$repo_root/agents/adapters/claude/CLAUDE.md.template"
 grep -q 'codebase-exploration.md' "$repo_root/agents/adapters/claude/CLAUDE.md.template"
-grep -q '\.agents/rules' "$repo_root/scripts/install.sh"
+grep -q 'AGENTS_HOME/rules' "$repo_root/scripts/install.sh"
+grep -q 'install_tree "$repo_root/agents/hooks" "$AGENTS_HOME/hooks" "agent hooks"' "$repo_root/scripts/install.sh"
+grep -q 'install_tree "$repo_root/agents/prompts" "$AGENTS_HOME/prompts" "agent prompts"' "$repo_root/scripts/install.sh"
+grep -q 'canonical_hooks_source="$repo_root/agents/hooks"' "$repo_root/scripts/install.sh"
+grep -q 'cp "$canonical_hooks_source/policy.py" "$CODEX_HOME/hooks/policy.py"' "$repo_root/scripts/install.sh"
 grep -q '\.agents/skills' "$repo_root/scripts/install-skills.sh"
 grep -q '\.agents/vendor_imports' "$repo_root/scripts/install-skills.sh"
 grep -q 'AGENTS_HOME/vendor_imports/skills' "$repo_root/scripts/install-skills.sh"
@@ -80,6 +92,7 @@ grep -q 'AGENTS_HOME/vendor_imports/repos/llama.cpp' "$repo_root/scripts/install
 grep -q 'AGENTS_HOME/vendor_imports/repos/llama.cpp' "$repo_root/scripts/install-brain-prereqs.sh"
 grep -q 'AGENTS_HOME/vendor_imports/repos/llama.cpp' "$repo_root/scripts/run-brain-mlx-smoke.sh"
 grep -q 'agents_home/vendor_imports/repos/brain-skill' "$repo_root/scripts/test-brain-skill.sh"
+grep -q 'remove_architectural_agent_metadata' "$repo_root/scripts/install-skills.sh"
 for touched_script in \
   "$repo_root/scripts/install-skills.sh" \
   "$repo_root/scripts/install-brain-prereqs.sh" \
@@ -91,7 +104,7 @@ for touched_script in \
   fi
 done
 grep -q 'prepare_canonical_destination' "$repo_root/scripts/install-skills.sh"
-grep -q 'find "$codex_adapter_hooks_source" -maxdepth 1 -name' "$repo_root/scripts/install.sh"
+grep -q 'canonical Superpowers is installed as a real directory' "$repo_root/scripts/install-skills.sh"
 grep -q 'platform-observability-model' "$repo_root/scripts/refresh-github.sh"
 grep -q 'observability-engineering' "$repo_root/scripts/refresh-github.sh"
 grep -q 'platform-reliability-model' "$repo_root/scripts/refresh-github.sh"
@@ -128,6 +141,24 @@ test -f "$repo_root/agents/skills/platform/slicing-stories/SKILL.md"
 test -f "$repo_root/agents/skills/platform/reviewing-traceability/SKILL.md"
 test -f "$repo_root/agents/skills/plugins/github/yeet/SKILL.md"
 test -f "$repo_root/agents/skills/plugins/google-drive/google-drive/SKILL.md"
+for architectural_skill in \
+  discovering-value-streams \
+  modeling-c4-architecture \
+  orchestrating-architecture-execution \
+  reviewing-traceability \
+  shaping-capabilities \
+  shaping-features \
+  slicing-stories; do
+  for vendored_root in \
+    "$repo_root/agents/skills/platform" \
+    "$repo_root/agents/skills/codex-curated" \
+    "$repo_root/skills/codex"; do
+    if [ -e "$vendored_root/$architectural_skill/agents/openai.yaml" ]; then
+      echo "stale architectural OpenAI metadata remains in $vendored_root/$architectural_skill" >&2
+      exit 1
+    fi
+  done
+done
 canonical_skill_count="$(find "$repo_root/agents/skills" -name SKILL.md | wc -l | tr -d ' ')"
 if [ "$canonical_skill_count" -lt 40 ]; then
   echo "expected at least 40 canonical skills, found $canonical_skill_count" >&2

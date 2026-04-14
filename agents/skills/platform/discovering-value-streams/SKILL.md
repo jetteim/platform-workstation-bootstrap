@@ -9,7 +9,7 @@ description: Use when a product idea, business problem, platform initiative, str
 
 Frame the work as a flow of value before decomposing it into capabilities, features, or stories. The output is a value stream brief that explains why the work exists and what must improve.
 
-Use `superpowers:brainstorming` when the goal, customer, or flow is ambiguous.
+Use `brainstorming` or an equivalent design-discovery workflow when the goal, customer, or flow is ambiguous.
 
 ## Process
 
@@ -60,4 +60,3 @@ Proceed to `shaping-capabilities` only when:
 - The beginning and end are observable.
 - Measures are not just delivery activity counts.
 - Capability candidates describe abilities the organization or product needs, not implementation tasks.
-

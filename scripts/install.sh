@@ -6,7 +6,7 @@ AGENTS_HOME="${AGENTS_HOME:-$HOME/.agents}"
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 CLAUDE_HOME="${CLAUDE_HOME:-$HOME/.claude}"
 
-# Canonical agent roots default under ~/.agents/rules.
+# Canonical agent roots default under ~/.agents.
 install_tree() {
   local source="$1"
   local destination="$2"
@@ -29,31 +29,31 @@ fi
 mkdir -p "$AGENTS_HOME/rules" "$AGENTS_HOME/hooks" "$AGENTS_HOME/prompts" "$CODEX_HOME/hooks" "$HOME/.config/git/hooks"
 
 install_tree "$repo_root/agents/rules" "$AGENTS_HOME/rules" "agent rules"
+install_tree "$repo_root/agents/hooks" "$AGENTS_HOME/hooks" "agent hooks"
+install_tree "$repo_root/agents/prompts" "$AGENTS_HOME/prompts" "agent prompts"
 mkdir -p "$CLAUDE_HOME"
 cp "$repo_root/agents/adapters/claude/CLAUDE.md.template" "$CLAUDE_HOME/CLAUDE.md.template"
 echo "[install] installed Claude rule template: $CLAUDE_HOME/CLAUDE.md.template"
-if [ -d "$repo_root/agents/hooks" ]; then
-  install_tree "$repo_root/agents/hooks" "$AGENTS_HOME/hooks" "agent hooks"
-fi
-if [ -d "$repo_root/agents/prompts" ]; then
-  install_tree "$repo_root/agents/prompts" "$AGENTS_HOME/prompts" "agent prompts"
-fi
 
-codex_hooks_source="$repo_root/codex/hooks"
+canonical_hooks_source="$repo_root/agents/hooks"
+codex_dispatcher_source="$repo_root/codex/hooks/codex_hook.py"
 codex_hooks_json="$repo_root/codex/hooks.json"
 codex_adapter_hooks_source="$repo_root/agents/adapters/codex/hooks"
 codex_adapter_hooks_json="$repo_root/agents/adapters/codex/hooks.json"
-# A broad find "$codex_adapter_hooks_source" -maxdepth 1 -name '*.py' check is not enough here.
-if [ -f "$codex_adapter_hooks_source/codex_hook.py" ] &&
-  [ -f "$codex_adapter_hooks_source/policy.py" ] &&
-  [ -f "$codex_adapter_hooks_source/redact.py" ]; then
-  codex_hooks_source="$codex_adapter_hooks_source"
+if [ ! -f "$canonical_hooks_source/policy.py" ] || [ ! -f "$canonical_hooks_source/redact.py" ]; then
+  echo "[install] missing canonical hook policy files under $canonical_hooks_source" >&2
+  exit 1
+fi
+if [ -f "$codex_adapter_hooks_source/codex_hook.py" ]; then
+  codex_dispatcher_source="$codex_adapter_hooks_source/codex_hook.py"
 fi
 if [ -f "$codex_adapter_hooks_json" ]; then
   codex_hooks_json="$codex_adapter_hooks_json"
 fi
 
-cp "$codex_hooks_source/"*.py "$CODEX_HOME/hooks/"
+cp "$canonical_hooks_source/policy.py" "$CODEX_HOME/hooks/policy.py"
+cp "$canonical_hooks_source/redact.py" "$CODEX_HOME/hooks/redact.py"
+cp "$codex_dispatcher_source" "$CODEX_HOME/hooks/codex_hook.py"
 chmod +x "$CODEX_HOME/hooks/codex_hook.py"
 cp "$codex_hooks_json" "$CODEX_HOME/hooks.json"
 

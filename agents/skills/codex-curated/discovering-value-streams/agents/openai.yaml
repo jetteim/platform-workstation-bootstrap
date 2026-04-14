@@ -1,4 +1,0 @@
-interface:
-  display_name: "Discovering Value Streams"
-  short_description: "Frame outcomes, customers, and flow"
-  default_prompt: "Use $discovering-value-streams to frame this product idea as a value stream."

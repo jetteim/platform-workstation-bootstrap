@@ -9,7 +9,7 @@ description: Use when a value stream, strategic outcome, portfolio item, or epic
 
 Capabilities describe meaningful abilities needed to improve a value stream. They are larger than features, but still need evidence, boundaries, and a route to implementation.
 
-Use `superpowers:brainstorming` to explore competing capability options before locking scope.
+Use `brainstorming` or an equivalent design-discovery workflow to explore competing capability options before locking scope.
 
 ## Capability Tests
 
@@ -68,4 +68,3 @@ Proceed to `shaping-features` only when:
 - The benefit hypothesis can be tested.
 - Key architecture questions have owners or are explicitly deferred.
 - Feature candidates can fit into a bounded delivery increment.
-

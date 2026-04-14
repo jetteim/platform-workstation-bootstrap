@@ -473,15 +473,11 @@ install_tree "$canonical_skills_root/codex-curated" "$CODEX_HOME/skills" "Codex 
 install_tree "$AGENTS_HOME/skills" "$CODEX_HOME/skills" "Codex projection from canonical skills"
 ```
 
-Replace Superpowers symlink logic with a canonical symlink:
+Replace Superpowers symlink logic with explicit canonical directory migration:
 
 ```bash
-if [ "$superpowers_ready" = "1" ] && { [ -L "$AGENTS_HOME/skills/superpowers" ] || [ ! -e "$AGENTS_HOME/skills/superpowers" ]; }; then
-  rm -f "$AGENTS_HOME/skills/superpowers"
-  ln -s "$CODEX_HOME/superpowers/skills" "$AGENTS_HOME/skills/superpowers"
-  echo "[skills] linked Superpowers skills -> ~/.agents/skills/superpowers"
-elif [ "$superpowers_ready" = "1" ]; then
-  echo "[skills] ~/.agents/skills/superpowers exists and is not a symlink; leaving it unchanged" >&2
+if [ "$superpowers_ready" = "1" ]; then
+  echo "[skills] canonical Superpowers is installed as a real directory: $AGENTS_HOME/skills/superpowers"
 fi
 ```
 

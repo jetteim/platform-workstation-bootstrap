@@ -17,12 +17,23 @@ from redact import redact
 LOG_DIR = Path.home() / ".codex" / "hook-logs"
 
 
-SESSION_CONTEXT = """Platform guardrails:
+DEFAULT_SESSION_CONTEXT = """Platform guardrails:
 - Treat secrets as toxic: do not print, quote, persist, or commit them.
 - For reliability work, capture target, command, timestamp, output path, metric/log/trace names, rollback path, and verification evidence.
 - For infra changes, prefer plan/dry-run/diff before apply/delete/destroy.
 - Do not claim fixed/passing/done without verification or an explicit caveat.
 """
+
+
+def session_context() -> str:
+    prompt_path = Path.home() / ".agents" / "prompts" / "platform-guardrails.md"
+    try:
+        prompt = prompt_path.read_text(encoding="utf-8").strip()
+    except OSError:
+        return DEFAULT_SESSION_CONTEXT
+    if not prompt:
+        return DEFAULT_SESSION_CONTEXT
+    return f"{prompt}\n"
 
 
 def read_payload() -> dict[str, Any]:
@@ -72,7 +83,7 @@ def handle_session_start(payload: dict[str, Any]) -> tuple[str, str | None]:
         {
             "hookSpecificOutput": {
                 "hookEventName": "SessionStart",
-                "additionalContext": SESSION_CONTEXT,
+                "additionalContext": session_context(),
             }
         }
     )
