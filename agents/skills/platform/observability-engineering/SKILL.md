@@ -9,9 +9,15 @@ description: Use when building platform or application observability, defining S
 
 Build observability from neutral intent. Treat backend monitors, dashboards, alert rules, admission policies, Helm values, and API calls as generated outputs.
 
-When the local `platform-observability-model` repository is available, use it as the source of truth. Otherwise use the compact references bundled with this skill.
+When the private `platform-observability-model` repository checkout is available, use it as the source of truth. Otherwise use the compact references bundled with this skill.
 
-Preferred model path:
+Preferred model checkout from the workstation installer:
+
+```text
+${AGENTS_HOME:-$HOME/.agents}/vendor_imports/repos/platform-observability-model
+```
+
+Legacy workspace checkout:
 
 ```text
 ~/Library/CloudStorage/OneDrive-Personal/Pet projects/platform-observability-model
@@ -48,13 +54,23 @@ If the task is primarily about incident aftercare, postmortems, miss-policy, act
 
 ### 1. Load The Model
 
-Check for the private model repo:
+Resolve the private model repo in this order:
+
+1. `${AGENTS_HOME:-$HOME/.agents}/vendor_imports/repos/platform-observability-model`
+2. `~/Library/CloudStorage/OneDrive-Personal/Pet projects/platform-observability-model`
+3. `references/observability-model-summary.md`
+
+Use this check:
 
 ```bash
-test -d "$HOME/Library/CloudStorage/OneDrive-Personal/Pet projects/platform-observability-model"
+model_repo="${AGENTS_HOME:-$HOME/.agents}/vendor_imports/repos/platform-observability-model"
+if [ ! -d "$model_repo/docs" ]; then
+  model_repo="$HOME/Library/CloudStorage/OneDrive-Personal/Pet projects/platform-observability-model"
+fi
+test -d "$model_repo/docs"
 ```
 
-If present, read only the relevant files:
+If a private checkout is present, read only the relevant files:
 
 - `docs/intent/principles.md`
 - `docs/usage-scenarios/service-onboarding-to-observability.md` when onboarding or preparing service observability
@@ -66,7 +82,7 @@ If present, read only the relevant files:
 - `docs/devex/*.md` when enforcement or developer workflow matters
 - `docs/migration/*.md` when SRE rules are involved
 
-If missing, use `references/observability-model-summary.md`.
+If no private checkout is present, use `references/observability-model-summary.md` and state that the bundled reference fallback was used. Do not invent content from the private model.
 
 When a usage scenario applies, follow it as the execution contract. The scenario defines expected inputs, outputs, refusal conditions, human review gates, and completion criteria.
 

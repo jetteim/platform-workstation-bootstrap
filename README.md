@@ -48,7 +48,8 @@ The skill install order mirrors the original upstream setup:
 - Project compatible skills into `~/.codex/skills` and `~/.claude/skills`.
 - Sync managed skill destinations from staged trees so removed vendored files are pruned on reinstall.
 - Install vendored Codex and plugin skill fallback copies.
-- Clone the private platform observability/reliability model repos and public engineering skill repos when GitHub access allows.
+- Clone the private platform observability/reliability model repos before installing their public engineering skills when GitHub access allows.
+- Fall back to bundled observability/reliability reference summaries inside the skill bundles when private model repo refresh is unavailable.
 - Clone the public architectural execution skill pipeline and install it from source when GitHub access allows.
 
 `install.sh` installs:

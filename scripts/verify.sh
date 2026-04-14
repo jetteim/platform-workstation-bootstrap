@@ -39,6 +39,10 @@ test -f "$repo_root/agents/hooks/policy.py"
 test -f "$repo_root/agents/hooks/redact.py"
 test -f "$repo_root/agents/prompts/platform-guardrails.md"
 test -f "$repo_root/agents/manifests/skill-projections.tsv"
+test -f "$repo_root/agents/skills/platform/observability-engineering/references/observability-model-summary.md"
+test -f "$repo_root/agents/skills/platform/reliability-engineering/references/reliability-model-summary.md"
+test -f "$repo_root/skills/codex/observability-engineering/references/observability-model-summary.md"
+test -f "$repo_root/skills/codex/reliability-engineering/references/reliability-model-summary.md"
 test -f "$repo_root/agents/adapters/claude/CLAUDE.md.template"
 test -f "$repo_root/agents/adapters/codex/README.md"
 grep -Fq '`~/.agents` is the canonical agent-neutral layer' "$repo_root/README.md"
@@ -61,6 +65,24 @@ grep -q 'https://github.com/jetteim/observability-engineering.git' "$repo_root/s
 grep -q 'https://github.com/jetteim/platform-reliability-model.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/reliability-engineering.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/architectural-execution-skills.git' "$repo_root/scripts/install-skills.sh"
+python3 - "$repo_root/scripts/install-skills.sh" <<'PY'
+from pathlib import Path
+import sys
+
+text = Path(sys.argv[1]).read_text(encoding="utf-8")
+checks = [
+    ("PLATFORM_OBSERVABILITY_MODEL_REPO|", "OBSERVABILITY_ENGINEERING_REPO|"),
+    ("PLATFORM_RELIABILITY_MODEL_REPO|", "RELIABILITY_ENGINEERING_REPO|"),
+]
+for model_repo, skill_repo in checks:
+    if text.index(model_repo) > text.index(skill_repo):
+        raise SystemExit(f"{model_repo} must be refreshed before {skill_repo}")
+PY
+grep -q 'vendor_imports/repos/platform-observability-model' "$repo_root/agents/skills/platform/observability-engineering/SKILL.md"
+grep -q 'references/observability-model-summary.md' "$repo_root/agents/skills/platform/observability-engineering/SKILL.md"
+grep -q 'vendor_imports/repos/platform-reliability-model' "$repo_root/agents/skills/platform/reliability-engineering/SKILL.md"
+grep -q 'references/reliability-model-summary.md' "$repo_root/agents/skills/platform/reliability-engineering/SKILL.md"
+grep -q 'private platform observability/reliability model repos before installing their public engineering skills' "$repo_root/README.md"
 grep -q 'multi_agent = true' "$repo_root/codex/config.example.toml"
 grep -q 'https://github.com/obra/superpowers/blob/main/.codex/INSTALL.md' "$repo_root/docs/original-install-comparison.md"
 grep -q 'agents/skills/platform' "$repo_root/docs/external-dependencies.md"

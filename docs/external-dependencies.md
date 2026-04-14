@@ -77,9 +77,9 @@ Current local pins:
 - Brain skill source mirror commit: `73789527637114b2a3745b2da9afa64fa8c1b7fa`
 - llama.cpp source mirror commit: `1e9d771e2c2f1113a5ebdd0dc15bafe57dce64be`
 - Platform observability model mirror commit: `aafa4361cf5b5ad9c416bf2a0d3ef81138a98a0d`
-- Observability engineering skill mirror commit: `70df31008d0b9e57fb5f57dec7ec3d9023312546`
+- Observability engineering skill mirror commit: `c98e8e2ded7334ac74dfe04d4488d0fbedd89ed6`
 - Platform reliability model mirror commit: `9b56152c4cb716865dd2b196bcbb849d453f1df2`
-- Reliability engineering skill mirror commit: `6785e245425ef5c84c57270fffc352000c893b8c`
+- Reliability engineering skill mirror commit: `375d300d6b18e8ccea5b46e23f70693cb457e19a`
 - Architectural execution skills mirror commit: `db4bec9bde964f0c8b8878737099bec72a8d1d3c`
 - Codex CLI npm package: `@openai/codex@0.120.0`
 - Codex Homebrew cask present: `codex 0.111.0`

@@ -9,9 +9,15 @@ description: Use when building reliability models, choosing SLIs/SLOs, assessing
 
 Build reliability from neutral intent. Treat ticket systems, chat channels, dashboards, backend APIs, and workflow automation as implementation targets.
 
-When the local `platform-reliability-model` repository is available, use it as the source of truth. Otherwise use the compact reference bundled with this skill.
+When the private `platform-reliability-model` repository checkout is available, use it as the source of truth. Otherwise use the compact reference bundled with this skill.
 
-Preferred model path:
+Preferred model checkout from the workstation installer:
+
+```text
+${AGENTS_HOME:-$HOME/.agents}/vendor_imports/repos/platform-reliability-model
+```
+
+Legacy workspace checkout:
 
 ```text
 ~/Library/CloudStorage/OneDrive-Personal/Pet projects/platform-reliability-model
@@ -52,13 +58,23 @@ Do not use this skill for generating telemetry backend monitors, dashboards, or 
 
 ### 1. Load The Model
 
-Check for the private model repo:
+Resolve the private model repo in this order:
+
+1. `${AGENTS_HOME:-$HOME/.agents}/vendor_imports/repos/platform-reliability-model`
+2. `~/Library/CloudStorage/OneDrive-Personal/Pet projects/platform-reliability-model`
+3. `references/reliability-model-summary.md`
+
+Use this check:
 
 ```bash
-test -d "$HOME/Library/CloudStorage/OneDrive-Personal/Pet projects/platform-reliability-model"
+model_repo="${AGENTS_HOME:-$HOME/.agents}/vendor_imports/repos/platform-reliability-model"
+if [ ! -d "$model_repo/docs" ]; then
+  model_repo="$HOME/Library/CloudStorage/OneDrive-Personal/Pet projects/platform-reliability-model"
+fi
+test -d "$model_repo/docs"
 ```
 
-If present, read only the relevant files:
+If a private checkout is present, read only the relevant files:
 
 - `docs/intent/principles.md`
 - `docs/intent/reliability-boundaries.md`
@@ -79,7 +95,7 @@ If present, read only the relevant files:
 - `docs/intent/resilience-experiment-model.md`
 - `docs/intent/relation-to-observability.md`
 
-If missing, use `references/reliability-model-summary.md`.
+If no private checkout is present, use `references/reliability-model-summary.md` and state that the bundled reference fallback was used. Do not invent content from the private model.
 
 When a usage scenario applies, follow it as the execution contract. The scenario defines expected inputs, outputs, refusal conditions, human review gates, and completion criteria.
 
