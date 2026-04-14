@@ -33,6 +33,8 @@ gh auth login
 
 `~/.agents` is the canonical agent-neutral layer. Codex and Claude are adapter targets projected from that layer.
 
+Canonical rules include operating principles for honesty, verification, scoped action, target-state work, documented paths, competing hypotheses, reversible change, user ownership, and simple solutions.
+
 `install-skills.sh` is the explicit skill installer. `install.sh` runs it automatically.
 
 The skill install order mirrors the original upstream setup:

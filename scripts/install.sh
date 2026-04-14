@@ -8,8 +8,10 @@ CLAUDE_HOME="${CLAUDE_HOME:-$HOME/.claude}"
 
 validate_home_dir() {
   local name="$1"
-  local path="$2"
+  local path
   local default_path
+
+  path="$(python3 -c 'import os, sys; print(os.path.abspath(os.path.expanduser(sys.argv[1])))' "$2")"
 
   case "$path" in
     /*) ;;
@@ -20,9 +22,9 @@ validate_home_dir() {
   esac
 
   case "$name" in
-    AGENTS_HOME) default_path="$HOME/.agents" ;;
-    CODEX_HOME) default_path="$HOME/.codex" ;;
-    CLAUDE_HOME) default_path="$HOME/.claude" ;;
+    AGENTS_HOME) default_path="$(python3 -c 'import os, sys; print(os.path.abspath(sys.argv[1]))' "$HOME/.agents")" ;;
+    CODEX_HOME) default_path="$(python3 -c 'import os, sys; print(os.path.abspath(sys.argv[1]))' "$HOME/.codex")" ;;
+    CLAUDE_HOME) default_path="$(python3 -c 'import os, sys; print(os.path.abspath(sys.argv[1]))' "$HOME/.claude")" ;;
     *)
       echo "[install] unknown managed home variable: ${name}" >&2
       exit 1
@@ -36,6 +38,8 @@ validate_home_dir() {
       exit 1
       ;;
   esac
+
+  echo "$path"
 }
 
 reject_symlink_path() {
@@ -50,6 +54,38 @@ reject_symlink_path() {
     fi
     current="$(dirname "$current")"
   done
+}
+
+ensure_directory() {
+  local destination="$1"
+  local label="$2"
+
+  reject_symlink_path "$destination" "$label"
+  mkdir -p "$destination"
+  reject_symlink_path "$destination" "$label"
+}
+
+install_file() {
+  local source="$1"
+  local destination="$2"
+  local label="$3"
+  local destination_dir
+
+  if [ ! -f "$source" ]; then
+    echo "[install] missing source for ${label}: ${source}" >&2
+    exit 1
+  fi
+  if [ -L "$destination" ]; then
+    echo "[install] refusing symlinked ${label}: ${destination}" >&2
+    exit 1
+  fi
+  destination_dir="$(dirname "$destination")"
+  ensure_directory "$destination_dir" "$label parent"
+  if [ -L "$destination" ]; then
+    echo "[install] refusing symlinked ${label}: ${destination}" >&2
+    exit 1
+  fi
+  cp "$source" "$destination"
 }
 
 # Canonical agent roots default under ~/.agents.
@@ -69,17 +105,15 @@ install_tree() {
       ;;
   esac
 
-  reject_symlink_path "$destination" "$label destination"
-  mkdir -p "$destination"
-  reject_symlink_path "$destination" "$label destination"
+  ensure_directory "$destination" "$label destination"
   find "$destination" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +
   cp -R "$source/." "$destination/"
   echo "[install] installed ${label}: ${destination}"
 }
 
-validate_home_dir "AGENTS_HOME" "$AGENTS_HOME"
-validate_home_dir "CODEX_HOME" "$CODEX_HOME"
-validate_home_dir "CLAUDE_HOME" "$CLAUDE_HOME"
+AGENTS_HOME="$(validate_home_dir "AGENTS_HOME" "$AGENTS_HOME")"
+CODEX_HOME="$(validate_home_dir "CODEX_HOME" "$CODEX_HOME")"
+CLAUDE_HOME="$(validate_home_dir "CLAUDE_HOME" "$CLAUDE_HOME")"
 reject_symlink_path "$AGENTS_HOME" "AGENTS_HOME"
 reject_symlink_path "$CODEX_HOME" "CODEX_HOME"
 reject_symlink_path "$CLAUDE_HOME" "CLAUDE_HOME"
@@ -88,13 +122,13 @@ if [ "${SKIP_GITHUB_REFRESH:-0}" != "1" ]; then
   "$repo_root/scripts/refresh-github.sh"
 fi
 
-mkdir -p "$AGENTS_HOME/rules" "$AGENTS_HOME/hooks" "$AGENTS_HOME/prompts" "$CODEX_HOME/hooks" "$HOME/.config/git/hooks"
+ensure_directory "$CODEX_HOME/hooks" "Codex hooks directory"
 
 install_tree "$repo_root/agents/rules" "$AGENTS_HOME/rules" "agent rules"
 install_tree "$repo_root/agents/hooks" "$AGENTS_HOME/hooks" "agent hooks"
 install_tree "$repo_root/agents/prompts" "$AGENTS_HOME/prompts" "agent prompts"
-mkdir -p "$CLAUDE_HOME"
-cp "$repo_root/agents/adapters/claude/CLAUDE.md.template" "$CLAUDE_HOME/CLAUDE.md.template"
+ensure_directory "$CLAUDE_HOME" "Claude home"
+install_file "$repo_root/agents/adapters/claude/CLAUDE.md.template" "$CLAUDE_HOME/CLAUDE.md.template" "Claude rule template"
 echo "[install] installed Claude rule template: $CLAUDE_HOME/CLAUDE.md.template"
 
 canonical_hooks_source="$repo_root/agents/hooks"
@@ -113,15 +147,15 @@ if [ -f "$codex_adapter_hooks_json" ]; then
   codex_hooks_json="$codex_adapter_hooks_json"
 fi
 
-cp "$canonical_hooks_source/policy.py" "$CODEX_HOME/hooks/policy.py"
-cp "$canonical_hooks_source/redact.py" "$CODEX_HOME/hooks/redact.py"
-cp "$codex_dispatcher_source" "$CODEX_HOME/hooks/codex_hook.py"
+install_file "$canonical_hooks_source/policy.py" "$CODEX_HOME/hooks/policy.py" "Codex hook policy"
+install_file "$canonical_hooks_source/redact.py" "$CODEX_HOME/hooks/redact.py" "Codex hook redaction"
+install_file "$codex_dispatcher_source" "$CODEX_HOME/hooks/codex_hook.py" "Codex hook dispatcher"
 chmod +x "$CODEX_HOME/hooks/codex_hook.py"
-cp "$codex_hooks_json" "$CODEX_HOME/hooks.json"
+install_file "$codex_hooks_json" "$CODEX_HOME/hooks.json" "Codex hooks config"
 
 "$repo_root/scripts/install-skills.sh"
 
-cp "$repo_root/git/hooks/pre-commit" "$HOME/.config/git/hooks/pre-commit"
+install_file "$repo_root/git/hooks/pre-commit" "$HOME/.config/git/hooks/pre-commit" "global Git pre-commit hook"
 chmod +x "$HOME/.config/git/hooks/pre-commit"
 git config --global core.hooksPath "$HOME/.config/git/hooks"
 

@@ -6,6 +6,7 @@ This workstation uses `~/.agents` as the canonical source for reusable rules and
 
 Read and follow:
 
+- `~/.agents/rules/operating-principles.md`
 - `~/.agents/rules/codebase-exploration.md`
 - `~/.agents/rules/reliability-observability.md`
 - `~/.agents/rules/secrets-and-safety.md`

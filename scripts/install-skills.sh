@@ -31,8 +31,10 @@ USE_VENDORED_FALLBACK="${USE_VENDORED_FALLBACK:-1}"
 
 validate_home_dir() {
   local name="$1"
-  local path="$2"
+  local path
   local default_path
+
+  path="$(python3 -c 'import os, sys; print(os.path.abspath(os.path.expanduser(sys.argv[1])))' "$2")"
 
   case "$path" in
     /*) ;;
@@ -43,9 +45,9 @@ validate_home_dir() {
   esac
 
   case "$name" in
-    AGENTS_HOME) default_path="$HOME/.agents" ;;
-    CODEX_HOME) default_path="$HOME/.codex" ;;
-    CLAUDE_HOME) default_path="$HOME/.claude" ;;
+    AGENTS_HOME) default_path="$(python3 -c 'import os, sys; print(os.path.abspath(sys.argv[1]))' "$HOME/.agents")" ;;
+    CODEX_HOME) default_path="$(python3 -c 'import os, sys; print(os.path.abspath(sys.argv[1]))' "$HOME/.codex")" ;;
+    CLAUDE_HOME) default_path="$(python3 -c 'import os, sys; print(os.path.abspath(sys.argv[1]))' "$HOME/.claude")" ;;
     *)
       echo "[skills] unknown managed home variable: ${name}" >&2
       exit 1
@@ -59,6 +61,8 @@ validate_home_dir() {
       exit 1
       ;;
   esac
+
+  echo "$path"
 }
 
 reject_symlink_path() {
@@ -75,12 +79,22 @@ reject_symlink_path() {
   done
 }
 
+ensure_directory() {
+  local destination="$1"
+  local label="$2"
+
+  reject_symlink_path "$destination" "$label"
+  mkdir -p "$destination"
+  reject_symlink_path "$destination" "$label"
+}
+
 clone_or_update() {
   local repo="$1"
   local destination="$2"
   local branch="$3"
   local label="$4"
 
+  reject_symlink_path "$destination" "${label} destination"
   if [ -d "$destination/.git" ]; then
     if [ -n "$(git -C "$destination" status --porcelain)" ]; then
       echo "[skills] ${label} has local changes; leaving checkout unchanged: ${destination}" >&2
@@ -101,7 +115,8 @@ clone_or_update() {
     return 2
   fi
 
-  mkdir -p "$(dirname "$destination")"
+  ensure_directory "$(dirname "$destination")" "${label} parent"
+  reject_symlink_path "$destination" "${label} destination"
   git clone --branch "$branch" "$repo" "$destination" || return 1
   echo "[skills] cloned ${label}: ${destination}"
 }
@@ -133,9 +148,7 @@ clear_destination() {
       ;;
   esac
 
-  reject_symlink_path "$destination" "managed destination"
-  mkdir -p "$destination"
-  reject_symlink_path "$destination" "managed destination"
+  ensure_directory "$destination" "managed destination"
   find "$destination" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +
 }
 
@@ -230,14 +243,17 @@ project_codex_skills() {
   install_tree "$codex_skills_stage" "$CODEX_HOME/skills" "Codex skills"
 }
 
-validate_home_dir "AGENTS_HOME" "$AGENTS_HOME"
-validate_home_dir "CODEX_HOME" "$CODEX_HOME"
-validate_home_dir "CLAUDE_HOME" "$CLAUDE_HOME"
+AGENTS_HOME="$(validate_home_dir "AGENTS_HOME" "$AGENTS_HOME")"
+CODEX_HOME="$(validate_home_dir "CODEX_HOME" "$CODEX_HOME")"
+CLAUDE_HOME="$(validate_home_dir "CLAUDE_HOME" "$CLAUDE_HOME")"
 reject_symlink_path "$AGENTS_HOME" "AGENTS_HOME"
 reject_symlink_path "$CODEX_HOME" "CODEX_HOME"
 reject_symlink_path "$CLAUDE_HOME" "CLAUDE_HOME"
 
-mkdir -p "$AGENTS_HOME/skills" "$AGENTS_HOME/vendor_imports/repos" "$CODEX_HOME/skills" "$CLAUDE_HOME/skills"
+ensure_directory "$AGENTS_HOME/skills" "agent skills directory"
+ensure_directory "$AGENTS_HOME/vendor_imports/repos" "agent source mirror directory"
+ensure_directory "$CODEX_HOME/skills" "Codex skills directory"
+ensure_directory "$CLAUDE_HOME/skills" "Claude skills directory"
 stage_root="$(mktemp -d "${TMPDIR:-/tmp}/platform-bootstrap-skills.XXXXXX")"
 trap 'rm -rf "$stage_root"' EXIT
 agent_skills_stage="$stage_root/agents-skills"
@@ -279,7 +295,7 @@ if ! clone_or_update "$OPENAI_SKILLS_REPO" "$AGENTS_HOME/vendor_imports/skills" 
   echo "[skills] OpenAI skills source mirror was not refreshed; vendored Codex skills remain installed" >&2
 fi
 
-mkdir -p "$AGENTS_HOME/vendor_imports/repos"
+ensure_directory "$AGENTS_HOME/vendor_imports/repos" "agent source mirror directory"
 for mirror in \
   "$CODEX_REPO|$AGENTS_HOME/vendor_imports/repos/codex|main|Codex source mirror" \
   "$PLAYWRIGHT_MCP_REPO|$AGENTS_HOME/vendor_imports/repos/playwright-mcp|main|Playwright MCP source mirror" \
