@@ -43,6 +43,7 @@ The skill install order mirrors the original upstream setup:
 - Install canonical shared skills under `~/.agents/skills`.
 - Install source mirrors under `~/.agents/vendor_imports`.
 - Project compatible skills into `~/.codex/skills` and `~/.claude/skills`.
+- Sync managed skill destinations from staged trees so removed vendored files are pruned on reinstall.
 - Install vendored Codex and plugin skill fallback copies.
 - Clone the private platform observability/reliability model repos and public engineering skill repos when GitHub access allows.
 - Clone the public architectural execution skill pipeline and install it from source when GitHub access allows.

@@ -14,7 +14,9 @@ from policy import assess_command, assess_prompt, completion_needs_evidence, sca
 from redact import redact
 
 
-LOG_DIR = Path.home() / ".codex" / "hook-logs"
+CODEX_HOME = Path(os.environ.get("CODEX_HOME", str(Path.home() / ".codex"))).expanduser()
+AGENTS_HOME = Path(os.environ.get("AGENTS_HOME", str(Path.home() / ".agents"))).expanduser()
+LOG_DIR = CODEX_HOME / "hook-logs"
 
 
 DEFAULT_SESSION_CONTEXT = """Platform guardrails:
@@ -26,7 +28,7 @@ DEFAULT_SESSION_CONTEXT = """Platform guardrails:
 
 
 def session_context() -> str:
-    prompt_path = Path.home() / ".agents" / "prompts" / "platform-guardrails.md"
+    prompt_path = AGENTS_HOME / "prompts" / "platform-guardrails.md"
     try:
         prompt = prompt_path.read_text(encoding="utf-8").strip()
     except OSError:

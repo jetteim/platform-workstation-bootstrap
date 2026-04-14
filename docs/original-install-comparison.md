@@ -38,6 +38,7 @@ Bootstrap match:
 - Keeps the source checkout at `~/.codex/superpowers`.
 - Installs canonical Superpowers into `~/.agents/skills/superpowers` as a real directory on fresh installs.
 - Replaces a legacy `~/.agents/skills/superpowers` symlink with a canonical real directory during migration.
+- Stages and syncs managed skill projections so removed files from the source tree are pruned on reinstall.
 - Sets `features.multi_agent = true` alongside `features.codex_hooks = true`.
 - Uses vendored `skills/superpowers/` only if no usable clone exists and `USE_VENDORED_FALLBACK=1`.
 

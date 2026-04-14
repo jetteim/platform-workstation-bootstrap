@@ -111,4 +111,6 @@ skills/plugins/google-drive/
 
 The vendored bundles are fallback/bootstrap material. Prefer refreshing the upstream forks first, then use these copies when a clean machine has not yet populated Codex skills or plugin caches.
 
+Managed skill destinations are synced from staged bootstrap trees, not overlaid indefinitely. Reinstalling prunes files that were removed from the managed source bundles.
+
 For the line-by-line comparison with original install instructions, see `docs/original-install-comparison.md`.

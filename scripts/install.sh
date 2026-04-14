@@ -16,8 +16,15 @@ install_tree() {
     echo "[install] missing source for ${label}: ${source}" >&2
     exit 1
   fi
+  case "$destination" in
+    ""|"/"|"$HOME"|"$AGENTS_HOME"|"$CODEX_HOME"|"$CLAUDE_HOME")
+      echo "[install] refusing to clear unsafe destination for ${label}: ${destination}" >&2
+      exit 1
+      ;;
+  esac
 
   mkdir -p "$destination"
+  find "$destination" -mindepth 1 -maxdepth 1 -exec rm -rf {} +
   cp -R "$source/." "$destination/"
   echo "[install] installed ${label}: ${destination}"
 }
