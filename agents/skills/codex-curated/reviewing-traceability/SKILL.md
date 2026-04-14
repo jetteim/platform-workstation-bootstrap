@@ -9,7 +9,7 @@ description: Use when value stream, capability, feature, story, C4, spec, or imp
 
 Use this skill as the integrity gate before implementation. The goal is not bureaucracy; it is to catch orphan work, missing architecture impact, vague value, and context overload before coding starts.
 
-Use `verification-before-completion` or an equivalent evidence-before-claims workflow before claiming the review is complete.
+Use `superpowers:verification-before-completion` when installed; otherwise use an equivalent evidence-before-claims workflow before claiming the review is complete.
 
 ## Review Matrix
 
@@ -27,7 +27,7 @@ Create or inspect a compact matrix:
 - NFR trace: every security, reliability, performance, compliance, or operability constraint has a test, review, or verification hook.
 - Context budget: active implementation packet has 7-10 stories max.
 - Enabler legitimacy: enabler work unblocks value, reduces delivery risk, or satisfies an explicit NFR.
-- Execution readiness: the implementation-planning workflow has enough file, test, command, and verification context.
+- Execution readiness: `superpowers:writing-plans` or the equivalent implementation-planning workflow has enough file, test, command, and verification context.
 
 ## Findings Format
 

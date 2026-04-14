@@ -9,7 +9,7 @@ description: Use when a feature or implementation-ready slice needs to become a 
 
 Create stories as the final human-readable bridge before implementation. Stories are not the whole system memory; they are a small context packet for the next executable slice.
 
-Use `brainstorming` or an equivalent design-discovery workflow for unclear story intent, then `writing-plans` or an equivalent implementation-planning workflow once the story packet is approved.
+Use `superpowers:brainstorming` when installed; otherwise use an equivalent design-discovery workflow for unclear story intent. Use `superpowers:writing-plans` when installed; otherwise use an equivalent implementation-planning workflow once the story packet is approved.
 
 ## Story Budget
 
@@ -52,7 +52,7 @@ so that <value>.
 
 ## Implementation Handoff
 
-Before calling the implementation-planning workflow, prepare:
+Before calling `superpowers:writing-plans` or the equivalent implementation-planning workflow, prepare:
 
 ```markdown
 # Implementation Packet: <feature>
@@ -72,4 +72,4 @@ Proceed to implementation planning only when:
 - The packet is small enough to reason about.
 - Every story has a parent feature and test hook.
 - Enabler work is tied to a user story, NFR, or architecture decision.
-- The implementation packet is enough for `writing-plans` or an equivalent workflow to create a concrete plan.
+- The implementation packet is enough for `superpowers:writing-plans` or the equivalent implementation-planning workflow to create a concrete plan.

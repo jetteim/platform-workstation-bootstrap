@@ -9,7 +9,7 @@ description: Use when a capability, epic, roadmap item, or architecture change n
 
 Features turn a capability into deliverable slices of value. Keep them concrete enough for planning, but not so small that they become implementation tasks.
 
-Use `modeling-c4-architecture` when a feature changes system boundaries, data ownership, integrations, runtime topology, or major technology choices.
+Use `modeling-c4-architecture` when installed; otherwise use an equivalent C4 architecture-modeling workflow when a feature changes system boundaries, data ownership, integrations, runtime topology, or major technology choices.
 
 ## Feature Tests
 
@@ -57,10 +57,9 @@ A good feature:
 
 ## Gate Before Stories
 
-Proceed to `slicing-stories` only when:
+Proceed to `slicing-stories` when installed, or to an equivalent story-slicing workflow, only when:
 
 - Acceptance criteria describe behavior, not implementation.
 - NFRs are specific enough to test or review.
 - Architecture impact is explicit.
 - The story packet can stay within 7-10 active stories.
-

@@ -192,6 +192,35 @@ for architectural_skill in \
     fi
   done
 done
+architectural_source_repo="$HOME/.agents/vendor_imports/repos/architectural-execution-skills"
+architectural_source_root="$architectural_source_repo/skills"
+if [ -d "$architectural_source_root" ]; then
+  if [ -n "$(git -C "$architectural_source_repo" status --porcelain)" ]; then
+    echo "architectural execution skills source mirror has local changes; cannot verify drift" >&2
+    exit 1
+  fi
+  for architectural_skill in \
+    discovering-value-streams \
+    modeling-c4-architecture \
+    orchestrating-architecture-execution \
+    reviewing-traceability \
+    shaping-capabilities \
+    shaping-features \
+    slicing-stories; do
+    for target_root in \
+      "$repo_root/agents/skills/platform" \
+      "$repo_root/agents/skills/codex-curated" \
+      "$repo_root/skills/codex" \
+      "$HOME/.agents/skills" \
+      "$HOME/.codex/skills" \
+      "$HOME/.claude/skills"; do
+      if [ -d "$target_root" ] && ! diff -qr "$architectural_source_root/$architectural_skill" "$target_root/$architectural_skill" >/dev/null; then
+        echo "architectural skill drift: $target_root/$architectural_skill differs from $architectural_source_root/$architectural_skill" >&2
+        exit 1
+      fi
+    done
+  done
+fi
 canonical_skill_count="$(find "$repo_root/agents/skills" -name SKILL.md | wc -l | tr -d ' ')"
 if [ "$canonical_skill_count" -lt 40 ]; then
   echo "expected at least 40 canonical skills, found $canonical_skill_count" >&2

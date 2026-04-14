@@ -9,7 +9,7 @@ description: Use when a product idea, business problem, platform initiative, str
 
 Frame the work as a flow of value before decomposing it into capabilities, features, or stories. The output is a value stream brief that explains why the work exists and what must improve.
 
-Use `brainstorming` or an equivalent design-discovery workflow when the goal, customer, or flow is ambiguous.
+Use `superpowers:brainstorming` when installed; otherwise use an equivalent design-discovery workflow when the goal, customer, or flow is ambiguous.
 
 ## Process
 
@@ -54,7 +54,7 @@ Use `brainstorming` or an equivalent design-discovery workflow when the goal, cu
 
 ## Gate Before Capabilities
 
-Proceed to `shaping-capabilities` only when:
+Proceed to `shaping-capabilities` when installed, or to an equivalent capability-shaping workflow, only when:
 
 - The stream has one clear customer or beneficiary.
 - The beginning and end are observable.
