@@ -85,8 +85,14 @@ grep -q 'AGENTS_HOME' "$repo_root/scripts/install.sh"
 grep -q 'AGENTS_HOME' "$repo_root/scripts/install-skills.sh"
 grep -q 'validate_home_dir "AGENTS_HOME" "$AGENTS_HOME"' "$repo_root/scripts/install.sh"
 grep -q 'validate_home_dir "AGENTS_HOME" "$AGENTS_HOME"' "$repo_root/scripts/install-skills.sh"
+grep -q 'validate_home_dir "AGENTS_HOME" "$AGENTS_HOME"' "$repo_root/scripts/install-brain-prereqs.sh"
+grep -q 'validate_home_dir "AGENTS_HOME" "$AGENTS_HOME"' "$repo_root/scripts/run-brain-mlx-smoke.sh"
+grep -q 'validate_home_dir "CODEX_HOME" "$CODEX_HOME"' "$repo_root/scripts/install-brain-prereqs.sh"
+grep -q 'validate_home_dir "CODEX_HOME" "$CODEX_HOME"' "$repo_root/scripts/run-brain-mlx-smoke.sh"
 grep -q 'reject_symlink_path "$AGENTS_HOME" "AGENTS_HOME"' "$repo_root/scripts/install.sh"
 grep -q 'reject_symlink_path "$AGENTS_HOME" "AGENTS_HOME"' "$repo_root/scripts/install-skills.sh"
+grep -q 'reject_symlink_path "$AGENTS_HOME" "AGENTS_HOME"' "$repo_root/scripts/install-brain-prereqs.sh"
+grep -q 'reject_symlink_path "$AGENTS_HOME" "AGENTS_HOME"' "$repo_root/scripts/run-brain-mlx-smoke.sh"
 grep -q 'CLAUDE_HOME' "$repo_root/scripts/install-skills.sh"
 grep -q 'CLAUDE_HOME' "$repo_root/scripts/install.sh"
 grep -q '~/.claude/skills' "$repo_root/agents/adapters/claude/CLAUDE.md.template"
@@ -105,6 +111,15 @@ if grep -q '"command"' "$repo_root/agents/hooks/policy.py"; then
   echo "canonical hook policy treats bare command wording as verification evidence" >&2
   exit 1
 fi
+for policy_file in \
+  "$repo_root/agents/hooks/policy.py" \
+  "$repo_root/agents/adapters/codex/hooks/policy.py" \
+  "$repo_root/codex/hooks/policy.py"; do
+  if grep -Eq '^[[:space:]]*"failed",$' "$policy_file"; then
+    echo "hook policy treats failed checks as verification evidence: $policy_file" >&2
+    exit 1
+  fi
+done
 grep -q '\.agents/vendor_imports' "$repo_root/scripts/install-skills.sh"
 grep -q 'AGENTS_HOME/vendor_imports/skills' "$repo_root/scripts/install-skills.sh"
 grep -q 'AGENTS_HOME/vendor_imports/repos/llama.cpp' "$repo_root/scripts/install-skills.sh"

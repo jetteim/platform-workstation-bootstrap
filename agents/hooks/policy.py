@@ -120,7 +120,6 @@ def completion_needs_evidence(message: str | None) -> bool:
             "verified",
             "checks",
             "passed",
-            "failed",
             "exit 0",
             "[verify] ok",
             "not run",

@@ -3,11 +3,85 @@ set -euo pipefail
 
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 AGENTS_HOME="${AGENTS_HOME:-$HOME/.agents}"
+validate_home_dir() {
+  local name="$1"
+  local path
+  local default_path
+
+  path="$(python3 -c 'import os, sys; print(os.path.abspath(os.path.expanduser(sys.argv[1])))' "$2")"
+
+  case "$path" in
+    /*) ;;
+    *)
+      echo "[brain-mlx] ${name} must be an absolute path: ${path}" >&2
+      exit 1
+      ;;
+  esac
+
+  case "$name" in
+    AGENTS_HOME) default_path="$(python3 -c 'import os, sys; print(os.path.abspath(sys.argv[1]))' "$HOME/.agents")" ;;
+    CODEX_HOME) default_path="$(python3 -c 'import os, sys; print(os.path.abspath(sys.argv[1]))' "$HOME/.codex")" ;;
+    *)
+      echo "[brain-mlx] unknown managed home variable: ${name}" >&2
+      exit 1
+      ;;
+  esac
+
+  case "$path" in
+    "$default_path"|"$default_path"/*|/tmp/*|/var/folders/*) ;;
+    *)
+      echo "[brain-mlx] refusing unsafe ${name}: ${path}" >&2
+      exit 1
+      ;;
+  esac
+
+  echo "$path"
+}
+
+reject_symlink_path() {
+  local path="$1"
+  local label="$2"
+  local current="$path"
+
+  while [ "$current" != "/" ] && [ "$current" != "$HOME" ] && [ "$current" != "/tmp" ] && [ "$current" != "/var/folders" ]; do
+    if [ -L "$current" ]; then
+      echo "[brain-mlx] refusing symlinked ${label}: ${current}" >&2
+      exit 1
+    fi
+    current="$(dirname "$current")"
+  done
+}
+
+ensure_directory() {
+  local destination="$1"
+  local label="$2"
+
+  reject_symlink_path "$destination" "$label"
+  mkdir -p "$destination"
+  reject_symlink_path "$destination" "$label"
+}
+
+safe_output_file() {
+  local destination="$1"
+  local label="$2"
+
+  ensure_directory "$(dirname "$destination")" "${label} parent"
+  reject_symlink_path "$destination" "$label"
+}
+
+CODEX_HOME="$(validate_home_dir "CODEX_HOME" "$CODEX_HOME")"
+AGENTS_HOME="$(validate_home_dir "AGENTS_HOME" "$AGENTS_HOME")"
+reject_symlink_path "$CODEX_HOME" "CODEX_HOME"
+reject_symlink_path "$AGENTS_HOME" "AGENTS_HOME"
+
 venv_path="${BRAIN_MLX_VENV:-$CODEX_HOME/mlx/brain-venv}"
 run_root="${BRAIN_MLX_RUN_ROOT:-$CODEX_HOME/mlx/runs/k8s-risk-classifier}"
 model="${BRAIN_MLX_MODEL:-mlx-community/Qwen3-0.6B-bf16}"
 iters="${BRAIN_MLX_ITERS:-300}"
 llama_cpp_path="${LLAMA_CPP_PATH:-$AGENTS_HOME/vendor_imports/repos/llama.cpp}"
+reject_symlink_path "$venv_path" "MLX venv path"
+reject_symlink_path "$run_root" "MLX run root"
+reject_symlink_path "$llama_cpp_path" "llama.cpp path"
 
 python_bin="$venv_path/bin/python"
 
@@ -17,7 +91,9 @@ if [ ! -x "$python_bin" ]; then
   exit 1
 fi
 
-mkdir -p "$run_root/data" "$run_root/models" "$run_root/reports"
+ensure_directory "$run_root/data" "MLX data directory"
+ensure_directory "$run_root/models" "MLX models directory"
+ensure_directory "$run_root/reports" "MLX reports directory"
 
 "$python_bin" - "$run_root" <<'PY'
 from pathlib import Path
@@ -116,6 +192,7 @@ summary = {
 print(json.dumps(summary, indent=2))
 PY
 
+safe_output_file "$run_root/lora_config.yaml" "LoRA config"
 cat >"$run_root/lora_config.yaml" <<YAML
 model: "$model"
 train: true
@@ -135,9 +212,11 @@ seed: 42
 YAML
 
 echo "[brain-mlx] training model=$model iters=$iters"
+safe_output_file "$run_root/reports/train.log" "training log"
 "$python_bin" -m mlx_lm lora --config "$run_root/lora_config.yaml" --train --test 2>&1 | tee "$run_root/reports/train.log"
 
 echo "[brain-mlx] fuse adapter"
+safe_output_file "$run_root/reports/fuse.log" "fuse log"
 "$python_bin" -m mlx_lm fuse \
   --model "$model" \
   --adapter-path "$run_root/adapters" \
@@ -148,12 +227,15 @@ if [ ! -f "$llama_cpp_path/convert_hf_to_gguf.py" ]; then
   echo "[brain-mlx] missing llama.cpp converter: $llama_cpp_path/convert_hf_to_gguf.py" >&2
   exit 1
 fi
+safe_output_file "$run_root/models/k8s-risk-classifier-q8_0.gguf" "GGUF output"
+safe_output_file "$run_root/reports/export-gguf.log" "GGUF export log"
 "$python_bin" "$llama_cpp_path/convert_hf_to_gguf.py" \
   "$run_root/models/fused" \
   --outfile "$run_root/models/k8s-risk-classifier-q8_0.gguf" \
   --outtype q8_0 2>&1 | tee "$run_root/reports/export-gguf.log"
 
 echo "[brain-mlx] sample inference"
+safe_output_file "$run_root/reports/sample-prediction.txt" "sample prediction"
 "$python_bin" -m mlx_lm generate \
   --model "$model" \
   --adapter-path "$run_root/adapters" \
