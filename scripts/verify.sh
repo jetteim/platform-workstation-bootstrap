@@ -80,6 +80,8 @@ for model_repo, skill_repo in checks:
 PY
 grep -q 'vendor_imports/repos/platform-observability-model' "$repo_root/agents/skills/platform/observability-engineering/SKILL.md"
 grep -q 'references/observability-model-summary.md' "$repo_root/agents/skills/platform/observability-engineering/SKILL.md"
+grep -q 'source-to-sink lineage' "$repo_root/agents/skills/platform/observability-engineering/SKILL.md"
+grep -q 'Telemetry Pipeline Pattern' "$repo_root/agents/skills/platform/observability-engineering/references/observability-model-summary.md"
 grep -q 'vendor_imports/repos/platform-reliability-model' "$repo_root/agents/skills/platform/reliability-engineering/SKILL.md"
 grep -q 'references/reliability-model-summary.md' "$repo_root/agents/skills/platform/reliability-engineering/SKILL.md"
 grep -q 'private platform observability/reliability model repos before installing their public engineering skills' "$repo_root/README.md"

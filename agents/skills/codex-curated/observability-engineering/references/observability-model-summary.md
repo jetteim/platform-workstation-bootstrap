@@ -14,6 +14,7 @@ Use this file when the private `platform-observability-model` repository is unav
 - Backend resources are generated artifacts.
 - Infra observability covers hosting, routing, capacity, control-plane, telemetry pipeline, policy, event, inventory, and change signals.
 - Infrastructure alert context contract has the same rigor as application alert context.
+- Telemetry pipelines must declare source-to-sink lineage, transformation contracts, buffer and delivery policy, validation, and self-observability when they affect SLOs, incident response, security, audit, cost, or backend generation.
 
 ## Required Alert Context
 
@@ -53,10 +54,22 @@ When preparing infrastructure observability:
 2. Inventory signal layers: platform, cluster, namespace, node, workload, pod, container, route, network, telemetry pipeline, policy, event, inventory, and change.
 3. Check metadata coverage for stable identity, readable names, owner, environment, workload, route, node, cluster, version, and change context.
 4. Define topology correlation across metrics, logs, traces, events, inventory, routes, workloads, owners, and changes.
-5. Define telemetry pipeline health for collector health, receiver health, queue pressure, dropped metrics/logs/spans, exporter errors, sampling, freshness, and backend delivery.
+5. Define telemetry pipeline topology and health for source health, collector health, receiver health, processor health, queue pressure, buffer pressure, dropped metrics/logs/spans, redaction failures, cardinality-limit actions, exporter errors, acknowledgement status, sampling, freshness, and backend delivery.
 6. Apply infrastructure alert context contract before paging: identity, ownership, impact, current state, change context, evidence, decision support, dashboard, and playbook.
 7. Classify isolated restarts, node pressure, quota pressure, collector drops, policy drift, and metadata drift as notifications or findings unless impact and action are explicit.
 8. Generate backend artifacts only after neutral intent, classification, context, and dashboard requirements are complete.
+
+## Telemetry Pipeline Pattern
+
+When telemetry pipeline behavior matters:
+
+1. Map sources, processors, sinks, buffers, acknowledgement boundaries, and fallback or quarantine paths.
+2. Require source-to-sink lineage for every delivered or discarded signal.
+3. Define component contracts for accepted signal types, emitted signal types, required semantic attributes, enrichment, redaction, routing, and failure behavior.
+4. Choose delivery policy by purpose: best-effort diagnostic telemetry can tolerate loss; SLO, audit, security, and incident-critical telemetry needs explicit durability, retry, and acknowledgement policy.
+5. Define buffer behavior for backpressure: block, drop newest, drop oldest, sample, or quarantine.
+6. Require pipeline self-observability for source ingestion, processor errors, queue depth, buffer age, dropped telemetry, sink latency, retries, delivery failures, configuration version, and validation status.
+7. Validate topology, component references, transformation unit tests, redaction, cardinality limits, and risky parser or routing changes before deployment.
 
 ## Reliability Boundary
 

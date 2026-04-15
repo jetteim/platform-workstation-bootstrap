@@ -51,6 +51,7 @@ If the task is primarily about incident aftercare, postmortems, miss-policy, act
 8. SRE rules are generated outputs from SLO and alert intent.
 9. Infra observability must cover hosting, routing, capacity, control-plane, telemetry pipeline, policy, event, inventory, and change signals.
 10. Infrastructure alert context contract has the same rigor as application alert context: owner, impact, current state, change context, evidence, decision support, dashboard, and playbook.
+11. Telemetry pipelines must declare source-to-sink lineage, transformation contracts, buffer and delivery policy, validation, and self-observability when they affect SLOs, incident response, security, audit, cost, or backend generation.
 
 ## Workflow
 
@@ -78,6 +79,7 @@ If a private checkout is present, read only the relevant files:
 - `docs/usage-scenarios/infra-observability-readiness.md` when building or reviewing infrastructure observability
 - `docs/usage-scenarios/service-onboarding-to-observability.md` when onboarding or preparing service observability
 - `docs/intent/infra-observability.md` when building or reviewing infrastructure observability
+- `docs/intent/telemetry-pipeline-model.md` when collector, routing, transformation, buffering, delivery, or telemetry quality matters
 - `docs/intent/semantic-conventions.md`
 - `docs/intent/alert-context-contract.md`
 - `docs/intent/decision-dashboard-model.md`
@@ -102,6 +104,7 @@ Inventory only what is needed for the request:
 - CI, admission policy, and validation paths
 - topology correlation across metrics, logs, traces, events, inventory, routes, workloads, owners, and changes
 - telemetry pipeline health for collectors, receivers, processors, queues, exporters, sampling, dropped data, freshness, and backend delivery
+- telemetry pipeline topology across sources, processors, sinks, buffers, acknowledgement boundaries, and fallback or quarantine paths
 
 Summarize current implementation as evidence. Do not let vendor-specific resources become the model.
 
@@ -131,9 +134,11 @@ Separate:
 
 Record instrumentation gaps instead of inventing fake telemetry bindings.
 
-For infrastructure observability, produce the artifacts described by `docs/usage-scenarios/infra-observability-readiness.md`: platform observability intent, infrastructure signal inventory, metadata coverage assessment, topology correlation requirements, telemetry pipeline health requirements, infrastructure alert context contract, decision dashboard intent, signal classifications, instrumentation gaps, enforcement gaps, and generated artifact manifest or backend generation request.
+When telemetry pipeline work matters, also define pipeline topology, component contracts, delivery policy, buffer policy, transformation tests, self-observability, and validation requirements. Record generation gaps when a target pipeline engine or backend cannot enforce required redaction, cardinality, delivery, or validation behavior.
 
-For service onboarding, produce the artifacts described by `docs/usage-scenarios/service-onboarding-to-observability.md`: service intent, semantic convention updates, SLO intent, SLI query bindings, alert or notification classifications, decision dashboard intent, generated artifact manifest, and enforcement recommendations.
+For infrastructure observability, produce the artifacts described by `docs/usage-scenarios/infra-observability-readiness.md`: platform observability intent, infrastructure signal inventory, metadata coverage assessment, topology correlation requirements, telemetry pipeline topology and health requirements, infrastructure alert context contract, decision dashboard intent, signal classifications, instrumentation gaps, enforcement gaps, and generated artifact manifest or backend generation request.
+
+For service onboarding, produce the artifacts described by `docs/usage-scenarios/service-onboarding-to-observability.md`: service intent, semantic convention updates, SLO intent, SLI query bindings, telemetry pipeline requirements or generation gaps, alert or notification classifications, decision dashboard intent, generated artifact manifest, and enforcement recommendations.
 
 ### 5. Classify Alerts
 
@@ -164,6 +169,7 @@ For each backend target, generate from neutral intent:
 - Helm values
 - CI validation
 - API call manifests
+- telemetry pipeline configuration and validation tests
 
 Generated artifacts must identify their source intent. If a backend cannot express the intent safely, report the gap.
 
@@ -176,6 +182,7 @@ Before claiming completion, check:
 - every dashboard opens from alert dimensions, not manual overview assumptions
 - semantic conventions are enforced at appropriate layers
 - generated artifacts are reproducible from the model
+- telemetry pipeline work includes source-to-sink lineage, transformation contracts, delivery policy, buffer policy, validation, and self-observability checks
 - infrastructure work includes metadata coverage, topology correlation, telemetry pipeline health, and infrastructure alert context contract checks
 
 ## Common Mistakes
@@ -186,3 +193,4 @@ Before claiming completion, check:
 - Paging on symptoms that do not require immediate human action.
 - Creating alerts without playbook actions or scoped dashboards.
 - Migrating old SRE rules one-to-one instead of reclassifying them by intent.
+- Treating telemetry collectors, transforms, buffers, and sinks as invisible implementation details when their failure changes observability truth.
