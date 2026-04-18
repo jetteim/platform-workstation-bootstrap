@@ -178,6 +178,8 @@ For each backend target, generate from neutral intent:
 
 Generated artifacts must identify their source intent. If a backend cannot express the intent safely, report the gap.
 
+For Datadog or Elastic Terraform output, load `references/provider-terraform-adapters.md` before generating files. Keep provider resources as adapters from `ObservabilityIntent`, `SloIntent`, `AlertContextContract`, `DecisionDashboardIntent`, pipeline artifacts, and reliability evidence. Do not embed secrets; capture target, blast radius, rollback path, and verification evidence.
+
 ### 7. Validate
 
 Before claiming completion, check:
@@ -187,6 +189,7 @@ Before claiming completion, check:
 - every dashboard opens from alert dimensions, not manual overview assumptions
 - semantic conventions are enforced at appropriate layers
 - generated artifacts are reproducible from the model
+- provider Terraform adapters reference neutral source intent, keep credentials as variables or environment-derived values, include syntax/plan validation commands, and report provider/API gaps
 - telemetry pipeline work includes source-to-sink lineage, transformation contracts, delivery policy, buffer policy, validation, and self-observability checks
 - infrastructure work includes metadata coverage, topology correlation, telemetry pipeline health, and infrastructure alert context contract checks
 

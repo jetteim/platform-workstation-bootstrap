@@ -39,6 +39,8 @@ Do not use this skill for one-off debugging of a single incident unless the task
 
 If the task is primarily about incident aftercare, postmortems, miss-policy, action items, resilience experiments, or operational readiness, use `reliability-engineering` instead. Use this skill only for the telemetry, SLO binding, alert, dashboard, or backend artifact portions.
 
+If the task is primarily about telemetry pipeline topology, source-to-sink lineage, transform contracts, routing, buffering, delivery guarantees, validation, or pipeline self-observability, use `creating-observability-pipelines` as the companion workflow. Keep this skill as the parent intent model for SLOs, semantic conventions, alert context, dashboards, and generated backend artifacts.
+
 ## Core Rules
 
 1. Start from intent, not backend syntax.
@@ -52,6 +54,7 @@ If the task is primarily about incident aftercare, postmortems, miss-policy, act
 9. Infra observability must cover hosting, routing, capacity, control-plane, telemetry pipeline, policy, event, inventory, and change signals.
 10. Infrastructure alert context contract has the same rigor as application alert context: owner, impact, current state, change context, evidence, decision support, dashboard, and playbook.
 11. Telemetry pipelines must declare source-to-sink lineage, transformation contracts, buffer and delivery policy, validation, and self-observability when they affect SLOs, incident response, security, audit, cost, or backend generation.
+12. Pipeline implementation work should be delegated to the `creating-observability-pipelines` workflow when that skill is available; this skill defines the observability intent that pipeline workflow must preserve.
 
 ## Workflow
 
@@ -136,6 +139,8 @@ Record instrumentation gaps instead of inventing fake telemetry bindings.
 
 When telemetry pipeline work matters, also define pipeline topology, component contracts, delivery policy, buffer policy, transformation tests, self-observability, and validation requirements. Record generation gaps when a target pipeline engine or backend cannot enforce required redaction, cardinality, delivery, or validation behavior.
 
+When `creating-observability-pipelines` is available and the request needs an implementable pipeline contract, use it to produce `PipelineIntent`, `SignalContract`, `PipelineTopology`, `TransformContract`, `RouteContract`, `BufferDeliveryPolicy`, `SelfObservabilityPlan`, `ValidationPlan`, and `GeneratedArtifactManifest` outputs. Then map those outputs back into this skill's SLO, alert, dashboard, semantic convention, and backend-generation artifacts as needed.
+
 For infrastructure observability, produce the artifacts described by `docs/usage-scenarios/infra-observability-readiness.md`: platform observability intent, infrastructure signal inventory, metadata coverage assessment, topology correlation requirements, telemetry pipeline topology and health requirements, infrastructure alert context contract, decision dashboard intent, signal classifications, instrumentation gaps, enforcement gaps, and generated artifact manifest or backend generation request.
 
 For service onboarding, produce the artifacts described by `docs/usage-scenarios/service-onboarding-to-observability.md`: service intent, semantic convention updates, SLO intent, SLI query bindings, telemetry pipeline requirements or generation gaps, alert or notification classifications, decision dashboard intent, generated artifact manifest, and enforcement recommendations.
@@ -173,6 +178,8 @@ For each backend target, generate from neutral intent:
 
 Generated artifacts must identify their source intent. If a backend cannot express the intent safely, report the gap.
 
+For Datadog or Elastic Terraform output, load `references/provider-terraform-adapters.md` before generating files. Keep provider resources as adapters from `ObservabilityIntent`, `SloIntent`, `AlertContextContract`, `DecisionDashboardIntent`, pipeline artifacts, and reliability evidence. Do not embed secrets; capture target, blast radius, rollback path, and verification evidence.
+
 ### 7. Validate
 
 Before claiming completion, check:
@@ -182,6 +189,7 @@ Before claiming completion, check:
 - every dashboard opens from alert dimensions, not manual overview assumptions
 - semantic conventions are enforced at appropriate layers
 - generated artifacts are reproducible from the model
+- provider Terraform adapters reference neutral source intent, keep credentials as variables or environment-derived values, include syntax/plan validation commands, and report provider/API gaps
 - telemetry pipeline work includes source-to-sink lineage, transformation contracts, delivery policy, buffer policy, validation, and self-observability checks
 - infrastructure work includes metadata coverage, topology correlation, telemetry pipeline health, and infrastructure alert context contract checks
 
