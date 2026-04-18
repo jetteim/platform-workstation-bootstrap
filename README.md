@@ -49,6 +49,7 @@ The skill install order mirrors the original upstream setup:
 - Sync managed skill destinations from staged trees so removed vendored files are pruned on reinstall.
 - Install vendored Codex and plugin skill fallback copies.
 - Clone the private platform observability/reliability model repos before installing their public engineering skills when GitHub access allows.
+- Clone the observability pipeline skill repo and install its tool-agnostic pipeline workflow when GitHub access allows.
 - Fall back to bundled observability/reliability reference summaries inside the skill bundles when private model repo refresh is unavailable.
 - Clone the public architectural execution skill pipeline and install it from source when GitHub access allows.
 
@@ -97,7 +98,7 @@ The Superpowers `brainstorming` skill is included with its full bundle:
 
 `scripts/install-skills.sh` installs Superpowers from the forked source repo first. The vendored Superpowers copy is fallback material for offline or damaged-bootstrap cases.
 
-It also installs vendored local Codex skills into `~/.codex/skills`, installs the external `brain` skill from its forked source mirror when available, and places plugin-skill fallbacks under `~/.agents/skills`.
+It also installs vendored local Codex skills into `~/.codex/skills`, installs the external `brain` skill from its forked source mirror when available, installs the observability pipeline workflow from its source mirror when available, and places plugin-skill fallbacks under `~/.agents/skills`.
 The architectural execution skill pipeline is installed from `jetteim/architectural-execution-skills` when the source mirror is available, with vendored fallback copies under `skills/codex/`.
 
 ## Important Repositories
@@ -115,6 +116,7 @@ The clean-machine path depends on these forks:
 | GGUF conversion for local model runs | `ggml-org/llama.cpp` | `jetteim/llama.cpp` |
 | Platform observability model | owned repo | `jetteim/platform-observability-model` |
 | Observability engineering skill | owned repo | `jetteim/observability-engineering` |
+| Observability pipeline skills | owned repo | `jetteim/observability-pipeline-skills` |
 | Platform reliability model | owned repo | `jetteim/platform-reliability-model` |
 | Reliability engineering skill | owned repo | `jetteim/reliability-engineering` |
 | Architectural execution skills | owned repo | `jetteim/architectural-execution-skills` |

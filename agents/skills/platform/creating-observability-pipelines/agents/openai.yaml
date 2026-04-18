@@ -1,0 +1,6 @@
+interface:
+  display_name: "Creating Observability Pipelines"
+  short_description: "Design tool-agnostic telemetry pipelines"
+  default_prompt: "Use $creating-observability-pipelines to design a telemetry pipeline contract for a production service."
+policy:
+  allow_implicit_invocation: true

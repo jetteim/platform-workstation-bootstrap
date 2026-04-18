@@ -24,6 +24,7 @@ BRAIN_SKILL_REPO="${BRAIN_SKILL_REPO:-https://github.com/jetteim/brain-skill.git
 LLAMA_CPP_REPO="${LLAMA_CPP_REPO:-https://github.com/jetteim/llama.cpp.git}"
 PLATFORM_OBSERVABILITY_MODEL_REPO="${PLATFORM_OBSERVABILITY_MODEL_REPO:-https://github.com/jetteim/platform-observability-model.git}"
 OBSERVABILITY_ENGINEERING_REPO="${OBSERVABILITY_ENGINEERING_REPO:-https://github.com/jetteim/observability-engineering.git}"
+OBSERVABILITY_PIPELINE_SKILLS_REPO="${OBSERVABILITY_PIPELINE_SKILLS_REPO:-https://github.com/jetteim/observability-pipeline-skills.git}"
 PLATFORM_RELIABILITY_MODEL_REPO="${PLATFORM_RELIABILITY_MODEL_REPO:-https://github.com/jetteim/platform-reliability-model.git}"
 RELIABILITY_ENGINEERING_REPO="${RELIABILITY_ENGINEERING_REPO:-https://github.com/jetteim/reliability-engineering.git}"
 ARCHITECTURAL_EXECUTION_SKILLS_REPO="${ARCHITECTURAL_EXECUTION_SKILLS_REPO:-https://github.com/jetteim/architectural-execution-skills.git}"
@@ -304,6 +305,7 @@ for mirror in \
   "$LLAMA_CPP_REPO|$AGENTS_HOME/vendor_imports/repos/llama.cpp|master|llama.cpp source mirror" \
   "$PLATFORM_OBSERVABILITY_MODEL_REPO|$AGENTS_HOME/vendor_imports/repos/platform-observability-model|main|Platform observability model source mirror" \
   "$OBSERVABILITY_ENGINEERING_REPO|$AGENTS_HOME/vendor_imports/repos/observability-engineering|main|Observability engineering skill source mirror" \
+  "$OBSERVABILITY_PIPELINE_SKILLS_REPO|$AGENTS_HOME/vendor_imports/repos/observability-pipeline-skills|main|Observability pipeline skills source mirror" \
   "$PLATFORM_RELIABILITY_MODEL_REPO|$AGENTS_HOME/vendor_imports/repos/platform-reliability-model|main|Platform reliability model source mirror" \
   "$RELIABILITY_ENGINEERING_REPO|$AGENTS_HOME/vendor_imports/repos/reliability-engineering|main|Reliability engineering skill source mirror" \
   "$ARCHITECTURAL_EXECUTION_SKILLS_REPO|$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills|main|Architectural execution skills source mirror"; do
@@ -325,6 +327,13 @@ if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/observability-engineering
   stage_tree "$AGENTS_HOME/vendor_imports/repos/observability-engineering/skill/observability-engineering" "$agent_skills_stage/observability-engineering" "Observability engineering skill from source mirror"
 elif [ -d "$canonical_skills_root/platform/observability-engineering" ]; then
   stage_tree "$canonical_skills_root/platform/observability-engineering" "$agent_skills_stage/observability-engineering" "vendored Observability engineering skill fallback"
+fi
+
+if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/observability-pipeline-skills" &&
+  [ -d "$AGENTS_HOME/vendor_imports/repos/observability-pipeline-skills/skill/creating-observability-pipelines" ]; then
+  stage_tree "$AGENTS_HOME/vendor_imports/repos/observability-pipeline-skills/skill/creating-observability-pipelines" "$agent_skills_stage/creating-observability-pipelines" "Observability pipeline skill from source mirror"
+elif [ -d "$canonical_skills_root/platform/creating-observability-pipelines" ]; then
+  stage_tree "$canonical_skills_root/platform/creating-observability-pipelines" "$agent_skills_stage/creating-observability-pipelines" "vendored Observability pipeline skill fallback"
 fi
 
 if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/reliability-engineering" &&

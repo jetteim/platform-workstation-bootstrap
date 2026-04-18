@@ -24,6 +24,7 @@ The bootstrap also expects these owned repositories. They are not forks.
 | --- | --- | --- |
 | `jetteim/platform-observability-model` | Private | Platform-agnostic observability intent model |
 | `jetteim/observability-engineering` | Public | Codex skill for building observability from the model |
+| `jetteim/observability-pipeline-skills` | Public | Codex skill for tool-agnostic observability pipeline contracts |
 | `jetteim/platform-reliability-model` | Private | Platform-agnostic reliability intent model |
 | `jetteim/reliability-engineering` | Public | Codex skill for building reliability from the model |
 | `jetteim/architectural-execution-skills` | Public | Codex skill pipeline from value stream and architecture to implementation |
@@ -39,6 +40,7 @@ The bootstrap also expects these owned repositories. They are not forks.
 | `jetteim/llama.cpp` | `~/.agents/vendor_imports/repos/llama.cpp` | llama.cpp source mirror for GGUF conversion |
 | `jetteim/platform-observability-model` | `~/.agents/vendor_imports/repos/platform-observability-model` | Private source-of-truth observability model |
 | `jetteim/observability-engineering` | `~/.agents/vendor_imports/repos/observability-engineering` | Observability engineering skill source mirror |
+| `jetteim/observability-pipeline-skills` | `~/.agents/vendor_imports/repos/observability-pipeline-skills` | Observability pipeline skill source mirror |
 | `jetteim/platform-reliability-model` | `~/.agents/vendor_imports/repos/platform-reliability-model` | Private source-of-truth reliability model |
 | `jetteim/reliability-engineering` | `~/.agents/vendor_imports/repos/reliability-engineering` | Reliability engineering skill source mirror |
 | `jetteim/architectural-execution-skills` | `~/.agents/vendor_imports/repos/architectural-execution-skills` | Architectural execution skills source mirror |
@@ -107,6 +109,8 @@ skills/plugins/google-drive/
 `skills/codex/brain/` comes from `jetteim/brain-skill` commit `73789527637114b2a3745b2da9afa64fa8c1b7fa`.
 
 `skills/codex/observability-engineering/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
+
+`skills/codex/creating-observability-pipelines/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
 
 `skills/codex/reliability-engineering/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
 

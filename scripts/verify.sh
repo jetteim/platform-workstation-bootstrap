@@ -40,8 +40,10 @@ test -f "$repo_root/agents/hooks/redact.py"
 test -f "$repo_root/agents/prompts/platform-guardrails.md"
 test -f "$repo_root/agents/manifests/skill-projections.tsv"
 test -f "$repo_root/agents/skills/platform/observability-engineering/references/observability-model-summary.md"
+test -f "$repo_root/agents/skills/platform/creating-observability-pipelines/references/pipeline-contract.md"
 test -f "$repo_root/agents/skills/platform/reliability-engineering/references/reliability-model-summary.md"
 test -f "$repo_root/skills/codex/observability-engineering/references/observability-model-summary.md"
+test -f "$repo_root/skills/codex/creating-observability-pipelines/references/pipeline-contract.md"
 test -f "$repo_root/skills/codex/reliability-engineering/references/reliability-model-summary.md"
 test -f "$repo_root/agents/adapters/claude/CLAUDE.md.template"
 test -f "$repo_root/agents/adapters/codex/README.md"
@@ -62,6 +64,7 @@ grep -q 'https://github.com/jetteim/brain-skill.git' "$repo_root/scripts/install
 grep -q 'https://github.com/jetteim/llama.cpp.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/platform-observability-model.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/observability-engineering.git' "$repo_root/scripts/install-skills.sh"
+grep -q 'https://github.com/jetteim/observability-pipeline-skills.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/platform-reliability-model.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/reliability-engineering.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/architectural-execution-skills.git' "$repo_root/scripts/install-skills.sh"
@@ -81,7 +84,11 @@ PY
 grep -q 'vendor_imports/repos/platform-observability-model' "$repo_root/agents/skills/platform/observability-engineering/SKILL.md"
 grep -q 'references/observability-model-summary.md' "$repo_root/agents/skills/platform/observability-engineering/SKILL.md"
 grep -q 'source-to-sink lineage' "$repo_root/agents/skills/platform/observability-engineering/SKILL.md"
+grep -q 'creating-observability-pipelines' "$repo_root/agents/skills/platform/observability-engineering/SKILL.md"
 grep -q 'Telemetry Pipeline Pattern' "$repo_root/agents/skills/platform/observability-engineering/references/observability-model-summary.md"
+grep -q '^name: creating-observability-pipelines$' "$repo_root/agents/skills/platform/creating-observability-pipelines/SKILL.md"
+grep -q '\$observability-engineering' "$repo_root/agents/skills/platform/creating-observability-pipelines/SKILL.md"
+grep -q 'SelfObservabilityPlan' "$repo_root/agents/skills/platform/creating-observability-pipelines/SKILL.md"
 grep -q 'vendor_imports/repos/platform-reliability-model' "$repo_root/agents/skills/platform/reliability-engineering/SKILL.md"
 grep -q 'references/reliability-model-summary.md' "$repo_root/agents/skills/platform/reliability-engineering/SKILL.md"
 grep -q 'private platform observability/reliability model repos before installing their public engineering skills' "$repo_root/README.md"
@@ -164,6 +171,7 @@ grep -q 'prepare_canonical_destination' "$repo_root/scripts/install-skills.sh"
 grep -q 'canonical Superpowers is installed as a real directory' "$repo_root/scripts/install-skills.sh"
 grep -q 'platform-observability-model' "$repo_root/scripts/refresh-github.sh"
 grep -q 'observability-engineering' "$repo_root/scripts/refresh-github.sh"
+grep -q 'observability-pipeline-skills' "$repo_root/scripts/refresh-github.sh"
 grep -q 'platform-reliability-model' "$repo_root/scripts/refresh-github.sh"
 grep -q 'reliability-engineering' "$repo_root/scripts/refresh-github.sh"
 grep -q 'architectural-execution-skills' "$repo_root/scripts/refresh-github.sh"
@@ -255,6 +263,7 @@ for required in \
   "$repo_root/skills/codex/.system/openai-docs/SKILL.md" \
   "$repo_root/skills/codex/brain/SKILL.md" \
   "$repo_root/skills/codex/observability-engineering/SKILL.md" \
+  "$repo_root/skills/codex/creating-observability-pipelines/SKILL.md" \
   "$repo_root/skills/codex/reliability-engineering/SKILL.md" \
   "$repo_root/skills/codex/orchestrating-architecture-execution/SKILL.md" \
   "$repo_root/skills/codex/discovering-value-streams/SKILL.md" \

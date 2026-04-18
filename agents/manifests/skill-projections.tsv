@@ -4,6 +4,7 @@ plugin-github	skills/plugins/github	yes	yes	plugin-fallback
 plugin-google-drive	skills/plugins/google-drive	yes	yes	plugin-fallback
 brain	skills/codex/brain	yes	yes	platform
 observability-engineering	skills/codex/observability-engineering	yes	yes	platform
+creating-observability-pipelines	skills/codex/creating-observability-pipelines	yes	yes	platform
 reliability-engineering	skills/codex/reliability-engineering	yes	yes	platform
 orchestrating-architecture-execution	skills/codex/orchestrating-architecture-execution	yes	yes	platform
 discovering-value-streams	skills/codex/discovering-value-streams	yes	yes	platform

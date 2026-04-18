@@ -39,6 +39,8 @@ Do not use this skill for one-off debugging of a single incident unless the task
 
 If the task is primarily about incident aftercare, postmortems, miss-policy, action items, resilience experiments, or operational readiness, use `reliability-engineering` instead. Use this skill only for the telemetry, SLO binding, alert, dashboard, or backend artifact portions.
 
+If the task is primarily about telemetry pipeline topology, source-to-sink lineage, transform contracts, routing, buffering, delivery guarantees, validation, or pipeline self-observability, use `creating-observability-pipelines` as the companion workflow. Keep this skill as the parent intent model for SLOs, semantic conventions, alert context, dashboards, and generated backend artifacts.
+
 ## Core Rules
 
 1. Start from intent, not backend syntax.
@@ -52,6 +54,7 @@ If the task is primarily about incident aftercare, postmortems, miss-policy, act
 9. Infra observability must cover hosting, routing, capacity, control-plane, telemetry pipeline, policy, event, inventory, and change signals.
 10. Infrastructure alert context contract has the same rigor as application alert context: owner, impact, current state, change context, evidence, decision support, dashboard, and playbook.
 11. Telemetry pipelines must declare source-to-sink lineage, transformation contracts, buffer and delivery policy, validation, and self-observability when they affect SLOs, incident response, security, audit, cost, or backend generation.
+12. Pipeline implementation work should be delegated to the `creating-observability-pipelines` workflow when that skill is available; this skill defines the observability intent that pipeline workflow must preserve.
 
 ## Workflow
 
@@ -135,6 +138,8 @@ Separate:
 Record instrumentation gaps instead of inventing fake telemetry bindings.
 
 When telemetry pipeline work matters, also define pipeline topology, component contracts, delivery policy, buffer policy, transformation tests, self-observability, and validation requirements. Record generation gaps when a target pipeline engine or backend cannot enforce required redaction, cardinality, delivery, or validation behavior.
+
+When `creating-observability-pipelines` is available and the request needs an implementable pipeline contract, use it to produce `PipelineIntent`, `SignalContract`, `PipelineTopology`, `TransformContract`, `RouteContract`, `BufferDeliveryPolicy`, `SelfObservabilityPlan`, `ValidationPlan`, and `GeneratedArtifactManifest` outputs. Then map those outputs back into this skill's SLO, alert, dashboard, semantic convention, and backend-generation artifacts as needed.
 
 For infrastructure observability, produce the artifacts described by `docs/usage-scenarios/infra-observability-readiness.md`: platform observability intent, infrastructure signal inventory, metadata coverage assessment, topology correlation requirements, telemetry pipeline topology and health requirements, infrastructure alert context contract, decision dashboard intent, signal classifications, instrumentation gaps, enforcement gaps, and generated artifact manifest or backend generation request.
 
