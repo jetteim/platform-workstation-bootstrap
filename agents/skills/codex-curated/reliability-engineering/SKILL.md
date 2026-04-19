@@ -42,6 +42,8 @@ Use this skill for:
 
 Do not use this skill for generating telemetry backend monitors, dashboards, or SLO query bindings directly. Use `observability-engineering` for that work and reference its outputs as reliability evidence.
 
+For Datadog, Elastic, or other provider-specific Terraform requests, this skill creates only a reliability handoff contract. Load `references/provider-handoff.md`, keep reliability intent neutral, and delegate provider resource generation to `observability-engineering`.
+
 ## Core Rules
 
 1. Separate incident response from incident aftercare.
@@ -223,6 +225,15 @@ When the reliability work needs telemetry, SLOs, alert context, or decision dash
 
 Do not duplicate the observability model inside reliability output.
 
+When provider-specific Terraform is requested:
+
+1. Load `references/provider-handoff.md`.
+2. Emit a `ReliabilityProviderHandoff` or equivalent `ProviderGenerationHandoff`.
+3. State which reliability artifacts are source intent.
+4. Split `owned_by_reliability` from `delegated_to_observability`.
+5. Include target provider, blast radius, rollback path, review gate, and provider gap reporting.
+6. Do not generate provider Terraform from this skill.
+
 ### 8. Validate
 
 Before claiming completion, check:
@@ -235,6 +246,7 @@ Before claiming completion, check:
 - miss-policy has trigger, response, authority, and exit condition
 - resilience experiments have hypothesis, experiment type, expected behavior, failure model, safety preconditions, abort criteria, blast radius, evidence plan, and learning loop
 - ambient failure experiments include cadence, exposure, jitter, target selection, exclusion windows, and pause or skip authority
+- provider-specific requests include a reliability handoff contract and delegate Terraform generation to `observability-engineering`
 - accepted risks are explicit
 
 ## Common Mistakes

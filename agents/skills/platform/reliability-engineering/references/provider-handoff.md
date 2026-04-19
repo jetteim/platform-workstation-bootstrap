@@ -1,0 +1,56 @@
+# Reliability Provider Handoff
+
+Use this reference when reliability work needs provider-backed SLOs, alerts, dashboards, monitors, or Terraform output.
+
+Reliability provider work is a handoff contract. Do not generate provider Terraform from this skill. Use `observability-engineering` for Datadog, Elastic, and other provider-specific backend artifacts.
+
+## ReliabilityProviderHandoff
+
+Every handoff should include:
+
+- `source_reliability_artifacts`: reliability artifacts that provide source intent, such as `SliSloDefinition`, `ReliabilityRecommendationSet`, `MissPolicy`, and `ResilienceExperimentPlan`
+- `provider_targets`: provider names requested by the user, such as `datadog` or `elastic`
+- `owned_by_reliability`: SLI semantics, SLO objective/window, error-budget policy, miss-policy, resilience experiment evidence needs, and operational readiness constraints
+- `delegated_to_observability`: Terraform resource mapping, provider query syntax, dashboards, monitor bindings, notification resources, provider validation commands, and provider gap reporting
+- `required_outputs`: provider SLO resources, burn-rate monitors, decision dashboards, evidence tags or labels, and validation evidence
+- `safety`: target account/space/project, blast radius, rollback path, review gate, and state recovery notes
+
+## Rules
+
+- Keep reliability intent neutral and provider-independent.
+- Treat provider resources as generated outputs, not the reliability model.
+- Preserve observability boundaries: reliability defines what should be measured and why; observability defines how it is queried, displayed, alerted, and provisioned.
+- Require provider gaps to be reported explicitly when a provider cannot express the reliability intent safely.
+- Never include provider credentials, tokens, API keys, or secret-like values in the handoff.
+
+## Minimal Shape
+
+```yaml
+ReliabilityProviderHandoff:
+  skill: observability-engineering
+  source_reliability_artifacts:
+    - SliSloDefinition
+    - ReliabilityRecommendationSet
+    - ResilienceExperimentPlan
+  provider_targets:
+    - datadog
+    - elastic
+  owned_by_reliability:
+    - SLI semantics
+    - SLO objective and window
+    - error-budget and miss-policy intent
+    - resilience experiment evidence needs
+  delegated_to_observability:
+    - Terraform resource mapping
+    - provider query syntax
+    - dashboards and monitor bindings
+    - provider validation commands
+  required_outputs:
+    - provider SLO resources
+    - burn-rate monitors
+    - decision dashboards
+    - evidence tags or labels
+  safety:
+    blast_radius: generated provider files only until plan review
+    rollback_path: revert generated provider commit and restore prior Terraform state if applied
+```
