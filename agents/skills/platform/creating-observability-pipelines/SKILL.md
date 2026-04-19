@@ -11,6 +11,8 @@ Create observability pipelines as neutral contracts between telemetry producers 
 
 Use `$observability-engineering` first when the request includes SLOs, SLIs, semantic conventions, alerts, dashboards, generated backend artifacts, or platform observability intent. Use this skill for pipeline topology, component contracts, delivery policy, validation, and pipeline self-observability.
 
+When a request names a concrete provider or runtime, keep the source pipeline contract tool-agnostic and generate provider adapters as a separate projection. This skill owns provider artifacts for telemetry movement: sources, transforms, routes, buffers, delivery, quarantine, validation, and pipeline self-observability. Delegate SLOs, dashboards, monitors, and backend observability artifacts to `$observability-engineering`.
+
 ## Core Model
 
 Every pipeline has these parts:
@@ -112,6 +114,8 @@ Only after the contract is clear, generate implementation artifacts for the chos
 
 If the target stack cannot express required redaction, delivery, buffering, replay, validation, or self-observability behavior, report the gap instead of weakening the contract silently.
 
+For concrete provider requests, also produce a `PipelineProviderAdapterManifest` that maps the neutral contract to provider artifacts and validation commands. Use `references/provider-pipeline-adapters.md` for Datadog Observability Pipelines, Elastic ecosystem, OpenTelemetry Collector, Vector, Fluent Bit, or similar provider/runtime projections.
+
 ### 8. Validate Before Completion
 
 Before claiming completion, produce evidence for:
@@ -141,8 +145,9 @@ Produce only the outputs needed for the request:
 - `SelfObservabilityPlan`
 - `ValidationPlan`
 - `GeneratedArtifactManifest`
+- `PipelineProviderAdapterManifest` when provider-specific pipeline artifacts are requested
 
-Use `references/pipeline-contract.md` when a concrete checklist or artifact shape is needed. Use `references/tool-agnostic-concepts.md` when the request needs concept clarification.
+Use `references/pipeline-contract.md` when a concrete checklist or artifact shape is needed. Use `references/provider-pipeline-adapters.md` when named providers or runtimes require generated pipeline artifacts. Use `references/tool-agnostic-concepts.md` when the request needs concept clarification.
 
 ## Common Mistakes
 
@@ -153,3 +158,4 @@ Use `references/pipeline-contract.md` when a concrete checklist or artifact shap
 - Routing telemetry without a declared delivery policy.
 - Ignoring pipeline self-observability until the pipeline fails.
 - Claiming delivery guarantees that the chosen stack or sink cannot actually enforce.
+- Mixing provider pipeline generation with SLO, dashboard, monitor, or backend artifact generation that belongs in `$observability-engineering`.
