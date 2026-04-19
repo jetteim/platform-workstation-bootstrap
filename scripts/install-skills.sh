@@ -26,6 +26,7 @@ PLATFORM_OBSERVABILITY_MODEL_REPO="${PLATFORM_OBSERVABILITY_MODEL_REPO:-https://
 OBSERVABILITY_ENGINEERING_REPO="${OBSERVABILITY_ENGINEERING_REPO:-https://github.com/jetteim/observability-engineering.git}"
 OBSERVABILITY_PIPELINE_SKILLS_REPO="${OBSERVABILITY_PIPELINE_SKILLS_REPO:-https://github.com/jetteim/observability-pipeline-skills.git}"
 PLATFORM_RELIABILITY_MODEL_REPO="${PLATFORM_RELIABILITY_MODEL_REPO:-https://github.com/jetteim/platform-reliability-model.git}"
+SLO_RULES_ENGINE_REPO="${SLO_RULES_ENGINE_REPO:-https://github.com/jetteim/slo-rules-engine.git}"
 RELIABILITY_ENGINEERING_REPO="${RELIABILITY_ENGINEERING_REPO:-https://github.com/jetteim/reliability-engineering.git}"
 ARCHITECTURAL_EXECUTION_SKILLS_REPO="${ARCHITECTURAL_EXECUTION_SKILLS_REPO:-https://github.com/jetteim/architectural-execution-skills.git}"
 USE_VENDORED_FALLBACK="${USE_VENDORED_FALLBACK:-1}"
@@ -307,6 +308,7 @@ for mirror in \
   "$OBSERVABILITY_ENGINEERING_REPO|$AGENTS_HOME/vendor_imports/repos/observability-engineering|main|Observability engineering skill source mirror" \
   "$OBSERVABILITY_PIPELINE_SKILLS_REPO|$AGENTS_HOME/vendor_imports/repos/observability-pipeline-skills|main|Observability pipeline skills source mirror" \
   "$PLATFORM_RELIABILITY_MODEL_REPO|$AGENTS_HOME/vendor_imports/repos/platform-reliability-model|main|Platform reliability model source mirror" \
+  "$SLO_RULES_ENGINE_REPO|$AGENTS_HOME/vendor_imports/repos/slo-rules-engine|main|sre-rules engine source mirror" \
   "$RELIABILITY_ENGINEERING_REPO|$AGENTS_HOME/vendor_imports/repos/reliability-engineering|main|Reliability engineering skill source mirror" \
   "$ARCHITECTURAL_EXECUTION_SKILLS_REPO|$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills|main|Architectural execution skills source mirror"; do
   IFS='|' read -r mirror_repo mirror_destination mirror_branch mirror_label <<<"$mirror"

@@ -61,6 +61,7 @@ ensure_owned_repo "platform-observability-model" "private" "Platform-agnostic ob
 ensure_owned_repo "observability-engineering" "public" "Codex skill for platform-agnostic observability engineering"
 ensure_owned_repo "observability-pipeline-skills" "public" "Tool-agnostic skills for observability pipeline contracts and workflows"
 ensure_owned_repo "platform-reliability-model" "private" "Platform-agnostic reliability intent model"
+ensure_owned_repo "slo-rules-engine" "public" "Deterministic SRE rules engine for reliability artifact generation"
 ensure_owned_repo "reliability-engineering" "public" "Codex skill for platform-agnostic reliability engineering"
 ensure_owned_repo "architectural-execution-skills" "public" "Codex skill pipeline from value stream and architecture to implementation"
 

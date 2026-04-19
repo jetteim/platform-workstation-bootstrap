@@ -11,6 +11,8 @@ Build reliability from neutral intent. Treat ticket systems, chat channels, dash
 
 When the private `platform-reliability-model` repository checkout is available, use it as the source of truth. Otherwise use the compact reference bundled with this skill.
 
+For executable SLI/SLO, alert, route, and dashboard generation, prefer deterministic `sre-rules` output from `slo-rules-engine` over hand-written provider artifacts. Use generation only after the reliability intent has been reviewed as a neutral model.
+
 Preferred model checkout from the workstation installer:
 
 ```text
@@ -21,6 +23,18 @@ Legacy workspace checkout:
 
 ```text
 ~/Library/CloudStorage/OneDrive-Personal/Pet projects/platform-reliability-model
+```
+
+Preferred deterministic generator checkout from the workstation installer:
+
+```text
+${AGENTS_HOME:-$HOME/.agents}/vendor_imports/repos/slo-rules-engine
+```
+
+Legacy workspace generator checkout:
+
+```text
+~/Library/CloudStorage/OneDrive-Personal/Pet projects/slo-rules-engine
 ```
 
 ## When To Use
@@ -42,7 +56,7 @@ Use this skill for:
 
 Do not use this skill for generating telemetry backend monitors, dashboards, or SLO query bindings directly. Use `observability-engineering` for that work and reference its outputs as reliability evidence.
 
-For Datadog, Elastic, or other provider-specific Terraform requests, this skill creates only a reliability handoff contract. Load `references/provider-handoff.md`, keep reliability intent neutral, and delegate provider resource generation to `observability-engineering`.
+For provider-backed SLO, alert, route, and dashboard generation, load `references/sre-rules-generation.md` and use `sre-rules` when the requested provider is supported by the deterministic engine. For Datadog, Elastic, or other provider-specific Terraform requests, this skill creates only a reliability handoff contract. Load `references/provider-handoff.md`, keep reliability intent neutral, and delegate Terraform resource generation to `observability-engineering`.
 
 ## Core Rules
 
@@ -57,6 +71,7 @@ For Datadog, Elastic, or other provider-specific Terraform requests, this skill 
 9. Reliability owns SLI/SLO choice, objective realism, calculation basis, error-budget policy, and miss-policy.
 10. Treat the principle that failure is normal as a design constraint: any dependency, platform primitive, or owned workload can be a failure source.
 11. Use resilience experiments to prove expected behavior under bounded failure, not to surprise teams with unmanaged outages.
+12. Use deterministic `sre-rules` generation for executable reliability artifacts when available; do not invent provider artifacts in prose.
 
 ## Workflow
 
@@ -153,6 +168,7 @@ Produce neutral objects as needed:
 - `ReliabilityActionItem`
 - `MissPolicy`
 - `ResilienceExperiment`
+- `SreRulesGenerationPlan` when executable reliability artifact generation is requested
 
 Record gaps instead of inventing missing facts.
 
@@ -225,6 +241,16 @@ When the reliability work needs telemetry, SLOs, alert context, or decision dash
 
 Do not duplicate the observability model inside reliability output.
 
+When executable reliability artifact generation is requested:
+
+1. Load `references/sre-rules-generation.md`.
+2. Resolve the `slo-rules-engine` checkout.
+3. Produce or reference a reviewed service definition.
+4. Run or request `rules-ctl validate` and `rules-ctl model-report` before provider generation.
+5. Use `rules-ctl generate --provider` only for providers listed by the deterministic engine.
+6. Report unsupported providers, missing bindings, and Terraform needs as explicit gaps or handoffs.
+7. Do not run live apply without explicit user approval and dry-run evidence.
+
 When provider-specific Terraform is requested:
 
 1. Load `references/provider-handoff.md`.
@@ -247,6 +273,7 @@ Before claiming completion, check:
 - resilience experiments have hypothesis, experiment type, expected behavior, failure model, safety preconditions, abort criteria, blast radius, evidence plan, and learning loop
 - ambient failure experiments include cadence, exposure, jitter, target selection, exclusion windows, and pause or skip authority
 - provider-specific requests include a reliability handoff contract and delegate Terraform generation to `observability-engineering`
+- deterministic generation requests include `sre-rules` source, `rules-ctl validate`, `rules-ctl model-report`, provider generation commands, unsupported-provider gaps, and rollback path
 - accepted risks are explicit
 
 ## Common Mistakes
@@ -257,3 +284,4 @@ Before claiming completion, check:
 - Using blame or vague advice as lessons.
 - Treating an SLO miss as automatically identical to an incident.
 - Lowering an SLO without consumer impact review and an expiration or review date.
+- Hand-writing generated SLO, monitor, dashboard, or route artifacts when deterministic `sre-rules` generation is available.

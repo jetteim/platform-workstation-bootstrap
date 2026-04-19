@@ -50,6 +50,7 @@ The skill install order mirrors the original upstream setup:
 - Install vendored Codex and plugin skill fallback copies.
 - Clone the private platform observability/reliability model repos before installing their public engineering skills when GitHub access allows.
 - Clone the observability pipeline skill repo and install its tool-agnostic pipeline workflow when GitHub access allows.
+- Clone the deterministic `slo-rules-engine` source mirror before installing `reliability-engineering`, so reliability generation can use `sre-rules` instead of hand-written provider artifacts.
 - Fall back to bundled observability/reliability reference summaries inside the skill bundles when private model repo refresh is unavailable.
 - Clone the public architectural execution skill pipeline and install it from source when GitHub access allows.
 
@@ -118,6 +119,7 @@ The clean-machine path depends on these forks:
 | Observability engineering skill | owned repo | `jetteim/observability-engineering` |
 | Observability pipeline skills | owned repo | `jetteim/observability-pipeline-skills` |
 | Platform reliability model | owned repo | `jetteim/platform-reliability-model` |
+| Deterministic SRE rules engine | owned repo | `jetteim/slo-rules-engine` |
 | Reliability engineering skill | owned repo | `jetteim/reliability-engineering` |
 | Architectural execution skills | owned repo | `jetteim/architectural-execution-skills` |
 
