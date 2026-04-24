@@ -66,4 +66,4 @@ Use this recipe whenever a Slides write can change anything the user will see, e
 
 - Stop when the third fresh review finds no meaningful remaining issue.
 - Continue to a fourth loop only if the slide still has visible defects after the third review.
-- Escalate to [google-slides-template-surgery](./template-surgery.md) when repeated passes still cannot cleanly fix the structure or when the same defect repeats across multiple slides.
+- Escalate to [google-slides-template-surgery](../../../google-slides-template-surgery/SKILL.md) when repeated passes still cannot cleanly fix the structure or when the same defect repeats across multiple slides.

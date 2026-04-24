@@ -11,8 +11,8 @@ Use this skill as the default entrypoint for Google Slides work. Stay here for d
 Use this base skill when the request spans multiple Google Slides workflows or when no more focused Slides skill is a better fit.
 Keep chart refresh and chart replacement workflows here when the job is to update a chart area from a connected source, such as Google Sheets, without broader deck redesign.
 For slide-reading and summary tasks, combine structural deck reads with slide thumbnails when the slide contains charts, graphs, diagrams, screenshots, or other content that cannot be understood from text alone.
-When the request is to replace screenshot placeholders or other static chart content with charts from an existing connected source, such as Google Sheets, stay in this reference unless the job is mainly visual cleanup. If the source is Google Sheets, read [sheets-chart-replacement](./sheets-chart-replacement.md).
-When a write can change rendered text flow, geometry, colors, shapes, lines, connectors, charts, arrows, or accent bars on a live slide, read [visual-change-loop](./visual-change-loop.md) before the first write even if the request is not primarily visual cleanup.
+When the request is to replace screenshot placeholders or other static chart content with charts from an existing connected source, such as Google Sheets, stay in this reference unless the job is mainly visual cleanup. If the source is Google Sheets, read [sheets-chart-replacement](../google-drive/references/slides/sheets-chart-replacement.md).
+When a write can change rendered text flow, geometry, colors, shapes, lines, connectors, charts, arrows, or accent bars on a live slide, read [visual-change-loop](../google-drive/references/slides/visual-change-loop.md) before the first write even if the request is not primarily visual cleanup.
 
 ## Specialized Skills
 
@@ -42,19 +42,19 @@ Confirm the runtime exposes the relevant Google Slides actions before editing:
 
 2. Read before writing.
 - Use `get_presentation` or `get_presentation_text` to capture slide order, titles, and overall structure.
-- When the request rewrites, translates, or updates multiple slides, follow [deck-scope-verification](./deck-scope-verification.md) before the first write so the full in-scope slide list is explicit.
+- When the request rewrites, translates, or updates multiple slides, follow [deck-scope-verification](../google-drive/references/slides/deck-scope-verification.md) before the first write so the full in-scope slide list is explicit.
 - Use `get_slide` before any slide-level write so object IDs and layout context come from the live deck.
 - For Q&A, evidence-finding, or "where in the deck is X?" requests, build an explicit candidate slide list first. Do not stop at the first keyword hit if the topic could appear across a section, in appendix evidence, or in both summary and detail slides.
 - When answering a topic question such as churn, pipeline, or ARR, inspect every plausible slide in the relevant section before concluding that the answer lives on only one slide.
-- For chart refresh or chart replacement work, follow [chart-refresh-workflows](./chart-refresh-workflows.md). Do not rely on `get_presentation_text` alone for chart workflows because chart-only slide elements may be omitted from text-only reads.
-- If the task is to swap screenshot placeholders or other static chart content for charts from an existing connected source, keep the source artifacts grounded before the first write. If the source is Google Sheets, also read [sheets-chart-replacement](./sheets-chart-replacement.md) so chart IDs, placeholder geometry, and write scope stay grounded.
+- For chart refresh or chart replacement work, follow [chart-refresh-workflows](../google-drive/references/slides/chart-refresh-workflows.md). Do not rely on `get_presentation_text` alone for chart workflows because chart-only slide elements may be omitted from text-only reads.
+- If the task is to swap screenshot placeholders or other static chart content for charts from an existing connected source, keep the source artifacts grounded before the first write. If the source is Google Sheets, also read [sheets-chart-replacement](../google-drive/references/slides/sheets-chart-replacement.md) so chart IDs, placeholder geometry, and write scope stay grounded.
 - When creating or updating a deck from multiple source presentations, identify the relevant source decks and slides before writing. Keep the source facts tied to the target slide plan so the final synthesis can be checked against the material that supported it.
 - For slide summaries or inspection, do not rely on text extraction alone when a slide contains charts, graphs, screenshots, diagrams, or image-heavy content.
 - Use `get_slide_thumbnail` alongside text/structure reads when visual evidence matters so the summary reflects both what the slide says and what the slide shows.
 - If a candidate slide has little useful extracted text but may still contain relevant evidence in a chart, screenshot, or diagram, inspect its thumbnail before ruling it out.
 - If the thumbnail response includes an `image_asset_pointer`, image content part, or other rendered image artifact, inspect that returned image directly as the slide image input. The response may also include `contentUrl` metadata; prefer the returned image content for visual understanding instead of downloading that URL or relying only on metadata.
 - Treat the slide page size as a hard boundary for every shape, text box, image, and color band you create.
-- If the write can change anything visible on the slide, such as text wrapping, shape styling, arrow direction, accent bars, chart placement, or connector styling, follow [visual-change-loop](./visual-change-loop.md) before the first `batch_update`.
+- If the write can change anything visible on the slide, such as text wrapping, shape styling, arrow direction, accent bars, chart placement, or connector styling, follow [visual-change-loop](../google-drive/references/slides/visual-change-loop.md) before the first `batch_update`.
 
 3. Apply default creation polish when making a new presentation.
 - Do not ask the user to specify visual styling unless the request depends on a specific brand, template, or aesthetic.
@@ -106,7 +106,7 @@ Confirm the runtime exposes the relevant Google Slides actions before editing:
 - After creating a new slide or applying layout-heavy changes, immediately verify that no text, shape, image, or color band extends beyond the slide boundary. If the editor would require horizontal or vertical scrolling to see the whole slide, or if the lowest text sits in the bottom safety margin, treat that as a failure and fix it before moving on.
 - When supplying `objectId` values in `batch_update`, use valid Google Slides IDs that are 5-50 characters long and start with an alphanumeric character or `_`. Prefer descriptive IDs like `slide02`, `slide02_title`, or `slide02_body`; do not use very short IDs like `s2` or `i0`.
 - If you need to create a slide and edit its placeholders in the same `batch_update`, create the slide with valid placeholder ID mappings first, then reference those placeholder IDs in later requests in the same batch.
-- Any write that can change visible layout or styling must follow [visual-change-loop](./visual-change-loop.md). Do not stop at a successful API response without thumbnail verification.
+- Any write that can change visible layout or styling must follow [visual-change-loop](../google-drive/references/slides/visual-change-loop.md). Do not stop at a successful API response without thumbnail verification.
 
 ## Write Safety
 
@@ -149,7 +149,7 @@ If the presentation is missing or the Google Slides connector does not return de
 
 ## References
 
-- [deck-scope-verification](./deck-scope-verification.md)
-- [chart-refresh-workflows](./chart-refresh-workflows.md)
-- [sheets-chart-replacement](./sheets-chart-replacement.md)
-- [visual-change-loop](./visual-change-loop.md)
+- [deck-scope-verification](../google-drive/references/slides/deck-scope-verification.md)
+- [chart-refresh-workflows](../google-drive/references/slides/chart-refresh-workflows.md)
+- [sheets-chart-replacement](../google-drive/references/slides/sheets-chart-replacement.md)
+- [visual-change-loop](../google-drive/references/slides/visual-change-loop.md)

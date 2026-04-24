@@ -11,7 +11,7 @@ Use these patterns as copy-and-fill templates. Do not invent raw `batch_update` 
 - When centering a new element relative to another object, compute the target top-left from the desired visual center and the new element's rendered width and height.
 - Keep batches small.
 - Re-fetch a thumbnail after every batch.
-- If the batch changed visible layout or styling, continue through [visual-change-loop](./visual-change-loop.md) and do not stop before the third fresh review.
+- If the batch changed visible layout or styling, continue through [visual-change-loop](../../google-drive/references/slides/visual-change-loop.md) and do not stop before the third fresh review.
 - Prefer exact field masks. Do not use guessed field names.
 
 ## Duplicate a strong slide

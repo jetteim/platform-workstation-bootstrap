@@ -14,7 +14,6 @@ superpowers:verification-before-completion
 superpowers:writing-plans
 superpowers:writing-skills
 local:doc
-local:gh-fix-ci
 local:orchestrating-architecture-execution
 local:discovering-value-streams
 local:shaping-capabilities

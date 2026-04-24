@@ -1,6 +1,6 @@
 ---
 name: google-slides-visual-iteration
-description: Iteratively inspect and polish existing connected Google Slides presentations in Codex using slide thumbnails plus raw Slides edits. Use when a user asks to fix a slide visually, clean up formatting, improve slide quality, make a deck look better, fix alignment, spacing, overlap, overflow, crowding, awkward whitespace, or deck-wide visual consistency in an existing Google Slides deck or shared Slides link, especially when the work should follow a thumbnail -> diagnose -> batch_update -> re-thumbnail verification loop.
+description: Iteratively inspect and polish existing connected Google Slides presentations in Codex using slide thumbnails plus raw Slides edits. Use when a user asks to fix a slide visually, clean up formatting, improve slide quality, make a deck look better, fix alignment, spacing, overlap, overflow, crowding, awkward whitespace, or deck-wide visual consistency in an existing Google Slides deck or shared Slides link.
 ---
 
 # Google Slides Visual Iteration
@@ -44,12 +44,12 @@ If a dedicated visual-iteration tool exists in the runtime, use it. Otherwise, e
 - Use `get_slide` on the target slide before the first write so you have the current element structure and IDs.
 - Before each additional write pass on that same slide, call `get_slide` again so the next `batch_update` uses fresh geometry and current element state rather than stale structure from the prior pass.
 - For overflow, wrapping, or neighboring text-box collision work, plan and verify from both sources: the thumbnail for rendered appearance and `get_slide` for live text-box geometry and adjacent object placement.
-- For screenshot-to-chart swaps sourced from Google Sheets, read [sheets-chart-replacement](./sheets-chart-replacement.md) before the first write so the replace flow stays grounded in live chart IDs and placeholder geometry.
+- For screenshot-to-chart swaps sourced from Google Sheets, read [sheets-chart-replacement](../google-drive/references/slides/sheets-chart-replacement.md) before the first write so the replace flow stays grounded in live chart IDs and placeholder geometry.
 - For dashboards, scorecards, or metric grids, map the small benchmark or target text boxes separately from the main headline values. Do not assume the smaller target text is part of the same text object as the large value.
-- Before declaring a visual element blocked, classify it as a shape, a line or connector, or an image. Then choose the matching raw request family from [batch-update-recipes](./batch-update-recipes.md).
+- Before declaring a visual element blocked, classify it as a shape, a line or connector, or an image. Then choose the matching raw request family from [batch-update-recipes](../google-slides-template-surgery/references/batch-update-recipes.md).
 - When positioning a new text box relative to another object, remember that Slides transforms use the text box's upper-left corner, not its center. Compute the target top-left from the desired visual center and the new text box footprint before writing.
 - If the user provides or implies a stronger manually polished target slide, treat that target as an explicit alignment and styling reference rather than trying to invent the layout card by card.
-- If the current write changes visible text flow, geometry, or styling, follow [visual-change-loop](./visual-change-loop.md) and treat this reference as the slide-local expanded version of that recipe.
+- If the current write changes visible text flow, geometry, or styling, follow [visual-change-loop](../google-drive/references/slides/visual-change-loop.md) and treat this reference as the slide-local expanded version of that recipe.
 
 3. Start with a thumbnail.
 - Call `get_slide_thumbnail` first.
@@ -259,10 +259,10 @@ The Slides connector exposes raw `batch_update` requests. That means:
 
 ## References
 
-- [deck-scope-verification](./deck-scope-verification.md)
-- [batch-update-recipes](./batch-update-recipes.md)
-- [sheets-chart-replacement](./sheets-chart-replacement.md)
-- [visual-change-loop](./visual-change-loop.md)
+- [deck-scope-verification](../google-drive/references/slides/deck-scope-verification.md)
+- [batch-update-recipes](../google-slides-template-surgery/references/batch-update-recipes.md)
+- [sheets-chart-replacement](../google-drive/references/slides/sheets-chart-replacement.md)
+- [visual-change-loop](../google-drive/references/slides/visual-change-loop.md)
 
 ## Example Prompts
 
