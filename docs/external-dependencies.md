@@ -71,18 +71,20 @@ For repeatable setup:
 
 Current local pins:
 
-- Superpowers local commit: `917e5f53b16b115b70a3a355ed5f4993b9f8b73d`
-- OpenAI skills local commit: `0ed2046f287a92b5f4bcace213dcb3cc5f094cb9`
-- Codex source mirror commit: `1288bb60a1c52958da68080761c864b57080a2b0`
-- Playwright MCP source mirror commit: `d3782155c40aabc3945673998bdbae83cb0dc94c`
-- MCP servers source mirror commit: `f4244583a6af9425633e433a3eec000d23f4e011`
+- Superpowers local commit: `e7a2d16476bf042e9add4699c9d018a90f86e4a6`
+- OpenAI skills local commit: `af9b54f235d0d56c6b4410be54d578b0fda4ddfc`
+- Codex source mirror commit: `35aaa5d9fcb606fb6f27dd5747ecab3f4ba0c07e`
+- Playwright MCP source mirror commit: `4c76659c5c637d2c66b8708012c9562c6c41773b`
+- MCP servers source mirror commit: `4503e2d12b799448cd05f789dd40f9643a8d1a6c`
 - Brain skill source mirror commit: `73789527637114b2a3745b2da9afa64fa8c1b7fa`
-- llama.cpp source mirror commit: `1e9d771e2c2f1113a5ebdd0dc15bafe57dce64be`
-- Platform observability model mirror commit: `aafa4361cf5b5ad9c416bf2a0d3ef81138a98a0d`
-- Observability engineering skill mirror commit: `c98e8e2ded7334ac74dfe04d4488d0fbedd89ed6`
+- llama.cpp source mirror commit: `d05fe1d7dadbf8943c8f1903fcf65b935ddab839`
+- Platform observability model mirror commit: `123d65763d84aec699fb6d2281e278df56e03625`
+- Observability engineering skill mirror commit: `47c7cbae453fac68062796c3a110913e30483127`
+- Observability pipeline skills mirror commit: `fbf6149ae62868ae6847cb0f3fd52459e5c62a46`
 - Platform reliability model mirror commit: `9b56152c4cb716865dd2b196bcbb849d453f1df2`
-- Reliability engineering skill mirror commit: `375d300d6b18e8ccea5b46e23f70693cb457e19a`
-- Architectural execution skills mirror commit: `db4bec9bde964f0c8b8878737099bec72a8d1d3c`
+- SLO rules engine mirror commit: `8883ba5fed0b6e675deff04e4d5c2b011cba218f`
+- Reliability engineering skill mirror commit: `6785e245425ef5c84c57270fffc352000c893b8c`
+- Architectural execution skills mirror commit: `bb211111e000e679a8b5c12ea4cc9ae94790e719`
 - Codex CLI npm package: `@openai/codex@0.120.0`
 - Codex Homebrew cask present: `codex 0.111.0`
 - Playwright MCP npm package: `@playwright/mcp@0.0.70`
@@ -102,7 +104,7 @@ skills/plugins/github/
 skills/plugins/google-drive/
 ```
 
-`skills/superpowers/` comes from local Superpowers commit `917e5f53b16b115b70a3a355ed5f4993b9f8b73d`.
+`skills/superpowers/` comes from local Superpowers commit `e7a2d16476bf042e9add4699c9d018a90f86e4a6`.
 
 `skills/codex/` comes from the local Codex user skill directory, including system skills and installed document/spreadsheet/PDF/notebook skills.
 
