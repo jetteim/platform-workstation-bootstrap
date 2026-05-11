@@ -32,7 +32,7 @@ Observed settings:
   - `github@openai-curated`
   - `google-drive@openai-curated`
 
-`features.codex_hooks` was available but disabled at assessment time.
+Hook feature flags were available but disabled at assessment time. Current bootstrap config uses `features.hooks`.
 
 ## Skills And Plugins
 

@@ -62,7 +62,7 @@ The skill install order mirrors the original upstream setup:
 - source-backed skills and fallback skill bundles through `scripts/install-skills.sh`
 - `~/.config/git/hooks/pre-commit`
 - `git config --global core.hooksPath ~/.config/git/hooks`
-- `features.codex_hooks = true`
+- `features.hooks = true`
 - `features.multi_agent = true`
 
 It does not overwrite live credentials or private config files.

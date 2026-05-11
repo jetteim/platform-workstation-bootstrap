@@ -133,7 +133,7 @@ echo "[install] installed Claude rule template: $CLAUDE_HOME/CLAUDE.md.template"
 
 canonical_hooks_source="$repo_root/agents/hooks"
 codex_dispatcher_source="$repo_root/codex/hooks/codex_hook.py"
-codex_hooks_json="$repo_root/codex/hooks.json"
+codex_hook_config_json="$repo_root/codex/hooks.json"
 codex_adapter_hooks_source="$repo_root/agents/adapters/codex/hooks"
 codex_adapter_hooks_json="$repo_root/agents/adapters/codex/hooks.json"
 if [ ! -f "$canonical_hooks_source/policy.py" ] || [ ! -f "$canonical_hooks_source/redact.py" ]; then
@@ -144,14 +144,14 @@ if [ -f "$codex_adapter_hooks_source/codex_hook.py" ]; then
   codex_dispatcher_source="$codex_adapter_hooks_source/codex_hook.py"
 fi
 if [ -f "$codex_adapter_hooks_json" ]; then
-  codex_hooks_json="$codex_adapter_hooks_json"
+  codex_hook_config_json="$codex_adapter_hooks_json"
 fi
 
 install_file "$canonical_hooks_source/policy.py" "$CODEX_HOME/hooks/policy.py" "Codex hook policy"
 install_file "$canonical_hooks_source/redact.py" "$CODEX_HOME/hooks/redact.py" "Codex hook redaction"
 install_file "$codex_dispatcher_source" "$CODEX_HOME/hooks/codex_hook.py" "Codex hook dispatcher"
 chmod +x "$CODEX_HOME/hooks/codex_hook.py"
-install_file "$codex_hooks_json" "$CODEX_HOME/hooks.json" "Codex hooks config"
+install_file "$codex_hook_config_json" "$CODEX_HOME/hooks.json" "Codex hooks config"
 
 "$repo_root/scripts/install-skills.sh"
 
@@ -166,7 +166,7 @@ import sys
 
 path = Path(sys.argv[1])
 required_features = {
-    "codex_hooks": "true",
+    "hooks": "true",
     "multi_agent": "true",
 }
 
@@ -179,6 +179,7 @@ if not path.exists():
     raise SystemExit(0)
 
 text = path.read_text(encoding='utf-8')
+text = re.sub(r'(?m)^codex_hooks\s*=.*\n?', '', text)
 if re.search(r'(?m)^\[features\]\s*$', text):
     for key, value in required_features.items():
         replacement = f"{key} = {value}"

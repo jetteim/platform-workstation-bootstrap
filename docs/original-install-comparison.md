@@ -40,7 +40,7 @@ Bootstrap match:
 - Replaces a legacy `~/.agents/skills/superpowers` symlink with a canonical real directory during migration.
 - Stages and syncs managed skill projections so removed files from the source tree are pruned on reinstall.
 - Refuses unsafe `AGENTS_HOME`, `CODEX_HOME`, and `CLAUDE_HOME` overrides before creating directories.
-- Sets `features.multi_agent = true` alongside `features.codex_hooks = true`.
+- Sets `features.multi_agent = true` alongside `features.hooks = true`.
 - Uses vendored `skills/superpowers/` only if no usable clone exists and `USE_VENDORED_FALLBACK=1`.
 
 Important: the installer does not force-reset an existing dirty `~/.codex/superpowers` checkout. It skips repo refresh in that case so local edits are not discarded. For source-backed skills under `~/.agents/vendor_imports/repos`, dirty mirrors are not used as install inputs; vendored canonical copies are used instead.
