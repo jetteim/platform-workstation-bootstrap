@@ -18,7 +18,11 @@ grep -q 'os.environ.get("AGENTS_HOME"' "$repo_root/agents/adapters/codex/hooks/c
 grep -q '^hooks = true' "$repo_root/agents/adapters/codex/config.example.toml"
 ! grep -q 'codex_hooks = true' "$repo_root/agents/adapters/codex/config.example.toml"
 grep -q 'multi_agent = true' "$repo_root/agents/adapters/codex/config.example.toml"
+grep -q 'plugins = true' "$repo_root/agents/adapters/codex/config.example.toml"
+grep -q '\[plugins."superpowers@openai-curated"\]' "$repo_root/agents/adapters/codex/config.example.toml"
 grep -q '"hooks": "true"' "$repo_root/scripts/install.sh"
+grep -q '"plugins": "true"' "$repo_root/scripts/install.sh"
+grep -q '"superpowers@openai-curated": "true"' "$repo_root/scripts/install.sh"
 python3 -m py_compile "$repo_root/codex/hooks/codex_hook.py" "$repo_root/codex/hooks/policy.py" "$repo_root/codex/hooks/redact.py"
 bash -n "$repo_root/scripts/refresh-github.sh"
 bash -n "$repo_root/scripts/install-brain-prereqs.sh"
@@ -57,8 +61,8 @@ test -f "$repo_root/skills/codex/reliability-engineering/references/sre-rules-ge
 test -f "$repo_root/agents/adapters/claude/CLAUDE.md.template"
 test -f "$repo_root/agents/adapters/codex/README.md"
 grep -Fq '`~/.agents` is the canonical agent-neutral layer' "$repo_root/README.md"
-grep -Fq 'Install canonical Superpowers into `~/.agents/skills/superpowers` as a real directory on fresh installs.' "$repo_root/README.md"
-grep -Fq 'Replace a legacy `~/.agents/skills/superpowers` symlink with the canonical real directory during migration.' "$repo_root/README.md"
+grep -Fq 'Enable Superpowers through the native Codex plugin `superpowers@openai-curated`.' "$repo_root/README.md"
+grep -Fq 'Do not clone or project Superpowers from `~/.codex/superpowers`' "$repo_root/README.md"
 grep -q 'Build a context map before exploring a codebase' "$repo_root/agents/rules/codebase-exploration.md"
 grep -q 'Honesty over plausibility' "$repo_root/agents/rules/operating-principles.md"
 grep -q 'operating-principles.md' "$repo_root/agents/adapters/claude/CLAUDE.md.template"
@@ -67,8 +71,8 @@ grep -q 'completion_needs_evidence' "$repo_root/agents/hooks/policy.py"
 grep -q 'Treat secrets as toxic' "$repo_root/agents/prompts/platform-guardrails.md"
 grep -q 'orchestrating-architecture-execution' "$repo_root/agents/manifests/skill-projections.tsv"
 grep -q '~/.agents' "$repo_root/agents/adapters/claude/CLAUDE.md.template"
-grep -q 'SUPERPOWERS_REPO' "$repo_root/scripts/install-skills.sh"
-grep -q 'https://github.com/jetteim/superpowers.git' "$repo_root/scripts/install-skills.sh"
+! grep -q 'SUPERPOWERS_REPO' "$repo_root/scripts/install-skills.sh"
+! grep -q 'https://github.com/jetteim/superpowers.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/brain-skill.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/llama.cpp.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/platform-observability-model.git' "$repo_root/scripts/install-skills.sh"
@@ -120,7 +124,9 @@ grep -q 'private platform observability/reliability model repos before installin
 grep -q '^hooks = true' "$repo_root/codex/config.example.toml"
 ! grep -q 'codex_hooks = true' "$repo_root/codex/config.example.toml"
 grep -q 'multi_agent = true' "$repo_root/codex/config.example.toml"
-grep -q 'https://github.com/obra/superpowers/blob/main/.codex/INSTALL.md' "$repo_root/docs/original-install-comparison.md"
+grep -q 'plugins = true' "$repo_root/codex/config.example.toml"
+grep -q '\[plugins."superpowers@openai-curated"\]' "$repo_root/codex/config.example.toml"
+grep -q 'plugins."superpowers@openai-curated".enabled = true' "$repo_root/docs/original-install-comparison.md"
 grep -q 'agents/skills/platform' "$repo_root/docs/external-dependencies.md"
 grep -q 'Agent-Agnostic Bootstrap' "$repo_root/docs/original-install-comparison.md"
 grep -q 'Codebase Exploration Rules' "$repo_root/docs/decisions.md"
@@ -133,6 +139,18 @@ if grep -q '~/.codex/vendor_imports/' "$repo_root/docs/original-install-comparis
 fi
 if grep -Fq 'Symlink `~/.agents/skills/superpowers` to `~/.codex/superpowers/skills`' "$repo_root/README.md"; then
   echo "README still claims Superpowers normally installs as a symlink" >&2
+  exit 1
+fi
+if grep -Fq 'clone_or_update "$SUPERPOWERS_REPO"' "$repo_root/scripts/install-skills.sh"; then
+  echo "install-skills still clones Superpowers from GitHub" >&2
+  exit 1
+fi
+if grep -Fq 'stage_tree "$agent_skills_stage/superpowers"' "$repo_root/scripts/install-skills.sh"; then
+  echo "install-skills still projects Superpowers into Codex local skills" >&2
+  exit 1
+fi
+if grep -q 'obra/superpowers' "$repo_root/scripts/refresh-github.sh"; then
+  echo "refresh-github still treats Superpowers as a forked install source" >&2
   exit 1
 fi
 grep -q 'diana-random1st/brain-skill' "$repo_root/scripts/refresh-github.sh"
@@ -194,8 +212,7 @@ for touched_script in \
     exit 1
   fi
 done
-grep -q 'prepare_canonical_destination' "$repo_root/scripts/install-skills.sh"
-grep -q 'canonical Superpowers is installed as a real directory' "$repo_root/scripts/install-skills.sh"
+grep -q 'Superpowers is provided by the Codex plugin superpowers@openai-curated' "$repo_root/scripts/install-skills.sh"
 grep -q 'platform-observability-model' "$repo_root/scripts/refresh-github.sh"
 grep -q 'observability-engineering' "$repo_root/scripts/refresh-github.sh"
 grep -q 'observability-pipeline-skills' "$repo_root/scripts/refresh-github.sh"
@@ -224,7 +241,6 @@ if [ "$skill_count" -lt 40 ]; then
   exit 1
 fi
 
-test -f "$repo_root/agents/skills/superpowers/brainstorming/SKILL.md"
 test -f "$repo_root/agents/skills/platform/orchestrating-architecture-execution/SKILL.md"
 test -f "$repo_root/agents/skills/platform/discovering-value-streams/SKILL.md"
 test -f "$repo_root/agents/skills/platform/shaping-capabilities/SKILL.md"

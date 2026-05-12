@@ -14,7 +14,7 @@ The default bootstrap path is installable. The optional Brain/MLX prerequisites 
 | --- | --- | --- |
 | Repository freshness | `git pull --ff-only` | Passed; repository was already up to date before local audit edits. |
 | GitHub authentication | `gh auth refresh -h github.com -s workflow` | Passed; needed because the Codex fork sync includes workflow files. |
-| Fork and mirror refresh | `./scripts/refresh-github.sh` | Passed after GitHub auth refresh. Forks/syncs include Superpowers, OpenAI skills, Codex, Playwright MCP, MCP servers, Brain skill, and llama.cpp. |
+| Fork and mirror refresh | `./scripts/refresh-github.sh` | Passed after GitHub auth refresh. Forks/syncs include OpenAI skills, Codex, Playwright MCP, MCP servers, Brain skill, and llama.cpp. Superpowers is now a Codex plugin, not a forked install source. |
 | Default install | `SKIP_GITHUB_REFRESH=1 ./scripts/install.sh` | Passed; refreshed local mirrors, installed vendored skills, Codex config, hooks, and symlinks. |
 | Brain prerequisites | `./scripts/install-brain-prereqs.sh` | Passed; installed or reused Homebrew packages, MLX virtualenv packages, and the llama.cpp source mirror. |
 | Brain skill package checks | `./scripts/test-brain-skill.sh` | Passed; found the Brain skill, MLX virtualenv, MLX packages, and llama.cpp checkout. |
@@ -26,7 +26,6 @@ The default bootstrap path is installable. The optional Brain/MLX prerequisites 
 
 | Dependency | Fork | Local mirror | Commit checked |
 | --- | --- | --- | --- |
-| Superpowers | `jetteim/superpowers` | `~/.codex/superpowers` | `917e5f53b16b115b70a3a355ed5f4993b9f8b73d` |
 | OpenAI skills | `jetteim/skills` | `~/.codex/vendor_imports/skills` | `0ed2046f287a92b5f4bcace213dcb3cc5f094cb9` |
 | Codex | `jetteim/codex` | `~/.codex/vendor_imports/repos/codex` | `3895ddd6b1caf80cd77d6fd44e3ce55bd290ef18` |
 | Playwright MCP | `jetteim/playwright-mcp` | `~/.codex/vendor_imports/repos/playwright-mcp` | `d3782155c40aabc3945673998bdbae83cb0dc94c` |

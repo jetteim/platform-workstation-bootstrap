@@ -6,7 +6,6 @@ The bootstrap process expects these forks to exist and stay synced.
 
 | Upstream | Fork | Why |
 | --- | --- | --- |
-| `obra/superpowers` | `jetteim/superpowers` | Superpowers skills, including `brainstorming` |
 | `openai/skills` | `jetteim/skills` | OpenAI curated skills cache source |
 | `openai/codex` | `jetteim/codex` | Codex CLI source/reference |
 | `microsoft/playwright-mcp` | `jetteim/playwright-mcp` | `@playwright/mcp` repository |
@@ -31,7 +30,6 @@ The bootstrap also expects these owned repositories. They are not forks.
 
 | Fork | Local path | Role |
 | --- | --- | --- |
-| `jetteim/superpowers` | `~/.codex/superpowers` | Live native Codex skill source; `~/.agents/skills/superpowers` is a canonical real directory and legacy symlinks are replaced during migration |
 | `jetteim/skills` | `~/.agents/vendor_imports/skills` | OpenAI skills provenance and reinstall source |
 | `jetteim/codex` | `~/.agents/vendor_imports/repos/codex` | Codex source/reference mirror |
 | `jetteim/playwright-mcp` | `~/.agents/vendor_imports/repos/playwright-mcp` | Playwright MCP source/reference mirror |
@@ -45,7 +43,7 @@ The bootstrap also expects these owned repositories. They are not forks.
 | `jetteim/reliability-engineering` | `~/.agents/vendor_imports/repos/reliability-engineering` | Reliability engineering skill source mirror |
 | `jetteim/architectural-execution-skills` | `~/.agents/vendor_imports/repos/architectural-execution-skills` | Architectural execution skills source mirror |
 
-Canonical v1 skill sources are copied under `agents/skills/superpowers/`, `agents/skills/platform/`, `agents/skills/plugins/`, and `agents/skills/codex-curated/`.
+Canonical v1 skill sources are copied under `agents/skills/platform/`, `agents/skills/plugins/`, and `agents/skills/codex-curated/`. Superpowers is provided by the Codex plugin `superpowers@openai-curated`, not by a local source checkout.
 
 `agents/skills/platform` includes the architectural execution pipeline: `orchestrating-architecture-execution`, value stream discovery, capability shaping, feature shaping, C4 modeling, story slicing, and traceability review.
 
@@ -71,18 +69,17 @@ For repeatable setup:
 
 Current local pins:
 
-- Superpowers local commit: `e7a2d16476bf042e9add4699c9d018a90f86e4a6`
-- OpenAI skills local commit: `af9b54f235d0d56c6b4410be54d578b0fda4ddfc`
-- Codex source mirror commit: `35aaa5d9fcb606fb6f27dd5747ecab3f4ba0c07e`
-- Playwright MCP source mirror commit: `4c76659c5c637d2c66b8708012c9562c6c41773b`
-- MCP servers source mirror commit: `4503e2d12b799448cd05f789dd40f9643a8d1a6c`
+- OpenAI skills local commit: `4c4058ebf44f6734e62c70ab4a81246d4d093fc8`
+- Codex source mirror commit: `5e3ee5eddfa5333f2e0b011880abf0cbf92bd295`
+- Playwright MCP source mirror commit: `ae27b8638aaf3a6be17d378964ae683864d20440`
+- MCP servers source mirror commit: `acedea0c24b3e20d7265f87b8b2afe2e0c6eb2f4`
 - Brain skill source mirror commit: `73789527637114b2a3745b2da9afa64fa8c1b7fa`
-- llama.cpp source mirror commit: `d05fe1d7dadbf8943c8f1903fcf65b935ddab839`
+- llama.cpp source mirror commit: `a9883db8ee021cf16783016a60996d41820b5195`
 - Platform observability model mirror commit: `123d65763d84aec699fb6d2281e278df56e03625`
 - Observability engineering skill mirror commit: `47c7cbae453fac68062796c3a110913e30483127`
 - Observability pipeline skills mirror commit: `fbf6149ae62868ae6847cb0f3fd52459e5c62a46`
 - Platform reliability model mirror commit: `9b56152c4cb716865dd2b196bcbb849d453f1df2`
-- SLO rules engine mirror commit: `8883ba5fed0b6e675deff04e4d5c2b011cba218f`
+- SLO rules engine mirror commit: `4a5260bfb03231c11ab8f847262b3a8ad579cd5b`
 - Reliability engineering skill mirror commit: `6785e245425ef5c84c57270fffc352000c893b8c`
 - Architectural execution skills mirror commit: `bb211111e000e679a8b5c12ea4cc9ae94790e719`
 - Codex CLI npm package: `@openai/codex@0.120.0`
@@ -104,7 +101,7 @@ skills/plugins/github/
 skills/plugins/google-drive/
 ```
 
-`skills/superpowers/` comes from local Superpowers commit `e7a2d16476bf042e9add4699c9d018a90f86e4a6`.
+`skills/superpowers/` is retained as archived fallback/reference material. The active Codex install path is the `superpowers@openai-curated` plugin.
 
 `skills/codex/` comes from the local Codex user skill directory, including system skills and installed document/spreadsheet/PDF/notebook skills.
 

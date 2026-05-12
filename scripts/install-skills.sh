@@ -15,7 +15,6 @@ if [ ! -d "$skills_root" ]; then
   exit 1
 fi
 
-SUPERPOWERS_REPO="${SUPERPOWERS_REPO:-https://github.com/jetteim/superpowers.git}"
 OPENAI_SKILLS_REPO="${OPENAI_SKILLS_REPO:-https://github.com/jetteim/skills.git}"
 CODEX_REPO="${CODEX_REPO:-https://github.com/jetteim/codex.git}"
 PLAYWRIGHT_MCP_REPO="${PLAYWRIGHT_MCP_REPO:-https://github.com/jetteim/playwright-mcp.git}"
@@ -241,7 +240,6 @@ ARCHITECTURAL_SKILLS=(
 project_codex_skills() {
   stage_skill_collection "$canonical_skills_root/codex-curated" "$codex_skills_stage" "Codex curated/user skills"
   stage_skill_collection "$agent_skills_stage" "$codex_skills_stage" "Codex projection from canonical skills"
-  stage_tree "$agent_skills_stage/superpowers" "$codex_skills_stage/superpowers" "Codex Superpowers projection"
   install_tree "$codex_skills_stage" "$CODEX_HOME/skills" "Codex skills"
 }
 
@@ -267,28 +265,10 @@ if command -v gh >/dev/null 2>&1; then
   gh auth setup-git >/dev/null 2>&1 || true
 fi
 
-prepare_canonical_destination "$AGENTS_HOME/skills/superpowers" "canonical Superpowers skills"
-stage_tree "$canonical_skills_root/superpowers" "$agent_skills_stage/superpowers" "canonical Superpowers skills"
 stage_tree "$canonical_skills_root/plugins/github" "$agent_skills_stage/plugin-github" "canonical GitHub plugin fallback skills"
 stage_tree "$canonical_skills_root/plugins/google-drive" "$agent_skills_stage/plugin-google-drive" "canonical Google Drive plugin fallback skills"
 stage_skill_collection "$canonical_skills_root/platform" "$agent_skills_stage" "canonical platform skills"
-
-superpowers_ready=0
-if clone_or_update "$SUPERPOWERS_REPO" "$CODEX_HOME/superpowers" "main" "Superpowers repo"; then
-  superpowers_ready=1
-elif [ -d "$CODEX_HOME/superpowers/skills" ]; then
-  superpowers_ready=1
-elif [ "$USE_VENDORED_FALLBACK" = "1" ]; then
-  install_tree "$skills_root/superpowers" "$CODEX_HOME/superpowers/skills" "vendored Superpowers fallback"
-  superpowers_ready=1
-else
-  echo "[skills] Superpowers install failed and fallback is disabled" >&2
-  exit 1
-fi
-
-if [ "$superpowers_ready" = "1" ]; then
-  echo "[skills] canonical Superpowers is installed as a real directory: $AGENTS_HOME/skills/superpowers"
-fi
+echo "[skills] Superpowers is provided by the Codex plugin superpowers@openai-curated"
 
 stage_tree "$skills_root/plugins/github" "$agent_skills_stage/plugin-github" "GitHub plugin skill fallback"
 stage_tree "$skills_root/plugins/google-drive" "$agent_skills_stage/plugin-google-drive" "Google Drive plugin skill fallback"
@@ -362,7 +342,6 @@ stage_skill_collection "$agent_skills_stage" "$claude_skills_stage" "Claude skil
 install_tree "$claude_skills_stage" "$CLAUDE_HOME/skills" "Claude skills"
 
 chmod_shebang_scripts "$CODEX_HOME/skills"
-chmod_shebang_scripts "$CODEX_HOME/superpowers/skills"
 chmod_shebang_scripts "$AGENTS_HOME/skills"
 
 total="$(find "$skills_root" -name SKILL.md | wc -l | tr -d ' ')"

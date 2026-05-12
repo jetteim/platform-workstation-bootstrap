@@ -15,35 +15,34 @@ The current bootstrap installs `~/.agents` first, then projects compatible asset
 
 ## Superpowers
 
-Original source: <https://github.com/obra/superpowers/blob/main/.codex/INSTALL.md>
+Original source: <https://github.com/obra/superpowers>
 
-Original Codex install:
+Current Codex install:
 
 ```bash
-git clone https://github.com/obra/superpowers.git ~/.codex/superpowers
-mkdir -p ~/.agents/skills
-ln -s ~/.codex/superpowers/skills ~/.agents/skills/superpowers
+/plugins
 ```
 
-Then restart Codex. For subagent skills, the Codex guide also documents:
+Search for `Superpowers`, select `Install Plugin`, then restart Codex. For subagent skills, the Codex setup still needs:
 
 ```toml
 [features]
 multi_agent = true
+plugins = true
 ```
 
 Bootstrap match:
 
-- Uses the fork `https://github.com/jetteim/superpowers.git` as the primary clone source.
-- Keeps the source checkout at `~/.codex/superpowers`.
-- Installs canonical Superpowers into `~/.agents/skills/superpowers` as a real directory on fresh installs.
-- Replaces a legacy `~/.agents/skills/superpowers` symlink with a canonical real directory during migration.
+- Enables the native Codex plugin through `plugins."superpowers@openai-curated".enabled = true`.
+- Sets `features.plugins = true`.
+- Does not clone, refresh, or project Superpowers from `~/.codex/superpowers`.
+- Removes Superpowers from managed local skill projections so plugin-provided skills are the active Codex path.
 - Stages and syncs managed skill projections so removed files from the source tree are pruned on reinstall.
 - Refuses unsafe `AGENTS_HOME`, `CODEX_HOME`, and `CLAUDE_HOME` overrides before creating directories.
 - Sets `features.multi_agent = true` alongside `features.hooks = true`.
-- Uses vendored `skills/superpowers/` only if no usable clone exists and `USE_VENDORED_FALLBACK=1`.
+- Keeps the vendored `skills/superpowers/` tree only as archived fallback/reference material.
 
-Important: the installer does not force-reset an existing dirty `~/.codex/superpowers` checkout. It skips repo refresh in that case so local edits are not discarded. For source-backed skills under `~/.agents/vendor_imports/repos`, dirty mirrors are not used as install inputs; vendored canonical copies are used instead.
+Important: the installer does not delete an existing `~/.codex/superpowers` checkout. It simply stops using it as an install source. For source-backed skills under `~/.agents/vendor_imports/repos`, dirty mirrors are not used as install inputs; vendored canonical copies are used instead.
 
 ## OpenAI Skills
 
@@ -146,11 +145,15 @@ enabled = true
 
 [plugins."google-drive@openai-curated"]
 enabled = true
+
+[plugins."superpowers@openai-curated"]
+enabled = true
 ```
 
 Bootstrap match:
 
 - Keeps plugin enablement in `codex/config.example.toml`.
+- Enables Superpowers as a native Codex plugin instead of a local Git checkout.
 - Vendors plugin skill fallback copies under `skills/plugins/`.
 - Installs fallback copies to `~/.agents/skills/plugin-github` and `~/.agents/skills/plugin-google-drive`.
 

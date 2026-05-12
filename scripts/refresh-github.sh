@@ -31,7 +31,6 @@ require gh
 gh auth status
 gh auth setup-git
 
-fork_or_sync "obra/superpowers" "superpowers" "main"
 fork_or_sync "openai/skills" "skills" "main"
 fork_or_sync "openai/codex" "codex" "main"
 fork_or_sync "microsoft/playwright-mcp" "playwright-mcp" "main"

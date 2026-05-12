@@ -4,6 +4,7 @@ model_reasoning_effort = "high"
 [features]
 hooks = true
 multi_agent = true
+plugins = true
 
 [projects."/Users/maximlee"]
 trust_level = "trusted"
@@ -33,4 +34,7 @@ args = ["-y", "@modelcontextprotocol/server-memory"]
 enabled = true
 
 [plugins."google-drive@openai-curated"]
+enabled = true
+
+[plugins."superpowers@openai-curated"]
 enabled = true

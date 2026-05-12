@@ -31,22 +31,23 @@ Observed settings:
 - Plugins:
   - `github@openai-curated`
   - `google-drive@openai-curated`
+  - `superpowers@openai-curated`
 
 Hook feature flags were available but disabled at assessment time. Current bootstrap config uses `features.hooks`.
 
 ## Skills And Plugins
 
-Local Superpowers source is mirrored at `~/.codex/superpowers/skills`. The agent-agnostic bootstrap migrates `~/.agents/skills/superpowers` to a real canonical directory and replaces legacy symlinks during install.
+Superpowers is enabled through the native Codex plugin `superpowers@openai-curated`. The bootstrap no longer installs Superpowers from `~/.codex/superpowers` or projects it into local Codex skills.
 
 External provenance:
 
-- Superpowers: `https://github.com/obra/superpowers.git`, local commit `eafe962b18f6c5dc70fb7c8cc7e83e61f4cdde06`
 - OpenAI skills: `https://github.com/openai/skills.git`, local commit `c207989386b30063bcecaf6b1977d761b244732e`
 
 Enabled OpenAI-curated plugins:
 
 - GitHub
 - Google Drive
+- Superpowers
 
 ## Git
 

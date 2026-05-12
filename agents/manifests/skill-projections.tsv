@@ -1,5 +1,4 @@
 # skill	source	codex	claude	category
-superpowers	skills/superpowers	yes	yes	superpowers
 plugin-github	skills/plugins/github	yes	yes	plugin-fallback
 plugin-google-drive	skills/plugins/google-drive	yes	yes	plugin-fallback
 brain	skills/codex/brain	yes	yes	platform

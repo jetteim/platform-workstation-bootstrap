@@ -168,12 +168,22 @@ path = Path(sys.argv[1])
 required_features = {
     "hooks": "true",
     "multi_agent": "true",
+    "plugins": "true",
+}
+required_plugins = {
+    "github@openai-curated": "true",
+    "google-drive@openai-curated": "true",
+    "superpowers@openai-curated": "true",
 }
 
 if not path.exists():
     path.write_text(
         "[features]\n"
-        + "".join(f"{key} = {value}\n" for key, value in required_features.items()),
+        + "".join(f"{key} = {value}\n" for key, value in required_features.items())
+        + "".join(
+            f'\n[plugins."{plugin}"]\nenabled = {value}\n'
+            for plugin, value in required_plugins.items()
+        ),
         encoding="utf-8",
     )
     raise SystemExit(0)
@@ -193,6 +203,24 @@ else:
         + "\n\n[features]\n"
         + "".join(f"{key} = {value}\n" for key, value in required_features.items())
     )
+
+for plugin, value in required_plugins.items():
+    header = f'[plugins."{plugin}"]'
+    if re.search(rf'(?m)^{re.escape(header)}\s*$', text):
+        section = rf'(?ms)^({re.escape(header)}\n)(.*?)(?=^\[|\Z)'
+        match = re.search(section, text)
+        body = match.group(2) if match else ""
+        if re.search(r'(?m)^enabled\s*=', body):
+            text = re.sub(
+                section,
+                lambda m: m.group(1) + re.sub(r'(?m)^enabled\s*=.*$', f'enabled = {value}', m.group(2)),
+                text,
+                count=1,
+            )
+        else:
+            text = re.sub(section, lambda m: m.group(1) + f'enabled = {value}\n' + m.group(2), text, count=1)
+    else:
+        text = text.rstrip() + f'\n\n{header}\nenabled = {value}\n'
 path.write_text(text, encoding='utf-8')
 PY
 

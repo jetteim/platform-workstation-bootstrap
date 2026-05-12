@@ -39,9 +39,8 @@ Canonical rules include operating principles for honesty, verification, scoped a
 
 The skill install order mirrors the original upstream setup:
 
-- Clone or update the Superpowers fork into `~/.codex/superpowers`.
-- Install canonical Superpowers into `~/.agents/skills/superpowers` as a real directory on fresh installs.
-- Replace a legacy `~/.agents/skills/superpowers` symlink with the canonical real directory during migration.
+- Enable Superpowers through the native Codex plugin `superpowers@openai-curated`.
+- Do not clone or project Superpowers from `~/.codex/superpowers`; local vendored copies are historical fallback material only.
 - Refuse unsafe `AGENTS_HOME`, `CODEX_HOME`, and `CLAUDE_HOME` overrides before creating directories.
 - Install canonical shared skills under `~/.agents/skills`.
 - Install source mirrors under `~/.agents/vendor_imports`.
@@ -64,6 +63,8 @@ The skill install order mirrors the original upstream setup:
 - `git config --global core.hooksPath ~/.config/git/hooks`
 - `features.hooks = true`
 - `features.multi_agent = true`
+- `features.plugins = true`
+- `plugins."superpowers@openai-curated".enabled = true`
 
 It does not overwrite live credentials or private config files.
 
@@ -85,21 +86,20 @@ This installs the local MLX training environment under `~/.codex/mlx`, mirrors `
 
 This repo vendors full installable skill bundles, not only prompts:
 
-- `skills/superpowers/*`
 - `skills/codex/*`
 - `skills/plugins/github/*`
 - `skills/plugins/google-drive/*`
 
-The Superpowers `brainstorming` skill is included with its full bundle:
+The historical Superpowers vendored copy remains in `skills/superpowers/` for audit and fallback reference, but the bootstrap no longer installs it into `~/.agents/skills` or `~/.codex/skills`. Codex gets Superpowers from `superpowers@openai-curated`.
+
+The archived Superpowers `brainstorming` bundle includes:
 
 - `skills/superpowers/brainstorming/SKILL.md`
 - `skills/superpowers/brainstorming/visual-companion.md`
 - `skills/superpowers/brainstorming/spec-document-reviewer-prompt.md`
 - `skills/superpowers/brainstorming/scripts/*`
 
-`scripts/install-skills.sh` installs Superpowers from the forked source repo first. The vendored Superpowers copy is fallback material for offline or damaged-bootstrap cases.
-
-It also installs vendored local Codex skills into `~/.codex/skills`, installs the external `brain` skill from its forked source mirror when available, installs the observability pipeline workflow from its source mirror when available, and places plugin-skill fallbacks under `~/.agents/skills`.
+`scripts/install-skills.sh` installs vendored local Codex skills into `~/.codex/skills`, installs the external `brain` skill from its forked source mirror when available, installs the observability pipeline workflow from its source mirror when available, and places plugin-skill fallbacks under `~/.agents/skills`.
 The architectural execution skill pipeline is installed from `jetteim/architectural-execution-skills` when the source mirror is available, with vendored fallback copies under `skills/codex/`.
 
 ## Important Repositories
@@ -110,7 +110,6 @@ The clean-machine path depends on these forks:
 | --- | --- | --- |
 | Codex CLI source/reference | `openai/codex` | `jetteim/codex` |
 | OpenAI curated skills | `openai/skills` | `jetteim/skills` |
-| Superpowers skills, including full brainstorming bundle | `obra/superpowers` | `jetteim/superpowers` |
 | Playwright MCP server | `microsoft/playwright-mcp` | `jetteim/playwright-mcp` |
 | MCP reference servers | `modelcontextprotocol/servers` | `jetteim/servers` |
 | Local micro-model training skill | `diana-random1st/brain-skill` | `jetteim/brain-skill` |
