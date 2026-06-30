@@ -11,7 +11,7 @@ This compares the bootstrap repository against the current install instructions 
 
 ## Agent-Agnostic Bootstrap
 
-The current bootstrap installs `~/.agents` first, then projects compatible assets into Codex and Claude. Codex remains a supported adapter, not the canonical model for shared rules, skills, hooks, prompts, or source mirrors.
+The current bootstrap installs `~/.agents` first for rules, hooks, prompts, and source mirrors. Active skills live in adapter-local locations or native plugin caches, so Codex remains a supported adapter rather than the canonical model for workstation state.
 
 ## Superpowers
 
@@ -38,6 +38,7 @@ Bootstrap match:
 - Does not clone, refresh, or project Superpowers from `~/.codex/superpowers`.
 - Removes Superpowers from managed local skill projections so plugin-provided skills are the active Codex path.
 - Stages and syncs managed skill projections so removed files from the source tree are pruned on reinstall.
+- Leaves `~/.agents/skills` managed empty after the duplicate-skill cleanup.
 - Refuses unsafe `AGENTS_HOME`, `CODEX_HOME`, and `CLAUDE_HOME` overrides before creating directories.
 - Sets `features.multi_agent = true` alongside `features.hooks = true`.
 - Keeps the vendored `skills/superpowers/` tree only as archived fallback/reference material.
@@ -155,7 +156,10 @@ Bootstrap match:
 - Keeps plugin enablement in `codex/config.example.toml`.
 - Enables Superpowers as a native Codex plugin instead of a local Git checkout.
 - Vendors plugin skill fallback copies under `skills/plugins/`.
-- Installs fallback copies to `~/.agents/skills/plugin-github` and `~/.agents/skills/plugin-google-drive`.
+- Keeps fallback copies vendored under `skills/plugins/`.
+- Installs full plugin fallback copies only to `~/.claude/skills`, where native Codex plugins are not available.
+- Installs only local Google Drive helper skills to `~/.codex/skills/plugin-google-drive`; GitHub and core Google Drive Codex skills are plugin-provided.
+- Records disabled `skills.config` entries for stale local GitHub skill paths so the plugin-provided GitHub skills remain authoritative.
 
 Intentional difference: plugin fallback skills are not a replacement for enabling plugins. They only preserve the local skill instructions if plugin cache hydration changes or is temporarily unavailable.
 

@@ -36,5 +36,17 @@ enabled = true
 [plugins."google-drive@openai-curated"]
 enabled = true
 
+[[skills.config]]
+path = "/Users/maximlee/.codex/skills/plugin-github/gh-fix-ci/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/maximlee/.codex/skills/plugin-github/github/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/Users/maximlee/.codex/skills/plugin-github/gh-address-comments/SKILL.md"
+enabled = false
+
 [plugins."superpowers@openai-curated"]
 enabled = true

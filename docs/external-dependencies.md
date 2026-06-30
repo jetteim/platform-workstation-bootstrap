@@ -43,7 +43,7 @@ The bootstrap also expects these owned repositories. They are not forks.
 | `jetteim/reliability-engineering` | `~/.agents/vendor_imports/repos/reliability-engineering` | Reliability engineering skill source mirror |
 | `jetteim/architectural-execution-skills` | `~/.agents/vendor_imports/repos/architectural-execution-skills` | Architectural execution skills source mirror |
 
-Canonical v1 skill sources are copied under `agents/skills/platform/`, `agents/skills/plugins/`, and `agents/skills/codex-curated/`. Superpowers is provided by the Codex plugin `superpowers@openai-curated`, not by a local source checkout.
+Repository skill projection sources are copied under `agents/skills/platform/`, `agents/skills/plugins/`, and `agents/skills/codex-curated/`. Active `~/.agents/skills` is managed empty after the duplicate-skill cleanup. Superpowers is provided by the Codex plugin `superpowers@openai-curated`, not by a local source checkout.
 
 `agents/skills/platform` includes the architectural execution pipeline: `orchestrating-architecture-execution`, value stream discovery, capability shaping, feature shaping, C4 modeling, story slicing, and traceability review.
 
@@ -117,7 +117,7 @@ skills/plugins/google-drive/
 
 `skills/plugins/github/` and `skills/plugins/google-drive/` come from the enabled OpenAI-curated plugin cache.
 
-The vendored bundles are fallback/bootstrap material. Prefer refreshing the upstream forks first, then use these copies when a clean machine has not yet populated Codex skills or plugin caches.
+The vendored bundles are fallback/bootstrap material. Prefer refreshing the upstream forks first, then use these copies when a clean machine has not yet populated adapter skills or plugin caches. Codex uses plugin-provided GitHub, Superpowers, and core Google Drive skills; only local Google Drive helper skills are projected under `~/.codex/skills/plugin-google-drive`.
 
 Managed skill destinations are synced from staged bootstrap trees, not overlaid indefinitely. Reinstalling prunes files that were removed from the managed source bundles.
 

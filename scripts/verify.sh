@@ -2,6 +2,8 @@
 set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export PYTHONPYCACHEPREFIX="${PYTHONPYCACHEPREFIX:-${TMPDIR:-/tmp}/platform-bootstrap-pycache}"
+mkdir -p "$PYTHONPYCACHEPREFIX"
 
 python3 -m py_compile \
   "$repo_root/agents/hooks/policy.py" \
@@ -60,7 +62,7 @@ test -f "$repo_root/skills/codex/reliability-engineering/references/provider-han
 test -f "$repo_root/skills/codex/reliability-engineering/references/sre-rules-generation.md"
 test -f "$repo_root/agents/adapters/claude/CLAUDE.md.template"
 test -f "$repo_root/agents/adapters/codex/README.md"
-grep -Fq '`~/.agents` is the canonical agent-neutral layer' "$repo_root/README.md"
+grep -Fq '`~/.agents` is the canonical rules, hooks, prompts, and source-mirror layer' "$repo_root/README.md"
 grep -Fq 'Enable Superpowers through the native Codex plugin `superpowers@openai-curated`.' "$repo_root/README.md"
 grep -Fq 'Do not clone or project Superpowers from `~/.codex/superpowers`' "$repo_root/README.md"
 grep -q 'Build a context map before exploring a codebase' "$repo_root/agents/rules/codebase-exploration.md"
@@ -126,6 +128,13 @@ grep -q '^hooks = true' "$repo_root/codex/config.example.toml"
 grep -q 'multi_agent = true' "$repo_root/codex/config.example.toml"
 grep -q 'plugins = true' "$repo_root/codex/config.example.toml"
 grep -q '\[plugins."superpowers@openai-curated"\]' "$repo_root/codex/config.example.toml"
+grep -Fq 'path = "/Users/maximlee/.codex/skills/plugin-github/gh-fix-ci/SKILL.md"' "$repo_root/codex/config.example.toml"
+grep -Fq 'path = "/Users/maximlee/.codex/skills/plugin-github/github/SKILL.md"' "$repo_root/codex/config.example.toml"
+grep -Fq 'path = "/Users/maximlee/.codex/skills/plugin-github/gh-address-comments/SKILL.md"' "$repo_root/codex/config.example.toml"
+grep -Fq 'disabled_skill_paths = [' "$repo_root/scripts/install.sh"
+grep -Fq '/plugin-github/gh-fix-ci/SKILL.md' "$repo_root/scripts/install.sh"
+grep -Fq '/plugin-github/github/SKILL.md' "$repo_root/scripts/install.sh"
+grep -Fq '/plugin-github/gh-address-comments/SKILL.md' "$repo_root/scripts/install.sh"
 grep -q 'plugins."superpowers@openai-curated".enabled = true' "$repo_root/docs/original-install-comparison.md"
 grep -q 'agents/skills/platform' "$repo_root/docs/external-dependencies.md"
 grep -q 'Agent-Agnostic Bootstrap' "$repo_root/docs/original-install-comparison.md"
@@ -149,6 +158,21 @@ if grep -Fq 'stage_tree "$agent_skills_stage/superpowers"' "$repo_root/scripts/i
   echo "install-skills still projects Superpowers into Codex local skills" >&2
   exit 1
 fi
+grep -Fq 'clear_destination "$AGENTS_HOME/skills"' "$repo_root/scripts/install-skills.sh"
+grep -Fq 'managed empty agent skills directory' "$repo_root/scripts/install-skills.sh"
+if grep -Fq 'install_tree "$agent_skills_stage" "$AGENTS_HOME/skills"' "$repo_root/scripts/install-skills.sh"; then
+  echo "install-skills still repopulates active ~/.agents/skills" >&2
+  exit 1
+fi
+if grep -Fq 'stage_tree "$skills_root/plugins/github" "$agent_skills_stage/plugin-github"' "$repo_root/scripts/install-skills.sh"; then
+  echo "install-skills still stages local GitHub plugin fallback skills for active installation" >&2
+  exit 1
+fi
+if grep -Fq 'stage_skill_collection "$agent_skills_stage" "$codex_skills_stage"' "$repo_root/scripts/install-skills.sh"; then
+  echo "install-skills still projects agent skill duplicates into Codex" >&2
+  exit 1
+fi
+grep -Fq 'stage_selected_google_drive_extension_skills' "$repo_root/scripts/install-skills.sh"
 if grep -q 'obra/superpowers' "$repo_root/scripts/refresh-github.sh"; then
   echo "refresh-github still treats Superpowers as a forked install source" >&2
   exit 1
@@ -179,7 +203,7 @@ grep -q 'install_tree "$repo_root/agents/prompts" "$AGENTS_HOME/prompts" "agent 
 grep -Fq 'find "$destination" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +' "$repo_root/scripts/install.sh"
 grep -q 'canonical_hooks_source="$repo_root/agents/hooks"' "$repo_root/scripts/install.sh"
 grep -q 'install_file "$canonical_hooks_source/policy.py" "$CODEX_HOME/hooks/policy.py" "Codex hook policy"' "$repo_root/scripts/install.sh"
-grep -q '\.agents/skills' "$repo_root/scripts/install-skills.sh"
+grep -q 'AGENTS_HOME/skills' "$repo_root/scripts/install-skills.sh"
 grep -q 'stage_skill_collection' "$repo_root/scripts/install-skills.sh"
 grep -q 'clean_git_mirror' "$repo_root/scripts/install-skills.sh"
 grep -Fq 'find "$destination" -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +' "$repo_root/scripts/install-skills.sh"
@@ -287,15 +311,18 @@ if [ -d "$architectural_source_root" ]; then
       "$repo_root/agents/skills/platform" \
       "$repo_root/agents/skills/codex-curated" \
       "$repo_root/skills/codex" \
-      "$HOME/.agents/skills" \
       "$HOME/.codex/skills" \
       "$HOME/.claude/skills"; do
-      if [ -d "$target_root" ] && ! diff -qr "$architectural_source_root/$architectural_skill" "$target_root/$architectural_skill" >/dev/null; then
+      if [ -d "$target_root/$architectural_skill" ] && ! diff -qr "$architectural_source_root/$architectural_skill" "$target_root/$architectural_skill" >/dev/null; then
         echo "architectural skill drift: $target_root/$architectural_skill differs from $architectural_source_root/$architectural_skill" >&2
         exit 1
       fi
     done
   done
+fi
+if [ -d "$HOME/.agents/skills" ] && find "$HOME/.agents/skills" -mindepth 1 -maxdepth 1 | grep -q .; then
+  echo "active ~/.agents/skills is expected to stay empty after the skills cleanup" >&2
+  exit 1
 fi
 canonical_skill_count="$(find "$repo_root/agents/skills" -name SKILL.md | wc -l | tr -d ' ')"
 if [ "$canonical_skill_count" -lt 40 ]; then

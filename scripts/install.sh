@@ -175,6 +175,11 @@ required_plugins = {
     "google-drive@openai-curated": "true",
     "superpowers@openai-curated": "true",
 }
+disabled_skill_paths = [
+    path.parent / "skills/plugin-github/gh-fix-ci/SKILL.md",
+    path.parent / "skills/plugin-github/github/SKILL.md",
+    path.parent / "skills/plugin-github/gh-address-comments/SKILL.md",
+]
 
 if not path.exists():
     path.write_text(
@@ -183,6 +188,10 @@ if not path.exists():
         + "".join(
             f'\n[plugins."{plugin}"]\nenabled = {value}\n'
             for plugin, value in required_plugins.items()
+        )
+        + "".join(
+            f'\n[[skills.config]]\npath = "{skill_path}"\nenabled = false\n'
+            for skill_path in disabled_skill_paths
         ),
         encoding="utf-8",
     )
@@ -221,6 +230,29 @@ for plugin, value in required_plugins.items():
             text = re.sub(section, lambda m: m.group(1) + f'enabled = {value}\n' + m.group(2), text, count=1)
     else:
         text = text.rstrip() + f'\n\n{header}\nenabled = {value}\n'
+
+disabled_skill_path_strings = [str(skill_path) for skill_path in disabled_skill_paths]
+lines = text.splitlines()
+filtered_lines = []
+i = 0
+while i < len(lines):
+    if lines[i].strip() == "[[skills.config]]":
+        block = [lines[i]]
+        i += 1
+        while i < len(lines) and not lines[i].startswith("["):
+            block.append(lines[i])
+            i += 1
+        block_text = "\n".join(block)
+        if any(f'path = "{skill_path}"' in block_text for skill_path in disabled_skill_path_strings):
+            continue
+        filtered_lines.extend(block)
+        continue
+    filtered_lines.append(lines[i])
+    i += 1
+
+text = "\n".join(filtered_lines).rstrip()
+for skill_path in disabled_skill_path_strings:
+    text += f'\n\n[[skills.config]]\npath = "{skill_path}"\nenabled = false\n'
 path.write_text(text, encoding='utf-8')
 PY
 

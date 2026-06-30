@@ -1,6 +1,6 @@
 # Agent Workstation Rules
 
-This workstation uses `~/.agents` as the canonical source for reusable rules and skills.
+This workstation uses `~/.agents` as the canonical source for reusable rules, hooks, prompts, and source mirrors.
 
 ## Required Shared Rules
 
@@ -13,7 +13,7 @@ Read and follow:
 
 ## Skills
 
-Reusable skills are installed under `~/.claude/skills` from `~/.agents/skills`.
+Reusable skills are installed under `~/.claude/skills` from the repository skill projections. `~/.agents/skills` is intentionally managed empty after the duplicate-skill cleanup.
 
 ## Adapter Boundary
 

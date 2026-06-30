@@ -1,6 +1,12 @@
 # skill	source	codex	claude	category
-plugin-github	skills/plugins/github	yes	yes	plugin-fallback
-plugin-google-drive	skills/plugins/google-drive	yes	yes	plugin-fallback
+plugin-github	skills/plugins/github	no	yes	plugin-fallback
+plugin-google-drive-core	skills/plugins/google-drive	no	yes	plugin-fallback
+google-slides-visual-iteration	skills/plugins/google-drive/google-slides-visual-iteration	yes	yes	plugin-extension
+google-slides-template-migration	skills/plugins/google-drive/google-slides-template-migration	yes	yes	plugin-extension
+google-slides-import-presentation	skills/plugins/google-drive/google-slides-import-presentation	yes	yes	plugin-extension
+google-slides-template-surgery	skills/plugins/google-drive/google-slides-template-surgery	yes	yes	plugin-extension
+google-sheets-formula-builder	skills/plugins/google-drive/google-sheets-formula-builder	yes	yes	plugin-extension
+google-sheets-chart-builder	skills/plugins/google-drive/google-sheets-chart-builder	yes	yes	plugin-extension
 brain	skills/codex/brain	yes	yes	platform
 observability-engineering	skills/codex/observability-engineering	yes	yes	platform
 creating-observability-pipelines	skills/codex/creating-observability-pipelines	yes	yes	platform

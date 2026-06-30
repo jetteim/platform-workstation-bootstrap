@@ -8,7 +8,7 @@ canonical_skills_root="$agents_root/skills"
 AGENTS_HOME="${AGENTS_HOME:-$HOME/.agents}"
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 CLAUDE_HOME="${CLAUDE_HOME:-$HOME/.claude}"
-# Canonical skills install under ~/.agents/skills; ~/.agents/vendor_imports is reserved for mirror migration.
+# Active Codex skills install under ~/.codex/skills; ~/.agents/vendor_imports holds source mirrors.
 
 if [ ! -d "$skills_root" ]; then
   echo "[skills] missing vendored skills directory: $skills_root" >&2
@@ -237,10 +237,37 @@ ARCHITECTURAL_SKILLS=(
   slicing-stories
 )
 
+GOOGLE_DRIVE_EXTENSION_SKILLS=(
+  google-slides-visual-iteration
+  google-slides-template-migration
+  google-slides-import-presentation
+  google-slides-template-surgery
+  google-sheets-formula-builder
+  google-sheets-chart-builder
+)
+
+stage_selected_google_drive_extension_skills() {
+  local source_root="$1"
+  local destination="$2"
+  local skill
+
+  for skill in "${GOOGLE_DRIVE_EXTENSION_SKILLS[@]}"; do
+    stage_tree "$source_root/$skill" "$destination/$skill" "Google Drive extension skill ${skill}"
+  done
+}
+
 project_codex_skills() {
   stage_skill_collection "$canonical_skills_root/codex-curated" "$codex_skills_stage" "Codex curated/user skills"
-  stage_skill_collection "$agent_skills_stage" "$codex_skills_stage" "Codex projection from canonical skills"
-  install_tree "$codex_skills_stage" "$CODEX_HOME/skills" "Codex skills"
+  stage_skill_collection "$platform_skills_stage" "$codex_skills_stage" "Codex platform skill projection"
+  stage_selected_google_drive_extension_skills "$skills_root/plugins/google-drive" "$codex_skills_stage/plugin-google-drive"
+  install_tree "$codex_skills_stage" "$CODEX_HOME/skills" "Codex local skills"
+}
+
+project_claude_skills() {
+  stage_skill_collection "$platform_skills_stage" "$claude_skills_stage" "Claude platform skill projection"
+  stage_tree "$skills_root/plugins/github" "$claude_skills_stage/plugin-github" "Claude GitHub plugin fallback skills"
+  stage_tree "$skills_root/plugins/google-drive" "$claude_skills_stage/plugin-google-drive" "Claude Google Drive plugin fallback skills"
+  install_tree "$claude_skills_stage" "$CLAUDE_HOME/skills" "Claude skills"
 }
 
 AGENTS_HOME="$(validate_home_dir "AGENTS_HOME" "$AGENTS_HOME")"
@@ -256,22 +283,20 @@ ensure_directory "$CODEX_HOME/skills" "Codex skills directory"
 ensure_directory "$CLAUDE_HOME/skills" "Claude skills directory"
 stage_root="$(mktemp -d "${TMPDIR:-/tmp}/platform-bootstrap-skills.XXXXXX")"
 trap 'rm -rf "$stage_root"' EXIT
-agent_skills_stage="$stage_root/agents-skills"
+platform_skills_stage="$stage_root/platform-skills"
 codex_skills_stage="$stage_root/codex-skills"
 claude_skills_stage="$stage_root/claude-skills"
-mkdir -p "$agent_skills_stage" "$codex_skills_stage" "$claude_skills_stage"
+mkdir -p "$platform_skills_stage" "$codex_skills_stage" "$claude_skills_stage"
 
 if command -v gh >/dev/null 2>&1; then
   gh auth setup-git >/dev/null 2>&1 || true
 fi
 
-stage_tree "$canonical_skills_root/plugins/github" "$agent_skills_stage/plugin-github" "canonical GitHub plugin fallback skills"
-stage_tree "$canonical_skills_root/plugins/google-drive" "$agent_skills_stage/plugin-google-drive" "canonical Google Drive plugin fallback skills"
-stage_skill_collection "$canonical_skills_root/platform" "$agent_skills_stage" "canonical platform skills"
+clear_destination "$AGENTS_HOME/skills"
+echo "[skills] managed empty agent skills directory: $AGENTS_HOME/skills"
+stage_skill_collection "$canonical_skills_root/platform" "$platform_skills_stage" "canonical platform skills"
 echo "[skills] Superpowers is provided by the Codex plugin superpowers@openai-curated"
-
-stage_tree "$skills_root/plugins/github" "$agent_skills_stage/plugin-github" "GitHub plugin skill fallback"
-stage_tree "$skills_root/plugins/google-drive" "$agent_skills_stage/plugin-google-drive" "Google Drive plugin skill fallback"
+echo "[skills] GitHub and core Google Drive skills are provided by Codex plugins"
 
 if ! clone_or_update "$OPENAI_SKILLS_REPO" "$AGENTS_HOME/vendor_imports/skills" "main" "OpenAI skills source mirror"; then
   echo "[skills] OpenAI skills source mirror was not refreshed; vendored Codex skills remain installed" >&2
@@ -299,47 +324,45 @@ done
 
 if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/brain-skill" &&
   [ -d "$AGENTS_HOME/vendor_imports/repos/brain-skill/skill" ]; then
-  stage_tree "$AGENTS_HOME/vendor_imports/repos/brain-skill/skill" "$agent_skills_stage/brain" "Brain skill from source mirror"
+  stage_tree "$AGENTS_HOME/vendor_imports/repos/brain-skill/skill" "$platform_skills_stage/brain" "Brain skill from source mirror"
 elif [ -d "$canonical_skills_root/platform/brain" ]; then
-  stage_tree "$canonical_skills_root/platform/brain" "$agent_skills_stage/brain" "vendored Brain skill fallback"
+  stage_tree "$canonical_skills_root/platform/brain" "$platform_skills_stage/brain" "vendored Brain skill fallback"
 fi
 
 if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/observability-engineering" &&
   [ -d "$AGENTS_HOME/vendor_imports/repos/observability-engineering/skill/observability-engineering" ]; then
-  stage_tree "$AGENTS_HOME/vendor_imports/repos/observability-engineering/skill/observability-engineering" "$agent_skills_stage/observability-engineering" "Observability engineering skill from source mirror"
+  stage_tree "$AGENTS_HOME/vendor_imports/repos/observability-engineering/skill/observability-engineering" "$platform_skills_stage/observability-engineering" "Observability engineering skill from source mirror"
 elif [ -d "$canonical_skills_root/platform/observability-engineering" ]; then
-  stage_tree "$canonical_skills_root/platform/observability-engineering" "$agent_skills_stage/observability-engineering" "vendored Observability engineering skill fallback"
+  stage_tree "$canonical_skills_root/platform/observability-engineering" "$platform_skills_stage/observability-engineering" "vendored Observability engineering skill fallback"
 fi
 
 if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/observability-pipeline-skills" &&
   [ -d "$AGENTS_HOME/vendor_imports/repos/observability-pipeline-skills/skill/creating-observability-pipelines" ]; then
-  stage_tree "$AGENTS_HOME/vendor_imports/repos/observability-pipeline-skills/skill/creating-observability-pipelines" "$agent_skills_stage/creating-observability-pipelines" "Observability pipeline skill from source mirror"
+  stage_tree "$AGENTS_HOME/vendor_imports/repos/observability-pipeline-skills/skill/creating-observability-pipelines" "$platform_skills_stage/creating-observability-pipelines" "Observability pipeline skill from source mirror"
 elif [ -d "$canonical_skills_root/platform/creating-observability-pipelines" ]; then
-  stage_tree "$canonical_skills_root/platform/creating-observability-pipelines" "$agent_skills_stage/creating-observability-pipelines" "vendored Observability pipeline skill fallback"
+  stage_tree "$canonical_skills_root/platform/creating-observability-pipelines" "$platform_skills_stage/creating-observability-pipelines" "vendored Observability pipeline skill fallback"
 fi
 
 if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/reliability-engineering" &&
   [ -d "$AGENTS_HOME/vendor_imports/repos/reliability-engineering/skill/reliability-engineering" ]; then
-  stage_tree "$AGENTS_HOME/vendor_imports/repos/reliability-engineering/skill/reliability-engineering" "$agent_skills_stage/reliability-engineering" "Reliability engineering skill from source mirror"
+  stage_tree "$AGENTS_HOME/vendor_imports/repos/reliability-engineering/skill/reliability-engineering" "$platform_skills_stage/reliability-engineering" "Reliability engineering skill from source mirror"
 elif [ -d "$canonical_skills_root/platform/reliability-engineering" ]; then
-  stage_tree "$canonical_skills_root/platform/reliability-engineering" "$agent_skills_stage/reliability-engineering" "vendored Reliability engineering skill fallback"
+  stage_tree "$canonical_skills_root/platform/reliability-engineering" "$platform_skills_stage/reliability-engineering" "vendored Reliability engineering skill fallback"
 fi
 
 if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills" &&
   [ -d "$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills/skills" ]; then
-  stage_skill_collection "$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills/skills" "$agent_skills_stage" "Architectural execution skills from source mirror"
+  stage_skill_collection "$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills/skills" "$platform_skills_stage" "Architectural execution skills from source mirror"
 else
   for architectural_skill in "${ARCHITECTURAL_SKILLS[@]}"; do
     if [ -d "$canonical_skills_root/platform/$architectural_skill" ]; then
-      stage_tree "$canonical_skills_root/platform/$architectural_skill" "$agent_skills_stage/$architectural_skill" "vendored ${architectural_skill} skill fallback"
+      stage_tree "$canonical_skills_root/platform/$architectural_skill" "$platform_skills_stage/$architectural_skill" "vendored ${architectural_skill} skill fallback"
     fi
   done
 fi
 
-install_tree "$agent_skills_stage" "$AGENTS_HOME/skills" "canonical agent skills"
 project_codex_skills
-stage_skill_collection "$agent_skills_stage" "$claude_skills_stage" "Claude skill projection from canonical skills"
-install_tree "$claude_skills_stage" "$CLAUDE_HOME/skills" "Claude skills"
+project_claude_skills
 
 chmod_shebang_scripts "$CODEX_HOME/skills"
 chmod_shebang_scripts "$AGENTS_HOME/skills"
