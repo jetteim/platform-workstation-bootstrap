@@ -1,6 +1,6 @@
 # Original Install Comparison
 
-Date checked: 2026-04-11
+Date checked: 2026-08-03
 
 This compares the bootstrap repository against the current install instructions in the original dependency repositories. The clean-machine rule is:
 
@@ -59,6 +59,7 @@ Bootstrap match:
 
 - Refreshes the fork `https://github.com/jetteim/skills.git` into `~/.agents/vendor_imports/skills` for provenance and future reinstall work.
 - Installs the currently captured local Codex skill overlay from `skills/codex/` into `~/.codex/skills`.
+- Captures the Codex `0.145.0` system bundle, including `review-agent`, in both canonical and fallback snapshots.
 - Keeps the vendored overlay explicit because this repo is meant to reproduce the current workstation, not only the default Codex distribution.
 
 Intentional difference: installing `skills/codex/` may overwrite user-level copies of system skills. That is acceptable for this bootstrap because the repo is the declared source of truth for this workstation profile. A future stricter mode can skip `.system` and rely fully on Codex's built-in system skills.
@@ -79,7 +80,7 @@ Bootstrap match:
 - Does not install Codex itself. Codex is a prerequisite for running this repo through Codex.
 - Records the current source fork at `https://github.com/jetteim/codex.git`.
 - Mirrors that fork to `~/.agents/vendor_imports/repos/codex` for clean-machine source reference.
-- Preserves the current operational path where npm supplies `@openai/codex`.
+- Preserves the current operational path where npm supplies `@openai/codex@0.145.0`.
 
 ## Playwright MCP
 

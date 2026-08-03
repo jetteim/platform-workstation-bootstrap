@@ -72,6 +72,7 @@ grep -q 'operating-principles.md' "$repo_root/agents/prompts/platform-guardrails
 grep -q 'completion_needs_evidence' "$repo_root/agents/hooks/policy.py"
 grep -q 'Treat secrets as toxic' "$repo_root/agents/prompts/platform-guardrails.md"
 grep -q 'orchestrating-architecture-execution' "$repo_root/agents/manifests/skill-projections.tsv"
+grep -q 'engineering-agent-ready-clis' "$repo_root/agents/manifests/skill-projections.tsv"
 grep -q '~/.agents' "$repo_root/agents/adapters/claude/CLAUDE.md.template"
 ! grep -q 'SUPERPOWERS_REPO' "$repo_root/scripts/install-skills.sh"
 ! grep -q 'https://github.com/jetteim/superpowers.git' "$repo_root/scripts/install-skills.sh"
@@ -84,6 +85,9 @@ grep -q 'https://github.com/jetteim/platform-reliability-model.git' "$repo_root/
 grep -q 'https://github.com/jetteim/slo-rules-engine.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/reliability-engineering.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/architectural-execution-skills.git' "$repo_root/scripts/install-skills.sh"
+grep -q '^@openai/codex@0.145.0$' "$repo_root/manifests/npm-global.txt"
+grep -q '^git@github.com:jetteim/slo-rules-engine.git$' "$repo_root/manifests/github-repos.txt"
+! grep -q '^git@github.com:jetteim/superpowers.git$' "$repo_root/manifests/github-repos.txt"
 python3 - "$repo_root/scripts/install-skills.sh" <<'PY'
 from pathlib import Path
 import sys
@@ -246,6 +250,20 @@ grep -q 'reliability-engineering' "$repo_root/scripts/refresh-github.sh"
 grep -q 'architectural-execution-skills' "$repo_root/scripts/refresh-github.sh"
 grep -q 'Outcome Score: 32/35' "$repo_root/docs/brain-skill-smoke-test.md"
 
+python3 "$repo_root/skills/codex/.system/skill-creator/scripts/quick_validate.py" \
+  "$repo_root/agents/skills/platform/engineering-agent-ready-clis"
+python3 "$repo_root/skills/codex/.system/skill-creator/scripts/quick_validate.py" \
+  "$repo_root/skills/codex/engineering-agent-ready-clis"
+diff -qr \
+  "$repo_root/agents/skills/platform/engineering-agent-ready-clis" \
+  "$repo_root/skills/codex/engineering-agent-ready-clis" >/dev/null
+grep -q '^system:review-agent$' "$repo_root/manifests/codex-skills.txt"
+grep -q '^local:engineering-agent-ready-clis$' "$repo_root/manifests/codex-skills.txt"
+grep -q '^data-analytics:publish-artifact-to-sites$' "$repo_root/manifests/codex-skills.txt"
+grep -q '^google-calendar:google-calendar$' "$repo_root/manifests/codex-skills.txt"
+test -f "$repo_root/agents/skills/codex-curated/.system/review-agent/SKILL.md"
+test -f "$repo_root/skills/codex/.system/review-agent/SKILL.md"
+
 brain_run_summary="$HOME/.codex/mlx/runs/k8s-risk-classifier/reports/run-summary.json"
 if [ -f "$brain_run_summary" ] && ! grep -q '"sample_prediction": "destructive"' "$brain_run_summary"; then
   echo "brain MLX run summary exists but does not record the expected destructive sample prediction" >&2
@@ -343,6 +361,7 @@ for required in \
   "$repo_root/skills/codex/modeling-c4-architecture/SKILL.md" \
   "$repo_root/skills/codex/slicing-stories/SKILL.md" \
   "$repo_root/skills/codex/reviewing-traceability/SKILL.md" \
+  "$repo_root/skills/codex/engineering-agent-ready-clis/SKILL.md" \
   "$repo_root/skills/plugins/github/yeet/SKILL.md" \
   "$repo_root/skills/plugins/google-drive/google-drive/SKILL.md" \
   "$repo_root/skills/superpowers/test-driven-development/SKILL.md"; do

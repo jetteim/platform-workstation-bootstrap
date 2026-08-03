@@ -45,6 +45,7 @@ The skill install order mirrors the original upstream setup:
 - Keep `~/.agents/skills` as a managed empty directory after the duplicate-skill cleanup.
 - Install source mirrors under `~/.agents/vendor_imports`.
 - Install cleaned local Codex skills into `~/.codex/skills`: platform/document skills plus local Google Drive helper skills that extend the native plugin.
+- Install `engineering-agent-ready-clis` for designing, auditing, retrofitting, and testing CLIs used by AI agents.
 - Install Claude fallback skills into `~/.claude/skills`, where native Codex plugins are not available.
 - Sync managed skill destinations from staged trees so removed vendored files are pruned on reinstall.
 - Keep vendored Codex and plugin skill fallback copies in the repo for clean-machine bootstrap, Claude fallback, and audit.
@@ -93,7 +94,7 @@ This repo vendors full installable skill bundles, not only prompts:
 
 The historical Superpowers vendored copy remains in `skills/superpowers/` for audit and fallback reference, but the bootstrap no longer installs it into `~/.agents/skills` or `~/.codex/skills`. Codex gets Superpowers from `superpowers@openai-curated`.
 
-`manifests/codex-skills.txt` also records Data Analytics skills from the current Codex remote plugin cache. That proprietary remote plugin is not vendored or installed by this repository.
+`manifests/codex-skills.txt` also records Data Analytics and Google Calendar skills exposed by the current Codex remote plugin cache. Those remote plugins are not vendored or installed by this repository.
 
 The archived Superpowers `brainstorming` bundle includes:
 
@@ -104,6 +105,7 @@ The archived Superpowers `brainstorming` bundle includes:
 
 `scripts/install-skills.sh` leaves `~/.agents/skills` empty, installs vendored and source-backed local Codex skills into `~/.codex/skills`, installs only the local Google Drive helper skills under `~/.codex/skills/plugin-google-drive`, and places full plugin-skill fallbacks under `~/.claude/skills` for Claude.
 The architectural execution skill pipeline is installed from `jetteim/architectural-execution-skills` when the source mirror is available, with vendored fallback copies under `skills/codex/`.
+The agent-ready CLI skill is canonical under `agents/skills/platform/engineering-agent-ready-clis/`, projected to Codex and Claude, and vendored under `skills/codex/engineering-agent-ready-clis/` for clean-machine bootstrap.
 
 ## Important Repositories
 

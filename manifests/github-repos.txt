@@ -1,6 +1,5 @@
 git@github.com:jetteim/codex.git
 git@github.com:jetteim/skills.git
-git@github.com:jetteim/superpowers.git
 git@github.com:jetteim/playwright-mcp.git
 git@github.com:jetteim/servers.git
 git@github.com:jetteim/brain-skill.git
@@ -9,5 +8,6 @@ git@github.com:jetteim/platform-observability-model.git
 git@github.com:jetteim/observability-engineering.git
 git@github.com:jetteim/observability-pipeline-skills.git
 git@github.com:jetteim/platform-reliability-model.git
+git@github.com:jetteim/slo-rules-engine.git
 git@github.com:jetteim/reliability-engineering.git
 git@github.com:jetteim/architectural-execution-skills.git

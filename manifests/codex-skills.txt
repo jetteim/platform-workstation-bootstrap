@@ -1,6 +1,7 @@
 system:imagegen
 system:openai-docs
 system:plugin-creator
+system:review-agent
 system:skill-creator
 system:skill-installer
 superpowers:brainstorming
@@ -44,12 +45,19 @@ data-analytics:kpi-reporting
 data-analytics:market-sizing
 data-analytics:metric-diagnostics
 data-analytics:product-business-analysis
+data-analytics:publish-artifact-to-sites
 data-analytics:validate-data
 data-analytics:visualize-data
+google-calendar:google-calendar
+google-calendar:google-calendar-daily-brief
+google-calendar:google-calendar-free-up-time
+google-calendar:google-calendar-group-scheduler
+google-calendar:google-calendar-meeting-prep
 local:brain
 local:creating-observability-pipelines
 local:discovering-value-streams
 local:doc
+local:engineering-agent-ready-clis
 local:jupyter-notebook
 local:modeling-c4-architecture
 local:observability-engineering

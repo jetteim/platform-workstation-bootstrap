@@ -25,6 +25,7 @@ The bootstrap also expects these owned repositories. They are not forks.
 | `jetteim/observability-engineering` | Public | Codex skill for building observability from the model |
 | `jetteim/observability-pipeline-skills` | Public | Codex skill for tool-agnostic observability pipeline contracts |
 | `jetteim/platform-reliability-model` | Private | Platform-agnostic reliability intent model |
+| `jetteim/slo-rules-engine` | Public | Deterministic SRE rules generation and validation |
 | `jetteim/reliability-engineering` | Public | Codex skill for building reliability from the model |
 | `jetteim/architectural-execution-skills` | Public | Codex skill pipeline from value stream and architecture to implementation |
 
@@ -40,6 +41,7 @@ The bootstrap also expects these owned repositories. They are not forks.
 | `jetteim/observability-engineering` | `~/.agents/vendor_imports/repos/observability-engineering` | Observability engineering skill source mirror |
 | `jetteim/observability-pipeline-skills` | `~/.agents/vendor_imports/repos/observability-pipeline-skills` | Observability pipeline skill source mirror |
 | `jetteim/platform-reliability-model` | `~/.agents/vendor_imports/repos/platform-reliability-model` | Private source-of-truth reliability model |
+| `jetteim/slo-rules-engine` | `~/.agents/vendor_imports/repos/slo-rules-engine` | Deterministic SRE rules engine source mirror |
 | `jetteim/reliability-engineering` | `~/.agents/vendor_imports/repos/reliability-engineering` | Reliability engineering skill source mirror |
 | `jetteim/architectural-execution-skills` | `~/.agents/vendor_imports/repos/architectural-execution-skills` | Architectural execution skills source mirror |
 
@@ -82,10 +84,10 @@ Current local pins:
 - SLO rules engine mirror commit: `4a5260bfb03231c11ab8f847262b3a8ad579cd5b`
 - Reliability engineering skill mirror commit: `6785e245425ef5c84c57270fffc352000c893b8c`
 - Architectural execution skills mirror commit: `bb211111e000e679a8b5c12ea4cc9ae94790e719`
-- Codex CLI npm package: `@openai/codex@0.120.0`
+- Codex CLI npm package: `@openai/codex@0.145.0`
 - Codex Homebrew cask present: `codex 0.111.0`
-- Playwright MCP npm package: `@playwright/mcp@0.0.70`
-- MCP memory server npm package: `@modelcontextprotocol/server-memory@2026.1.26`
+- Playwright MCP npm package: `@playwright/mcp@0.0.78`
+- MCP memory server npm package: `@modelcontextprotocol/server-memory@2026.7.4`
 - MCP GitHub server npm package: `@modelcontextprotocol/server-github@2025.4.8`
 
 ## Vendored Skill Bundles
@@ -105,6 +107,8 @@ skills/plugins/google-drive/
 
 `skills/codex/` comes from the local Codex user skill directory, including system skills and installed document/spreadsheet/PDF/notebook skills.
 
+The captured Codex `0.145.0` system bundle includes `review-agent` and the current image generation, OpenAI documentation, plugin creation, skill creation, and skill installation workflows.
+
 `skills/codex/brain/` comes from `jetteim/brain-skill` commit `73789527637114b2a3745b2da9afa64fa8c1b7fa`.
 
 `skills/codex/observability-engineering/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
@@ -112,6 +116,8 @@ skills/plugins/google-drive/
 `skills/codex/creating-observability-pipelines/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
 
 `skills/codex/reliability-engineering/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
+
+`skills/codex/engineering-agent-ready-clis/` is the vendored fallback for the canonical platform skill under `agents/skills/platform/`.
 
 `skills/codex/orchestrating-architecture-execution/` and its companion value-stream, capability, feature, C4, story-slicing, and traceability skills come from `jetteim/architectural-execution-skills` and are installed as fallbacks when the source mirror is unavailable.
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent-Ready CLI Engineering"
+  short_description: "Design and audit CLIs for reliable agent use"
+  default_prompt: "Use $engineering-agent-ready-clis to assess and improve this CLI for safe AI-agent operation."

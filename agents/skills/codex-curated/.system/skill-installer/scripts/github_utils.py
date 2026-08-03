@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-"""Shared GitHub helpers for skill install scripts.
-
-secret-scan: allow-patterns
-"""
+"""Shared GitHub helpers for skill install scripts."""
 
 from __future__ import annotations
 
