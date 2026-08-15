@@ -46,6 +46,7 @@ The skill install order mirrors the original upstream setup:
 - Install source mirrors under `~/.agents/vendor_imports`.
 - Install cleaned local Codex skills into `~/.codex/skills`: platform/document skills plus local Google Drive helper skills that extend the native plugin.
 - Install `engineering-agent-ready-clis` for designing, auditing, retrofitting, and testing CLIs used by AI agents.
+- Install `writing-diataxis-documentation` for every documentation creation, revision, audit, or restructuring task.
 - Install Claude fallback skills into `~/.claude/skills`, where native Codex plugins are not available.
 - Sync managed skill destinations from staged trees so removed vendored files are pruned on reinstall.
 - Keep vendored Codex and plugin skill fallback copies in the repo for clean-machine bootstrap, Claude fallback, and audit.
@@ -54,6 +55,7 @@ The skill install order mirrors the original upstream setup:
 - Clone the deterministic `slo-rules-engine` source mirror before installing `reliability-engineering`, so reliability generation can use `sre-rules` instead of hand-written provider artifacts.
 - Fall back to bundled observability/reliability reference summaries inside the skill bundles when private model repo refresh is unavailable.
 - Clone the public architectural execution skill pipeline and install it from source when GitHub access allows.
+- Clone the public Diátaxis documentation skill and install it from source when GitHub access allows.
 
 `install.sh` installs:
 
@@ -106,6 +108,7 @@ The archived Superpowers `brainstorming` bundle includes:
 `scripts/install-skills.sh` leaves `~/.agents/skills` empty, installs vendored and source-backed local Codex skills into `~/.codex/skills`, installs only the local Google Drive helper skills under `~/.codex/skills/plugin-google-drive`, and places full plugin-skill fallbacks under `~/.claude/skills` for Claude.
 The architectural execution skill pipeline is installed from `jetteim/architectural-execution-skills` when the source mirror is available, with vendored fallback copies under `skills/codex/`.
 The agent-ready CLI skill is canonical under `agents/skills/platform/engineering-agent-ready-clis/`, projected to Codex and Claude, and vendored under `skills/codex/engineering-agent-ready-clis/` for clean-machine bootstrap.
+The agent-agnostic Diátaxis documentation skill is installed from `jetteim/diataxis-documentation-skill`, projected unchanged to Codex and Claude, and vendored under `skills/codex/writing-diataxis-documentation/` for clean-machine bootstrap. It uses a Superpowers-style dialogue: one question at a time, recommended content approaches, progressive outline approval, a gate before drafting, and final user review.
 
 ## Important Repositories
 
@@ -126,6 +129,7 @@ The clean-machine path depends on these forks:
 | Deterministic SRE rules engine | owned repo | `jetteim/slo-rules-engine` |
 | Reliability engineering skill | owned repo | `jetteim/reliability-engineering` |
 | Architectural execution skills | owned repo | `jetteim/architectural-execution-skills` |
+| Diátaxis documentation skill | owned repo | `jetteim/diataxis-documentation-skill` |
 
 ## Why Keep A User-Wide Git Hook
 

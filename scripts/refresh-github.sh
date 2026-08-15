@@ -63,5 +63,6 @@ ensure_owned_repo "platform-reliability-model" "private" "Platform-agnostic reli
 ensure_owned_repo "slo-rules-engine" "public" "Deterministic SRE rules engine for reliability artifact generation"
 ensure_owned_repo "reliability-engineering" "public" "Codex skill for platform-agnostic reliability engineering"
 ensure_owned_repo "architectural-execution-skills" "public" "Codex skill pipeline from value stream and architecture to implementation"
+ensure_owned_repo "diataxis-documentation-skill" "public" "Agent skill for writing and auditing documentation with the Diátaxis framework"
 
 echo "[github] refresh complete"

@@ -28,6 +28,7 @@ PLATFORM_RELIABILITY_MODEL_REPO="${PLATFORM_RELIABILITY_MODEL_REPO:-https://gith
 SLO_RULES_ENGINE_REPO="${SLO_RULES_ENGINE_REPO:-https://github.com/jetteim/slo-rules-engine.git}"
 RELIABILITY_ENGINEERING_REPO="${RELIABILITY_ENGINEERING_REPO:-https://github.com/jetteim/reliability-engineering.git}"
 ARCHITECTURAL_EXECUTION_SKILLS_REPO="${ARCHITECTURAL_EXECUTION_SKILLS_REPO:-https://github.com/jetteim/architectural-execution-skills.git}"
+DIATAXIS_DOCUMENTATION_SKILL_REPO="${DIATAXIS_DOCUMENTATION_SKILL_REPO:-https://github.com/jetteim/diataxis-documentation-skill.git}"
 USE_VENDORED_FALLBACK="${USE_VENDORED_FALLBACK:-1}"
 
 validate_home_dir() {
@@ -315,7 +316,8 @@ for mirror in \
   "$PLATFORM_RELIABILITY_MODEL_REPO|$AGENTS_HOME/vendor_imports/repos/platform-reliability-model|main|Platform reliability model source mirror" \
   "$SLO_RULES_ENGINE_REPO|$AGENTS_HOME/vendor_imports/repos/slo-rules-engine|main|sre-rules engine source mirror" \
   "$RELIABILITY_ENGINEERING_REPO|$AGENTS_HOME/vendor_imports/repos/reliability-engineering|main|Reliability engineering skill source mirror" \
-  "$ARCHITECTURAL_EXECUTION_SKILLS_REPO|$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills|main|Architectural execution skills source mirror"; do
+  "$ARCHITECTURAL_EXECUTION_SKILLS_REPO|$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills|main|Architectural execution skills source mirror" \
+  "$DIATAXIS_DOCUMENTATION_SKILL_REPO|$AGENTS_HOME/vendor_imports/repos/diataxis-documentation-skill|main|Diátaxis documentation skill source mirror"; do
   IFS='|' read -r mirror_repo mirror_destination mirror_branch mirror_label <<<"$mirror"
   if ! clone_or_update "$mirror_repo" "$mirror_destination" "$mirror_branch" "$mirror_label"; then
     echo "[skills] ${mirror_label} was not refreshed; continuing with configured package install path" >&2
@@ -348,6 +350,13 @@ if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/reliability-engineering" 
   stage_tree "$AGENTS_HOME/vendor_imports/repos/reliability-engineering/skill/reliability-engineering" "$platform_skills_stage/reliability-engineering" "Reliability engineering skill from source mirror"
 elif [ -d "$canonical_skills_root/platform/reliability-engineering" ]; then
   stage_tree "$canonical_skills_root/platform/reliability-engineering" "$platform_skills_stage/reliability-engineering" "vendored Reliability engineering skill fallback"
+fi
+
+if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/diataxis-documentation-skill" &&
+  [ -d "$AGENTS_HOME/vendor_imports/repos/diataxis-documentation-skill/skill/writing-diataxis-documentation" ]; then
+  stage_tree "$AGENTS_HOME/vendor_imports/repos/diataxis-documentation-skill/skill/writing-diataxis-documentation" "$platform_skills_stage/writing-diataxis-documentation" "Diátaxis documentation skill from source mirror"
+elif [ -d "$canonical_skills_root/platform/writing-diataxis-documentation" ]; then
+  stage_tree "$canonical_skills_root/platform/writing-diataxis-documentation" "$platform_skills_stage/writing-diataxis-documentation" "vendored Diátaxis documentation skill fallback"
 fi
 
 if clean_git_mirror "$AGENTS_HOME/vendor_imports/repos/architectural-execution-skills" &&
