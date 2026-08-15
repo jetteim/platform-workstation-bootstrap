@@ -69,3 +69,4 @@ local:shaping-capabilities
 local:shaping-features
 local:slicing-stories
 local:spreadsheet
+local:writing-diataxis-documentation

@@ -28,6 +28,7 @@ The bootstrap also expects these owned repositories. They are not forks.
 | `jetteim/slo-rules-engine` | Public | Deterministic SRE rules generation and validation |
 | `jetteim/reliability-engineering` | Public | Codex skill for building reliability from the model |
 | `jetteim/architectural-execution-skills` | Public | Codex skill pipeline from value stream and architecture to implementation |
+| `jetteim/diataxis-documentation-skill` | Public | Agent skill for documentation structured around Diátaxis reader needs |
 
 | Fork | Local path | Role |
 | --- | --- | --- |
@@ -44,6 +45,7 @@ The bootstrap also expects these owned repositories. They are not forks.
 | `jetteim/slo-rules-engine` | `~/.agents/vendor_imports/repos/slo-rules-engine` | Deterministic SRE rules engine source mirror |
 | `jetteim/reliability-engineering` | `~/.agents/vendor_imports/repos/reliability-engineering` | Reliability engineering skill source mirror |
 | `jetteim/architectural-execution-skills` | `~/.agents/vendor_imports/repos/architectural-execution-skills` | Architectural execution skills source mirror |
+| `jetteim/diataxis-documentation-skill` | `~/.agents/vendor_imports/repos/diataxis-documentation-skill` | Diátaxis documentation skill source mirror |
 
 Repository skill projection sources are copied under `agents/skills/platform/`, `agents/skills/plugins/`, and `agents/skills/codex-curated/`. Active `~/.agents/skills` is managed empty after the duplicate-skill cleanup. Superpowers is provided by the Codex plugin `superpowers@openai-curated`, not by a local source checkout.
 
@@ -84,6 +86,7 @@ Current local pins:
 - SLO rules engine mirror commit: `4a5260bfb03231c11ab8f847262b3a8ad579cd5b`
 - Reliability engineering skill mirror commit: `6785e245425ef5c84c57270fffc352000c893b8c`
 - Architectural execution skills mirror commit: `bb211111e000e679a8b5c12ea4cc9ae94790e719`
+- Diátaxis documentation skill mirror commit: `e84499968416a10baa909d613b67ca0f39533733`
 - Codex CLI npm package: `@openai/codex@0.145.0`
 - Codex Homebrew cask present: `codex 0.111.0`
 - Playwright MCP npm package: `@playwright/mcp@0.0.78`
@@ -118,6 +121,8 @@ The captured Codex `0.145.0` system bundle includes `review-agent` and the curre
 `skills/codex/reliability-engineering/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
 
 `skills/codex/engineering-agent-ready-clis/` is the vendored fallback for the canonical platform skill under `agents/skills/platform/`.
+
+`skills/codex/writing-diataxis-documentation/` comes from `jetteim/diataxis-documentation-skill` and is installed as a fallback when the source mirror is unavailable.
 
 `skills/codex/orchestrating-architecture-execution/` and its companion value-stream, capability, feature, C4, story-slicing, and traceability skills come from `jetteim/architectural-execution-skills` and are installed as fallbacks when the source mirror is unavailable.
 

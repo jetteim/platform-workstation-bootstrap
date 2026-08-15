@@ -60,6 +60,12 @@ test -f "$repo_root/skills/codex/creating-observability-pipelines/references/pro
 test -f "$repo_root/skills/codex/reliability-engineering/references/reliability-model-summary.md"
 test -f "$repo_root/skills/codex/reliability-engineering/references/provider-handoff.md"
 test -f "$repo_root/skills/codex/reliability-engineering/references/sre-rules-generation.md"
+test -f "$repo_root/agents/skills/platform/writing-diataxis-documentation/references/authoring-contracts.md"
+test -f "$repo_root/agents/skills/platform/writing-diataxis-documentation/references/auditing-and-structure.md"
+test -f "$repo_root/agents/skills/platform/writing-diataxis-documentation/references/dialogue-workflow.md"
+test -f "$repo_root/skills/codex/writing-diataxis-documentation/references/authoring-contracts.md"
+test -f "$repo_root/skills/codex/writing-diataxis-documentation/references/auditing-and-structure.md"
+test -f "$repo_root/skills/codex/writing-diataxis-documentation/references/dialogue-workflow.md"
 test -f "$repo_root/agents/adapters/claude/CLAUDE.md.template"
 test -f "$repo_root/agents/adapters/codex/README.md"
 grep -Fq '`~/.agents` is the canonical rules, hooks, prompts, and source-mirror layer' "$repo_root/README.md"
@@ -73,6 +79,7 @@ grep -q 'completion_needs_evidence' "$repo_root/agents/hooks/policy.py"
 grep -q 'Treat secrets as toxic' "$repo_root/agents/prompts/platform-guardrails.md"
 grep -q 'orchestrating-architecture-execution' "$repo_root/agents/manifests/skill-projections.tsv"
 grep -q 'engineering-agent-ready-clis' "$repo_root/agents/manifests/skill-projections.tsv"
+grep -q 'writing-diataxis-documentation' "$repo_root/agents/manifests/skill-projections.tsv"
 grep -q '~/.agents' "$repo_root/agents/adapters/claude/CLAUDE.md.template"
 ! grep -q 'SUPERPOWERS_REPO' "$repo_root/scripts/install-skills.sh"
 ! grep -q 'https://github.com/jetteim/superpowers.git' "$repo_root/scripts/install-skills.sh"
@@ -85,8 +92,10 @@ grep -q 'https://github.com/jetteim/platform-reliability-model.git' "$repo_root/
 grep -q 'https://github.com/jetteim/slo-rules-engine.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/reliability-engineering.git' "$repo_root/scripts/install-skills.sh"
 grep -q 'https://github.com/jetteim/architectural-execution-skills.git' "$repo_root/scripts/install-skills.sh"
+grep -q 'https://github.com/jetteim/diataxis-documentation-skill.git' "$repo_root/scripts/install-skills.sh"
 grep -q '^@openai/codex@0.145.0$' "$repo_root/manifests/npm-global.txt"
 grep -q '^git@github.com:jetteim/slo-rules-engine.git$' "$repo_root/manifests/github-repos.txt"
+grep -q '^git@github.com:jetteim/diataxis-documentation-skill.git$' "$repo_root/manifests/github-repos.txt"
 ! grep -q '^git@github.com:jetteim/superpowers.git$' "$repo_root/manifests/github-repos.txt"
 python3 - "$repo_root/scripts/install-skills.sh" <<'PY'
 from pathlib import Path
@@ -248,6 +257,7 @@ grep -q 'platform-reliability-model' "$repo_root/scripts/refresh-github.sh"
 grep -q 'slo-rules-engine' "$repo_root/scripts/refresh-github.sh"
 grep -q 'reliability-engineering' "$repo_root/scripts/refresh-github.sh"
 grep -q 'architectural-execution-skills' "$repo_root/scripts/refresh-github.sh"
+grep -q 'diataxis-documentation-skill' "$repo_root/scripts/refresh-github.sh"
 grep -q 'Outcome Score: 32/35' "$repo_root/docs/brain-skill-smoke-test.md"
 
 python3 "$repo_root/skills/codex/.system/skill-creator/scripts/quick_validate.py" \
@@ -257,8 +267,27 @@ python3 "$repo_root/skills/codex/.system/skill-creator/scripts/quick_validate.py
 diff -qr \
   "$repo_root/agents/skills/platform/engineering-agent-ready-clis" \
   "$repo_root/skills/codex/engineering-agent-ready-clis" >/dev/null
+python3 "$repo_root/skills/codex/.system/skill-creator/scripts/quick_validate.py" \
+  "$repo_root/agents/skills/platform/writing-diataxis-documentation"
+python3 "$repo_root/skills/codex/.system/skill-creator/scripts/quick_validate.py" \
+  "$repo_root/skills/codex/writing-diataxis-documentation"
+diff -qr \
+  "$repo_root/agents/skills/platform/writing-diataxis-documentation" \
+  "$repo_root/skills/codex/writing-diataxis-documentation" >/dev/null
+grep -q '<DIALOGUE-GATE>' "$repo_root/agents/skills/platform/writing-diataxis-documentation/SKILL.md"
+grep -q 'Ask exactly one clarifying or approval question per message' \
+  "$repo_root/agents/skills/platform/writing-diataxis-documentation/SKILL.md"
+grep -q 'this agent-agnostic skill' \
+  "$repo_root/agents/skills/platform/writing-diataxis-documentation/SKILL.md"
+if rg -i 'codex|openai|claude|chatgpt|request_user_input|mcp|tool_call' \
+  "$repo_root/agents/skills/platform/writing-diataxis-documentation/SKILL.md" \
+  "$repo_root/agents/skills/platform/writing-diataxis-documentation/references" >/dev/null; then
+  echo "agent-specific runtime language leaked into the portable Diátaxis skill instructions" >&2
+  exit 1
+fi
 grep -q '^system:review-agent$' "$repo_root/manifests/codex-skills.txt"
 grep -q '^local:engineering-agent-ready-clis$' "$repo_root/manifests/codex-skills.txt"
+grep -q '^local:writing-diataxis-documentation$' "$repo_root/manifests/codex-skills.txt"
 grep -q '^data-analytics:publish-artifact-to-sites$' "$repo_root/manifests/codex-skills.txt"
 grep -q '^google-calendar:google-calendar$' "$repo_root/manifests/codex-skills.txt"
 test -f "$repo_root/agents/skills/codex-curated/.system/review-agent/SKILL.md"
@@ -338,6 +367,24 @@ if [ -d "$architectural_source_root" ]; then
     done
   done
 fi
+diataxis_source_repo="$HOME/.agents/vendor_imports/repos/diataxis-documentation-skill"
+diataxis_source_skill="$diataxis_source_repo/skill/writing-diataxis-documentation"
+if [ -d "$diataxis_source_skill" ]; then
+  if [ -n "$(git -C "$diataxis_source_repo" status --porcelain)" ]; then
+    echo "Diátaxis documentation skill source mirror has local changes; cannot verify drift" >&2
+    exit 1
+  fi
+  for target_skill in \
+    "$repo_root/agents/skills/platform/writing-diataxis-documentation" \
+    "$repo_root/skills/codex/writing-diataxis-documentation" \
+    "$HOME/.codex/skills/writing-diataxis-documentation" \
+    "$HOME/.claude/skills/writing-diataxis-documentation"; do
+    if [ -d "$target_skill" ] && ! diff -qr "$diataxis_source_skill" "$target_skill" >/dev/null; then
+      echo "Diátaxis documentation skill drift: $target_skill differs from $diataxis_source_skill" >&2
+      exit 1
+    fi
+  done
+fi
 if [ -d "$HOME/.agents/skills" ] && find "$HOME/.agents/skills" -mindepth 1 -maxdepth 1 | grep -q .; then
   echo "active ~/.agents/skills is expected to stay empty after the skills cleanup" >&2
   exit 1
@@ -362,6 +409,7 @@ for required in \
   "$repo_root/skills/codex/slicing-stories/SKILL.md" \
   "$repo_root/skills/codex/reviewing-traceability/SKILL.md" \
   "$repo_root/skills/codex/engineering-agent-ready-clis/SKILL.md" \
+  "$repo_root/skills/codex/writing-diataxis-documentation/SKILL.md" \
   "$repo_root/skills/plugins/github/yeet/SKILL.md" \
   "$repo_root/skills/plugins/google-drive/google-drive/SKILL.md" \
   "$repo_root/skills/superpowers/test-driven-development/SKILL.md"; do
