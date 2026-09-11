@@ -27,6 +27,8 @@ Generate from neutral intent to:
 - `datadog_service_definition_yaml` when service ownership metadata is required
 - `datadog_observability_pipeline` only when the pipeline contract explicitly targets Datadog Observability Pipelines
 
+Datadog create/update SLO windows are provider-constrained. If neutral intent uses a window that Datadog cannot represent directly, do not silently normalize it. Either report the unsupported window as a provider gap or generate the nearest supported window with an explicit review gate and gap record.
+
 Required checks:
 
 ```bash

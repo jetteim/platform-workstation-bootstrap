@@ -45,6 +45,7 @@ The skill install order mirrors the original upstream setup:
 - Keep `~/.agents/skills` as a managed empty directory after the duplicate-skill cleanup.
 - Install source mirrors under `~/.agents/vendor_imports`.
 - Install cleaned local Codex skills into `~/.codex/skills`: platform/document skills plus local Google Drive helper skills that extend the native plugin.
+- Preserve the local Codex ZenMoney receipt categorization, savings, and category review skills.
 - Install `engineering-agent-ready-clis` for designing, auditing, retrofitting, and testing CLIs used by AI agents.
 - Install `writing-diataxis-documentation` for every documentation creation, revision, audit, or restructuring task.
 - Install Claude fallback skills into `~/.claude/skills`, where native Codex plugins are not available.
@@ -96,7 +97,7 @@ This repo vendors full installable skill bundles, not only prompts:
 
 The historical Superpowers vendored copy remains in `skills/superpowers/` for audit and fallback reference, but the bootstrap no longer installs it into `~/.agents/skills` or `~/.codex/skills`. Codex gets Superpowers from `superpowers@openai-curated`.
 
-`manifests/codex-skills.txt` also records Data Analytics and Google Calendar skills exposed by the current Codex remote plugin cache. Those remote plugins are not vendored or installed by this repository.
+`manifests/codex-skills.txt` records installed local skills and skill bundles present in the native and remote plugin caches, including Data Analytics, Deep Research, templates, and plugin management. Cache presence does not establish that a skill is enabled or exposed in a session. Remote plugins are not vendored or installed by this repository.
 
 The archived Superpowers `brainstorming` bundle includes:
 
@@ -142,6 +143,12 @@ Keep a global Git hook, but make it a safety net:
 - Delegate project-specific checks to `.githooks/pre-commit` or `.git/hooks/pre-commit.local`.
 
 Language and repo-specific linting belongs in each repository. Global hooks should protect every repo without making unrelated work brittle.
+
+## Compare With Local State
+
+Run `./scripts/audit.sh` for a read-only JSON inventory of installed packages, skill hashes, plugin cache versions, and source-mirror commits/dirty status. The captured baseline is `manifests/local-state.json`; compare it with fresh output, ignoring `observed_at`. The audit excludes credentials and private runtime configuration values.
+
+Both Codex config examples capture the reviewed local model, MCP commands, project trust entries, and tool approval policies. They contain machine-specific paths and require review before use elsewhere. UI counters and hook trust state are excluded.
 
 ## NPM Status
 

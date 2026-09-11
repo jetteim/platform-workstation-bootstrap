@@ -1,4 +1,4 @@
-"""Policy checks for platform workstation Codex hooks.
+"""Shared platform hook policy checks.
 
 secret-scan: allow-patterns
 """

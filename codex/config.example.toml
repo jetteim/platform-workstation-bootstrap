@@ -1,10 +1,12 @@
-model = "gpt-5.4"
+# Local setup snapshot; credentials and runtime UI/hook trust state are excluded.
+# Review machine-specific paths and tool approval policies before using elsewhere.
+model = "gpt-6-astra"
 model_reasoning_effort = "high"
 
 [features]
-hooks = true
-multi_agent = true
 plugins = true
+multi_agent = true
+hooks = true
 
 [projects."/Users/maximlee"]
 trust_level = "trusted"
@@ -18,22 +20,92 @@ trust_level = "trusted"
 [projects."/Users/maximlee/Library/CloudStorage/OneDrive-Personal/Pet projects/video/poc-macbook"]
 trust_level = "trusted"
 
+[projects."/Users/maximlee/Library/CloudStorage/OneDrive-Personal/Pet projects/architectural-execution-skills"]
+trust_level = "trusted"
+
+[projects."/Users/maximlee/Library/CloudStorage/OneDrive-Personal/Pet projects"]
+trust_level = "trusted"
+
+[projects."/Users/maximlee/Library/CloudStorage/OneDrive-Personal/Pet projects/legacyproject-takehome-scaffold"]
+trust_level = "trusted"
+
+[projects."/Users/maximlee/Library/CloudStorage/OneDrive-Personal/Pet projects/slo-rules-engine"]
+trust_level = "trusted"
+
+[projects."/Users/maximlee/Library/CloudStorage/OneDrive-Personal/Pet projects/platform-workstation-bootstrap"]
+trust_level = "trusted"
+
+[projects."/Users/maximlee/Library/CloudStorage/OneDrive-Personal/Pet projects/zenmoney-receipts"]
+trust_level = "trusted"
+
 [mcp_servers.playwright]
 command = "npx"
-args = ["-y", "@playwright/mcp@latest"]
+args = ["-y", "@playwright/mcp@latest", "--cdp-endpoint=chrome"]
+
+[mcp_servers.playwright.tools.browser_run_code_unsafe]
+approval_mode = "approve"
+
+[mcp_servers.playwright.tools.browser_navigate]
+approval_mode = "approve"
+
+[mcp_servers.playwright.tools.browser_click]
+approval_mode = "approve"
 
 [mcp_servers.github]
 command = "npx"
 args = ["-y", "@modelcontextprotocol/server-github"]
 
+[mcp_servers.github.tools.create_repository]
+approval_mode = "approve"
+
+[mcp_servers.github.tools.get_file_contents]
+approval_mode = "approve"
+
+[mcp_servers.github.tools.search_code]
+approval_mode = "approve"
+
+[mcp_servers.github.tools.search_issues]
+approval_mode = "approve"
+
+[mcp_servers.github.tools.search_repositories]
+approval_mode = "approve"
+
 [mcp_servers.memory]
 command = "npx"
 args = ["-y", "@modelcontextprotocol/server-memory"]
+
+[mcp_servers.memory.tools.add_observations]
+approval_mode = "approve"
+
+[mcp_servers.memory.tools.create_entities]
+approval_mode = "approve"
+
+[mcp_servers."zenmoney-receipts"]
+command = "node"
+args = ["/Users/maximlee/Library/CloudStorage/OneDrive-Personal/Pet projects/zenmoney-receipts/dist/index.js"]
+
+[mcp_servers."zenmoney-receipts".tools.zenmoney_apply_category_create]
+approval_mode = "approve"
+
+[mcp_servers."zenmoney-receipts".tools.zenmoney_apply_category_update]
+approval_mode = "approve"
+
+[mcp_servers."zenmoney-receipts".tools.zenmoney_apply_receipt_category]
+approval_mode = "approve"
+
+[mcp_servers."zenmoney-receipts".tools.zenmoney_apply_new_receipt]
+approval_mode = "approve"
+
+[mcp_servers."zenmoney-receipts".tools.zenmoney_apply_receipt_reconciliation]
+approval_mode = "approve"
 
 [plugins."github@openai-curated"]
 enabled = true
 
 [plugins."google-drive@openai-curated"]
+enabled = true
+
+[plugins."superpowers@openai-curated"]
 enabled = true
 
 [[skills.config]]
@@ -48,5 +120,5 @@ enabled = false
 path = "/Users/maximlee/.codex/skills/plugin-github/gh-address-comments/SKILL.md"
 enabled = false
 
-[plugins."superpowers@openai-curated"]
-enabled = true
+[apps.connector_76869538009648d5b282a4bb21c3d157.tools."github.create_pull_request"]
+approval_mode = "approve"

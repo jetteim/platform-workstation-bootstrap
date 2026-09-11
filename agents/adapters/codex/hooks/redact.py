@@ -1,4 +1,4 @@
-"""Redaction helpers for Codex hook logs.
+"""Shared redaction helpers for hook logs.
 
 secret-scan: allow-patterns
 """

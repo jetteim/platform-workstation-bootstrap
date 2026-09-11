@@ -12,3 +12,4 @@ git@github.com:jetteim/slo-rules-engine.git
 git@github.com:jetteim/reliability-engineering.git
 git@github.com:jetteim/architectural-execution-skills.git
 git@github.com:jetteim/diataxis-documentation-skill.git
+git@github.com:jetteim/zenmoney-receipts.git

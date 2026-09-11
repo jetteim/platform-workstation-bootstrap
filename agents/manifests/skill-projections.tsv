@@ -21,3 +21,6 @@ modeling-c4-architecture	skills/codex/modeling-c4-architecture	yes	yes	platform
 slicing-stories	skills/codex/slicing-stories	yes	yes	platform
 reviewing-traceability	skills/codex/reviewing-traceability	yes	yes	platform
 codex-curated	skills/codex	yes	no	codex-curated
+categorize-zenmoney-receipts	skills/codex/categorize-zenmoney-receipts	yes	no	codex-local
+find-zenmoney-savings	skills/codex/find-zenmoney-savings	yes	no	codex-local
+review-zenmoney-categories	skills/codex/review-zenmoney-categories	yes	no	codex-local

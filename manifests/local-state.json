@@ -1,0 +1,698 @@
+{
+  "agents_skills_empty": true,
+  "brew_casks_from_installed_directories": {
+    "codex": [
+      "0.111.0"
+    ]
+  },
+  "brew_formulae": [
+    "autoconf 2.72",
+    "boost 1.90.0_1",
+    "brotli 1.2.0",
+    "c-ares 1.34.6",
+    "ca-certificates 2025-12-02 2026-03-19",
+    "cmake 4.3.1",
+    "gh 2.87.3",
+    "git-delta 0.19.2",
+    "go 1.26.0",
+    "icu4c@78 78.2",
+    "innoextract 1.9_13",
+    "libgit2 1.9.2_1",
+    "libnghttp2 1.68.0",
+    "libnghttp3 1.15.0",
+    "libngtcp2 1.20.0",
+    "libssh2 1.11.1_1",
+    "libuv 1.52.0",
+    "libyaml 0.2.5",
+    "llhttp 9.3.1",
+    "lz4 1.10.0",
+    "m4 1.4.21",
+    "node@22 22.22.0",
+    "oniguruma 6.9.10",
+    "openssl@3 3.6.1",
+    "pcre2 10.47_1",
+    "pkgconf 2.5.1",
+    "rbenv 1.3.2",
+    "readline 8.3.3",
+    "ripgrep 15.1.0",
+    "ruby 4.0.1",
+    "ruby-build 20260121",
+    "simdjson 4.2.4",
+    "simdutf 8.0.0",
+    "sqlite 3.51.2_1",
+    "starship 1.25.0",
+    "terraform 1.5.7",
+    "uv 0.11.6",
+    "uvwasi 0.0.23",
+    "wails 2.11.0",
+    "xz 5.8.2",
+    "zstd 1.5.7_1"
+  ],
+  "claude_local_skills": {
+    "brain": {
+      "files": 4,
+      "sha256": "a1eaff55239bd715b9c37fa625141f9cca0e2bd8d08df55faaf66be420250364"
+    },
+    "creating-observability-pipelines": {
+      "files": 5,
+      "sha256": "94e8e168e7829dfe55754f3ba782bd2fd8366db805531df695b8b1163e95b26d"
+    },
+    "discovering-value-streams": {
+      "files": 1,
+      "sha256": "9f2d6becae7fa21e45f55a54f8aa8de3fe2686e002c7faecce41b179eed0b309"
+    },
+    "engineering-agent-ready-clis": {
+      "files": 4,
+      "sha256": "9a808782c95e30d5804e481c06d2e4212d604f578bed95ab3ab6a83610d0f0ea"
+    },
+    "modeling-c4-architecture": {
+      "files": 1,
+      "sha256": "7317ea5a1e9b6de7f3903f140e1962a579ca0760ef2e714cabb9a7b73f2bb23c"
+    },
+    "observability-engineering": {
+      "files": 3,
+      "sha256": "7ac5b716892c31132b5946e2f9a826f7d3466bab4fbae686a8a037d9b1eae295"
+    },
+    "orchestrating-architecture-execution": {
+      "files": 1,
+      "sha256": "1af8ceba894b78c8c0f4d869b850a7868edbc620d25a305de97c751ee48b8a25"
+    },
+    "plugin-github/gh-address-comments": {
+      "files": 6,
+      "sha256": "d4ec4e065076475cfbaf3942417f32bd36995c112464adcc7d4ffe7c6f5901cf"
+    },
+    "plugin-github/gh-fix-ci": {
+      "files": 6,
+      "sha256": "b71a25d5a2d9ff1a6b7df404d07f6f362f0641acdee04c5ca89196ca8d94536c"
+    },
+    "plugin-github/github": {
+      "files": 4,
+      "sha256": "6c891787f953eb269809f874cf1f29f3cc76c38f78be027133980528274ad8fe"
+    },
+    "plugin-github/yeet": {
+      "files": 5,
+      "sha256": "e37a41aa5c9ea4de954e30de5376e28cdd9a43e93160dd129734ab2488fe3219"
+    },
+    "plugin-google-drive/google-docs": {
+      "files": 4,
+      "sha256": "c7952e58eda656800c542b1f21d05b721f1f28d7979acea988d61ad024a2adb6"
+    },
+    "plugin-google-drive/google-drive": {
+      "files": 10,
+      "sha256": "97d396d539a23f4335f45a4519e51b8022f950d2e52f6fd6af399287680a781b"
+    },
+    "plugin-google-drive/google-drive-comments": {
+      "files": 1,
+      "sha256": "a0fd55f09db95a1b48b68f211aa4656b708a0ad24a88f9c50ea9d89fa582d875"
+    },
+    "plugin-google-drive/google-sheets": {
+      "files": 5,
+      "sha256": "4d3fb33ed6a61682d526ed4f31c14e22b3f0b8fbc863b29a3aed6b0eaa7c8850"
+    },
+    "plugin-google-drive/google-sheets-chart-builder": {
+      "files": 5,
+      "sha256": "7d5847f6a60f21ebbb5b0308654b686092f990b632302c0842044b11f0279201"
+    },
+    "plugin-google-drive/google-sheets-formula-builder": {
+      "files": 5,
+      "sha256": "998607ff115a1d27d0e5e2d34c80f18a225d82b699af26b150f55aed2c313dfb"
+    },
+    "plugin-google-drive/google-slides": {
+      "files": 4,
+      "sha256": "aac05ae3e2ebda1e2efcf683c3e0190bbfed131a91d10ad2f603fd1b1a0343a1"
+    },
+    "plugin-google-drive/google-slides-import-presentation": {
+      "files": 4,
+      "sha256": "aefeab364ca6f7200f2677fe6b2d49c02f365ee92f0c4eed6b4ddead53849b3b"
+    },
+    "plugin-google-drive/google-slides-template-migration": {
+      "files": 6,
+      "sha256": "989dece889ba446093ea2b73713b7c13a3dba7f7fc7b5f838f15e80645695ea1"
+    },
+    "plugin-google-drive/google-slides-template-surgery": {
+      "files": 6,
+      "sha256": "dfab381a87ef0be49d1bd02ff1e777e62478e4663810005aca574af748623db6"
+    },
+    "plugin-google-drive/google-slides-visual-iteration": {
+      "files": 4,
+      "sha256": "0ea3831173a2854acafdf5ac9d1f94ae61ae1c4e79a1770e75920228c1c890bf"
+    },
+    "reliability-engineering": {
+      "files": 4,
+      "sha256": "bac209c7f3551323555cf609aa87550f614f2ce611453f61ce26db693108ea35"
+    },
+    "reviewing-traceability": {
+      "files": 1,
+      "sha256": "43752e747d548f4e1b41f2edbd6ad324e35b9f4bcc711560a829d9a07f188308"
+    },
+    "shaping-capabilities": {
+      "files": 1,
+      "sha256": "13543e62b01bb5893968d221ebfc4d4bb5eb35ac708ecd82f2a77881be0c0684"
+    },
+    "shaping-features": {
+      "files": 1,
+      "sha256": "b87a8adc78a112b0e6e673004c0680e03b59b5404ee4ad7382287fd206dc8c84"
+    },
+    "slicing-stories": {
+      "files": 1,
+      "sha256": "50ccbceaefd0dd83c5d21ecda40cc20d47cfc15ee86340c0920bdcf073ed62db"
+    },
+    "writing-diataxis-documentation": {
+      "files": 7,
+      "sha256": "be57f957c1ebe33844a31546747cd627c383f3505fcb577db2f82bbc272f24e5"
+    }
+  },
+  "codex_local_skills": {
+    ".system/imagegen": {
+      "files": 12,
+      "sha256": "034044708ce0cd81dc3f4b5267ebbaf7d0af7f4f3311a0e1883e93da96a909d2"
+    },
+    ".system/openai-docs": {
+      "files": 17,
+      "sha256": "769dcf7c4d2ee81c9dd47b7901b0dbdc90f3ff07772a7a757cc1b512daf8c43a"
+    },
+    ".system/plugin-creator": {
+      "files": 11,
+      "sha256": "daeb57acacb32b5868816f98e8250fd883c0d5eaad092299516104a7ccdd42fe"
+    },
+    ".system/review-agent": {
+      "files": 2,
+      "sha256": "d9afb449b897a78ab7f18f9b0e486da589bad26e63ffc81b0b5d399dcf750e58"
+    },
+    ".system/skill-creator": {
+      "files": 9,
+      "sha256": "6d6b8a517e8a5f8816f857961f60b979708c0c53726922990cdae11fa246f870"
+    },
+    ".system/skill-installer": {
+      "files": 8,
+      "sha256": "d9e8f8979d3da978be55ea98ee967a9d2ded02f567aeb65902344d3993adabf8"
+    },
+    "brain": {
+      "files": 4,
+      "sha256": "a1eaff55239bd715b9c37fa625141f9cca0e2bd8d08df55faaf66be420250364"
+    },
+    "categorize-zenmoney-receipts": {
+      "files": 2,
+      "sha256": "4d61f10731f2baa159e7c3988cdfcff0cada6553a507be00886aba2dbe5a8202"
+    },
+    "creating-observability-pipelines": {
+      "files": 5,
+      "sha256": "94e8e168e7829dfe55754f3ba782bd2fd8366db805531df695b8b1163e95b26d"
+    },
+    "discovering-value-streams": {
+      "files": 1,
+      "sha256": "9f2d6becae7fa21e45f55a54f8aa8de3fe2686e002c7faecce41b179eed0b309"
+    },
+    "doc": {
+      "files": 6,
+      "sha256": "74ea8b9f9e3bd00af3a02b47fd7e65377a0a6419fe37857ccd2a367d6e7ab31f"
+    },
+    "engineering-agent-ready-clis": {
+      "files": 4,
+      "sha256": "9a808782c95e30d5804e481c06d2e4212d604f578bed95ab3ab6a83610d0f0ea"
+    },
+    "find-zenmoney-savings": {
+      "files": 2,
+      "sha256": "b544c1daa51a0f1cb6650f70cdadbd24415d717b222ea76a41aca6804e36f6ef"
+    },
+    "jupyter-notebook": {
+      "files": 12,
+      "sha256": "6665498ab74a5043a809f80337b6e7c0323792f07fe54a733f95ca7397efc05a"
+    },
+    "modeling-c4-architecture": {
+      "files": 1,
+      "sha256": "7317ea5a1e9b6de7f3903f140e1962a579ca0760ef2e714cabb9a7b73f2bb23c"
+    },
+    "observability-engineering": {
+      "files": 3,
+      "sha256": "7ac5b716892c31132b5946e2f9a826f7d3466bab4fbae686a8a037d9b1eae295"
+    },
+    "orchestrating-architecture-execution": {
+      "files": 1,
+      "sha256": "1af8ceba894b78c8c0f4d869b850a7868edbc620d25a305de97c751ee48b8a25"
+    },
+    "pdf": {
+      "files": 4,
+      "sha256": "4944a28471c83b09f1aa9d57bf5065c0406b243d71615f97c41511d60ff80476"
+    },
+    "plugin-google-drive/google-sheets-chart-builder": {
+      "files": 5,
+      "sha256": "7d5847f6a60f21ebbb5b0308654b686092f990b632302c0842044b11f0279201"
+    },
+    "plugin-google-drive/google-sheets-formula-builder": {
+      "files": 5,
+      "sha256": "998607ff115a1d27d0e5e2d34c80f18a225d82b699af26b150f55aed2c313dfb"
+    },
+    "plugin-google-drive/google-slides-import-presentation": {
+      "files": 4,
+      "sha256": "aefeab364ca6f7200f2677fe6b2d49c02f365ee92f0c4eed6b4ddead53849b3b"
+    },
+    "plugin-google-drive/google-slides-template-migration": {
+      "files": 6,
+      "sha256": "989dece889ba446093ea2b73713b7c13a3dba7f7fc7b5f838f15e80645695ea1"
+    },
+    "plugin-google-drive/google-slides-template-surgery": {
+      "files": 6,
+      "sha256": "dfab381a87ef0be49d1bd02ff1e777e62478e4663810005aca574af748623db6"
+    },
+    "plugin-google-drive/google-slides-visual-iteration": {
+      "files": 4,
+      "sha256": "0ea3831173a2854acafdf5ac9d1f94ae61ae1c4e79a1770e75920228c1c890bf"
+    },
+    "reliability-engineering": {
+      "files": 4,
+      "sha256": "bac209c7f3551323555cf609aa87550f614f2ce611453f61ce26db693108ea35"
+    },
+    "review-zenmoney-categories": {
+      "files": 2,
+      "sha256": "d55d1767ba7055c9755a9f15bd169dfd0df189c6d4aa3e500f1f14938611691d"
+    },
+    "reviewing-traceability": {
+      "files": 1,
+      "sha256": "43752e747d548f4e1b41f2edbd6ad324e35b9f4bcc711560a829d9a07f188308"
+    },
+    "shaping-capabilities": {
+      "files": 1,
+      "sha256": "13543e62b01bb5893968d221ebfc4d4bb5eb35ac708ecd82f2a77881be0c0684"
+    },
+    "shaping-features": {
+      "files": 1,
+      "sha256": "b87a8adc78a112b0e6e673004c0680e03b59b5404ee4ad7382287fd206dc8c84"
+    },
+    "slicing-stories": {
+      "files": 1,
+      "sha256": "50ccbceaefd0dd83c5d21ecda40cc20d47cfc15ee86340c0920bdcf073ed62db"
+    },
+    "spreadsheet": {
+      "files": 9,
+      "sha256": "0d732472e6f324cab9e5f6b6f5f69ad64a5b29455bd65ebd65e473a4d1e2e606"
+    },
+    "writing-diataxis-documentation": {
+      "files": 7,
+      "sha256": "be57f957c1ebe33844a31546747cd627c383f3505fcb577db2f82bbc272f24e5"
+    }
+  },
+  "exclusions": [
+    "credentials, auth databases, sessions, browser state, receipt data",
+    "live config values (reviewed separately through an explicit allowlist)",
+    "plugin enabled status: cache presence alone does not establish activation",
+    "source-mirror uncommitted contents (only commit and dirty status recorded)"
+  ],
+  "git_hooks_path": "~/.config/git/hooks",
+  "git_pre_commit_sha256": "0a7d787eb8701f10dea08b47d931db3cb70cde32452a21658a3db7de3c074862",
+  "managed_files": {
+    ".agents/hooks": {
+      "files": 2,
+      "sha256": "6fa6fcc3e9567ce5a1eeda9d331868bc224d885bde06dd49b89c4c417c4435dd"
+    },
+    ".agents/prompts": {
+      "files": 1,
+      "sha256": "5f51d41d747956b0ec9f5c0100efba4f5851dc9e124bbe537bad6fca7244d3fd"
+    },
+    ".agents/rules": {
+      "files": 4,
+      "sha256": "f2ca7d0015a531e9c2f23c2f1254de9ba8348e9f58765397b27e5a3ef2ade409"
+    },
+    ".codex/hooks": {
+      "files": 3,
+      "sha256": "8914f46b39f18a314d25a056a3a6bc80bc80d7155b354f575780246bcecd1b8c"
+    }
+  },
+  "npm_global": {
+    "@openai/codex": "0.154.0",
+    "eslint": "10.0.2",
+    "markdownlint-cli": "0.48.0"
+  },
+  "npx_cached_versions": {
+    "@modelcontextprotocol/server-github": [
+      "2025.4.8"
+    ],
+    "@modelcontextprotocol/server-memory": [
+      "2026.8.31"
+    ],
+    "@playwright/mcp": [
+      "0.0.80"
+    ]
+  },
+  "observed_at": "2026-09-11T16:29:52.029213+00:00",
+  "pip_user": [
+    "certifi==2026.2.25",
+    "charset-normalizer==3.4.7",
+    "colorama==0.4.6",
+    "conan==2.27.1",
+    "fasteners==0.20",
+    "idna==3.12",
+    "Jinja2==3.1.6",
+    "MarkupSafe==3.0.3",
+    "patch-ng==1.18.1",
+    "pip==26.0.1",
+    "pyaes==1.6.1",
+    "pypdf==6.8.0",
+    "Pyrogram==2.0.106",
+    "PySocks==1.7.1",
+    "python-dateutil==2.9.0.post0",
+    "PyYAML==6.0.3",
+    "requests==2.32.5",
+    "TgCrypto==1.2.5",
+    "typing_extensions==4.15.0",
+    "urllib3==1.26.20"
+  ],
+  "plugin_cache_skills": {
+    "openai-curated-remote/data-analytics/1.0.2": {
+      "analyze-data-quality": {
+        "files": 2,
+        "sha256": "563bbbd2d2f461297704f9a1b20f4d0fc130cc97814ad1183a730c2a53efca37"
+      },
+      "build-dashboard": {
+        "files": 3,
+        "sha256": "935b7419f856afba135697d6a42ac8634cb52ffbbdf2bb4bc0a175d10f9ecc48"
+      },
+      "build-report": {
+        "files": 6,
+        "sha256": "ebdd3a2974fdd7ff77d5688ed187d0a15c1e0970f60570dbdce1f9f8c6a0109f"
+      },
+      "convert-to-doc": {
+        "files": 2,
+        "sha256": "83787aca34e695c2202d7c85cbcae7ea362849f4927702d030f3012299066c81"
+      },
+      "convert-to-slides": {
+        "files": 2,
+        "sha256": "763eb5d3f6c6805d0852d9ac2a8c3d37fe4c30dafbaa915b03bdc9e3f8ba093e"
+      },
+      "create-data-context": {
+        "files": 5,
+        "sha256": "ccc8a28dd73e0057a04ed8ae4747e6f8905f35e793b17afb5650e43612baf723"
+      },
+      "design-kpis": {
+        "files": 2,
+        "sha256": "8e0417f57e477e663fb3fb95dcb2a81c74efc5c8ac9153f4f9079b6d79345fd2"
+      },
+      "gather-business-context": {
+        "files": 2,
+        "sha256": "c540cc87d8421106676dbd367fcff3c0cd773ce4d4b9c762da9f3daec8a1fc01"
+      },
+      "index": {
+        "files": 2,
+        "sha256": "f9018a70f4ba2460fc83c7fddbfd77a356b7c45b78418f658a2e298c25220b4d"
+      },
+      "jupyter-notebooks": {
+        "files": 2,
+        "sha256": "2bd5e611149d8f6f624041d1c685b97bfabd4b5fa97bbe3d33666029771246b7"
+      },
+      "kpi-reporting": {
+        "files": 3,
+        "sha256": "b7466e5a02d0ae0c067ceeccb067749f940cc123b6252c6abe13f03c52643f16"
+      },
+      "market-sizing": {
+        "files": 2,
+        "sha256": "06dc8953d74da05d59df16ee5c57de9cf12ce935aa0e4819bf5b9dbd60117c3a"
+      },
+      "metric-diagnostics": {
+        "files": 2,
+        "sha256": "ab8e3176d99a63d20542dbd21f77d4fd332fdf4db75416a844be2892173e35ae"
+      },
+      "product-business-analysis": {
+        "files": 2,
+        "sha256": "d136f5a50cbedd62701ecfa9ccd30241fc99661f591ca3b9e31db114af71913e"
+      },
+      "publish-artifact-to-sites": {
+        "files": 15,
+        "sha256": "c5bcc1bf243c2cad794c867a4874889384785281ea4b5eed3e1ac709ef24615e"
+      },
+      "report-to-pdf": {
+        "files": 2,
+        "sha256": "e6721df658be3273f86d2905cb8e13b49006c8ee0d01ab493b6f9d1df639d0ba"
+      },
+      "schedule-refresh-jobs": {
+        "files": 2,
+        "sha256": "9689f3b12ce92ae393f310d3b947ea57d88162b32ac98b4cd3bb7ec10f122cca"
+      },
+      "share-artifact-summary": {
+        "files": 2,
+        "sha256": "cefd10179fd18f68d58b82149e6c2a2c6b803ab7620d2692ef61f9bd4ea0432b"
+      },
+      "validate-data": {
+        "files": 6,
+        "sha256": "d1aca7a7c3027c881f99e310ff4a18d8fd063764bd6776d5097c5f0aa74f9e61"
+      },
+      "visualize-data": {
+        "files": 16,
+        "sha256": "5fb9c578f42300d6de00ec0fc5e47502f30bbeab98741ff1def0d23a70fb6c42"
+      }
+    },
+    "openai-curated-remote/deep-research-work/0.1.15": {
+      "deep-research": {
+        "files": 2,
+        "sha256": "8dfbbf0137357b2896c5e6adc088bc2af5117466bd0275df8c5bbc508e4d74fd"
+      }
+    },
+    "openai-curated-remote/github/0.1.12-5f7cd798dc99": {},
+    "openai-curated-remote/gmail/0.1.10": {},
+    "openai-curated-remote/google-calendar/1.2.7": {},
+    "openai-curated-remote/openai-templates/0.1.1": {
+      "artifact-template-analytics-dashboard": {
+        "files": 5,
+        "sha256": "7981ff00bd8d0c05f467352753c9e36bcbaed3e9bc04a4e27f570bd5b2d4f24e"
+      },
+      "artifact-template-business-review": {
+        "files": 5,
+        "sha256": "296ba569c6efaa95232e161568adc0c0ad1e78d86d3e7caa0ac0acc76064055e"
+      },
+      "artifact-template-design-report": {
+        "files": 5,
+        "sha256": "e0f26474814f57d92f7220fa4550cabff63e854986d494c1c343427bb1fc16c6"
+      },
+      "artifact-template-experiment-analysis": {
+        "files": 5,
+        "sha256": "48481fb2743201d45a098774b6b1f82818f349b5e30584ff6f69dab0fb4486c1"
+      },
+      "artifact-template-financial-budget": {
+        "files": 5,
+        "sha256": "3ddf53a5c6efa87dca508f47b186c5a220cea98e46060ea28d79f72ddbc7f97f"
+      },
+      "artifact-template-investment-committee-memo": {
+        "files": 5,
+        "sha256": "96584c86c41ac676de146fb4a8b1427ae39e74c9864a7637d055497d5cf6589a"
+      },
+      "artifact-template-legal-memorandum": {
+        "files": 5,
+        "sha256": "b9f418fdf7273cb525be35e99b43027776a13974053944681ca0839accc1aefd"
+      },
+      "artifact-template-market-trends-report": {
+        "files": 5,
+        "sha256": "b9ce81fdb0bc9f5766847b70a7ef7839eca4e71bbb6728b63df93e6b3ea0fa63"
+      },
+      "artifact-template-minimal-letterhead": {
+        "files": 5,
+        "sha256": "de04e6c53ed3677be6064e98eb8b8a7aa690a763d6c02145de43c44c162e2c49"
+      },
+      "artifact-template-operating-calendar": {
+        "files": 5,
+        "sha256": "4acef50ce49edb27d5e3223c1efebdf2941233102163ac402f99607cdaed3045"
+      },
+      "artifact-template-operating-review": {
+        "files": 5,
+        "sha256": "93eb26125994e133263a240390a78da6248134a3f6391ef07bc258c61cc7cbd7"
+      },
+      "artifact-template-project-kickoff": {
+        "files": 5,
+        "sha256": "87b0574d5ab97b135d91cc3823d161d133f323c5a15cb4f1087719f0f03c15c5"
+      },
+      "artifact-template-project-tracker": {
+        "files": 5,
+        "sha256": "b2c0d388febfc27a66865976baefe3d334850b7a912bc9a94dfd8d1bad49abdf"
+      },
+      "artifact-template-sales-pipeline": {
+        "files": 5,
+        "sha256": "ee87ecc2f68615811f4726305fa965937a303ed8d73561c56473d84eee37fac0"
+      },
+      "artifact-template-simple-dark-mode": {
+        "files": 5,
+        "sha256": "19905cc1cc6c91643376597fc9a319ea683ee18fbf20b224057a65b9f967ab9c"
+      },
+      "artifact-template-simple-light-mode": {
+        "files": 5,
+        "sha256": "866ff4dde38bbd309f2086592fc8b860da0e7b3efe764c2d857002a6f501f208"
+      },
+      "artifact-template-strategy-memorandum": {
+        "files": 5,
+        "sha256": "b9a993f11d611789fd083f8e0f670d945d76df7473761df40138b64d21b6adc8"
+      },
+      "artifact-template-system-design": {
+        "files": 5,
+        "sha256": "bf852fb0f42ac46f9ac3615763b685e99d7ce4073a24a546e1d258c244d57ebe"
+      },
+      "artifact-template-team-alignment": {
+        "files": 5,
+        "sha256": "7381b9eed1e4251c926d96375113eb852ed53fbd2c343a19df2a29abd9c356f4"
+      },
+      "artifact-template-three-statement-forecast": {
+        "files": 5,
+        "sha256": "4af87f33741d5980967e4e31db41fa965a248fea187eb9eaae0bb7b32c88285f"
+      }
+    },
+    "openai-curated-remote/plugin-management/0.1.0": {
+      "plugin-management": {
+        "files": 1,
+        "sha256": "16f3c322658f4e0abcd4d6b840d239a288d8e29436c71b74499a6572c754f48b"
+      }
+    },
+    "openai-curated/github/11c74d6b": {
+      "gh-address-comments": {
+        "files": 6,
+        "sha256": "d4ec4e065076475cfbaf3942417f32bd36995c112464adcc7d4ffe7c6f5901cf"
+      },
+      "gh-fix-ci": {
+        "files": 6,
+        "sha256": "b71a25d5a2d9ff1a6b7df404d07f6f362f0641acdee04c5ca89196ca8d94536c"
+      },
+      "github": {
+        "files": 4,
+        "sha256": "6c891787f953eb269809f874cf1f29f3cc76c38f78be027133980528274ad8fe"
+      },
+      "yeet": {
+        "files": 5,
+        "sha256": "e37a41aa5c9ea4de954e30de5376e28cdd9a43e93160dd129734ab2488fe3219"
+      }
+    },
+    "openai-curated/google-drive/11c74d6b": {
+      "google-docs": {
+        "files": 19,
+        "sha256": "fd835188afed11b045e28549dfd445dec23032cff243600be5d02e266238c83d"
+      },
+      "google-drive": {
+        "files": 10,
+        "sha256": "30d87887c716dd0144827b56652026716a5e972f0ca05f0f62885d48b7aeeeca"
+      },
+      "google-drive-comments": {
+        "files": 2,
+        "sha256": "38cd2e15d9375221d0eed81c5442e3b81dc910083f500024699c157a3fb7d547"
+      },
+      "google-sheets": {
+        "files": 11,
+        "sha256": "104e1005720234475af8b4b5acb1d4689473f695bf78ddcad860fe8715a9c080"
+      },
+      "google-slides": {
+        "files": 19,
+        "sha256": "a8d6f6348565e27c86d0d3224f23712602ea93438390f284ac429cf0a2ded634"
+      }
+    },
+    "openai-curated/superpowers/11c74d6b": {
+      "brainstorming": {
+        "files": 9,
+        "sha256": "31a3d0cda41af2d144e8d34412987454a2aa0e61ed76bea33c0f931d37c656a5"
+      },
+      "dispatching-parallel-agents": {
+        "files": 2,
+        "sha256": "271a0417ed4995c940e1009c3c5034d16d41e69d9a41dc85c1e0b3d054c051c9"
+      },
+      "executing-plans": {
+        "files": 2,
+        "sha256": "d60435b70a5480e068d10bf42574ba26cafb2e61fc45f994698cd1c6fb6f05ce"
+      },
+      "finishing-a-development-branch": {
+        "files": 2,
+        "sha256": "27b00ae5b9054e14ad73bb6b6c7b18873e277f3d2f90e6b56b45ef780fc587d8"
+      },
+      "receiving-code-review": {
+        "files": 2,
+        "sha256": "87fef0bc57bd5ff835f46df4d2fe865e752e24498a6ebd94dd69bb6960c71441"
+      },
+      "requesting-code-review": {
+        "files": 3,
+        "sha256": "4689b3f32d74477170ee9b5b8db8a88261a8c5ccff3f8f8874a55f52e7d24c48"
+      },
+      "subagent-driven-development": {
+        "files": 5,
+        "sha256": "52533aa0b8b48b996c2d2d86f5966b6746141ff4bed9f00a62aa2c9f1668c8d9"
+      },
+      "systematic-debugging": {
+        "files": 12,
+        "sha256": "ef5d27605ca1fe54b6077959b5bd9524057a905591a66069c34efa1cf40766de"
+      },
+      "test-driven-development": {
+        "files": 3,
+        "sha256": "90f505d2ce91c3dfbd0ed089b5e83610ce403b09fac1e318d7697d87e9dafe87"
+      },
+      "using-git-worktrees": {
+        "files": 2,
+        "sha256": "e35be293bbfc3084a4311fceb51a81598d2296cdfa5eb4d83865a8161e6449e1"
+      },
+      "using-superpowers": {
+        "files": 5,
+        "sha256": "8d553c67f6bd6a98f6e35536e79c6c9e51515a2bf7a21fddd7456b6ab9cce516"
+      },
+      "verification-before-completion": {
+        "files": 2,
+        "sha256": "d5fd9f9428c35962bf65b14ffe4d59f7fafb1e3c79480d460f65509c35c5e53d"
+      },
+      "writing-plans": {
+        "files": 3,
+        "sha256": "32a033195ae45e841b7ae637c6e907fd172e6e600a00841ab1ffb08c5a63405f"
+      },
+      "writing-skills": {
+        "files": 8,
+        "sha256": "219a2257bd0e1d0fe43cb32c84c2302a1f44dc7105ee4b8de1e92b0ae9a3912a"
+      }
+    }
+  },
+  "source_mirrors": {
+    "repos/architectural-execution-skills": {
+      "commit": "bb211111e000e679a8b5c12ea4cc9ae94790e719",
+      "dirty": false
+    },
+    "repos/brain-skill": {
+      "commit": "73789527637114b2a3745b2da9afa64fa8c1b7fa",
+      "dirty": false
+    },
+    "repos/codex": {
+      "commit": "85fc4def358b7df21883e72ae8dda43a0f572f32",
+      "dirty": false
+    },
+    "repos/diataxis-documentation-skill": {
+      "commit": "e84499968416a10baa909d613b67ca0f39533733",
+      "dirty": false
+    },
+    "repos/llama.cpp": {
+      "commit": "27df9199d16c393868d20b3ed28b4f72e30de6bd",
+      "dirty": false
+    },
+    "repos/observability-engineering": {
+      "commit": "47c7cbae453fac68062796c3a110913e30483127",
+      "dirty": false
+    },
+    "repos/observability-pipeline-skills": {
+      "commit": "fbf6149ae62868ae6847cb0f3fd52459e5c62a46",
+      "dirty": false
+    },
+    "repos/platform-observability-model": {
+      "commit": "123d65763d84aec699fb6d2281e278df56e03625",
+      "dirty": false
+    },
+    "repos/platform-reliability-model": {
+      "commit": "9b56152c4cb716865dd2b196bcbb849d453f1df2",
+      "dirty": true
+    },
+    "repos/playwright-mcp": {
+      "commit": "7e0457a7cbf88823bf0146d12c46ae12c6818247",
+      "dirty": false
+    },
+    "repos/reliability-engineering": {
+      "commit": "6785e245425ef5c84c57270fffc352000c893b8c",
+      "dirty": true
+    },
+    "repos/servers": {
+      "commit": "76d64c822f5125032f89eb71dbdb94e42b434821",
+      "dirty": false
+    },
+    "repos/slo-rules-engine": {
+      "commit": "4a5260bfb03231c11ab8f847262b3a8ad579cd5b",
+      "dirty": false
+    },
+    "skills": {
+      "commit": "49f948faa9258a0c61caceaf225e179651397431",
+      "dirty": false
+    }
+  },
+  "source_of_truth": "installed local workstation state"
+}
