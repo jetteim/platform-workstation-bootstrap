@@ -40,7 +40,7 @@ Canonical rules include operating principles for honesty, verification, scoped a
 The skill install order mirrors the original upstream setup:
 
 - Enable Superpowers through the native Codex plugin `superpowers@openai-curated`.
-- Do not clone or project Superpowers from `~/.codex/superpowers`; local vendored copies are historical fallback material only.
+- Do not clone or project Superpowers from `~/.codex/superpowers`; use the native plugin as its only install source.
 - Refuse unsafe `AGENTS_HOME`, `CODEX_HOME`, and `CLAUDE_HOME` overrides before creating directories.
 - Keep `~/.agents/skills` as a managed empty directory after the duplicate-skill cleanup.
 - Install source mirrors under `~/.agents/vendor_imports`.
@@ -95,18 +95,12 @@ This repo vendors full installable skill bundles, not only prompts:
 - `skills/plugins/github/*`
 - `skills/plugins/google-drive/*`
 
-The historical Superpowers vendored copy remains in `skills/superpowers/` for audit and fallback reference, but the bootstrap no longer installs it into `~/.agents/skills` or `~/.codex/skills`. Codex gets Superpowers from `superpowers@openai-curated`.
+Codex gets Superpowers from `superpowers@openai-curated`. Obsolete vendored Superpowers trees were removed; previous snapshots remain in Git history.
 
 `manifests/codex-skills.txt` records installed local skills and skill bundles present in the native and remote plugin caches, including Data Analytics, Deep Research, templates, and plugin management. Cache presence does not establish that a skill is enabled or exposed in a session. Remote plugins are not vendored or installed by this repository.
 
-The archived Superpowers `brainstorming` bundle includes:
-
-- `skills/superpowers/brainstorming/SKILL.md`
-- `skills/superpowers/brainstorming/visual-companion.md`
-- `skills/superpowers/brainstorming/spec-document-reviewer-prompt.md`
-- `skills/superpowers/brainstorming/scripts/*`
-
 `scripts/install-skills.sh` leaves `~/.agents/skills` empty, installs vendored and source-backed local Codex skills into `~/.codex/skills`, installs only the local Google Drive helper skills under `~/.codex/skills/plugin-google-drive`, and places full plugin-skill fallbacks under `~/.claude/skills` for Claude.
+`agents/skills/codex-curated/` contains Codex-only system, document, and ZenMoney skills. Shared platform skills live under `agents/skills/platform/` and are staged once for each adapter.
 The architectural execution skill pipeline is installed from `jetteim/architectural-execution-skills` when the source mirror is available, with vendored fallback copies under `skills/codex/`.
 The agent-ready CLI skill is canonical under `agents/skills/platform/engineering-agent-ready-clis/`, projected to Codex and Claude, and vendored under `skills/codex/engineering-agent-ready-clis/` for clean-machine bootstrap.
 The agent-agnostic Diátaxis documentation skill is installed from `jetteim/diataxis-documentation-skill`, projected unchanged to Codex and Claude, and vendored under `skills/codex/writing-diataxis-documentation/` for clean-machine bootstrap. It uses a Superpowers-style dialogue: one question at a time, recommended content approaches, progressive outline approval, a gate before drafting, and final user review.

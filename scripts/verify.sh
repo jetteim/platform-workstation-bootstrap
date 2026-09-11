@@ -299,12 +299,35 @@ if [ -f "$brain_run_summary" ] && ! grep -q '"sample_prediction": "destructive"'
   exit 1
 fi
 
-test -f "$repo_root/skills/superpowers/brainstorming/SKILL.md"
-test -f "$repo_root/skills/superpowers/brainstorming/visual-companion.md"
-test -f "$repo_root/skills/superpowers/brainstorming/spec-document-reviewer-prompt.md"
-test -x "$repo_root/skills/superpowers/brainstorming/scripts/start-server.sh"
-test -x "$repo_root/skills/superpowers/brainstorming/scripts/stop-server.sh"
-grep -q '^name: brainstorming$' "$repo_root/skills/superpowers/brainstorming/SKILL.md"
+# Superpowers is plugin-owned; duplicate local bundles must not return.
+test ! -e "$repo_root/skills/superpowers"
+test ! -e "$repo_root/agents/skills/superpowers"
+for platform_skill in "$repo_root/agents/skills/platform/"*; do
+  test ! -e "$repo_root/agents/skills/codex-curated/$(basename "$platform_skill")"
+done
+
+# The two staging collections must compose the complete Codex fallback exactly.
+# This catches accidentally deleting the only source while removing duplicates.
+python3 - "$repo_root" <<'PY'
+from pathlib import Path
+import sys
+
+root = Path(sys.argv[1])
+
+def files(path):
+    return {
+        str(p.relative_to(path)): p.read_bytes()
+        for p in path.rglob("*")
+        if p.is_file() and "__pycache__" not in p.parts
+        and p.name != ".DS_Store" and p.suffix != ".pyc"
+    }
+
+curated = files(root / "agents/skills/codex-curated")
+platform = files(root / "agents/skills/platform")
+assert not curated.keys() & platform.keys(), "duplicate staged skill files"
+assert {**curated, **platform} == files(root / "skills/codex"), "incomplete Codex fallback projection"
+print("[verify] deduplicated skill staging matches the complete fallback")
+PY
 
 skill_count="$(find "$repo_root/skills" -name SKILL.md | wc -l | tr -d ' ')"
 if [ "$skill_count" -lt 40 ]; then
@@ -411,8 +434,7 @@ for required in \
   "$repo_root/skills/codex/engineering-agent-ready-clis/SKILL.md" \
   "$repo_root/skills/codex/writing-diataxis-documentation/SKILL.md" \
   "$repo_root/skills/plugins/github/yeet/SKILL.md" \
-  "$repo_root/skills/plugins/google-drive/google-drive/SKILL.md" \
-  "$repo_root/skills/superpowers/test-driven-development/SKILL.md"; do
+  "$repo_root/skills/plugins/google-drive/google-drive/SKILL.md"; do
   test -f "$required"
 done
 

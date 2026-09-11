@@ -104,13 +104,12 @@ This repository vendors full copies of the installed skill bundles so a clean ma
 Vendored paths:
 
 ```text
-skills/superpowers/
 skills/codex/
 skills/plugins/github/
 skills/plugins/google-drive/
 ```
 
-`skills/superpowers/` is retained as archived fallback/reference material. The active Codex install path is the `superpowers@openai-curated` plugin.
+Superpowers is installed only through the `superpowers@openai-curated` plugin. Obsolete vendored copies were removed; older versions remain in Git history.
 
 `skills/codex/` comes from the local Codex user skill directory, including system skills and installed document/spreadsheet/PDF/notebook skills.
 
@@ -130,7 +129,7 @@ The captured Codex `0.154.0` system bundle includes `review-agent` and the curre
 
 `skills/codex/orchestrating-architecture-execution/` and its companion value-stream, capability, feature, C4, story-slicing, and traceability skills come from `jetteim/architectural-execution-skills` and are installed as fallbacks when the source mirror is unavailable.
 
-`skills/plugins/github/` and `skills/plugins/google-drive/` retain the locally installed Claude fallback bundles plus Codex Google Drive extensions. The active native Google Drive plugin has newer core skills; its version and skill hashes are recorded separately in `manifests/local-state.json`. The archived Superpowers bundles likewise remain reference material rather than an active installation source.
+`skills/plugins/github/` and `skills/plugins/google-drive/` retain the locally installed Claude fallback bundles plus Codex Google Drive extensions. The active native Google Drive plugin has newer core skills; its version and skill hashes are recorded separately in `manifests/local-state.json`. Superpowers has no vendored fallback; the native plugin is its only install source.
 
 The vendored bundles are fallback/bootstrap material. Prefer refreshing the upstream forks first, then use these copies when a clean machine has not yet populated adapter skills or plugin caches. Codex uses plugin-provided GitHub, Superpowers, and core Google Drive skills; only local Google Drive helper skills are projected under `~/.codex/skills/plugin-google-drive`.
 

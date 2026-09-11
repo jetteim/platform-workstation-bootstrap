@@ -41,9 +41,9 @@ Bootstrap match:
 - Leaves `~/.agents/skills` managed empty after the duplicate-skill cleanup.
 - Refuses unsafe `AGENTS_HOME`, `CODEX_HOME`, and `CLAUDE_HOME` overrides before creating directories.
 - Sets `features.multi_agent = true` alongside `features.hooks = true`.
-- Keeps the vendored `skills/superpowers/` tree only as archived fallback/reference material.
+- Uses the native plugin as the only Superpowers install source; obsolete vendored trees were removed.
 
-Important: the installer does not delete an existing `~/.codex/superpowers` checkout. It simply stops using it as an install source. For source-backed skills under `~/.agents/vendor_imports/repos`, dirty mirrors are not used as install inputs; vendored canonical copies are used instead.
+The installer does not delete an existing `~/.codex/superpowers` checkout. The 2026-09-11 housekeeping moved this workstation’s unused clean checkout to `~/.agents/archive/superpowers-2026-09-11` for rollback; it is outside active skill discovery paths. For source-backed skills under `~/.agents/vendor_imports/repos`, dirty mirrors are not used as install inputs; vendored canonical copies are used instead.
 
 ## OpenAI Skills
 

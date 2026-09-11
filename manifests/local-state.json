@@ -300,6 +300,7 @@
   ],
   "git_hooks_path": "~/.config/git/hooks",
   "git_pre_commit_sha256": "0a7d787eb8701f10dea08b47d931db3cb70cde32452a21658a3db7de3c074862",
+  "legacy_superpowers_checkout_present": false,
   "managed_files": {
     ".agents/hooks": {
       "files": 2,
@@ -334,7 +335,7 @@
       "0.0.80"
     ]
   },
-  "observed_at": "2026-09-11T16:29:52.029213+00:00",
+  "observed_at": "2026-09-11T16:35:38.711128+00:00",
   "pip_user": [
     "certifi==2026.2.25",
     "charset-normalizer==3.4.7",

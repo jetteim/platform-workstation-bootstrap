@@ -90,6 +90,7 @@ def main():
             for name in [".agents/rules", ".agents/hooks", ".agents/prompts", ".codex/hooks"]
         },
         "agents_skills_empty": not any((home / ".agents/skills").iterdir()),
+        "legacy_superpowers_checkout_present": (home / ".codex/superpowers").exists(),
         "git_hooks_path": run("git", "config", "--global", "core.hooksPath").replace(str(home), "~"),
         "git_pre_commit_sha256": hashlib.sha256(
             (home / ".config/git/hooks/pre-commit").read_bytes()
