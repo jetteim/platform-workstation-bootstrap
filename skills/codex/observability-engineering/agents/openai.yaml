@@ -1,0 +1,4 @@
+interface:
+  display_name: "Observability Engineering"
+  short_description: "Build reviewed telemetry bindings and backend artifacts"
+  default_prompt: "Use $observability-engineering for the requested scope and report verification evidence."

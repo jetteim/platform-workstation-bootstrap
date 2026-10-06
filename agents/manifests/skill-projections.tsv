@@ -24,3 +24,5 @@ codex-curated	agents/skills/codex-curated	yes	no	codex-curated
 categorize-zenmoney-receipts	agents/skills/codex-curated/categorize-zenmoney-receipts	yes	no	codex-local
 find-zenmoney-savings	agents/skills/codex-curated/find-zenmoney-savings	yes	no	codex-local
 review-zenmoney-categories	agents/skills/codex-curated/review-zenmoney-categories	yes	no	codex-local
+
+cli-creator	agents/skills/codex-curated/cli-creator	yes	no	codex-curated

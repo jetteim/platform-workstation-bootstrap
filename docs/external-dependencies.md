@@ -138,3 +138,21 @@ Managed skill destinations are synced from staged bootstrap trees, not overlaid 
 Dirty source mirrors are preserved but skipped as install inputs. This prevents local mirror edits from leaking into projected skills while keeping those edits available for manual recovery.
 
 For the line-by-line comparison with original install instructions, see `docs/original-install-comparison.md`.
+
+## Skill refresh after the 6 October review
+
+Reviewed source packages and projections were updated for A1–A12; CLI creator was added from the pinned curated catalog with the refinements recorded in its `references/provenance.md`. Runtime system/plugin ownership is unchanged. See [skill-lifecycle.md](skill-lifecycle.md) for conditional S1/S3 proposals and the implemented S2 split, and `agents/manifests/skill-snapshots.json` for complete package hashes and local source revisions. Run the drift gate before source adoption; do not replace refinements by blindly copying a refreshed checkout. Behavioral evaluator infrastructure is synthetic/opt-in, not proof of a model baseline.
+
+## Published reviewed skill sources — 6 October 2026
+
+These are the source commits adopted by the reviewed snapshots, distinct from the earlier managed-mirror inventory above. Package bytes are checked against `agents/manifests/skill-snapshots.json`; the source revision fields now identify committed, published skill contents.
+
+| Source repository | Published commit |
+| --- | --- |
+| `architectural-execution-skills` | [`026d845`](https://github.com/jetteim/architectural-execution-skills/commit/026d8454037edfbd6670c599f82ebdc7362255ce) |
+| `observability-engineering` | [`290d684`](https://github.com/jetteim/observability-engineering/commit/290d68402d30a3091ddc32235218bf0f053d0c6a) |
+| `observability-pipeline-skills` | [`bc40b5c`](https://github.com/jetteim/observability-pipeline-skills/commit/bc40b5c8991e491199a2d14d1c7602451f95da50) |
+| `reliability-engineering` | [`2266054`](https://github.com/jetteim/reliability-engineering/commit/2266054410119aa7f2edcb676732d8f83396da8a) |
+| `zenmoney-receipts` | [`a22449d`](https://github.com/jetteim/zenmoney-receipts/commit/a22449d3fb76e307fee36658c4ad10f70404967d) |
+
+The [saved skill review](reviews/2026-10-06-skills/PUBLICATION.md) records coverage, proposals and verification. Existing dependency mirrors and live agent homes were not refreshed by this publication.

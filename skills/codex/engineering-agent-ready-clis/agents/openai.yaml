@@ -1,4 +1,4 @@
 interface:
-  display_name: "Agent-Ready CLI Engineering"
-  short_description: "Design and audit CLIs for reliable agent use"
-  default_prompt: "Use $engineering-agent-ready-clis to assess and improve this CLI for safe AI-agent operation."
+  display_name: "Agent-Ready CLI Audit and Retrofit"
+  short_description: "Audit and retrofit existing CLI/MCP interfaces"
+  default_prompt: "Use $engineering-agent-ready-clis to audit or retrofit this existing interface, with evidence for safety and schema parity."

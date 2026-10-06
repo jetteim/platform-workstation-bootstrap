@@ -1,6 +1,6 @@
 ---
 name: google-sheets
-description: Analyze and edit connected Google Sheets with range precision. Use when the user wants to find a spreadsheet, inspect tabs or ranges, search rows, plan formulas, clean or restructure tables, write concise summaries, or make explicit cell-range updates.
+description: "Analyze and edit connected Google Sheets with range precision. Use when the user wants to find a spreadsheet, inspect tabs or ranges, search rows, plan formulas, clean or restructure tables, write concise summaries, or make explicit cell-range updates."
 ---
 
 # Google Sheets
@@ -29,3 +29,7 @@ Use this skill to keep spreadsheet work grounded in the exact spreadsheet, sheet
 ## References
 
 - For raw Sheets write shapes and example `batch_update` bodies, read `./references/batch-update-recipes.md`.
+
+## Connected capability boundary
+
+Check the runtime exposes the exact reads and mutations needed for this operation. These skills use the Google Drive app/plugin; do not invent a Google MCP server or automatically connect an account. Missing tooling permits a bounded explanation or supplied-file analysis, not fabricated IDs, writes or verification.

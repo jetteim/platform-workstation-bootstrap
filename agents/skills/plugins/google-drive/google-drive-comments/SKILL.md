@@ -1,6 +1,6 @@
 ---
 name: google-drive-comments
-description: Write, reply to, and resolve Google Drive comments on Docs, Sheets, Slides, and Drive files with evidence-backed location context. Use when the user asks to leave comments, review a file with comments, respond to comment threads, or resolve Drive comments.
+description: "Write, reply to, and resolve Google Drive comments on Docs, Sheets, Slides, and Drive files with evidence-backed location context. Use when the user asks to leave comments, review a file with comments, respond to comment threads, or resolve Drive comments."
 ---
 
 # Google Drive Comments
@@ -21,7 +21,7 @@ Use this skill for comment workflows in the unified Google Drive plugin. Drive c
 
 3. Draft all intended comment updates before writing.
 - Prefer one `bulk_update_file_comments` call for all creates, replies, and resolves in the same user request.
-- Keep the batch to the action limit exposed by the tool. If the request needs more comments than the limit, ask before splitting into another batch.
+- Keep the batch to the action limit exposed by the tool. Split the explicitly authorized comment set into bounded batches until complete. Keep the same targets and content scope; verify created comment IDs before retrying an uncertain batch to avoid duplicates. Ask only when the requested content or targets remain unresolved.
 - For replies and resolves, use existing comment IDs from the live comment thread data.
 
 4. Attach surface-specific evidence to every new top-level comment.
@@ -44,3 +44,7 @@ Use this skill for comment workflows in the unified Google Drive plugin. Drive c
 
 - Do not rely on Drive comment `anchor` data for Google Docs, Sheets, or Slides unless the connector explicitly documents a provider-supported shape for that surface. Drive API-created comments may still display as unanchored in the Google editor UI.
 - The evidence fields are the durable location contract for this workflow: exact quoted text for Docs and text-like files, sheet/cell range for Sheets, and slide number plus visible text for Slides.
+
+## Connected capability boundary
+
+Check the runtime exposes the exact reads and mutations needed for this operation. These skills use the Google Drive app/plugin; do not invent a Google MCP server or automatically connect an account. Missing tooling permits a bounded explanation or supplied-file analysis, not fabricated IDs, writes or verification.

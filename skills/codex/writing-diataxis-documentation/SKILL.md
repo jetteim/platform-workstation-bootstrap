@@ -1,6 +1,6 @@
 ---
 name: writing-diataxis-documentation
-description: Create, revise, or review technical documentation around a reader need using Diátaxis. Use for tutorials, how-to guides, reference, explanations, READMEs, and runbooks; preserve delegated judgment and scale dialogue to missing decisions.
+description: "Create, revise, or review technical documentation around a reader need using Diátaxis. Use for tutorials, how-to guides, reference, explanations, READMEs, and runbooks; preserve delegated judgment and scale dialogue to missing decisions."
 ---
 
 # Write Diátaxis Documentation

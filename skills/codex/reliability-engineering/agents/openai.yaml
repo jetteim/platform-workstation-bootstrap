@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reliability Engineering"
+  short_description: "Choose reliability intent and evidence-based objectives"
+  default_prompt: "Use $reliability-engineering for the requested scope and report verification evidence."

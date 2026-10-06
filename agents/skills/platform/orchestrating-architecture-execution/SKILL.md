@@ -1,9 +1,12 @@
 ---
 name: orchestrating-architecture-execution
-description: Use when an idea, initiative, architecture change, roadmap item, epic, or vague product request needs to become a coherent pipeline of value stream, capability, feature, story, architecture, spec, plan, implementation, and verification artifacts.
+description: Route an initiative from unclear intent to the smallest useful architecture and delivery artifacts, then verified execution.
 ---
 
 # Orchestrating Architecture Execution
+
+Preserve the supplied artifact structure and selected abstraction level. Produce only what the current decision needs; one complete story or brief can be sufficient. Existing authorization covers routine local implementation and verification. Ask only about unresolved material choices or an expanded action.
+
 
 ## Overview
 
@@ -21,9 +24,9 @@ Use the named skill at each level when it is installed. If a named skill is not 
 | Scope | `shaping-capabilities` | Capability map | Each capability changes business or operational ability, not just a component |
 | Delivery | `shaping-features` | Feature packets | Each feature is valuable, testable, bounded, and has architecture impact noted |
 | Architecture | `modeling-c4-architecture` | C4 decision views | Diagrams answer specific stakeholder questions at the right zoom level |
-| Implementation | `slicing-stories` | Story packets and spec handoff | No more than 7-10 active stories are needed to hold the implementation context |
+| Implementation | `slicing-stories` | Story packets and spec handoff | The active slice is bounded and the acceptance criteria are testable |
 | Integrity | `reviewing-traceability` | Traceability review | Every story traces upward and every architecture decision traces downward |
-| Code | Complementary workflow skills | Design spec, plan, implementation | Use `superpowers:brainstorming`, `superpowers:writing-plans`, `superpowers:test-driven-development`, and `superpowers:verification-before-completion` when installed; otherwise use equivalent runtime workflows |
+| Code | Complementary workflow skills | Design spec, plan, implementation | Use available workflows proportional to the task, with evidence before completion |
 
 ## Routing Rules
 
@@ -34,17 +37,13 @@ Start at the highest level that is unclear. Do not create all artifacts by defau
 - If the user brings a capability or epic-like chunk, use `shaping-features` when installed; otherwise use an equivalent feature-shaping workflow.
 - If architecture boundaries, ownership, integration, data, or deployment are unclear, use `modeling-c4-architecture` when installed; otherwise use an equivalent C4 architecture-modeling workflow before story slicing.
 - If the user brings a feature and wants implementation, use `slicing-stories` when installed; otherwise use an equivalent story-slicing workflow, then hand off to `superpowers:writing-plans` when installed or an equivalent implementation-planning workflow.
-- Before implementation, use `reviewing-traceability` when installed; otherwise use an equivalent traceability-review workflow when there is more than one abstraction level or more than 7-10 stories.
+- Before implementation, use `reviewing-traceability` when installed; otherwise use an equivalent traceability-review workflow when there is more than one abstraction level or a complex active slice.
 
-## Complementary Workflow Skills
+## Complementary workflows
 
-Do not reimplement these workflows:
+Use available discovery, planning, implementation and verification workflows when they improve this task. Do not require a companion package, a test-first ritual or delegation for routine reversible work. Use tests appropriate to the behavior and risk; obtain evidence before claiming completion.
 
-- **Required when shaping ambiguous levels:** Use `superpowers:brainstorming` when installed; otherwise use an equivalent design-discovery workflow.
-- **Required when turning approved specs into implementation work:** Use `superpowers:writing-plans` when installed; otherwise use an equivalent implementation-planning workflow.
-- **Required when coding features or fixes:** Use `superpowers:test-driven-development` when installed; otherwise use an equivalent test-first workflow.
-- **Recommended for executing plans:** Use `superpowers:subagent-driven-development` when installed and independent task execution is available; otherwise use `superpowers:executing-plans` when installed or an equivalent plan-execution workflow.
-- **Required before claiming completion:** Use `superpowers:verification-before-completion` when installed; otherwise use an equivalent evidence-before-claims workflow.
+Existing authorization covers ordinary implementation and local verification. Ask only for an unresolved material decision or a newly expanded action. Do not produce all hierarchy levels or require routine reapproval. Delegation requires authorization from the session or applicable instructions.
 
 ## Anti-Cliches
 
@@ -54,7 +53,7 @@ Reject these failure modes:
 - Architecture theater: diagrams that do not change a decision.
 - SAFe cosplay: roles, events, and labels copied without helping execution.
 - SDD paperwork: specs that describe everything except the next executable slice.
-- Context overload: more than 7-10 active stories or decisions in the human working set.
+- Context overload: an active slice too large to understand and verify.
 
 ## Artifact Shape
 

@@ -1,6 +1,6 @@
 ---
 name: google-slides-import-presentation
-description: Import a local `.ppt`, `.pptx`, or `.odp` file into Google Slides, verify the resulting native deck, and hand it off to the right follow-on workflow. Use when the user wants to convert a presentation file into a native Google Slides deck before follow-on work.
+description: "Convert a local PPT, PPTX or ODP to native Google Slides when that destination is explicit or established; verify the imported deck."
 ---
 
 # Google Slides Import Presentation
@@ -37,10 +37,10 @@ If `import_presentation` is unavailable, stop and say the file cannot be convert
 - Use thumbnails for spot checks when layout fidelity matters or the user plans formatting cleanup next.
 
 5. Hand off to the right next skill.
-- Use [google-slides](../google-slides/SKILL.md) for general summaries or edits.
+- Use the available `google-slides` skill for general summaries or edits; if absent, perform the bounded read/edit workflow with the available connected actions.
 - Use [google-slides-visual-iteration](../google-slides-visual-iteration/SKILL.md) for post-import slide formatting cleanup.
 - Use [google-slides-template-migration](../google-slides-template-migration/SKILL.md) when the imported deck should move onto a branded template.
-- If import drift requires visible layout cleanup on a slide, follow [visual-change-loop](../google-drive/references/slides/visual-change-loop.md) through the third fresh review instead of stopping after one cosmetic pass.
+- If import drift requires visible layout cleanup on a slide, follow [visual-change-loop](../google-drive/references/slides/visual-change-loop.md) until the requested outcome is verified, without unnecessary additional writes.
 
 ## Rules
 
@@ -48,7 +48,7 @@ If `import_presentation` is unavailable, stop and say the file cannot be convert
 - Preserve source slide order and content by default.
 - Do not promise perfect fidelity for animations, transitions, SmartArt, or other Office-specific features.
 - If import introduces layout drift, fix it in the native Google Slides deck rather than editing the source file.
-- When the user says "edit this PPTX," import first and then operate on the resulting Google Slides deck.
+- A request to "edit this PPTX" preserves the local file workflow unless Google Slides conversion is explicit or already established. Use an available local presentation workflow, or explain the missing capability; do not upload/import by assumption.
 
 ## Output
 
@@ -65,3 +65,7 @@ If `import_presentation` is unavailable, stop and say the file cannot be convert
 ## Light Fallback
 
 If the file is missing, unreadable, or the runtime cannot import it, say that presentation import may be unavailable or the provided file may be invalid, then ask for a valid local file or a connected Google Slides deck instead.
+
+## Connected capability boundary
+
+Check the runtime exposes the exact reads and mutations needed for this operation. These skills use the Google Drive app/plugin; do not invent a Google MCP server or automatically connect an account. Missing tooling permits a bounded explanation or supplied-file analysis, not fabricated IDs, writes or verification.

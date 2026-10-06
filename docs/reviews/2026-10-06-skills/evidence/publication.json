@@ -1,0 +1,29 @@
+{
+  "recorded_at_utc": "2026-10-06T14:03:12.474114+00:00",
+  "source_commits": {
+    "architectural-execution-skills": "026d8454037edfbd6670c599f82ebdc7362255ce",
+    "observability-engineering": "290d68402d30a3091ddc32235218bf0f053d0c6a",
+    "observability-pipeline-skills": "bc40b5c8991e491199a2d14d1c7602451f95da50",
+    "reliability-engineering": "2266054410119aa7f2edcb676732d8f83396da8a",
+    "zenmoney-receipts": "a22449d3fb76e307fee36658c4ad10f70404967d"
+  },
+  "source_pushes": "verified successful to origin/main",
+  "zenmoney_published_snapshot": {
+    "application_tests_passed": 86,
+    "hosted_tests_skipped": 1,
+    "runner_simulations_passed": 6,
+    "build_and_smoke": "passed",
+    "pre_existing_correction": "preserved locally, not committed"
+  },
+  "bootstrap_source_revisions": "updated to the published commits",
+  "actual_model_runs": 0,
+  "bootstrap_commit": "the commit containing this record; verify with Git history and origin/main",
+  "rollback": "Use scoped reverts of the published maintenance commits; preserve unrelated local changes.",
+  "bootstrap_verification": {
+    "command": "./scripts/verify.sh",
+    "passed": true,
+    "offline_tests": 18,
+    "reviewed_packages": 41,
+    "required_source_drift_check": "passed"
+  }
+}

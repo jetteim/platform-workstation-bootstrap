@@ -11,4 +11,8 @@ done
 python3 -m compileall -q "$repo_root/agents/hooks" "$repo_root/agents/adapters/codex/hooks" \
   "$repo_root/codex/hooks" "$repo_root/scripts" "$repo_root/git/hooks/scan-staged.py"
 python3 "$repo_root/scripts/test-harness.py"
+python3 "$repo_root/scripts/test-skill-evaluator.py"
+python3 "$repo_root/scripts/test-skill-drift.py"
+python3 "$repo_root/scripts/test-brain-tokenizer.py"
+python3 "$repo_root/scripts/check-skill-drift.py"
 echo "[verify] ok"

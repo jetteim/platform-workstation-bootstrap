@@ -1,19 +1,22 @@
 ---
 name: engineering-agent-ready-clis
-description: Design, audit, or retrofit a CLI or MCP interface for agent use, including structured I/O, discovery, bounded responses, validation, and mutation previews. Use when agent readiness is part of the requested outcome.
+description: "Audit, verify or retrofit an existing CLI/MCP interface for agent use: adversarial input validation, safe previews, bounded I/O and shared-schema parity."
 ---
 
 # Engineer Agent-Ready CLIs
 
 Treat the agent as a fast, fallible, untrusted operator. Preserve human ergonomics, but build a deterministic machine contract and defense-in-depth underneath it.
 
-Read [references/agent-cli-contract.md](references/agent-cli-contract.md) before designing, implementing, or reviewing a CLI. Read [references/assessment-rubric.md](references/assessment-rubric.md) when scoring readiness or prioritizing retrofit work.
+Read [references/agent-cli-contract.md](references/agent-cli-contract.md) before retrofitting, verifying or reviewing a CLI. Read [references/assessment-rubric.md](references/assessment-rubric.md) when scoring readiness or prioritizing retrofit work.
+
+For ordinary new CLI creation use `cli-creator` when available. Use this skill for explicit readiness audits, retrofits or schema/MCP parity; do not activate it merely because a CLI is being created. If the creator is absent, use its bounded composable-command workflow without claiming this audit ran.
+
+Secrets never belong in command-line flags, history, logs, captured output or examples. Use supported environment/config or secure credential storage; diagnostics report source category only. These workstation rules override permissive upstream examples.
 
 ## Establish the target
 
 Classify the task as one or more of:
 
-- **Design**: define a new command and machine interface.
 - **Retrofit**: add agent-safe paths without breaking the human interface.
 - **Audit**: collect evidence and identify gaps without changing code.
 - **Verify**: test an implementation against explicit requirements.

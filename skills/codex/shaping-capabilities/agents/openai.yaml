@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shaping Capabilities"
+  short_description: "Turn an outcome or epic into capability increments with hypoth"
+  default_prompt: "Use $shaping-capabilities to turn an outcome or epic into capability increments with hypotheses, dependencies and feature candidates."

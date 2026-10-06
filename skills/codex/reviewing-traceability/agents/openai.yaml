@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reviewing Traceability"
+  short_description: "Check coherence between supplied outcome, architecture and del"
+  default_prompt: "Use $reviewing-traceability to check coherence between supplied outcome, architecture and delivery artifacts before execution; identify gaps and orphan decisions."

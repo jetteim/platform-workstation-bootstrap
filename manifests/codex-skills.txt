@@ -101,3 +101,5 @@ system:skill-installer
 work-pets:create-pet
 work-pets:pets
 work-pets:update-pet
+
+cli-creator

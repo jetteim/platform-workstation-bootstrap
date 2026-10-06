@@ -38,7 +38,7 @@ terraform validate
 terraform plan -refresh=false -out=tfplan
 ```
 
-Datadog generated files must include tags derived from semantic attributes such as `service.name`, `deployment.environment`, `service.owner`, and source-intent IDs.
+Datadog generated files must include tags derived from semantic attributes such as `service.name`, `deployment.environment.name`, `service.owner`, and source-intent IDs.
 
 ## Elastic Terraform
 

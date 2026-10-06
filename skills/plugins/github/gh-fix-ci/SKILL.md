@@ -12,7 +12,7 @@ Use this skill when the task is specifically about failing GitHub Actions checks
 
 - Use the GitHub app from this plugin for PR metadata, changed files, and review context.
 - Use `gh` for GitHub Actions checks and logs because the connector does not expose that workflow end to end.
-- Summarize the root cause first, propose a focused fix plan, and implement only after explicit approval.
+- Summarize the root cause first, propose a focused fix plan, and implement within the user’s existing authorization.
 
 Prereq: authenticate with GitHub CLI once, then confirm with `gh auth status`. Repo and workflow scopes are typically required for Actions inspection.
 
@@ -54,9 +54,9 @@ Prereq: authenticate with GitHub CLI once, then confirm with `gh auth status`. R
 5. Summarize failures for the user.
    - Provide the failing check name, run URL (if any), and a concise log snippet.
    - Call out missing logs explicitly and do not over-claim certainty.
-6. Propose a focused fix plan and wait for approval.
+6. State a focused fix plan and continue already-authorized local fixes. Ask only about unresolved material choices or newly expanded actions.
    - Keep the plan tied directly to the failing checks and the observed root cause.
-7. Implement after approval.
+7. Implement within authorized scope; a read-only review remains read-only.
    - Apply the approved fix locally.
    - Run the most relevant local verification available.
 8. Recheck status and summarize residual risk.

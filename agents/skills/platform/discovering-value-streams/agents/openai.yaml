@@ -1,0 +1,4 @@
+interface:
+  display_name: "Discovering Value Streams"
+  short_description: "Frame an unclear initiative around customer outcomes, value-st"
+  default_prompt: "Use $discovering-value-streams to frame an unclear initiative around customer outcomes, value-stream boundaries, flow and measures before delivery decomposition."

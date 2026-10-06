@@ -1,6 +1,6 @@
 ---
 name: google-slides
-description: Inspect, create, import, summarize, and update Google Slides presentations through connected Google Slides data. Use when the user wants to find a deck, read slide structure, summarize a presentation or specific slide, understand charts, graphs, or other slide visuals by combining slide text with thumbnail-based image understanding, create a new presentation, import a `.ppt`, `.pptx`, or `.odp`, or make general content edits in Google Slides. For visual polish on an existing deck, such as formatting cleanup, alignment fixes, overflow cleanup, or slide-by-slide deck cleanup, prefer `google-slides-visual-iteration`.
+description: "Read, create or edit a connected Google Slides presentation. Route visual polish, template migration and file conversion to their focused helpers."
 ---
 
 # Google Slides
@@ -52,7 +52,7 @@ Confirm the runtime exposes the relevant Google Slides actions before editing:
 - For slide summaries or inspection, do not rely on text extraction alone when a slide contains charts, graphs, screenshots, diagrams, or image-heavy content.
 - Use `get_slide_thumbnail` alongside text/structure reads when visual evidence matters so the summary reflects both what the slide says and what the slide shows.
 - If a candidate slide has little useful extracted text but may still contain relevant evidence in a chart, screenshot, or diagram, inspect its thumbnail before ruling it out.
-- If the thumbnail response includes an `image_asset_pointer`, image content part, or other rendered image artifact, inspect that returned image directly as the slide image input. The response may also include `contentUrl` metadata; prefer the returned image content for visual understanding instead of downloading that URL or relying only on metadata.
+- If the thumbnail response includes an `image_asset_pointer`, image content part, or other rendered image artifact, inspect that returned image directly as the slide image input. An image artifact must actually be opened for pixel inspection. If it is inaccessible, use a supported retrieval/export path or report the visual-verification limit; tool success or URL metadata alone is insufficient.
 - Treat the slide page size as a hard boundary for every shape, text box, image, and color band you create.
 - If the write can change anything visible on the slide, such as text wrapping, shape styling, arrow direction, accent bars, chart placement, or connector styling, follow [visual-change-loop](../google-drive/references/slides/visual-change-loop.md) before the first `batch_update`.
 
@@ -102,7 +102,7 @@ Confirm the runtime exposes the relevant Google Slides actions before editing:
 - If the task depends on how the slide looks, fetch a thumbnail before editing and verify again after the write.
 - If the task is to summarize, interpret, or sanity-check a visual slide, fetch a thumbnail and use it as evidence for charts, graphs, screenshots, diagrams, and other non-textual content rather than summarizing only the extracted text.
 - When fixing slide formatting, use a tight loop: take a thumbnail, identify visible spacing/alignment/cropping/regression issues, send a focused `batch_update`, then take another thumbnail to verify the result.
-- Run at least 3 verified formatting passes when layout or styling changed, and continue to a fourth only if the slide still has meaningful issues. Switch to [google-slides-visual-iteration](../google-slides-visual-iteration/SKILL.md) if the job turns into slide-by-slide formatting across a larger set of slides.
+- Inspect a fresh render after visible changes; write again only for a concrete remaining defect and stop when the requested result is verified. Switch to [google-slides-visual-iteration](../google-slides-visual-iteration/SKILL.md) if the job turns into slide-by-slide formatting across a larger set of slides.
 - After creating a new slide or applying layout-heavy changes, immediately verify that no text, shape, image, or color band extends beyond the slide boundary. If the editor would require horizontal or vertical scrolling to see the whole slide, or if the lowest text sits in the bottom safety margin, treat that as a failure and fix it before moving on.
 - When supplying `objectId` values in `batch_update`, use valid Google Slides IDs that are 5-50 characters long and start with an alphanumeric character or `_`. Prefer descriptive IDs like `slide02`, `slide02_title`, or `slide02_body`; do not use very short IDs like `s2` or `i0`.
 - If you need to create a slide and edit its placeholders in the same `batch_update`, create the slide with valid placeholder ID mappings first, then reference those placeholder IDs in later requests in the same batch.
@@ -153,3 +153,7 @@ If the presentation is missing or the Google Slides connector does not return de
 - [chart-refresh-workflows](../google-drive/references/slides/chart-refresh-workflows.md)
 - [sheets-chart-replacement](../google-drive/references/slides/sheets-chart-replacement.md)
 - [visual-change-loop](../google-drive/references/slides/visual-change-loop.md)
+
+## Connected capability boundary
+
+Check the runtime exposes the exact reads and mutations needed for this operation. These skills use the Google Drive app/plugin; do not invent a Google MCP server or automatically connect an account. Missing tooling permits a bounded explanation or supplied-file analysis, not fabricated IDs, writes or verification.

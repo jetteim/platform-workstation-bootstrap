@@ -1,0 +1,4 @@
+interface:
+  display_name: "Modeling C4 Architecture"
+  short_description: "Explain system boundaries, ownership, integrations and deploym"
+  default_prompt: "Use $modeling-c4-architecture to explain system boundaries, ownership, integrations and deployment with C4 views tied to the requested decision."

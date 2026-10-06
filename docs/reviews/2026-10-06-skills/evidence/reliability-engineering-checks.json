@@ -1,0 +1,15 @@
+{
+  "target": "reliability-engineering",
+  "command": "./scripts/validate.sh",
+  "audit_date": "2026-10-06",
+  "timestamp_note": "Executed during this audit; exact process start timestamp was not captured.",
+  "output_path": "evidence/reliability-engineering-checks.json",
+  "exit_code": 0,
+  "stdout_stderr": "yaml parses\nexercise prompt: tests/scenarios/checkout-reliability.prompt.md\nexpected artifacts: tests/scenarios/checkout-reliability.expected.yaml\nactual artifacts: tests/scenarios/checkout-reliability.actual.yaml\nexpected contents satisfied\nexercise validation ok\nvalidation ok\n",
+  "metric_names": [],
+  "log_names": [],
+  "trace_names": [],
+  "signal_note": "Repository checks; no live telemetry queried.",
+  "rollback_path": "No tracked repository edits; bootstrap tests used disposable homes.",
+  "verification_scope": "Static manifest checks and comparisons of checked-in scenario outputs; no new agent execution or live provider validation."
+}

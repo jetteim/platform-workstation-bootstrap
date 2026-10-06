@@ -1,0 +1,4 @@
+interface:
+  display_name: "Orchestrating Architecture Execution"
+  short_description: "Route an initiative from unclear intent to the smallest useful"
+  default_prompt: "Use $orchestrating-architecture-execution to route an initiative from unclear intent to the smallest useful architecture and delivery artifacts, then verified execution."

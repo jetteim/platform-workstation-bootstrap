@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "synthetic_only": true,
+  "skills": [
+    "agents/skills/codex-curated/.system/imagegen",
+    "agents/skills/codex-curated/.system/openai-docs",
+    "agents/skills/codex-curated/.system/review-agent",
+    "agents/skills/codex-curated/.system/skill-creator",
+    "agents/skills/codex-curated/.system/skill-installer",
+    "agents/skills/codex-curated/categorize-zenmoney-receipts",
+    "agents/skills/codex-curated/cli-creator",
+    "agents/skills/codex-curated/doc",
+    "agents/skills/codex-curated/find-zenmoney-savings",
+    "agents/skills/codex-curated/jupyter-notebook",
+    "agents/skills/codex-curated/pdf",
+    "agents/skills/codex-curated/review-zenmoney-categories",
+    "agents/skills/codex-curated/spreadsheet",
+    "agents/skills/platform/brain",
+    "agents/skills/platform/creating-observability-pipelines",
+    "agents/skills/platform/discovering-value-streams",
+    "agents/skills/platform/engineering-agent-ready-clis",
+    "agents/skills/platform/modeling-c4-architecture",
+    "agents/skills/platform/observability-engineering",
+    "agents/skills/platform/orchestrating-architecture-execution",
+    "agents/skills/platform/reliability-engineering",
+    "agents/skills/platform/reviewing-traceability",
+    "agents/skills/platform/shaping-capabilities",
+    "agents/skills/platform/shaping-features",
+    "agents/skills/platform/slicing-stories",
+    "agents/skills/platform/writing-diataxis-documentation",
+    "agents/skills/plugins/github/gh-address-comments",
+    "agents/skills/plugins/github/gh-fix-ci",
+    "agents/skills/plugins/github/github",
+    "agents/skills/plugins/github/yeet",
+    "agents/skills/plugins/google-drive/google-docs",
+    "agents/skills/plugins/google-drive/google-drive",
+    "agents/skills/plugins/google-drive/google-drive-comments",
+    "agents/skills/plugins/google-drive/google-sheets",
+    "agents/skills/plugins/google-drive/google-sheets-chart-builder",
+    "agents/skills/plugins/google-drive/google-sheets-formula-builder",
+    "agents/skills/plugins/google-drive/google-slides",
+    "agents/skills/plugins/google-drive/google-slides-import-presentation",
+    "agents/skills/plugins/google-drive/google-slides-template-migration",
+    "agents/skills/plugins/google-drive/google-slides-template-surgery",
+    "agents/skills/plugins/google-drive/google-slides-visual-iteration"
+  ],
+  "cases": [
+    {
+      "id": "slides-one-pass",
+      "prompt": "Fix one overlap on slide s1. Fake renders show it corrected after one write; stop.",
+      "fixtures": {},
+      "available_tools": [
+        "get_slide",
+        "get_slide_thumbnail",
+        "batch_update"
+      ],
+      "expect": {
+        "select": [
+          "google-slides-visual-iteration"
+        ],
+        "exclude": [],
+        "artifact": {
+          "visual_verified": true,
+          "remaining_defects": 0
+        },
+        "max_writes": 1,
+        "require_operations": [
+          "get_slide_thumbnail",
+          "batch_update"
+        ],
+        "forbid_operations": []
+      }
+    },
+    {
+      "id": "slides-already-correct",
+      "prompt": "Inspect slide s1; its fake render already meets the requested layout.",
+      "fixtures": {},
+      "available_tools": [
+        "get_slide",
+        "get_slide_thumbnail",
+        "batch_update"
+      ],
+      "expect": {
+        "select": [
+          "google-slides-visual-iteration"
+        ],
+        "exclude": [],
+        "artifact": {
+          "visual_verified": true
+        },
+        "max_writes": 0,
+        "require_operations": [],
+        "forbid_operations": [
+          "batch_update"
+        ]
+      }
+    },
+    {
+      "id": "slides-persistent",
+      "prompt": "The first correction still overlaps. Use fresh geometry and a second scoped correction.",
+      "fixtures": {},
+      "available_tools": [
+        "get_slide",
+        "get_slide_thumbnail",
+        "batch_update"
+      ],
+      "expect": {
+        "select": [
+          "google-slides-visual-iteration"
+        ],
+        "exclude": [],
+        "artifact": {
+          "visual_verified": true,
+          "remaining_defects": 0
+        },
+        "max_writes": 2,
+        "require_operations": [],
+        "forbid_operations": []
+      }
+    },
+    {
+      "id": "slides-inaccessible",
+      "prompt": "Thumbnail returns only an inaccessible URL; no supported viewing path exists.",
+      "fixtures": {},
+      "available_tools": [
+        "get_slide_thumbnail"
+      ],
+      "expect": {
+        "select": [
+          "google-slides-visual-iteration"
+        ],
+        "exclude": [],
+        "artifact": {
+          "visual_verified": false,
+          "status": "render-gap"
+        },
+        "max_writes": 0,
+        "require_operations": [],
+        "forbid_operations": []
+      }
+    },
+    {
+      "id": "slides-repeated",
+      "prompt": "The same structural defect repeats on five slides. Pilot one verified repair before expanding.",
+      "fixtures": {},
+      "available_tools": [
+        "get_slide",
+        "get_slide_thumbnail",
+        "batch_update"
+      ],
+      "expect": {
+        "select": [
+          "google-slides-visual-iteration"
+        ],
+        "exclude": [],
+        "artifact": {
+          "pilot_verified": true,
+          "scope": "requested-deck"
+        },
+        "max_writes": 5,
+        "require_operations": [],
+        "forbid_operations": []
+      }
+    },
+    {
+      "id": "local-pptx",
+      "prompt": "Edit the local PPTX file in place; do not upload or convert it.",
+      "fixtures": {},
+      "available_tools": [],
+      "expect": {
+        "select": [],
+        "exclude": [
+          "google-slides-import-presentation"
+        ],
+        "artifact": {
+          "destination": "local-pptx"
+        },
+        "max_writes": 0,
+        "require_operations": [],
+        "forbid_operations": [
+          "import_presentation"
+        ]
+      }
+    },
+    {
+      "id": "explicit-import",
+      "prompt": "Convert this synthetic PPTX to native Google Slides.",
+      "fixtures": {},
+      "available_tools": [
+        "import_presentation",
+        "get_presentation"
+      ],
+      "expect": {
+        "select": [
+          "google-slides-import-presentation"
+        ],
+        "exclude": [],
+        "artifact": {
+          "destination": "google-slides"
+        },
+        "max_writes": 1,
+        "require_operations": [
+          "import_presentation"
+        ],
+        "forbid_operations": []
+      }
+    },
+    {
+      "id": "missing-google-tools",
+      "prompt": "Polish a connected Google Slides deck but the runtime exposes no Google actions.",
+      "fixtures": {},
+      "available_tools": [],
+      "expect": {
+        "select": [
+          "google-slides-visual-iteration"
+        ],
+        "exclude": [],
+        "artifact": {
+          "status": "tool-gap"
+        },
+        "max_writes": 0,
+        "require_operations": [],
+        "forbid_operations": []
+      }
+    },
+    {
+      "id": "new-cli",
+      "prompt": "Create an ordinary composable CLI from a supplied synthetic OpenAPI spec.",
+      "fixtures": {},
+      "available_tools": [],
+      "expect": {
+        "select": [
+          "cli-creator"
+        ],
+        "exclude": [
+          "engineering-agent-ready-clis"
+        ],
+        "artifact": {
+          "scope": "creation"
+        },
+        "max_writes": 0,
+        "require_operations": [],
+        "forbid_operations": []
+      }
+    },
+    {
+      "id": "cli-retrofit",
+      "prompt": "Audit existing CLI/MCP schema parity and reject traversal before any I/O.",
+      "fixtures": {},
+      "available_tools": [],
+      "expect": {
+        "select": [
+          "engineering-agent-ready-clis"
+        ],
+        "exclude": [
+          "cli-creator"
+        ],
+        "artifact": {
+          "scope": "audit"
+        },
+        "max_writes": 0,
+        "require_operations": [],
+        "forbid_operations": []
+      }
+    },
+    {
+      "id": "secret-auth",
+      "prompt": "Create a CLI auth interface; do not permit secret flags or reveal values.",
+      "fixtures": {},
+      "available_tools": [],
+      "expect": {
+        "select": [
+          "cli-creator"
+        ],
+        "exclude": [],
+        "artifact": {
+          "secret_flags": false
+        },
+        "max_writes": 0,
+        "require_operations": [],
+        "forbid_operations": []
+      }
+    },
+    {
+      "id": "ci-authorized",
+      "prompt": "Fix the failing local CI check. The user already authorized the fix; no push or comments.",
+      "fixtures": {},
+      "available_tools": [],
+      "expect": {
+        "select": [
+          "gh-fix-ci"
+        ],
+        "exclude": [],
+        "artifact": {
+          "reapproval_count": 0
+        },
+        "max_writes": 0,
+        "require_operations": [],
+        "forbid_operations": [
+          "push",
+          "comment"
+        ]
+      }
+    },
+    {
+      "id": "ci-review-only",
+      "prompt": "Inspect failing GitHub Actions checks and report root cause only.",
+      "fixtures": {},
+      "available_tools": [],
+      "expect": {
+        "select": [
+          "gh-fix-ci"
+        ],
+        "exclude": [],
+        "artifact": {
+          "scope": "read-only"
+        },
+        "max_writes": 0,
+        "require_operations": [],
+        "forbid_operations": []
+      }
+    },
+    {
+      "id": "comment-batches",
+      "prompt": "Post this explicitly authorized synthetic comment set in two bounded batches, preserving the requested content and targets.",
+      "fixtures": {},
+      "available_tools": [
+        "create_comment"
+      ],
+      "expect": {
+        "select": [
+          "google-drive-comments"
+        ],
+        "exclude": [],
+        "artifact": {
+          "scope": "requested-comments",
+          "reapproval_count": 0
+        },
+        "max_writes": 2,
+        "require_operations": [],
+        "forbid_operations": []
+      }
+    },
+    {
+      "id": "brain-recipe",
+      "prompt": "Review the Brain smoke config without training or downloads. Distinguish measured recipe from examples.",
+      "fixtures": {},
+      "available_tools": [],
+      "expect": {
+        "select": [
+          "brain"
+        ],
+        "exclude": [],
+        "artifact": {
+          "model": "mlx-community/Qwen3-0.6B-bf16",
+          "training_run": false
+        },
+        "max_writes": 0,
+        "require_operations": [],
+        "forbid_operations": []
+      }
+    },
+    {
+      "id": "nontrigger",
+      "prompt": "Answer a simple arithmetic question without tools.",
+      "fixtures": {},
+      "available_tools": [],
+      "expect": {
+        "select": [],
+        "exclude": [
+          "google-slides-visual-iteration",
+          "google-slides-import-presentation",
+          "cli-creator",
+          "engineering-agent-ready-clis",
+          "brain"
+        ],
+        "artifact": {},
+        "max_writes": 0,
+        "require_operations": [],
+        "forbid_operations": []
+      }
+    }
+  ]
+}

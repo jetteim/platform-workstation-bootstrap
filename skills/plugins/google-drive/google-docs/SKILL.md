@@ -1,6 +1,6 @@
 ---
 name: google-docs
-description: Inspect and edit Google Docs documents with index-aware batch updates. Use when the user wants to read document text or structure, find paragraph indexes, rewrite sections in place, edit tables, or apply style-aware document changes with Google Docs tools.
+description: "Inspect and edit Google Docs documents with index-aware batch updates. Use when the user wants to read document text or structure, find paragraph indexes, rewrite sections in place, edit tables, or apply style-aware document changes with Google Docs tools."
 ---
 
 # Google Docs
@@ -70,3 +70,7 @@ Use this guide for precise Google Docs reading, editing, and creation.
 ## Fallback
 
 If document content or write tools are unavailable, say that Google Docs access or tooling is missing and ask the user to reconnect or clarify the target document.
+
+## Connected capability boundary
+
+Check the runtime exposes the exact reads and mutations needed for this operation. These skills use the Google Drive app/plugin; do not invent a Google MCP server or automatically connect an account. Missing tooling permits a bounded explanation or supplied-file analysis, not fabricated IDs, writes or verification.

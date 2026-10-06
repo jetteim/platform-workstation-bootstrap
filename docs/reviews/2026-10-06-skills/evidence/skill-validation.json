@@ -1,0 +1,935 @@
+{
+  "timestamp_utc": "2026-10-06T13:14:22.211015+00:00",
+  "results": [
+    {
+      "path": "architectural-execution-skills/skills/slicing-stories/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "architectural-execution-skills/skills/slicing-stories"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "architectural-execution-skills/skills/discovering-value-streams/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "architectural-execution-skills/skills/discovering-value-streams"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "architectural-execution-skills/skills/orchestrating-architecture-execution/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "architectural-execution-skills/skills/orchestrating-architecture-execution"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "architectural-execution-skills/skills/shaping-features/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "architectural-execution-skills/skills/shaping-features"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "architectural-execution-skills/skills/modeling-c4-architecture/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "architectural-execution-skills/skills/modeling-c4-architecture"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "architectural-execution-skills/skills/reviewing-traceability/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "architectural-execution-skills/skills/reviewing-traceability"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "architectural-execution-skills/skills/shaping-capabilities/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "architectural-execution-skills/skills/shaping-capabilities"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "observability-engineering/skill/observability-engineering/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "observability-engineering/skill/observability-engineering"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "observability-pipeline-skills/skill/creating-observability-pipelines/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "observability-pipeline-skills/skill/creating-observability-pipelines"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/find-zenmoney-savings/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/codex-curated/find-zenmoney-savings"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/spreadsheet/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/codex-curated/spreadsheet"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/jupyter-notebook/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/codex-curated/jupyter-notebook"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/review-zenmoney-categories/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/codex-curated/review-zenmoney-categories"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/pdf/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/codex-curated/pdf"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/categorize-zenmoney-receipts/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/codex-curated/categorize-zenmoney-receipts"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/.system/review-agent/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/codex-curated/.system/review-agent"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/.system/skill-creator/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/codex-curated/.system/skill-creator"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/.system/skill-installer/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/codex-curated/.system/skill-installer"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/.system/openai-docs/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/codex-curated/.system/openai-docs"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/.system/imagegen/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/codex-curated/.system/imagegen"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/doc/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/codex-curated/doc"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/github/github/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/github/github"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/github/gh-fix-ci/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/github/gh-fix-ci"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/github/yeet/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/github/yeet"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/github/gh-address-comments/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/github/gh-address-comments"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-docs/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-docs"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides-visual-iteration/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides-visual-iteration"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides-template-migration/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides-template-migration"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides-import-presentation/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides-import-presentation"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-drive-comments/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-drive-comments"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides-template-surgery/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides-template-surgery"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-sheets-formula-builder/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-sheets-formula-builder"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-sheets/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-sheets"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-sheets-chart-builder/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-sheets-chart-builder"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-drive/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-drive"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/slicing-stories/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/platform/slicing-stories"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/creating-observability-pipelines/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/platform/creating-observability-pipelines"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/discovering-value-streams/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/platform/discovering-value-streams"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/reliability-engineering/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/platform/reliability-engineering"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/orchestrating-architecture-execution/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/platform/orchestrating-architecture-execution"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/writing-diataxis-documentation/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/platform/writing-diataxis-documentation"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/shaping-features/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/platform/shaping-features"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/modeling-c4-architecture/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/platform/modeling-c4-architecture"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/reviewing-traceability/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/platform/reviewing-traceability"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/brain/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/platform/brain"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/engineering-agent-ready-clis/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/platform/engineering-agent-ready-clis"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/shaping-capabilities/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/platform/shaping-capabilities"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/observability-engineering/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/agents/skills/platform/observability-engineering"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/github/github/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/github/github"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/github/gh-fix-ci/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/github/gh-fix-ci"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/github/yeet/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/github/yeet"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/github/gh-address-comments/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/github/gh-address-comments"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-docs/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/google-drive/google-docs"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides-visual-iteration/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides-visual-iteration"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides-template-migration/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides-template-migration"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides-import-presentation/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides-import-presentation"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-drive-comments/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/google-drive/google-drive-comments"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides-template-surgery/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides-template-surgery"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-sheets-formula-builder/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/google-drive/google-sheets-formula-builder"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-sheets/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/google-drive/google-sheets"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-sheets-chart-builder/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/google-drive/google-sheets-chart-builder"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-drive/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/google-drive/google-drive"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/find-zenmoney-savings/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/find-zenmoney-savings"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/slicing-stories/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/slicing-stories"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/creating-observability-pipelines/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/creating-observability-pipelines"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/spreadsheet/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/spreadsheet"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/discovering-value-streams/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/discovering-value-streams"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/reliability-engineering/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/reliability-engineering"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/jupyter-notebook/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/jupyter-notebook"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/review-zenmoney-categories/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/review-zenmoney-categories"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/orchestrating-architecture-execution/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/orchestrating-architecture-execution"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/pdf/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/pdf"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/writing-diataxis-documentation/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/writing-diataxis-documentation"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/shaping-features/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/shaping-features"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/categorize-zenmoney-receipts/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/categorize-zenmoney-receipts"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/modeling-c4-architecture/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/modeling-c4-architecture"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/reviewing-traceability/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/reviewing-traceability"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/.system/review-agent/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/.system/review-agent"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/.system/skill-creator/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/.system/skill-creator"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/.system/skill-installer/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/.system/skill-installer"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/.system/openai-docs/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/.system/openai-docs"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/.system/imagegen/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/.system/imagegen"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/brain/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/brain"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/doc/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/doc"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/engineering-agent-ready-clis/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/engineering-agent-ready-clis"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/shaping-capabilities/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/shaping-capabilities"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/observability-engineering/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "platform-workstation-bootstrap/skills/codex/observability-engineering"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "reliability-engineering/skill/reliability-engineering/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "reliability-engineering/skill/reliability-engineering"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "zenmoney-receipts/skills/find-zenmoney-savings/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "zenmoney-receipts/skills/find-zenmoney-savings"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "zenmoney-receipts/skills/review-zenmoney-categories/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "zenmoney-receipts/skills/review-zenmoney-categories"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "path": "zenmoney-receipts/skills/categorize-zenmoney-receipts/SKILL.md",
+      "command": [
+        "python3",
+        "/Users/maximlee/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "zenmoney-receipts/skills/categorize-zenmoney-receipts"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n"
+    }
+  ]
+}

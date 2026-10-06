@@ -264,6 +264,9 @@ stage_selected_google_drive_extension_skills() {
   for skill in "${GOOGLE_DRIVE_EXTENSION_SKILLS[@]}"; do
     stage_tree "$source_root/$skill" "$destination/$skill" "Google Drive extension skill ${skill}"
   done
+  # Helpers share these packaged recipes. Include resources without installing
+  # a duplicate core Google Drive skill over the native provider plugin.
+  stage_tree "$source_root/google-drive/references/slides" "$destination/google-drive/references/slides" "Google Slides helper resources"
 }
 
 project_codex_skills() {

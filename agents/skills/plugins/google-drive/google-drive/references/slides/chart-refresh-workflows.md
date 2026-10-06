@@ -40,7 +40,7 @@ Use this guidance when the user asks to refresh, update, replace, or repair a ch
 - If the chart area is static chart content, preserve the approximate position and size of the existing image.
 - Replace the old chart image rather than stacking a second chart on top of it.
 - If the image is clearly stale or explicitly marked as replaceable static content, do not report success until the old graphic is gone and the new one occupies the intended area.
-- If the replacement leaves visible residue, spacing drift, or chart-area cleanup work, switch to [visual-change-loop](./visual-change-loop.md) and do not stop before the third verified review.
+- If the replacement leaves visible residue, spacing drift, or chart-area cleanup work, switch to [visual-change-loop](./visual-change-loop.md) and stop when a fresh rendered review verifies the requested outcome.
 
 ## 7. If no source chart exists, be explicit about the extra step
 
@@ -51,8 +51,8 @@ Use this guidance when the user asks to refresh, update, replace, or repair a ch
 
 - A chart refresh or replacement is only complete when the chart slide was re-read after the write and the visual result was checked with a thumbnail when the image itself matters.
 - Do not claim success just because the write call succeeded or because adjacent chart labels changed.
-- When thumbnail responses include an `image_asset_pointer`, image content part, or other rendered image artifact, inspect that returned image directly instead of downloading the `contentUrl` just to look at the same slide.
-- When the refresh or replacement changed visible layout, placeholder cleanup, or nearby styling, follow [visual-change-loop](./visual-change-loop.md) and keep the review loop going through the third fresh visual pass.
+- When thumbnail responses include an `image_asset_pointer`, image content part, or other rendered image artifact, inspect the actual image through a supported viewing path. If the artifact is inaccessible, use supported retrieval/export or report the visual verification limit; metadata/tool success alone does not establish rendered quality.
+- When the refresh or replacement changed visible layout, placeholder cleanup, or nearby styling, follow [visual-change-loop](./visual-change-loop.md) and continue only for specific remaining defects until a fresh render verifies the requested outcome.
 - Verify both of these things before declaring success:
   - the chart graphic itself now matches the intended source chart
   - obsolete placeholder or instructional text is no longer visible unless the user asked to keep it

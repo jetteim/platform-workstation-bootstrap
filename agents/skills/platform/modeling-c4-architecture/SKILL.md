@@ -1,9 +1,12 @@
 ---
 name: modeling-c4-architecture
-description: Use when architecture boundaries, integrations, ownership, containers, components, deployment, dependencies, or stakeholder communication need C4-style views tied to value streams, capabilities, features, stories, or implementation plans.
+description: Explain system boundaries, ownership, integrations and deployment with C4 views tied to the requested decision.
 ---
 
 # Modeling C4 Architecture
+
+Preserve the supplied artifact structure and selected abstraction level. Produce only what the current decision needs; one complete story or brief can be sufficient. Existing authorization covers routine local implementation and verification. Ask only about unresolved material choices or an expanded action.
+
 
 ## Overview
 
@@ -68,4 +71,3 @@ Architecture is ready for execution when:
 - The selected level is neither too broad nor too detailed.
 - Containers/components map to ownership and implementation boundaries.
 - NFRs and risks are reflected in features, stories, or tests.
-

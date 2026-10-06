@@ -1,19 +1,22 @@
 ---
 name: slicing-stories
-description: Use when a feature or implementation-ready slice needs to become a human-sized story packet, acceptance tests, enabler work, spec handoff, implementation-plan input, and execution context without overwhelming the user.
+description: Slice a feature into implementation-ready stories with testable acceptance criteria and a bounded execution context.
 ---
 
 # Slicing Stories
+
+Preserve the supplied artifact structure and selected abstraction level. Produce only what the current decision needs; one complete story or brief can be sufficient. Existing authorization covers routine local implementation and verification. Ask only about unresolved material choices or an expanded action.
+
 
 ## Overview
 
 Create stories as the final human-readable bridge before implementation. Stories are not the whole system memory; they are a small context packet for the next executable slice.
 
-Use `superpowers:brainstorming` when installed; otherwise use an equivalent design-discovery workflow for unclear story intent. Use `superpowers:writing-plans` when installed; otherwise use an equivalent implementation-planning workflow once the story packet is approved.
+Use a focused discovery step only for unresolved story intent. Once material decisions are settled, use an implementation plan proportional to the task within the user’s existing authorization.
 
 ## Story Budget
 
-Keep the active packet to 7-10 stories maximum. If more are needed, split the feature again or create separate packets by journey step, component boundary, risk, or rollout cohort.
+Keep the active packet understandable. One complete story is sufficient; 7–10 is an optional working-size heuristic. Preserve larger supplied backlogs and select a bounded active slice by journey, risk or rollout instead of blocking on the total count.
 
 ## Slice Types
 
@@ -52,14 +55,14 @@ so that <value>.
 
 ## Implementation Handoff
 
-Before calling `superpowers:writing-plans` or the equivalent implementation-planning workflow, prepare:
+When a planning handoff is useful, prepare:
 
 ```markdown
 # Implementation Packet: <feature>
 
-**Parent chain:** <value stream> -> <capability> -> <feature>
+**Supplied parent chain:** <existing relevant parents; do not invent absent levels>
 **Architecture context:** <C4 views and decisions>
-**Active stories:** <7-10 max>
+**Active stories:** <bounded active slice>
 **Out of scope:** <explicit exclusions>
 **Verification evidence:** <commands, tests, demos, metrics>
 **Risks:** <only risks that affect implementation order or test strategy>
@@ -72,4 +75,4 @@ Proceed to implementation planning only when:
 - The packet is small enough to reason about.
 - Every story has a parent feature and test hook.
 - Enabler work is tied to a user story, NFR, or architecture decision.
-- The implementation packet is enough for `superpowers:writing-plans` or the equivalent implementation-planning workflow to create a concrete plan.
+- The packet contains enough concrete context for the chosen implementation workflow.

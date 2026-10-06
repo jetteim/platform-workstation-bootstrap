@@ -1,0 +1,15 @@
+{
+  "target": "platform-workstation-bootstrap",
+  "command": "./scripts/verify.sh",
+  "audit_date": "2026-10-06",
+  "timestamp_note": "Executed during this audit; exact process start timestamp was not captured.",
+  "output_path": "evidence/platform-workstation-bootstrap-checks.json",
+  "exit_code": 0,
+  "stdout_stderr": "test_audit_allowlist_excludes_private_configuration (__main__.HarnessTests) ... ok\ntest_config_defaults_preserve_user_choices (__main__.HarnessTests) ... ok\ntest_git_scanner_reads_index_and_keeps_content_private (__main__.HarnessTests) ... ok\ntest_hook_decisions_and_bounded_stop (__main__.HarnessTests) ... ok\ntest_install_offline_reinstall_and_pruning (__main__.HarnessTests) ... ok\ntest_installer_rejects_unsafe_and_symlinked_destinations (__main__.HarnessTests) ... ok\ntest_malformed_hook_input_and_session_context (__main__.HarnessTests) ... ok\ntest_repo_projections_and_skill_metadata (__main__.HarnessTests) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 9.976s\n\nOK\n[verify] ok\n",
+  "metric_names": [],
+  "log_names": [],
+  "trace_names": [],
+  "signal_note": "Repository checks; no live telemetry queried.",
+  "rollback_path": "No tracked repository edits; bootstrap tests used disposable homes.",
+  "verification_scope": "8 offline fixture tests; syntax/compile and skill projection checks."
+}

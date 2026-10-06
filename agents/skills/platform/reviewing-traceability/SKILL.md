@@ -1,9 +1,12 @@
 ---
 name: reviewing-traceability
-description: Use when value stream, capability, feature, story, C4, spec, or implementation-plan artifacts need a coherence check before execution, especially when context has grown large or architectural intent may be lost.
+description: Check coherence between supplied outcome, architecture and delivery artifacts before execution; identify gaps and orphan decisions.
 ---
 
 # Reviewing Traceability
+
+Preserve the supplied artifact structure and selected abstraction level. Produce only what the current decision needs; one complete story or brief can be sufficient. Existing authorization covers routine local implementation and verification. Ask only about unresolved material choices or an expanded action.
+
 
 ## Overview
 
@@ -21,11 +24,11 @@ Create or inspect a compact matrix:
 
 ## Checks
 
-- Upward trace: every story or task has a parent feature, capability, and outcome.
+- Upward trace: each story or task traces to its supplied parents and intended value; absent hierarchy levels are not invented.
 - Downward trace: every selected capability has at least one feature or an explicit reason to defer.
 - Architecture trace: every feature with C4 impact has a view, decision, or explicit no-diagram rationale.
 - NFR trace: every security, reliability, performance, compliance, or operability constraint has a test, review, or verification hook.
-- Context budget: active implementation packet has 7-10 stories max.
+- Context budget: the selected active slice is understandable; retain the full backlog without imposing a numeric correctness gate.
 - Enabler legitimacy: enabler work unblocks value, reduces delivery risk, or satisfies an explicit NFR.
 - Execution readiness: `superpowers:writing-plans` or the equivalent implementation-planning workflow has enough file, test, command, and verification context.
 
@@ -58,7 +61,7 @@ Lead with blockers and concrete fixes:
 
 Do not proceed to implementation when:
 
-- More than 10 stories are active and none can be split out.
+- The active slice is too large to understand or verify and cannot be bounded.
 - A story cannot be tied to user value, learning, NFR, or risk reduction.
 - A major architecture dependency has no decision owner.
 - Acceptance criteria cannot be tested or reviewed.

@@ -1,6 +1,6 @@
 ---
 name: google-sheets-formula-builder
-description: Design, repair, and roll out Google Sheets formulas with better syntax recall and validation discipline. Use when the user wants to add a formula column, fix a broken formula, choose between a row formula and a spill formula, build a lookup or filter formula, or turn repeated logic into a reusable named function.
+description: "Build or repair Google Sheets formulas, including row formulas, spill arrays, lookups and reusable named functions."
 ---
 
 # Google Sheets Formula Builder
@@ -31,3 +31,7 @@ Read `./references/formula-patterns.md` before drafting the first formula. The p
 ## References
 
 - For syntax reminders, formula-shape heuristics, and official Google Sheets docs links, read `./references/formula-patterns.md`.
+
+## Connected capability boundary
+
+Check the runtime exposes the exact reads and mutations needed for this operation. These skills use the Google Drive app/plugin; do not invent a Google MCP server or automatically connect an account. Missing tooling permits a bounded explanation or supplied-file analysis, not fabricated IDs, writes or verification.

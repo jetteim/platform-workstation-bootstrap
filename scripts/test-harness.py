@@ -4,6 +4,7 @@
 import importlib.util
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -157,7 +158,16 @@ class HarnessTests(unittest.TestCase):
                       "google-slides-template-surgery", "google-slides-visual-iteration"):
             expected.update({"plugin-google-drive/" + skill + "/" + key: value
                              for key, value in files(ROOT / "skills/plugins/google-drive" / skill).items()})
+        expected.update({"plugin-google-drive/google-drive/references/slides/" + key: value
+                         for key, value in files(ROOT / "skills/plugins/google-drive/google-drive/references/slides").items()})
         self.assertEqual(files(codex / "skills"), expected)
+        self.assertFalse((codex / "skills/plugin-google-drive/google-drive/SKILL.md").exists())
+        for path in (codex / "skills/plugin-google-drive").rglob("*.md"):
+            text = re.sub(r"```.*?```", "", path.read_text(), flags=re.S)
+            for link in re.findall(r"\[[^\]]*\]\(([^)]+)\)", text):
+                if "://" not in link and not link.startswith("#"):
+                    self.assertTrue((path.parent / link.split("#")[0]).is_file(),
+                                    "Missing installed helper resource: " + path.name + " -> " + link)
         self.assertFalse(list((self.work / "agents/skills").iterdir()))
         stale = codex / "skills/brain/removed-reference.txt"
         stale.write_text("stale fixture")

@@ -1,6 +1,6 @@
 ---
 name: google-sheets-chart-builder
-description: Design, create, and revise Google Sheets charts with better chart-spec recall and editing discipline. Use when the user wants to add a chart to a sheet, choose the right chart type for existing data, repair a broken chart, update a chart's data series, or reposition or resize a chart after creating it.
+description: "Create or repair a Google Sheets chart using live data ranges and verified chart specifications."
 ---
 
 # Google Sheets Chart Builder
@@ -26,3 +26,7 @@ Read `./references/chart-recipes.md` before the first chart write. The point is 
 ## References
 
 - For chart-type heuristics, request-shape reminders, and official Google Sheets docs links, read `./references/chart-recipes.md`.
+
+## Connected capability boundary
+
+Check the runtime exposes the exact reads and mutations needed for this operation. These skills use the Google Drive app/plugin; do not invent a Google MCP server or automatically connect an account. Missing tooling permits a bounded explanation or supplied-file analysis, not fabricated IDs, writes or verification.

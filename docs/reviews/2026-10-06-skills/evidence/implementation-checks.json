@@ -1,0 +1,79 @@
+{
+  "recorded_at_utc": "2026-10-06 13:51:31 UTC",
+  "checks_started_at_utc": "2026-10-06 13:47:06 UTC",
+  "checks": [
+    {
+      "target": "architectural-execution-skills",
+      "command": "./scripts/validate.sh",
+      "exit_code": 0,
+      "output": "yaml parses\n[fixtures] Saved-output contract comparison; no agent invoked\nexercise prompt: tests/scenarios/checkout-architecture-execution.prompt.md\nexpected artifacts: tests/scenarios/checkout-architecture-execution.expected.yaml\nactual artifacts: tests/scenarios/checkout-architecture-execution.actual.yaml\nexpected contents satisfied\nexercise validation ok\n......\n----------------------------------------------------------------------\nRan 6 tests in 0.609s\n\nOK\nPackage structure and entrypoint references: 7 passed; no model invoked\nSynthetic scenario definitions: 8 checked; no model invoked\nvalidation ok\n",
+      "output_path": "skill-repo-review-2026-10-06/evidence/implementation-checks.json",
+      "rollback": "Reverse only the selected local diff; preserve pre-existing user work."
+    },
+    {
+      "target": "observability-engineering",
+      "command": "./scripts/validate.sh",
+      "exit_code": 0,
+      "output": "yaml parses\n[fixtures] Saved-output contract comparison; no agent invoked\nexercise prompt: tests/scenarios/checkout-observability.prompt.md\nexpected artifacts: tests/scenarios/checkout-observability.expected.yaml\nactual artifacts: tests/scenarios/checkout-observability.actual.yaml\nexpected contents satisfied\nexercise prompt: tests/scenarios/provider-terraform-adapters.prompt.md\nexpected artifacts: tests/scenarios/provider-terraform-adapters.expected.yaml\nactual artifacts: tests/scenarios/provider-terraform-adapters.actual.yaml\nexpected contents satisfied\nscenarios validated: 2\nexercise validation ok\n......\n----------------------------------------------------------------------\nRan 6 tests in 0.698s\n\nOK\n..\n----------------------------------------------------------------------\nRan 2 tests in 0.004s\n\nOK\nPackage structure and entrypoint references: 1 passed; no model invoked\nSynthetic scenario definitions: 9 checked; no model invoked\nvalidation ok\n",
+      "output_path": "skill-repo-review-2026-10-06/evidence/implementation-checks.json",
+      "rollback": "Reverse only the selected local diff; preserve pre-existing user work."
+    },
+    {
+      "target": "observability-pipeline-skills",
+      "command": "./scripts/validate.sh",
+      "exit_code": 0,
+      "output": "yaml parses\n[fixtures] Saved-output contract comparison; no agent invoked\nexercise prompt: tests/scenarios/audit-pipeline.prompt.md\nexpected artifacts: tests/scenarios/audit-pipeline.expected.yaml\nactual artifacts: tests/scenarios/audit-pipeline.actual.yaml\nexpected contents satisfied\nexercise prompt: tests/scenarios/checkout-pipeline.prompt.md\nexpected artifacts: tests/scenarios/checkout-pipeline.expected.yaml\nactual artifacts: tests/scenarios/checkout-pipeline.actual.yaml\nexpected contents satisfied\nexercise prompt: tests/scenarios/provider-pipeline-adapters.prompt.md\nexpected artifacts: tests/scenarios/provider-pipeline-adapters.expected.yaml\nactual artifacts: tests/scenarios/provider-pipeline-adapters.actual.yaml\nexpected contents satisfied\nscenarios validated: 3\nexercise validation ok\n......\n----------------------------------------------------------------------\nRan 6 tests in 0.603s\n\nOK\nPackage structure and entrypoint references: 1 passed; no model invoked\nSynthetic scenario definitions: 8 checked; no model invoked\nvalidation ok\n",
+      "output_path": "skill-repo-review-2026-10-06/evidence/implementation-checks.json",
+      "rollback": "Reverse only the selected local diff; preserve pre-existing user work."
+    },
+    {
+      "target": "reliability-engineering",
+      "command": "./scripts/validate.sh",
+      "exit_code": 0,
+      "output": "yaml parses\n[fixtures] Saved-output contract comparison; no agent invoked\nexercise prompt: tests/scenarios/checkout-reliability.prompt.md\nexpected artifacts: tests/scenarios/checkout-reliability.expected.yaml\nactual artifacts: tests/scenarios/checkout-reliability.actual.yaml\nexpected contents satisfied\nexercise validation ok\n......\n----------------------------------------------------------------------\nRan 6 tests in 0.542s\n\nOK\n..\n----------------------------------------------------------------------\nRan 2 tests in 0.004s\n\nOK\nPackage structure and entrypoint references: 1 passed; no model invoked\nSynthetic scenario definitions: 9 checked; no model invoked\nvalidation ok\n",
+      "output_path": "skill-repo-review-2026-10-06/evidence/implementation-checks.json",
+      "rollback": "Reverse only the selected local diff; preserve pre-existing user work."
+    },
+    {
+      "target": "platform-workstation-bootstrap",
+      "command": "./scripts/verify.sh",
+      "exit_code": 0,
+      "output": "test_audit_allowlist_excludes_private_configuration (__main__.HarnessTests) ... ok\ntest_config_defaults_preserve_user_choices (__main__.HarnessTests) ... ok\ntest_git_scanner_reads_index_and_keeps_content_private (__main__.HarnessTests) ... ok\ntest_hook_decisions_and_bounded_stop (__main__.HarnessTests) ... ok\ntest_install_offline_reinstall_and_pruning (__main__.HarnessTests) ... ok\ntest_installer_rejects_unsafe_and_symlinked_destinations (__main__.HarnessTests) ... ok\ntest_malformed_hook_input_and_session_context (__main__.HarnessTests) ... ok\ntest_repo_projections_and_skill_metadata (__main__.HarnessTests) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 12.812s\n\nOK\n......\n----------------------------------------------------------------------\nRan 6 tests in 0.406s\n\nOK\n..\n----------------------------------------------------------------------\nRan 2 tests in 0.009s\n\nOK\n..\n----------------------------------------------------------------------\nRan 2 tests in 0.002s\n\nOK\n{\n  \"ok\": true,\n  \"packages\": 41,\n  \"source_checkouts_unavailable\": [],\n  \"errors\": []\n}\n[verify] ok\n",
+      "output_path": "skill-repo-review-2026-10-06/evidence/implementation-checks.json",
+      "rollback": "Reverse only the selected local diff; preserve pre-existing user work."
+    },
+    {
+      "target": "zenmoney-receipts",
+      "command": "npm run check",
+      "exit_code": 0,
+      "output": "\n> zenmoney-receipts@0.7.0 check\n> npm run test && npm run build && node scripts/test-memory-correction-cli.mjs && npm run smoke && npm run eval:receipts && npm run verify:repo && npm run test:skill-evaluator && npm run verify:skills\n\n\n> zenmoney-receipts@0.7.0 test\n> vitest run\n\n\n RUN  v4.1.10 /Users/maximlee/Library/CloudStorage/OneDrive-Personal/Pet projects/zenmoney-receipts\n\n\n Test Files  23 passed | 1 skipped (24)\n      Tests  91 passed | 1 skipped (92)\n   Start at  14:47:08\n   Duration  1.88s (transform 1.70s, setup 0ms, import 3.33s, tests 5.01s, environment 2ms)\n\n\n> zenmoney-receipts@0.7.0 build\n> npm run typecheck && esbuild src/index.ts src/cli.ts src/backend.ts src/backend-entry.ts src/hosted-entry.ts --bundle --packages=external --platform=node --target=node20 --format=esm --outdir=dist --banner:js=\"#!/usr/bin/env node\"\n\n\n> zenmoney-receipts@0.7.0 typecheck\n> tsc --noEmit\n\n\n  dist/hosted-entry.js   262.6kb\n  dist/cli.js            230.3kb\n  dist/index.js          216.0kb\n  dist/backend.js         19.4kb\n  dist/backend-entry.js     92b \n\n⚡ Done in 21ms\nReceipt-memory correction CLI: synthetic preview, apply, replay, bounds and error checks passed.\n\n> zenmoney-receipts@0.7.0 smoke\n> node scripts/smoke.mjs\n\nMCP smoke test passed (39 tools).\nPrivate backend process smoke test passed.\n\n> zenmoney-receipts@0.7.0 eval:receipts\n> node scripts/evaluate-receipts.mjs\n\n{\n  \"schemaVersion\": \"1\",\n  \"command\": \"evaluate-receipts\",\n  \"evaluationKind\": \"static-fixture-contract\",\n  \"modelRun\": false,\n  \"ok\": true,\n  \"caseCount\": 10,\n  \"metrics\": {\n    \"totalExactAccuracy\": 1,\n    \"dateDecisionAccuracy\": 1,\n    \"currencyExactAccuracy\": 1,\n    \"purposeAllocationExactAccuracy\": 1,\n    \"ambiguityDecisionAccuracy\": 1,\n    \"safeAllocationRate\": 1\n  },\n  \"thresholds\": {\n    \"totalExactAccuracy\": 1,\n    \"dateDecisionAccuracy\": 1,\n    \"currencyExactAccuracy\": 1,\n    \"purposeAllocationExactAccuracy\": 1,\n    \"ambiguityDecisionAccuracy\": 1,\n    \"safeAllocationRate\": 1\n  },\n  \"failures\": []\n}\n\n> zenmoney-receipts@0.7.0 verify:repo\n> node scripts/verify-repo.mjs\n\n{\n  \"schemaVersion\": \"1\",\n  \"command\": \"verify-repo\",\n  \"ok\": true,\n  \"checkedFiles\": 24,\n  \"failures\": []\n}\n\n> zenmoney-receipts@0.7.0 test:skill-evaluator\n> python3 scripts/test-skill-evaluator.py\n\n......\n----------------------------------------------------------------------\nRan 6 tests in 0.442s\n\nOK\n\n> zenmoney-receipts@0.7.0 verify:skills\n> python3 scripts/check-skill-package.py\n\nPackage structure and entrypoint references: 3 passed; no model invoked\nSynthetic scenario definitions: 11 checked; no model invoked\n",
+      "output_path": "skill-repo-review-2026-10-06/evidence/implementation-checks.json",
+      "rollback": "Reverse only the selected local diff; preserve pre-existing user work."
+    }
+  ],
+  "additional_verified_checks": [
+    {
+      "target": "platform-workstation-bootstrap",
+      "command": "./scripts/verify.sh",
+      "result": "Passed after the final UI/provenance and Slides installer/resource-link updates",
+      "tests": 18
+    },
+    {
+      "target": "platform-workstation-bootstrap",
+      "command": "python3 scripts/check-skill-drift.py --require-sources",
+      "result": "Passed; 41 packages, all source checkouts available"
+    },
+    {
+      "target": "all-six-repos",
+      "command": "python3 /tmp/check-reviewed-skill-packages.py",
+      "result": "95 packages valid; 91 UI files parsed; resource/diff checks clear; provider system snapshots unchanged"
+    }
+  ],
+  "signal_names": [
+    "deployment.environment.name",
+    "legacy deployment.environment mapping",
+    "service.owner organization extension"
+  ],
+  "live_signal_changes": false,
+  "actual_model_runs": 0
+}

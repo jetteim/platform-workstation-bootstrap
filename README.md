@@ -157,3 +157,13 @@ NPM is required by the current Codex setup because:
 - MCP servers are configured via `npx`.
 
 It is not treated as a generic platform dependency beyond Codex/MCP.
+
+## Skill evaluation
+
+See [skill-evaluation.md](docs/skill-evaluation.md) for static fixture limits, synthetic scenarios and the opt-in fresh-run adapter. Offline runner tests are simulations; model-backed results are reported separately.
+
+## Reviewed skill lifecycle
+
+See [skill-lifecycle.md](docs/skill-lifecycle.md) for sunset candidates, provider ownership and the creation/audit CLI split. Full package digests and projections are checked by `scripts/check-skill-drift.py`; use `--require-sources` when the sibling source repositories are available. Skill evaluator checks simulate the runner; actual model evaluation is opt-in and reported separately.
+
+The [6 October skill review and publication record](docs/reviews/2026-10-06-skills/PUBLICATION.md) preserves the audit, action outcomes, published source revisions and verification limits.

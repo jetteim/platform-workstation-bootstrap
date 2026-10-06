@@ -1,3 +1,4 @@
+<!-- Reviewed examples: model-dependent templates/IDs/configs and external timings, not bootstrap benchmark results. See tested-recipe.md. -->
 # MLX Pipeline — Full 6-Phase Reference
 
 Complete pipeline for training dedicated local models on Apple Silicon.
@@ -107,7 +108,7 @@ JSONL with 3-message chat format. Assistant content MUST include `<think>\n\n</t
 ]}
 ```
 
-**Why the `<think>` prefix?** Qwen3 has a built-in thinking mode. Without suppression, inference outputs `<think>...reasoning...</think>` before the answer, making it slow and unpredictable. Adding the empty think block in training teaches the model to skip reasoning and output directly.
+**Model-specific thinking example:** confirm that the selected tokenizer supports this formatting; prefer its supported thinking/template option and evaluate the actual output. The following Qwen3 explanation is illustrative. Qwen3 has a built-in thinking mode. Without suppression, inference outputs `<think>...reasoning...</think>` before the answer, making it slow and unpredictable. Adding the empty think block in training teaches the model to skip reasoning and output directly.
 
 ### Generation Strategy
 
@@ -210,8 +211,8 @@ Reference for micro: `examples/generate_dataset.py` — supports `--model-family
 
 | Model | Params | GGUF Q8 | Use case |
 |-------|--------|---------|----------|
-| `Qwen/Qwen3-0.6B` | 596M | 634 MB | **Micro standard.** Classification, routing (<20 classes) |
-| `Qwen/Qwen3-1.7B` | 1.7B | ~1.8 GB | **Medium standard.** Short text rewriting, correction |
+| `Qwen/Qwen3-0.6B` | 596M | 634 MB | Illustrative classifier. Classification, routing (<20 classes) |
+| `Qwen/Qwen3-1.7B` | 1.7B | ~1.8 GB | Illustrative generator. Short text rewriting, correction |
 | `Qwen/Qwen3-4B` | 4B | ~4.2 GB | Complex rewriting, multi-language, longer output |
 | `unsloth/gemma-3-270m-it` | 268M | 285 MB | Legacy. Smaller but less capable |
 
@@ -372,7 +373,7 @@ cp models/<name>-fused/*.gguf ~/.diana/models/<name>.gguf
 \n            = 198
 ```
 
-These are special tokens and must be inserted as raw token IDs in Rust (not tokenized as text). See `rust-embedding.md` for full implementation.
+These IDs illustrate one Qwen3 tokenizer only. Load the selected tokenizer metadata and verify each special token ID and chat template against the fused/exported model before constructing Rust tokens. Never reuse these constants across models. See `rust-embedding.md` for full implementation.
 
 ## Performance Reference
 

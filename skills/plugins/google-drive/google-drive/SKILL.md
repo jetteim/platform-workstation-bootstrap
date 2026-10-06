@@ -1,6 +1,6 @@
 ---
 name: google-drive
-description: Use connected Google Drive as the single entrypoint for Drive, Docs, Sheets, and Slides work. Use when the user wants to find, fetch, organize, share, export, copy, or delete Drive files, or summarize and edit Google Docs, Google Sheets, and Google Slides through one unified Google Drive plugin.
+description: "Use connected Google Drive as the single entrypoint for Drive, Docs, Sheets, and Slides work. Use when the user wants to find, fetch, organize, share, export, copy, or delete Drive files, or summarize and edit Google Docs, Google Sheets, and Google Slides through one unified Google Drive plugin."
 ---
 
 # Google Drive
@@ -57,3 +57,7 @@ Start with Google Drive for file discovery and file lifecycle tasks, then route 
 - Slides import: [google-slides-import-presentation](../google-slides-import-presentation/SKILL.md)
 - Slides template surgery: [google-slides-template-surgery](../google-slides-template-surgery/SKILL.md)
 - Slides template migration: [google-slides-template-migration](../google-slides-template-migration/SKILL.md)
+
+## Connected capability boundary
+
+Check the runtime exposes the exact reads and mutations needed for this operation. These skills use the Google Drive app/plugin; do not invent a Google MCP server or automatically connect an account. Missing tooling permits a bounded explanation or supplied-file analysis, not fabricated IDs, writes or verification.

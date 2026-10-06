@@ -1,0 +1,472 @@
+{
+  "schema_version": 1,
+  "policy": "Compare before adopting; update recorded digests only after review. Never refresh provider caches through this gate.",
+  "skills": [
+    {
+      "name": "imagegen",
+      "canonical": "agents/skills/codex-curated/.system/imagegen",
+      "projections": [
+        "skills/codex/.system/imagegen"
+      ],
+      "reviewed_sha256": "5d926863f2c2f337a4da4bfdd73e166c251d23cdcdd70087e71220708cb55585",
+      "ownership": "provider-owned-runtime-with-reviewed-offline-snapshot",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "openai-docs",
+      "canonical": "agents/skills/codex-curated/.system/openai-docs",
+      "projections": [
+        "skills/codex/.system/openai-docs"
+      ],
+      "reviewed_sha256": "7607aec44f2970dd1eb6279e8520c5336482c65618c25c09197d1a5da5c04983",
+      "ownership": "provider-owned-runtime-with-reviewed-offline-snapshot",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "review-agent",
+      "canonical": "agents/skills/codex-curated/.system/review-agent",
+      "projections": [
+        "skills/codex/.system/review-agent"
+      ],
+      "reviewed_sha256": "7d3bde7aa65d44442ea6fe7b23467076f6711fafeb529a1c6452bb9f69ef1397",
+      "ownership": "provider-owned-runtime-with-reviewed-offline-snapshot",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "skill-creator",
+      "canonical": "agents/skills/codex-curated/.system/skill-creator",
+      "projections": [
+        "skills/codex/.system/skill-creator"
+      ],
+      "reviewed_sha256": "0737895aa4b4ce96f0106e9aa7454d86e6eeabc9bdafe2472237cba056196374",
+      "ownership": "provider-owned-runtime-with-reviewed-offline-snapshot",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "skill-installer",
+      "canonical": "agents/skills/codex-curated/.system/skill-installer",
+      "projections": [
+        "skills/codex/.system/skill-installer"
+      ],
+      "reviewed_sha256": "5e638afa0ff9fd5720c21f26bb7fab3f1125b03e038e0751f4a5de90479be825",
+      "ownership": "provider-owned-runtime-with-reviewed-offline-snapshot",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "categorize-zenmoney-receipts",
+      "canonical": "agents/skills/codex-curated/categorize-zenmoney-receipts",
+      "projections": [
+        "skills/codex/categorize-zenmoney-receipts"
+      ],
+      "reviewed_sha256": "93e2c4b941bf375b9d78bbb6da225d2f3128293d92322a35b159eb7053678d8f",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "source_package": "../zenmoney-receipts/skills/categorize-zenmoney-receipts",
+      "source_sha256": "93e2c4b941bf375b9d78bbb6da225d2f3128293d92322a35b159eb7053678d8f",
+      "source_revision": "a22449d3fb76e307fee36658c4ad10f70404967d",
+      "intentional_refinement": ""
+    },
+    {
+      "name": "cli-creator",
+      "canonical": "agents/skills/codex-curated/cli-creator",
+      "projections": [
+        "skills/codex/cli-creator"
+      ],
+      "reviewed_sha256": "585fe18d786e7a3e2ac3630b7dd2492aab7a48cde952328db8f75e5845c440a7",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "upstream": "openai/skills@49f948faa9258a0c61caceaf225e179651397431",
+      "intentional_refinement": "S2 creation/audit routing, requested destination, secret flag prohibition and scoped installation; see references/provenance.md"
+    },
+    {
+      "name": "doc",
+      "canonical": "agents/skills/codex-curated/doc",
+      "projections": [
+        "skills/codex/doc"
+      ],
+      "reviewed_sha256": "c46d884a69c68090fd24970655d931d8c934f876cc421f54692d8713684d151b",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "find-zenmoney-savings",
+      "canonical": "agents/skills/codex-curated/find-zenmoney-savings",
+      "projections": [
+        "skills/codex/find-zenmoney-savings"
+      ],
+      "reviewed_sha256": "841f7d7a23d15c678fa413a1b729772462c76caaeb11f8e4c46c959002035552",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "source_package": "../zenmoney-receipts/skills/find-zenmoney-savings",
+      "source_sha256": "841f7d7a23d15c678fa413a1b729772462c76caaeb11f8e4c46c959002035552",
+      "source_revision": "a22449d3fb76e307fee36658c4ad10f70404967d",
+      "intentional_refinement": ""
+    },
+    {
+      "name": "jupyter-notebook",
+      "canonical": "agents/skills/codex-curated/jupyter-notebook",
+      "projections": [
+        "skills/codex/jupyter-notebook"
+      ],
+      "reviewed_sha256": "a16fb2c592ac8846940db7ad61bb8fbe814339c1a5d6041f759cc74301c11457",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "upstream": "openai/skills@49f948faa9258a0c61caceaf225e179651397431"
+    },
+    {
+      "name": "pdf",
+      "canonical": "agents/skills/codex-curated/pdf",
+      "projections": [
+        "skills/codex/pdf"
+      ],
+      "reviewed_sha256": "75605de0c36f3ca8ef3de2631a54233721285c5aa3c6f08ddd3380fc4fe9a330",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "upstream": "openai/skills@49f948faa9258a0c61caceaf225e179651397431"
+    },
+    {
+      "name": "review-zenmoney-categories",
+      "canonical": "agents/skills/codex-curated/review-zenmoney-categories",
+      "projections": [
+        "skills/codex/review-zenmoney-categories"
+      ],
+      "reviewed_sha256": "d1f0615549fdd8b80118fb8d047c7eb58c00b0fa2a3ea11cfe38884af0e4e202",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "source_package": "../zenmoney-receipts/skills/review-zenmoney-categories",
+      "source_sha256": "d1f0615549fdd8b80118fb8d047c7eb58c00b0fa2a3ea11cfe38884af0e4e202",
+      "source_revision": "a22449d3fb76e307fee36658c4ad10f70404967d",
+      "intentional_refinement": ""
+    },
+    {
+      "name": "spreadsheet",
+      "canonical": "agents/skills/codex-curated/spreadsheet",
+      "projections": [
+        "skills/codex/spreadsheet"
+      ],
+      "reviewed_sha256": "1491327f2f179beb18550d27982a764a587f023b43c55fb1226cd5cb9c0e966d",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "brain",
+      "canonical": "agents/skills/platform/brain",
+      "projections": [
+        "skills/codex/brain"
+      ],
+      "reviewed_sha256": "4ab64db49614a455ca3be843fe03ab61ff44f0c5df4e822a1c669235c3871994",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "creating-observability-pipelines",
+      "canonical": "agents/skills/platform/creating-observability-pipelines",
+      "projections": [
+        "skills/codex/creating-observability-pipelines"
+      ],
+      "reviewed_sha256": "bc47c0579c76842698a9683265a42b85c58d555913c029611cc19031a922c91c",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "source_package": "../observability-pipeline-skills/skill/creating-observability-pipelines",
+      "source_sha256": "bc47c0579c76842698a9683265a42b85c58d555913c029611cc19031a922c91c",
+      "source_revision": "bc40b5c8991e491199a2d14d1c7602451f95da50",
+      "intentional_refinement": ""
+    },
+    {
+      "name": "discovering-value-streams",
+      "canonical": "agents/skills/platform/discovering-value-streams",
+      "projections": [
+        "skills/codex/discovering-value-streams"
+      ],
+      "reviewed_sha256": "945cea8e6bb76a7d39cd2d793ecdf6ae7f3af9204af1aac09aa5794198aa46b6",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "source_package": "../architectural-execution-skills/skills/discovering-value-streams",
+      "source_sha256": "945cea8e6bb76a7d39cd2d793ecdf6ae7f3af9204af1aac09aa5794198aa46b6",
+      "source_revision": "026d8454037edfbd6670c599f82ebdc7362255ce",
+      "intentional_refinement": ""
+    },
+    {
+      "name": "engineering-agent-ready-clis",
+      "canonical": "agents/skills/platform/engineering-agent-ready-clis",
+      "projections": [
+        "skills/codex/engineering-agent-ready-clis"
+      ],
+      "reviewed_sha256": "9ac8522c76b15830433e5a046cd5fe5c8ae6ea962bdd75decd29252680f3c4cd",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "modeling-c4-architecture",
+      "canonical": "agents/skills/platform/modeling-c4-architecture",
+      "projections": [
+        "skills/codex/modeling-c4-architecture"
+      ],
+      "reviewed_sha256": "054cf5013087080fa24730b728ca87ce730aaaa3dfeda64cd94fd93a6f2521e9",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "source_package": "../architectural-execution-skills/skills/modeling-c4-architecture",
+      "source_sha256": "054cf5013087080fa24730b728ca87ce730aaaa3dfeda64cd94fd93a6f2521e9",
+      "source_revision": "026d8454037edfbd6670c599f82ebdc7362255ce",
+      "intentional_refinement": ""
+    },
+    {
+      "name": "observability-engineering",
+      "canonical": "agents/skills/platform/observability-engineering",
+      "projections": [
+        "skills/codex/observability-engineering"
+      ],
+      "reviewed_sha256": "74ceebded430c0153bc8f08e679ddf4cdc2b10ccdbf72fe082da25dc1df3d05f",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "source_package": "../observability-engineering/skill/observability-engineering",
+      "source_sha256": "74ceebded430c0153bc8f08e679ddf4cdc2b10ccdbf72fe082da25dc1df3d05f",
+      "source_revision": "290d68402d30a3091ddc32235218bf0f053d0c6a",
+      "intentional_refinement": ""
+    },
+    {
+      "name": "orchestrating-architecture-execution",
+      "canonical": "agents/skills/platform/orchestrating-architecture-execution",
+      "projections": [
+        "skills/codex/orchestrating-architecture-execution"
+      ],
+      "reviewed_sha256": "a3d97a5aabfddf743c25bd7d04537ff1ab848f071c2a72f1ce3ff9728220fd3c",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "source_package": "../architectural-execution-skills/skills/orchestrating-architecture-execution",
+      "source_sha256": "a3d97a5aabfddf743c25bd7d04537ff1ab848f071c2a72f1ce3ff9728220fd3c",
+      "source_revision": "026d8454037edfbd6670c599f82ebdc7362255ce",
+      "intentional_refinement": ""
+    },
+    {
+      "name": "reliability-engineering",
+      "canonical": "agents/skills/platform/reliability-engineering",
+      "projections": [
+        "skills/codex/reliability-engineering"
+      ],
+      "reviewed_sha256": "4ee4f5f8d59d5ac115a43ced25a18f5a93e68f9cf81c3a714013d0e64136404a",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "source_package": "../reliability-engineering/skill/reliability-engineering",
+      "source_sha256": "4ee4f5f8d59d5ac115a43ced25a18f5a93e68f9cf81c3a714013d0e64136404a",
+      "source_revision": "2266054410119aa7f2edcb676732d8f83396da8a",
+      "intentional_refinement": ""
+    },
+    {
+      "name": "reviewing-traceability",
+      "canonical": "agents/skills/platform/reviewing-traceability",
+      "projections": [
+        "skills/codex/reviewing-traceability"
+      ],
+      "reviewed_sha256": "fff6064d763e4760bb6bb3159fc10058f27b66343cc6d9145c0df4a03cea266b",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "source_package": "../architectural-execution-skills/skills/reviewing-traceability",
+      "source_sha256": "fff6064d763e4760bb6bb3159fc10058f27b66343cc6d9145c0df4a03cea266b",
+      "source_revision": "026d8454037edfbd6670c599f82ebdc7362255ce",
+      "intentional_refinement": ""
+    },
+    {
+      "name": "shaping-capabilities",
+      "canonical": "agents/skills/platform/shaping-capabilities",
+      "projections": [
+        "skills/codex/shaping-capabilities"
+      ],
+      "reviewed_sha256": "cc054c806adea08868316d9e1eaa92052e991c3d0729683e2837f0576e93ee79",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "source_package": "../architectural-execution-skills/skills/shaping-capabilities",
+      "source_sha256": "cc054c806adea08868316d9e1eaa92052e991c3d0729683e2837f0576e93ee79",
+      "source_revision": "026d8454037edfbd6670c599f82ebdc7362255ce",
+      "intentional_refinement": ""
+    },
+    {
+      "name": "shaping-features",
+      "canonical": "agents/skills/platform/shaping-features",
+      "projections": [
+        "skills/codex/shaping-features"
+      ],
+      "reviewed_sha256": "5fae990782aa1165aa4c112009da527a87574be04d4053f8325730fdcb91ba72",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "source_package": "../architectural-execution-skills/skills/shaping-features",
+      "source_sha256": "5fae990782aa1165aa4c112009da527a87574be04d4053f8325730fdcb91ba72",
+      "source_revision": "026d8454037edfbd6670c599f82ebdc7362255ce",
+      "intentional_refinement": ""
+    },
+    {
+      "name": "slicing-stories",
+      "canonical": "agents/skills/platform/slicing-stories",
+      "projections": [
+        "skills/codex/slicing-stories"
+      ],
+      "reviewed_sha256": "02e7e8731e3611a3644fe84c1a91e24297e9ecf6d7b66148a26a5dc4a05ef26a",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06",
+      "source_package": "../architectural-execution-skills/skills/slicing-stories",
+      "source_sha256": "02e7e8731e3611a3644fe84c1a91e24297e9ecf6d7b66148a26a5dc4a05ef26a",
+      "source_revision": "026d8454037edfbd6670c599f82ebdc7362255ce",
+      "intentional_refinement": ""
+    },
+    {
+      "name": "writing-diataxis-documentation",
+      "canonical": "agents/skills/platform/writing-diataxis-documentation",
+      "projections": [
+        "skills/codex/writing-diataxis-documentation"
+      ],
+      "reviewed_sha256": "f8c6245113876819ea7ec17bc92eeb4dc3ccbd6a96f893d329798f50dc752862",
+      "ownership": "reviewed-snapshot",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "gh-address-comments",
+      "canonical": "agents/skills/plugins/github/gh-address-comments",
+      "projections": [
+        "skills/plugins/github/gh-address-comments"
+      ],
+      "reviewed_sha256": "c92bce8ad82907eb4bf1ebfe0ae94834c4bdcf31a0faa39416570db038e69944",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "gh-fix-ci",
+      "canonical": "agents/skills/plugins/github/gh-fix-ci",
+      "projections": [
+        "skills/plugins/github/gh-fix-ci"
+      ],
+      "reviewed_sha256": "182d1fea545038197027a4be47933be1403245775ca76ff3441c2f23ed515683",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "github",
+      "canonical": "agents/skills/plugins/github/github",
+      "projections": [
+        "skills/plugins/github/github"
+      ],
+      "reviewed_sha256": "a10a8229b747e1b07d24b22474dc6ea0d9c4d741a4cfa782e07248fab50fde97",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "yeet",
+      "canonical": "agents/skills/plugins/github/yeet",
+      "projections": [
+        "skills/plugins/github/yeet"
+      ],
+      "reviewed_sha256": "c0bc75351a210019c80605b80bc3bc8570937daafb651c9469d043db3f4912c9",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "google-docs",
+      "canonical": "agents/skills/plugins/google-drive/google-docs",
+      "projections": [
+        "skills/plugins/google-drive/google-docs"
+      ],
+      "reviewed_sha256": "87039b39d9ac39ab17039db82613fb61e54eea6b88df888c36ddff90dfcb42e6",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "google-drive",
+      "canonical": "agents/skills/plugins/google-drive/google-drive",
+      "projections": [
+        "skills/plugins/google-drive/google-drive"
+      ],
+      "reviewed_sha256": "33a24a0ed59012f4108e3037294554a149b2c94f479242ce07b0209dae935adc",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "google-drive-comments",
+      "canonical": "agents/skills/plugins/google-drive/google-drive-comments",
+      "projections": [
+        "skills/plugins/google-drive/google-drive-comments"
+      ],
+      "reviewed_sha256": "da8b989f7d5e9c1f5b8bc0df168de6d4fbe06700e15a4569011118224fa45608",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "google-sheets",
+      "canonical": "agents/skills/plugins/google-drive/google-sheets",
+      "projections": [
+        "skills/plugins/google-drive/google-sheets"
+      ],
+      "reviewed_sha256": "c55131a43e56f6ec2b19dcdc83c74a45ab5126307ca728ec22bbd18e3852cee7",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "google-sheets-chart-builder",
+      "canonical": "agents/skills/plugins/google-drive/google-sheets-chart-builder",
+      "projections": [
+        "skills/plugins/google-drive/google-sheets-chart-builder"
+      ],
+      "reviewed_sha256": "f24e3e4c75dfee5208d7c20d97e88621313b68cf136f40eddf63ad6eb86eaad3",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "google-sheets-formula-builder",
+      "canonical": "agents/skills/plugins/google-drive/google-sheets-formula-builder",
+      "projections": [
+        "skills/plugins/google-drive/google-sheets-formula-builder"
+      ],
+      "reviewed_sha256": "c6f6b895676c66259472a2c69af146dbec9b5ca2693fce76723711d5cd3498d1",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "google-slides",
+      "canonical": "agents/skills/plugins/google-drive/google-slides",
+      "projections": [
+        "skills/plugins/google-drive/google-slides"
+      ],
+      "reviewed_sha256": "8e5fe7c068902c83fc389e222f328065e45536e26e17659479e93cf96d847789",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "google-slides-import-presentation",
+      "canonical": "agents/skills/plugins/google-drive/google-slides-import-presentation",
+      "projections": [
+        "skills/plugins/google-drive/google-slides-import-presentation"
+      ],
+      "reviewed_sha256": "e7ba78d104722fbbae53ccc7421234b1763160844d4a225876a776da65682051",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "google-slides-template-migration",
+      "canonical": "agents/skills/plugins/google-drive/google-slides-template-migration",
+      "projections": [
+        "skills/plugins/google-drive/google-slides-template-migration"
+      ],
+      "reviewed_sha256": "44937a1b11b3755315f2dd990f36c5aca307555a63e098ce15e48518cdcf14e2",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "google-slides-template-surgery",
+      "canonical": "agents/skills/plugins/google-drive/google-slides-template-surgery",
+      "projections": [
+        "skills/plugins/google-drive/google-slides-template-surgery"
+      ],
+      "reviewed_sha256": "db05834fd984edfb19379c992533f846a0eb143856e637778bd4a61afc1ee7f0",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    },
+    {
+      "name": "google-slides-visual-iteration",
+      "canonical": "agents/skills/plugins/google-drive/google-slides-visual-iteration",
+      "projections": [
+        "skills/plugins/google-drive/google-slides-visual-iteration"
+      ],
+      "reviewed_sha256": "794989837c8ba22e9afc721958c28fe22f3fc1c8f3d2355c49871df54cae42f8",
+      "ownership": "reviewed-local-fallback",
+      "reviewed_at": "2026-10-06"
+    }
+  ]
+}

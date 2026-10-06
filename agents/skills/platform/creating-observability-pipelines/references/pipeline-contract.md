@@ -32,13 +32,13 @@ signal: logs
 required_fields:
   - timestamp
   - service.name
-  - deployment.environment
+  - deployment.environment.name
   - severity
   - message
   - trace.id
 cardinality_limits:
   service.name: bounded-service-registry
-  deployment.environment: bounded-environment-list
+  deployment.environment.name: bounded-environment-list
   user.id: event-only
 sensitivity:
   default: internal

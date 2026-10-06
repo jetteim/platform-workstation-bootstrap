@@ -1,0 +1,398 @@
+{
+  "timestamp_utc": "2026-10-06T13:48:15.966821+00:00",
+  "skill_packages": 95,
+  "ui_packages": 91,
+  "provider_system_snapshots_unchanged": true,
+  "synthetic_scenario_counts": {
+    "architectural-execution-skills": 8,
+    "observability-engineering": 9,
+    "observability-pipeline-skills": 8,
+    "reliability-engineering": 9,
+    "zenmoney-receipts": 11,
+    "platform-workstation-bootstrap": 16
+  },
+  "total_scenarios": 61,
+  "errors": [],
+  "results": [
+    {
+      "path": "architectural-execution-skills/skills/discovering-value-streams/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "architectural-execution-skills/skills/modeling-c4-architecture/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "architectural-execution-skills/skills/orchestrating-architecture-execution/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "architectural-execution-skills/skills/reviewing-traceability/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "architectural-execution-skills/skills/shaping-capabilities/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "architectural-execution-skills/skills/shaping-features/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "architectural-execution-skills/skills/slicing-stories/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "observability-engineering/skill/observability-engineering/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "observability-pipeline-skills/skill/creating-observability-pipelines/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "reliability-engineering/skill/reliability-engineering/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "zenmoney-receipts/skills/categorize-zenmoney-receipts/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "zenmoney-receipts/skills/find-zenmoney-savings/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "zenmoney-receipts/skills/review-zenmoney-categories/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/.system/imagegen/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/.system/openai-docs/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/.system/review-agent/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/.system/skill-creator/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/.system/skill-installer/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/categorize-zenmoney-receipts/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/cli-creator/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/doc/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/find-zenmoney-savings/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/jupyter-notebook/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/pdf/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/review-zenmoney-categories/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/codex-curated/spreadsheet/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/brain/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/creating-observability-pipelines/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/discovering-value-streams/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/engineering-agent-ready-clis/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/modeling-c4-architecture/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/observability-engineering/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/orchestrating-architecture-execution/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/reliability-engineering/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/reviewing-traceability/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/shaping-capabilities/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/shaping-features/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/slicing-stories/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/platform/writing-diataxis-documentation/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/github/gh-address-comments/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/github/gh-fix-ci/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/github/github/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/github/yeet/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-docs/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-drive/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-drive-comments/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-sheets/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-sheets-chart-builder/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-sheets-formula-builder/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides-import-presentation/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides-template-migration/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides-template-surgery/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/agents/skills/plugins/google-drive/google-slides-visual-iteration/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/.system/imagegen/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/.system/openai-docs/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/.system/review-agent/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/.system/skill-creator/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/.system/skill-installer/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/brain/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/categorize-zenmoney-receipts/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/cli-creator/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/creating-observability-pipelines/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/discovering-value-streams/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/doc/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/engineering-agent-ready-clis/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/find-zenmoney-savings/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/jupyter-notebook/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/modeling-c4-architecture/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/observability-engineering/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/orchestrating-architecture-execution/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/pdf/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/reliability-engineering/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/review-zenmoney-categories/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/reviewing-traceability/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/shaping-capabilities/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/shaping-features/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/slicing-stories/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/spreadsheet/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/codex/writing-diataxis-documentation/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/github/gh-address-comments/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/github/gh-fix-ci/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/github/github/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/github/yeet/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-docs/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-drive/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-drive-comments/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-sheets/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-sheets-chart-builder/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-sheets-formula-builder/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides-import-presentation/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides-template-migration/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides-template-surgery/SKILL.md",
+      "valid": true
+    },
+    {
+      "path": "platform-workstation-bootstrap/skills/plugins/google-drive/google-slides-visual-iteration/SKILL.md",
+      "valid": true
+    }
+  ]
+}

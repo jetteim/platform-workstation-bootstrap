@@ -1,0 +1,4 @@
+interface:
+  display_name: "CLI Creator"
+  short_description: "Build CLIs for Codex"
+  default_prompt: "Use $cli-creator to build a composable CLI from this source within the requested scope, with secret-safe auth, a reviewable install target and verified fixture behavior."

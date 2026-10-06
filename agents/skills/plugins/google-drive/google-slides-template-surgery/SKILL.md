@@ -1,6 +1,6 @@
 ---
 name: google-slides-template-surgery
-description: Perform structural rework in connected Google Slides decks. Use when local visual cleanup is not enough and repeated layout defects require batch_update structure edits plus strict verification.
+description: "Repair recurring structural layout defects in connected Google Slides using scoped raw edits and rendered verification."
 ---
 
 # Google Slides Template Surgery
@@ -87,3 +87,7 @@ A structural pass is only done when:
 Read these before the first write:
 - `./references/template-surgery-playbook.md`
 - `./references/batch-update-recipes.md`
+
+## Connected capability boundary
+
+Check the runtime exposes the exact reads and mutations needed for this operation. These skills use the Google Drive app/plugin; do not invent a Google MCP server or automatically connect an account. Missing tooling permits a bounded explanation or supplied-file analysis, not fabricated IDs, writes or verification.

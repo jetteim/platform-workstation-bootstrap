@@ -1,0 +1,4 @@
+interface:
+  display_name: "Shaping Features"
+  short_description: "Shape a capability into bounded, testable feature packets with"
+  default_prompt: "Use $shaping-features to shape a capability into bounded, testable feature packets with acceptance criteria, NFRs and architecture impact."

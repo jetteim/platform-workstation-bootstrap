@@ -1,15 +1,18 @@
 ---
 name: shaping-capabilities
-description: Use when a value stream, strategic outcome, portfolio item, or epic-sized change needs to be decomposed into capability increments, business hypotheses, dependencies, architecture concerns, and feature candidates.
+description: Turn an outcome or epic into capability increments with hypotheses, dependencies and feature candidates.
 ---
 
 # Shaping Capabilities
+
+Preserve the supplied artifact structure and selected abstraction level. Produce only what the current decision needs; one complete story or brief can be sufficient. Existing authorization covers routine local implementation and verification. Ask only about unresolved material choices or an expanded action.
+
 
 ## Overview
 
 Capabilities describe meaningful abilities needed to improve a value stream. They are larger than features, but still need evidence, boundaries, and a route to implementation.
 
-Use `superpowers:brainstorming` when installed; otherwise use an equivalent design-discovery workflow to explore competing capability options before locking scope.
+Use an available design-discovery workflow only when unresolved intent needs it to explore competing capability options before locking scope.
 
 ## Capability Tests
 
@@ -27,7 +30,7 @@ A good capability:
 2. Generate capability options from friction points, missing abilities, risk controls, and feedback gaps.
 3. Classify each as business-facing, platform-facing, operational, or enabler.
 4. Identify dependencies and architecture questions early.
-5. Keep 3-7 capabilities active; park the rest.
+5. Keep a manageable active capability slice; 3–7 is a heuristic. Preserve supplied backlogs and park only work outside the chosen slice.
 6. Choose the next capability by value, risk reduction, learning, and dependency order.
 
 ## Capability Brief

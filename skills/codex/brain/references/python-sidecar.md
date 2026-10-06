@@ -1,3 +1,4 @@
+<!-- Reviewed examples: model-dependent templates/IDs/configs and external timings, not bootstrap benchmark results. See tested-recipe.md. -->
 # Python Sidecar — Medium-Brain Deployment
 
 Run the model as a persistent Python process. Loads model once, serves requests over stdin/stdout or HTTP. Best for Tauri apps, daemons, or any context where cold-start latency matters.
@@ -16,7 +17,7 @@ from mlx_lm import load, generate
 import sys
 import json
 
-MODEL_PATH = "models/<name>-fused"  # or GGUF path
+MODEL_PATH = "models/<name>-fused"  # MLX directory; GGUF uses a compatible llama runtime
 
 model, tokenizer = load(MODEL_PATH)
 
@@ -28,7 +29,8 @@ def infer(input_text: str) -> str:
         {"role": "user", "content": input_text},
     ]
     prompt = tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
-    prompt += "<think>\n\n</think>\n\n"
+    # Apply only supported model/template options for thinking.
+    # Do not append a universal prefix across tokenizer families.
     return generate(model, tokenizer, prompt=prompt, max_tokens=200, temp=0.0)
 
 # Simple JSON-line protocol over stdin/stdout
@@ -49,12 +51,7 @@ Same pattern as micro-brain's Rust embedding (see `rust-embedding.md`), but:
 - Generation loop needed (not just single-token greedy)
 - Recommend keeping model loaded in memory (daemon or sidecar)
 
-Qwen3 ChatML special tokens are the same:
-```rust
-const IM_START: i32 = 151644;
-const IM_END: i32 = 151645;
-const NEWLINE: i32 = 198;
-```
+Inspect the selected tokenizer with the packaged `scripts/tokenizer-metadata.py`. Use the selected chat template and verified GGUF vocabulary; do not reuse fixed IDs or assume a newline is one token. See `rust-embedding.md` for a metadata-driven example.
 
 ## System Prompt Design
 

@@ -1,3 +1,4 @@
+<!-- Reviewed examples: model-dependent templates/IDs/configs and external timings, not bootstrap benchmark results. See tested-recipe.md. -->
 # Rust Embedding — Micro-Brain Deployment
 
 Embed a GGUF model directly into a Rust binary. No server, no startup overhead beyond model load. Best for hooks, daemons, and real-time pipelines.
@@ -15,19 +16,16 @@ Model: copy GGUF to `~/.diana/models/<name>.gguf`
 
 ## Qwen3 ChatML Token Construction
 
-**CRITICAL: Qwen3 ChatML special tokens must be raw token IDs.**
+Inspect the selected local tokenizer with `python3 scripts/tokenizer-metadata.py <model-directory>` (relative to the installed skill). Use its actual chat template. The helper reports ChatML support and IDs only; do not apply this example to a tokenizer without ChatML. Verify that exported GGUF IDs match before inference.
 
-`<|im_start|>` and `<|im_end|>` are special tokens inserted by ID. Text content is tokenized separately. The `<think>\n\n</think>\n\n` prefix suppresses Qwen3's thinking mode at inference time.
+`<|im_start|>` and `<|im_end|>` are special tokens inserted by ID. Text content is tokenized separately. An empty think prefix is a model-specific training example, not a universal suppression guarantee. Prefer the selected template’s supported option and verify the actual output.
 
 ```rust
-// Qwen3 ChatML special token IDs
-const IM_START: i32 = 151644; // <|im_start|>
-const IM_END: i32 = 151645;   // <|im_end|>
-const NEWLINE: i32 = 198;     // \n
-
-let im_start = LlamaToken::new(IM_START);
-let im_end = LlamaToken::new(IM_END);
-let nl = LlamaToken::new(NEWLINE);
+// chat_tokens is loaded from validated selected-tokenizer metadata,
+// checked against the GGUF vocabulary. Do not supply hardcoded IDs.
+let im_start = LlamaToken::new(chat_tokens.im_start);
+let im_end = LlamaToken::new(chat_tokens.im_end);
+let nl = model.str_to_token("\n", AddBos::Never)?;
 
 // Tokenize text parts
 let system_label = model.str_to_token("system", AddBos::Never)?;
@@ -35,25 +33,26 @@ let system_text = model.str_to_token(&system_prompt, AddBos::Never)?;
 let user_label = model.str_to_token("user", AddBos::Never)?;
 let user_text = model.str_to_token(&input, AddBos::Never)?;
 let assistant_label = model.str_to_token("assistant", AddBos::Never)?;
-let think_suffix = model.str_to_token("<think>\n\n</think>\n\n", AddBos::Never)?;
+// generation_suffix comes from the selected model template/config.
+let think_suffix = model.str_to_token(&generation_suffix, AddBos::Never)?;
 
 // Build: <|im_start|>system\n{sp}<|im_end|>\n<|im_start|>user\n{cmd}<|im_end|>\n<|im_start|>assistant\n<think>...</think>\n\n
 let mut tokens = Vec::new();
 tokens.push(im_start);
 tokens.extend_from_slice(&system_label);
-tokens.push(nl);
+tokens.extend_from_slice(&nl);
 tokens.extend_from_slice(&system_text);
 tokens.push(im_end);
-tokens.push(nl);
+tokens.extend_from_slice(&nl);
 tokens.push(im_start);
 tokens.extend_from_slice(&user_label);
-tokens.push(nl);
+tokens.extend_from_slice(&nl);
 tokens.extend_from_slice(&user_text);
 tokens.push(im_end);
-tokens.push(nl);
+tokens.extend_from_slice(&nl);
 tokens.push(im_start);
 tokens.extend_from_slice(&assistant_label);
-tokens.push(nl);
+tokens.extend_from_slice(&nl);
 tokens.extend_from_slice(&think_suffix);
 ```
 

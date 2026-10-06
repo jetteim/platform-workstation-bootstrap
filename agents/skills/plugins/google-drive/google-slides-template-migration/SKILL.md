@@ -1,6 +1,6 @@
 ---
 name: google-slides-template-migration
-description: Migrate a Google Slides deck onto a target template. Use when the user wants to preserve source content while rebuilding slides from a branded template structure instead of making incremental in-place edits.
+description: "Rebuild a connected Google Slides deck on a chosen template while preserving its content and order."
 ---
 
 # Google Slides Template Migration
@@ -114,10 +114,14 @@ A migration pass is only done when:
 - no clipping, overlap, or awkward density was introduced
 - the main content areas feel intentionally filled rather than sparse by accident
 - sibling slides of the same type look like they belong in the same deck
-- any slide that needed visible local cleanup was carried through [visual-change-loop](../google-drive/references/slides/visual-change-loop.md) until the third fresh review
+- any slide that needed visible local cleanup was carried through [visual-change-loop](../google-drive/references/slides/visual-change-loop.md) until a fresh render verifies the requested outcome
 
 ## References
 
 Read these before migrating beyond the first few slides:
 - `./references/migration-playbook.md`
 - `./references/slide-archetype-mapping.md`
+
+## Connected capability boundary
+
+Check the runtime exposes the exact reads and mutations needed for this operation. These skills use the Google Drive app/plugin; do not invent a Google MCP server or automatically connect an account. Missing tooling permits a bounded explanation or supplied-file analysis, not fabricated IDs, writes or verification.

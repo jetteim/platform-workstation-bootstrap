@@ -1,0 +1,4 @@
+interface:
+  display_name: "Slicing Stories"
+  short_description: "Slice a feature into implementation-ready stories with testabl"
+  default_prompt: "Use $slicing-stories to slice a feature into implementation-ready stories with testable acceptance criteria and a bounded execution context."

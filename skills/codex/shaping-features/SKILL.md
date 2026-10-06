@@ -1,9 +1,12 @@
 ---
 name: shaping-features
-description: Use when a capability, epic, roadmap item, or architecture change needs feature-sized delivery packets with acceptance criteria, NFRs, enablers, dependencies, C4 impact, and story-slicing readiness.
+description: Shape a capability into bounded, testable feature packets with acceptance criteria, NFRs and architecture impact.
 ---
 
 # Shaping Features
+
+Preserve the supplied artifact structure and selected abstraction level. Produce only what the current decision needs; one complete story or brief can be sufficient. Existing authorization covers routine local implementation and verification. Ask only about unresolved material choices or an expanded action.
+
 
 ## Overview
 
@@ -28,7 +31,7 @@ A good feature:
 3. Separate user-facing features from enabler features.
 4. Attach NFRs where they constrain design, not as generic quality slogans.
 5. Note C4 impact: context, container, component, deployment, or none.
-6. Prepare story slicing only for the next 1-3 features.
+6. Prepare stories for the selected active feature slice; 1–3 features is a heuristic, not a quota.
 
 ## Feature Packet
 
@@ -62,4 +65,4 @@ Proceed to `slicing-stories` when installed, or to an equivalent story-slicing w
 - Acceptance criteria describe behavior, not implementation.
 - NFRs are specific enough to test or review.
 - Architecture impact is explicit.
-- The story packet can stay within 7-10 active stories.
+- The active story packet is understandable and bounded for this team; 7–10 is a heuristic, not a readiness gate.

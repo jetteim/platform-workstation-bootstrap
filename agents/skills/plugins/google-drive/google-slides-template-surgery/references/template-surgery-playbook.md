@@ -5,7 +5,7 @@ Use this file when the main skill has already triggered and you need the operati
 ## When To Escalate
 
 Escalate from normal visual iteration to template surgery when:
-- a slide needs more than 3-4 visual passes and still looks structurally wrong
+- verified local edits stop improving a slide because its structure is wrong
 - the same layout defect appears across a family of slides
 - the problem is caused by placeholder design, not local position drift
 - fixing one element keeps creating new collisions elsewhere
@@ -21,7 +21,7 @@ Escalate from normal visual iteration to template surgery when:
 - rework one title/body/image arrangement
 4. Apply a small batch.
 5. Re-fetch the thumbnail.
-6. Run [visual-change-loop](../../google-drive/references/slides/visual-change-loop.md) on the representative slide until the third fresh review is clean.
+6. Run [visual-change-loop](../../google-drive/references/slides/visual-change-loop.md) on the representative slide until a fresh rendered review confirms the requested outcome.
 7. Check one sibling slide with the same pattern.
 8. Only then continue to the rest of the section.
 

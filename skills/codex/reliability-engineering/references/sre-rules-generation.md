@@ -29,15 +29,7 @@ Provider Terraform remains outside this skill. If the user asks for Terraform, e
 
 ## Resolve The Engine
 
-Look for `slo-rules-engine` in this order:
-
-```bash
-sre_rules_root="${SRE_RULES_ENGINE_ROOT:-${AGENTS_HOME:-$HOME/.agents}/vendor_imports/repos/slo-rules-engine}"
-if [ ! -x "$sre_rules_root/bin/rules-ctl" ]; then
-  sre_rules_root="$HOME/Library/CloudStorage/OneDrive-Personal/Pet projects/slo-rules-engine"
-fi
-test -x "$sre_rules_root/bin/rules-ctl"
-```
+Use `scripts/resolve-model.py --kind engine`, with `--root <path>` or `SRE_RULES_ENGINE_ROOT` for an explicit checkout. See [model-resolution.md](model-resolution.md). An explicit missing root is a reported gap; it is not silently replaced. Without an explicit root, the helper checks the managed mirror, workspace and legacy checkout for executable `bin/rules-ctl`.
 
 If no checkout is available, do not fabricate generated artifacts. Output an `SreRulesGenerationGap` with the missing checkout path and the generation commands that should be run after installation.
 
