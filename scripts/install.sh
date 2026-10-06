@@ -5,6 +5,7 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 AGENTS_HOME="${AGENTS_HOME:-$HOME/.agents}"
 CODEX_HOME="${CODEX_HOME:-$HOME/.codex}"
 CLAUDE_HOME="${CLAUDE_HOME:-$HOME/.claude}"
+GIT_HOOKS_HOME="${GIT_HOOKS_HOME:-$HOME/.config/git/hooks}"
 
 validate_home_dir() {
   local name="$1"
@@ -25,6 +26,7 @@ validate_home_dir() {
     AGENTS_HOME) default_path="$(python3 -c 'import os, sys; print(os.path.abspath(sys.argv[1]))' "$HOME/.agents")" ;;
     CODEX_HOME) default_path="$(python3 -c 'import os, sys; print(os.path.abspath(sys.argv[1]))' "$HOME/.codex")" ;;
     CLAUDE_HOME) default_path="$(python3 -c 'import os, sys; print(os.path.abspath(sys.argv[1]))' "$HOME/.claude")" ;;
+    GIT_HOOKS_HOME) default_path="$(python3 -c 'import os, sys; print(os.path.abspath(sys.argv[1]))' "$HOME/.config/git/hooks")" ;;
     *)
       echo "[install] unknown managed home variable: ${name}" >&2
       exit 1
@@ -114,9 +116,11 @@ install_tree() {
 AGENTS_HOME="$(validate_home_dir "AGENTS_HOME" "$AGENTS_HOME")"
 CODEX_HOME="$(validate_home_dir "CODEX_HOME" "$CODEX_HOME")"
 CLAUDE_HOME="$(validate_home_dir "CLAUDE_HOME" "$CLAUDE_HOME")"
+GIT_HOOKS_HOME="$(validate_home_dir "GIT_HOOKS_HOME" "$GIT_HOOKS_HOME")"
 reject_symlink_path "$AGENTS_HOME" "AGENTS_HOME"
 reject_symlink_path "$CODEX_HOME" "CODEX_HOME"
 reject_symlink_path "$CLAUDE_HOME" "CLAUDE_HOME"
+reject_symlink_path "$GIT_HOOKS_HOME" "GIT_HOOKS_HOME"
 
 if [ "${SKIP_GITHUB_REFRESH:-0}" != "1" ]; then
   "$repo_root/scripts/refresh-github.sh"
@@ -155,106 +159,12 @@ install_file "$codex_hook_config_json" "$CODEX_HOME/hooks.json" "Codex hooks con
 
 "$repo_root/scripts/install-skills.sh"
 
-install_file "$repo_root/git/hooks/pre-commit" "$HOME/.config/git/hooks/pre-commit" "global Git pre-commit hook"
-chmod +x "$HOME/.config/git/hooks/pre-commit"
-git config --global core.hooksPath "$HOME/.config/git/hooks"
+install_file "$repo_root/git/hooks/pre-commit" "$GIT_HOOKS_HOME/pre-commit" "global Git pre-commit hook"
+install_file "$repo_root/git/hooks/scan-staged.py" "$GIT_HOOKS_HOME/scan-staged.py" "staged blob scanner"
+chmod +x "$GIT_HOOKS_HOME/pre-commit"
+git config --global core.hooksPath "$GIT_HOOKS_HOME"
 
-python3 - "$CODEX_HOME/config.toml" <<'PY'
-from pathlib import Path
-import re
-import sys
-
-path = Path(sys.argv[1])
-required_features = {
-    "hooks": "true",
-    "multi_agent": "true",
-    "plugins": "true",
-}
-required_plugins = {
-    "github@openai-curated": "true",
-    "google-drive@openai-curated": "true",
-    "superpowers@openai-curated": "true",
-}
-disabled_skill_paths = [
-    path.parent / "skills/plugin-github/gh-fix-ci/SKILL.md",
-    path.parent / "skills/plugin-github/github/SKILL.md",
-    path.parent / "skills/plugin-github/gh-address-comments/SKILL.md",
-]
-
-if not path.exists():
-    path.write_text(
-        "[features]\n"
-        + "".join(f"{key} = {value}\n" for key, value in required_features.items())
-        + "".join(
-            f'\n[plugins."{plugin}"]\nenabled = {value}\n'
-            for plugin, value in required_plugins.items()
-        )
-        + "".join(
-            f'\n[[skills.config]]\npath = "{skill_path}"\nenabled = false\n'
-            for skill_path in disabled_skill_paths
-        ),
-        encoding="utf-8",
-    )
-    raise SystemExit(0)
-
-text = path.read_text(encoding='utf-8')
-text = re.sub(r'(?m)^codex_hooks\s*=.*\n?', '', text)
-if re.search(r'(?m)^\[features\]\s*$', text):
-    for key, value in required_features.items():
-        replacement = f"{key} = {value}"
-        if re.search(rf'(?m)^{re.escape(key)}\s*=', text):
-            text = re.sub(rf'(?m)^{re.escape(key)}\s*=.*$', replacement, text)
-        else:
-            text = re.sub(r'(?m)^\[features\]\s*$', f'[features]\n{replacement}', text, count=1)
-else:
-    text = (
-        text.rstrip()
-        + "\n\n[features]\n"
-        + "".join(f"{key} = {value}\n" for key, value in required_features.items())
-    )
-
-for plugin, value in required_plugins.items():
-    header = f'[plugins."{plugin}"]'
-    if re.search(rf'(?m)^{re.escape(header)}\s*$', text):
-        section = rf'(?ms)^({re.escape(header)}\n)(.*?)(?=^\[|\Z)'
-        match = re.search(section, text)
-        body = match.group(2) if match else ""
-        if re.search(r'(?m)^enabled\s*=', body):
-            text = re.sub(
-                section,
-                lambda m: m.group(1) + re.sub(r'(?m)^enabled\s*=.*$', f'enabled = {value}', m.group(2)),
-                text,
-                count=1,
-            )
-        else:
-            text = re.sub(section, lambda m: m.group(1) + f'enabled = {value}\n' + m.group(2), text, count=1)
-    else:
-        text = text.rstrip() + f'\n\n{header}\nenabled = {value}\n'
-
-disabled_skill_path_strings = [str(skill_path) for skill_path in disabled_skill_paths]
-lines = text.splitlines()
-filtered_lines = []
-i = 0
-while i < len(lines):
-    if lines[i].strip() == "[[skills.config]]":
-        block = [lines[i]]
-        i += 1
-        while i < len(lines) and not lines[i].startswith("["):
-            block.append(lines[i])
-            i += 1
-        block_text = "\n".join(block)
-        if any(f'path = "{skill_path}"' in block_text for skill_path in disabled_skill_path_strings):
-            continue
-        filtered_lines.extend(block)
-        continue
-    filtered_lines.append(lines[i])
-    i += 1
-
-text = "\n".join(filtered_lines).rstrip()
-for skill_path in disabled_skill_path_strings:
-    text += f'\n\n[[skills.config]]\npath = "{skill_path}"\nenabled = false\n'
-path.write_text(text, encoding='utf-8')
-PY
+python3 "$repo_root/scripts/configure-codex.py" "$CODEX_HOME/config.toml"
 
 echo "[install] installed canonical agent layer, adapter projections, and global Git safety hook"
 echo "[install] review agents/adapters/codex/config.example.toml before changing live $CODEX_HOME/config.toml further"

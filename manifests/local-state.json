@@ -51,7 +51,7 @@
   "claude_local_skills": {
     "brain": {
       "files": 4,
-      "sha256": "a1eaff55239bd715b9c37fa625141f9cca0e2bd8d08df55faaf66be420250364"
+      "sha256": "e9e5cbd22c31e0f0dd461803ffe28f163c52027e73b3a9ee76ed4ab843060378"
     },
     "creating-observability-pipelines": {
       "files": 5,
@@ -63,7 +63,7 @@
     },
     "engineering-agent-ready-clis": {
       "files": 4,
-      "sha256": "9a808782c95e30d5804e481c06d2e4212d604f578bed95ab3ab6a83610d0f0ea"
+      "sha256": "efd1e3b6b613cd07f5dd4b6083693f48749dd65502098b0739c1b50a6b9bda14"
     },
     "modeling-c4-architecture": {
       "files": 1,
@@ -71,7 +71,7 @@
     },
     "observability-engineering": {
       "files": 3,
-      "sha256": "7ac5b716892c31132b5946e2f9a826f7d3466bab4fbae686a8a037d9b1eae295"
+      "sha256": "33869dee267d4aa0843a3460dbb8fff3e81c2578545660052063737f963acd91"
     },
     "orchestrating-architecture-execution": {
       "files": 1,
@@ -159,7 +159,7 @@
     },
     "writing-diataxis-documentation": {
       "files": 7,
-      "sha256": "be57f957c1ebe33844a31546747cd627c383f3505fcb577db2f82bbc272f24e5"
+      "sha256": "ac8fd3361e5bd3a55566c2d2d387029f7bce678f89e5656048fe3bc09083d660"
     }
   },
   "codex_local_skills": {
@@ -170,10 +170,6 @@
     ".system/openai-docs": {
       "files": 17,
       "sha256": "769dcf7c4d2ee81c9dd47b7901b0dbdc90f3ff07772a7a757cc1b512daf8c43a"
-    },
-    ".system/plugin-creator": {
-      "files": 11,
-      "sha256": "daeb57acacb32b5868816f98e8250fd883c0d5eaad092299516104a7ccdd42fe"
     },
     ".system/review-agent": {
       "files": 2,
@@ -189,7 +185,7 @@
     },
     "brain": {
       "files": 4,
-      "sha256": "a1eaff55239bd715b9c37fa625141f9cca0e2bd8d08df55faaf66be420250364"
+      "sha256": "e9e5cbd22c31e0f0dd461803ffe28f163c52027e73b3a9ee76ed4ab843060378"
     },
     "categorize-zenmoney-receipts": {
       "files": 2,
@@ -209,7 +205,7 @@
     },
     "engineering-agent-ready-clis": {
       "files": 4,
-      "sha256": "9a808782c95e30d5804e481c06d2e4212d604f578bed95ab3ab6a83610d0f0ea"
+      "sha256": "efd1e3b6b613cd07f5dd4b6083693f48749dd65502098b0739c1b50a6b9bda14"
     },
     "find-zenmoney-savings": {
       "files": 2,
@@ -225,7 +221,7 @@
     },
     "observability-engineering": {
       "files": 3,
-      "sha256": "7ac5b716892c31132b5946e2f9a826f7d3466bab4fbae686a8a037d9b1eae295"
+      "sha256": "33869dee267d4aa0843a3460dbb8fff3e81c2578545660052063737f963acd91"
     },
     "orchestrating-architecture-execution": {
       "files": 1,
@@ -289,17 +285,48 @@
     },
     "writing-diataxis-documentation": {
       "files": 7,
-      "sha256": "be57f957c1ebe33844a31546747cd627c383f3505fcb577db2f82bbc272f24e5"
+      "sha256": "ac8fd3361e5bd3a55566c2d2d387029f7bce678f89e5656048fe3bc09083d660"
     }
   },
   "exclusions": [
     "credentials, auth databases, sessions, browser state, receipt data",
-    "live config values (reviewed separately through an explicit allowlist)",
-    "plugin enabled status: cache presence alone does not establish activation",
+    "live config values except allowlisted model, effort, feature flags, known native plugin booleans, and known MCP enabled flags",
+    "remote plugin activation, hook trust, and session exposure: cache presence does not establish these",
     "source-mirror uncommitted contents (only commit and dirty status recorded)"
   ],
   "git_hooks_path": "~/.config/git/hooks",
-  "git_pre_commit_sha256": "0a7d787eb8701f10dea08b47d931db3cb70cde32452a21658a3db7de3c074862",
+  "git_pre_commit_sha256": "05766808cc29fa46159760304cc3d99cf65d526bec4d486bd6444299d1f15ebe",
+  "git_staged_scanner_present": true,
+  "harnesses": {
+    "claude": {
+      "rule_template_present": true,
+      "settings_present": false,
+      "user_instructions_present": false
+    },
+    "codex": {
+      "config_parse_available": true,
+      "features": {
+        "hooks": true,
+        "multi_agent": true,
+        "plugins": true
+      },
+      "hooks_config_present": true,
+      "mcp_enabled": {
+        "github": false,
+        "memory": true,
+        "playwright": true,
+        "zenmoney-receipts": true
+      },
+      "model": "gpt-6.1-sol",
+      "model_reasoning_effort": "high",
+      "native_plugins_enabled": {
+        "github@openai-curated": true,
+        "google-drive@openai-curated": true,
+        "superpowers@openai-curated": true
+      },
+      "user_instructions_present": false
+    }
+  },
   "legacy_superpowers_checkout_present": false,
   "managed_files": {
     ".agents/hooks": {
@@ -312,15 +339,15 @@
     },
     ".agents/rules": {
       "files": 4,
-      "sha256": "f2ca7d0015a531e9c2f23c2f1254de9ba8348e9f58765397b27e5a3ef2ade409"
+      "sha256": "dd6f301c306d102567ca57b83e406da8d381725822178e00bfc01f6d2bbd876a"
     },
     ".codex/hooks": {
       "files": 3,
-      "sha256": "8914f46b39f18a314d25a056a3a6bc80bc80d7155b354f575780246bcecd1b8c"
+      "sha256": "563db4ab2bab891bb34cfdec41f62f7e11a1291f44984dc5490777c211661cfd"
     }
   },
   "npm_global": {
-    "@openai/codex": "0.154.0",
+    "@openai/codex": "0.160.1",
     "eslint": "10.0.2",
     "markdownlint-cli": "0.48.0"
   },
@@ -332,10 +359,10 @@
       "2026.8.31"
     ],
     "@playwright/mcp": [
-      "0.0.80"
+      "0.0.83"
     ]
   },
-  "observed_at": "2026-09-11T16:35:38.711128+00:00",
+  "observed_at": "2026-10-06T12:45:47.438004+00:00",
   "pip_user": [
     "certifi==2026.2.25",
     "charset-normalizer==3.4.7",
@@ -359,7 +386,7 @@
     "urllib3==1.26.20"
   ],
   "plugin_cache_skills": {
-    "openai-curated-remote/data-analytics/1.0.2": {
+    "openai-curated-remote/data-analytics/1.0.11": {
       "analyze-data-quality": {
         "files": 2,
         "sha256": "563bbbd2d2f461297704f9a1b20f4d0fc130cc97814ad1183a730c2a53efca37"
@@ -394,7 +421,7 @@
       },
       "index": {
         "files": 2,
-        "sha256": "f9018a70f4ba2460fc83c7fddbfd77a356b7c45b78418f658a2e298c25220b4d"
+        "sha256": "a6bfb7914d97f02ed31e342a11f72d89dd263f0639eecd7b737f21df8fa77e2d"
       },
       "jupyter-notebooks": {
         "files": 2,
@@ -418,11 +445,11 @@
       },
       "publish-artifact-to-sites": {
         "files": 15,
-        "sha256": "c5bcc1bf243c2cad794c867a4874889384785281ea4b5eed3e1ac709ef24615e"
+        "sha256": "b8e1e2dadfc8a3763e18576ac187bd65bbe055a7ec9dba56d77679a4622398a1"
       },
       "report-to-pdf": {
         "files": 2,
-        "sha256": "e6721df658be3273f86d2905cb8e13b49006c8ee0d01ab493b6f9d1df639d0ba"
+        "sha256": "4837a8d017395ca4ea47be121cbaed6e4b10911605e54379b0190a935ab3d1fb"
       },
       "schedule-refresh-jobs": {
         "files": 2,
@@ -439,12 +466,6 @@
       "visualize-data": {
         "files": 16,
         "sha256": "5fb9c578f42300d6de00ec0fc5e47502f30bbeab98741ff1def0d23a70fb6c42"
-      }
-    },
-    "openai-curated-remote/deep-research-work/0.1.15": {
-      "deep-research": {
-        "files": 2,
-        "sha256": "8dfbbf0137357b2896c5e6adc088bc2af5117466bd0275df8c5bbc508e4d74fd"
       }
     },
     "openai-curated-remote/github/0.1.12-5f7cd798dc99": {},
@@ -536,6 +557,38 @@
       "plugin-management": {
         "files": 1,
         "sha256": "16f3c322658f4e0abcd4d6b840d239a288d8e29436c71b74499a6572c754f48b"
+      }
+    },
+    "openai-curated-remote/sites/0.1.75": {
+      "sites-building": {
+        "files": 139,
+        "sha256": "010b3b664837cd340edd31387ece6f3c485e63e44ee52f757d72d4bc4cd03027"
+      },
+      "sites-hosting": {
+        "files": 3,
+        "sha256": "d669d12ae69134b56d8a9db8852ac83adf5933961274dcb2e0aaf139e6ab5589"
+      },
+      "sites-mcp": {
+        "files": 1,
+        "sha256": "a65439893abb2bb2a3be96d870c34895f1466e877969777a3e7f060470d48116"
+      },
+      "sites-preview-troubleshooting": {
+        "files": 1,
+        "sha256": "721bf3467530d7b274aa3bcfc65e9011bab59e959f91d2bbc4199e9864479008"
+      }
+    },
+    "openai-curated-remote/work-pets/0.1.6": {
+      "create-pet": {
+        "files": 21,
+        "sha256": "e678b986a599abce73106cf28c276f706b6c085d239f2a6e1888cd548c57a8ba"
+      },
+      "pets": {
+        "files": 2,
+        "sha256": "0e2ffddfcc127cf10b1a61e41e8d1a3733fb79078c7625a4e16a07f036d7278e"
+      },
+      "update-pet": {
+        "files": 2,
+        "sha256": "8464a5cbe507354526447c2209a629f8c2da728d8ed395ba17f812383d4a57ab"
       }
     },
     "openai-curated/github/11c74d6b": {

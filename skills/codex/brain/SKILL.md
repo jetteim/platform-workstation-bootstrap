@@ -1,6 +1,6 @@
 ---
 name: brain
-description: "Build dedicated local models — from tiny classifiers (micro) to text generators (medium). MLX LoRA fine-tune on Apple Silicon, GGUF export, deploy via Rust or Python sidecar. Triggers: 'brain', 'micro-brain', 'medium-brain', 'finetune', 'train a model', 'classifier', 'local generation', 'натренировать модель'."
+description: Train and export dedicated local text classifiers or short-text generators with MLX LoRA on Apple Silicon. Use for local model training or GGUF deployment; ordinary classification questions do not require this skill.
 ---
 
 # Brain — Dedicated Local Models

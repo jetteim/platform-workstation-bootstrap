@@ -29,7 +29,9 @@ SLO_RULES_ENGINE_REPO="${SLO_RULES_ENGINE_REPO:-https://github.com/jetteim/slo-r
 RELIABILITY_ENGINEERING_REPO="${RELIABILITY_ENGINEERING_REPO:-https://github.com/jetteim/reliability-engineering.git}"
 ARCHITECTURAL_EXECUTION_SKILLS_REPO="${ARCHITECTURAL_EXECUTION_SKILLS_REPO:-https://github.com/jetteim/architectural-execution-skills.git}"
 DIATAXIS_DOCUMENTATION_SKILL_REPO="${DIATAXIS_DOCUMENTATION_SKILL_REPO:-https://github.com/jetteim/diataxis-documentation-skill.git}"
-USE_VENDORED_FALLBACK="${USE_VENDORED_FALLBACK:-1}"
+# Reviewed snapshots are reproducible; refreshed upstream sources are opt-in.
+USE_SOURCE_SKILLS="${USE_SOURCE_SKILLS:-0}"
+SKIP_SOURCE_REFRESH="${SKIP_SOURCE_REFRESH:-0}"
 
 validate_home_dir() {
   local name="$1"
@@ -96,6 +98,11 @@ clone_or_update() {
   local branch="$3"
   local label="$4"
 
+  if [ "$SKIP_SOURCE_REFRESH" = "1" ]; then
+    echo "[skills] source refresh skipped: ${label}"
+    return 0
+  fi
+
   reject_symlink_path "$destination" "${label} destination"
   if [ -d "$destination/.git" ]; then
     if [ -n "$(git -C "$destination" status --porcelain)" ]; then
@@ -125,6 +132,8 @@ clone_or_update() {
 
 clean_git_mirror() {
   local destination="$1"
+
+  [ "$USE_SOURCE_SKILLS" = "1" ] || return 1
 
   [ -d "$destination/.git" ] || return 1
   [ -z "$(git -C "$destination" status --porcelain)" ]
@@ -259,6 +268,10 @@ stage_selected_google_drive_extension_skills() {
 
 project_codex_skills() {
   stage_skill_collection "$canonical_skills_root/codex-curated" "$codex_skills_stage" "Codex curated/user skills"
+  if [ -d "$CODEX_HOME/skills/.system" ]; then
+    # Codex regenerates this directory during startup; do not downgrade it.
+    stage_tree "$CODEX_HOME/skills/.system" "$codex_skills_stage/.system" "existing provider-managed Codex system skills"
+  fi
   stage_skill_collection "$platform_skills_stage" "$codex_skills_stage" "Codex platform skill projection"
   stage_selected_google_drive_extension_skills "$skills_root/plugins/google-drive" "$codex_skills_stage/plugin-google-drive"
   install_tree "$codex_skills_stage" "$CODEX_HOME/skills" "Codex local skills"
@@ -289,7 +302,7 @@ codex_skills_stage="$stage_root/codex-skills"
 claude_skills_stage="$stage_root/claude-skills"
 mkdir -p "$platform_skills_stage" "$codex_skills_stage" "$claude_skills_stage"
 
-if command -v gh >/dev/null 2>&1; then
+if [ "$SKIP_SOURCE_REFRESH" != "1" ] && command -v gh >/dev/null 2>&1; then
   gh auth setup-git >/dev/null 2>&1 || true
 fi
 

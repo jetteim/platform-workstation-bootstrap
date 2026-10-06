@@ -11,7 +11,6 @@ from pathlib import Path
 from typing import Any
 
 from policy import assess_command, assess_prompt, completion_needs_evidence, scan_secrets
-from redact import redact
 
 
 CODEX_HOME = Path(os.environ.get("CODEX_HOME", str(Path.home() / ".codex"))).expanduser()
@@ -21,6 +20,7 @@ LOG_DIR = CODEX_HOME / "hook-logs"
 
 DEFAULT_SESSION_CONTEXT = """Platform guardrails:
 - Treat secrets as toxic: do not print, quote, persist, or commit them.
+- Follow the shared operating principles in `~/.agents/rules/operating-principles.md`.
 - For reliability work, capture target, command, timestamp, output path, metric/log/trace names, rollback path, and verification evidence.
 - For infra changes, prefer plan/dry-run/diff before apply/delete/destroy.
 - Do not claim fixed/passing/done without verification or an explicit caveat.
@@ -43,27 +43,28 @@ def read_payload() -> dict[str, Any]:
     if not raw.strip():
         return {}
     try:
-        return json.loads(raw)
+        payload = json.loads(raw)
+        return payload if isinstance(payload, dict) else {"_invalid_json": True}
     except json.JSONDecodeError:
-        return {"_invalid_json": raw[:4000]}
+        return {"_invalid_json": True}
 
 
 def write_log(event_name: str, payload: dict[str, Any], decision: str, reason: str | None) -> None:
     try:
-        LOG_DIR.mkdir(parents=True, exist_ok=True)
+        LOG_DIR.mkdir(mode=0o700, parents=True, exist_ok=True)
         date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
         entry = {
             "ts": datetime.now(timezone.utc).isoformat(),
             "event": event_name,
             "decision": decision,
             "reason": reason,
-            "session_id": payload.get("session_id"),
-            "turn_id": payload.get("turn_id"),
-            "cwd": payload.get("cwd"),
-            "model": payload.get("model"),
-            "payload": redact(payload),
+            # Never persist prompts, commands, tool output, paths, or transcripts.
+            # Redaction patterns cannot guarantee that arbitrary data is secret-free.
+            "invalid_payload": bool(payload.get("_invalid_json")),
         }
-        with (LOG_DIR / f"{date}.jsonl").open("a", encoding="utf-8") as handle:
+        flags = os.O_WRONLY | os.O_APPEND | os.O_CREAT | os.O_NOFOLLOW
+        descriptor = os.open(LOG_DIR / f"{date}.jsonl", flags, 0o600)
+        with os.fdopen(descriptor, "a", encoding="utf-8") as handle:
             handle.write(json.dumps(entry, sort_keys=True) + "\n")
     except OSError:
         # Hooks should enforce safety policy even if telemetry storage is unavailable.
@@ -150,6 +151,9 @@ def handle_post_tool_use(payload: dict[str, Any]) -> tuple[str, str | None]:
 
 
 def handle_stop(payload: dict[str, Any]) -> tuple[str, str | None]:
+    if payload.get("stop_hook_active"):
+        emit({"continue": True})
+        return "allow", "completion feedback already requested"
     message = payload.get("last_assistant_message")
     if completion_needs_evidence(str(message) if message is not None else None):
         reason = "Before finalizing, add verification evidence or explicitly state what could not be verified."
@@ -165,6 +169,10 @@ def main() -> int:
     decision = "allow"
     reason = None
     try:
+        if payload.get("_invalid_json"):
+            # Do not assess or record malformed input as a valid event.
+            print("Invalid hook payload: expected a JSON object.", file=sys.stderr)
+            return 1
         if event_name == "SessionStart":
             decision, reason = handle_session_start(payload)
         elif event_name == "UserPromptSubmit":

@@ -14,7 +14,7 @@ It is not a dotfiles dump. Secrets, tokens, auth databases, shell history, brows
 
 ## First Step
 
-Always refresh GitHub and dependency forks first:
+For a clean-machine install, refresh GitHub and dependency forks first. A read-only review starts with `./scripts/audit.sh` and does not sync forks:
 
 ```bash
 ./scripts/refresh-github.sh
@@ -37,17 +37,18 @@ Canonical rules include operating principles for honesty, verification, scoped a
 
 `install-skills.sh` is the explicit skill installer. `install.sh` runs it automatically.
 
-The skill install order mirrors the original upstream setup:
+The installer uses reviewed skill snapshots by default:
 
 - Enable Superpowers through the native Codex plugin `superpowers@openai-curated`.
 - Do not clone or project Superpowers from `~/.codex/superpowers`; use the native plugin as its only install source.
 - Refuse unsafe `AGENTS_HOME`, `CODEX_HOME`, and `CLAUDE_HOME` overrides before creating directories.
 - Keep `~/.agents/skills` as a managed empty directory after the duplicate-skill cleanup.
 - Install source mirrors under `~/.agents/vendor_imports`.
+- Preserve existing Codex-managed `.system` skills and their runtime state; bundled system skills seed an empty home only.
 - Install cleaned local Codex skills into `~/.codex/skills`: platform/document skills plus local Google Drive helper skills that extend the native plugin.
-- Preserve the local Codex ZenMoney receipt categorization, savings, and category review skills.
+- Install the reviewed local Codex ZenMoney receipt categorization, savings, and category review skills. Reinstallation replaces managed skill trees; back up intentional local changes first.
 - Install `engineering-agent-ready-clis` for designing, auditing, retrofitting, and testing CLIs used by AI agents.
-- Install `writing-diataxis-documentation` for every documentation creation, revision, audit, or restructuring task.
+- Install `writing-diataxis-documentation` for technical documentation work; use dialogue only for consequential unresolved decisions and honor delegated judgment.
 - Install Claude fallback skills into `~/.claude/skills`, where native Codex plugins are not available.
 - Sync managed skill destinations from staged trees so removed vendored files are pruned on reinstall.
 - Keep vendored Codex and plugin skill fallback copies in the repo for clean-machine bootstrap, Claude fallback, and audit.
@@ -55,25 +56,25 @@ The skill install order mirrors the original upstream setup:
 - Clone the observability pipeline skill repo and install its tool-agnostic pipeline workflow when GitHub access allows.
 - Clone the deterministic `slo-rules-engine` source mirror before installing `reliability-engineering`, so reliability generation can use `sre-rules` instead of hand-written provider artifacts.
 - Fall back to bundled observability/reliability reference summaries inside the skill bundles when private model repo refresh is unavailable.
-- Clone the public architectural execution skill pipeline and install it from source when GitHub access allows.
-- Clone the public Diátaxis documentation skill and install it from source when GitHub access allows.
+- Maintain the architectural execution skill source mirror; install the reviewed repo snapshot.
+- Maintain the Diátaxis documentation skill source mirror; install the reviewed repo snapshot.
 
 `install.sh` installs:
 
 - `~/.codex/hooks.json`
 - `~/.agents/hooks/*` and `~/.agents/prompts/*`
 - `~/.codex/hooks/*.py`, combining shared hook policy with the Codex event dispatcher
-- source-backed skills and cleaned fallback skill projections through `scripts/install-skills.sh`
+- reviewed skills and cleaned fallback skill projections through `scripts/install-skills.sh`
 - `~/.config/git/hooks/pre-commit`
+- `~/.config/git/hooks/scan-staged.py`, which inspects staged blobs in memory
 - `git config --global core.hooksPath ~/.config/git/hooks`
-- `features.hooks = true`
-- `features.multi_agent = true`
-- `features.plugins = true`
-- `plugins."superpowers@openai-curated".enabled = true`
+- missing feature defaults: `hooks = true`, `multi_agent = true`, `plugins = true`
+- missing native plugin defaults: GitHub, Google Drive, and Superpowers enabled
+- `enabled = false` for the archived `@modelcontextprotocol/server-github` duplicate when no explicit enable choice exists
 
-It does not overwrite live credentials or private config files.
+It preserves explicit model, feature, plugin, skill, and credential choices. The config updater parses TOML before and after editing and writes only when defaults are missing. The current executable and npm package both report Codex `0.160.1`. Python 3.11+ supplies `tomllib`; the macOS system Python uses the installed pip TOML parser.
 
-Dirty source mirrors are refreshed neither destructively nor used as source-backed skill inputs; the installer falls back to vendored canonical copies when a mirror has local changes.
+Dirty source mirrors are never refreshed destructively. Set `USE_SOURCE_SKILLS=1` only when intentionally installing clean source-mirror skill versions in place of the reviewed snapshots; this can replace local refinements. Use `SKIP_GITHUB_REFRESH=1 SKIP_SOURCE_REFRESH=1 ./scripts/install.sh` to reinstall the reviewed setup offline. For fixture installs, set `AGENTS_HOME`, `CODEX_HOME`, `CLAUDE_HOME`, and `GIT_HOOKS_HOME` to directories beneath `/tmp`, and set `GIT_CONFIG_GLOBAL` to a fixture file to isolate Git configuration.
 
 See `docs/original-install-comparison.md` for the upstream install-step comparison.
 
@@ -99,11 +100,11 @@ Codex gets Superpowers from `superpowers@openai-curated`. Obsolete vendored Supe
 
 `manifests/codex-skills.txt` records installed local skills and skill bundles present in the native and remote plugin caches, including Data Analytics, Deep Research, templates, and plugin management. Cache presence does not establish that a skill is enabled or exposed in a session. Remote plugins are not vendored or installed by this repository.
 
-`scripts/install-skills.sh` leaves `~/.agents/skills` empty, installs vendored and source-backed local Codex skills into `~/.codex/skills`, installs only the local Google Drive helper skills under `~/.codex/skills/plugin-google-drive`, and places full plugin-skill fallbacks under `~/.claude/skills` for Claude.
+`scripts/install-skills.sh` leaves `~/.agents/skills` empty, installs reviewed local Codex skills into `~/.codex/skills`, installs only the local Google Drive helper skills under `~/.codex/skills/plugin-google-drive`, and places full plugin-skill fallbacks under `~/.claude/skills` for Claude.
 `agents/skills/codex-curated/` contains Codex-only system, document, and ZenMoney skills. Shared platform skills live under `agents/skills/platform/` and are staged once for each adapter.
-The architectural execution skill pipeline is installed from `jetteim/architectural-execution-skills` when the source mirror is available, with vendored fallback copies under `skills/codex/`.
+The architectural execution skill pipeline originates in `jetteim/architectural-execution-skills`; reviewed copies live under `agents/skills/platform/` and `skills/codex/`. Upstream refresh and skill installation are separate choices.
 The agent-ready CLI skill is canonical under `agents/skills/platform/engineering-agent-ready-clis/`, projected to Codex and Claude, and vendored under `skills/codex/engineering-agent-ready-clis/` for clean-machine bootstrap.
-The agent-agnostic Diátaxis documentation skill is installed from `jetteim/diataxis-documentation-skill`, projected unchanged to Codex and Claude, and vendored under `skills/codex/writing-diataxis-documentation/` for clean-machine bootstrap. It uses a Superpowers-style dialogue: one question at a time, recommended content approaches, progressive outline approval, a gate before drafting, and final user review.
+The agent-agnostic Diátaxis documentation skill originates in `jetteim/diataxis-documentation-skill`. The reviewed local version is projected to Codex and Claude and mirrored under `skills/codex/writing-diataxis-documentation/`. It matches content to a reader need, asks one question at a time when needed, and continues under delegated judgment when evidence settles the brief and outline.
 
 ## Important Repositories
 
@@ -140,9 +141,13 @@ Language and repo-specific linting belongs in each repository. Global hooks shou
 
 ## Compare With Local State
 
-Run `./scripts/audit.sh` for a read-only JSON inventory of installed packages, skill hashes, plugin cache versions, and source-mirror commits/dirty status. The captured baseline is `manifests/local-state.json`; compare it with fresh output, ignoring `observed_at`. The audit excludes credentials and private runtime configuration values.
+Run `./scripts/audit.sh` for a read-only JSON inventory of installed packages, skill hashes, plugin cache versions, and source-mirror commits/dirty status. The captured baseline is `manifests/local-state.json`; compare it with fresh output, ignoring `observed_at`. The audit excludes credentials and private runtime configuration values except allowlisted model, reasoning effort, feature flags, and known native plugin booleans, and known MCP enabled flags. It records rule/template presence separately from activation. Remote plugin cache presence and native plugin enabled flags do not establish session exposure or hook trust.
 
-Both Codex config examples capture the reviewed local model, MCP commands, project trust entries, and tool approval policies. They contain machine-specific paths and require review before use elsewhere. UI counters and hook trust state are excluded.
+Both Codex config examples capture the reviewed local model, MCP commands, project trust entries, and tool approval policies. They contain machine-specific paths and require review before use elsewhere. UI counters and hook trust state are excluded. Review new or changed hook definitions using `/hooks`; hook installation does not establish trust. Hook logs retain timestamps, event names, decisions, and fixed reasons, with no prompt, command, tool-output, or transcript payloads. Secret detection remains a heuristic safety net, and the Stop evidence check requests at most one correction per turn.
+
+Claude currently has local skill fallbacks and a `CLAUDE.md.template`; neither an active `~/.claude/CLAUDE.md` nor `settings.json` is present. The template is a proposed integration, not evidence that Claude loads shared rules.
+
+`./scripts/verify.sh` checks syntax, skill projections, and disposable behavioral fixtures for hooks, staged-content scanning, config preservation, and offline install/reinstall. It does not read live hook logs or depend on source-mirror cleanliness. See [the assessment](docs/assessment.md) for current findings, source guidance, and verification limits.
 
 ## NPM Status
 

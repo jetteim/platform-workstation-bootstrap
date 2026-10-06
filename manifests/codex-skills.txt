@@ -1,3 +1,4 @@
+# Observed local skills and plugin cache entries; cache presence does not prove activation.
 data-analytics:analyze-data-quality
 data-analytics:build-dashboard
 data-analytics:build-report
@@ -18,7 +19,6 @@ data-analytics:schedule-refresh-jobs
 data-analytics:share-artifact-summary
 data-analytics:validate-data
 data-analytics:visualize-data
-deep-research-work:deep-research
 local:brain
 local:categorize-zenmoney-receipts
 local:creating-observability-pipelines
@@ -75,6 +75,10 @@ plugin-google-drive:google-drive-comments
 plugin-google-drive:google-sheets
 plugin-google-drive:google-slides
 plugin-management:plugin-management
+sites:sites-building
+sites:sites-hosting
+sites:sites-mcp
+sites:sites-preview-troubleshooting
 superpowers:brainstorming
 superpowers:dispatching-parallel-agents
 superpowers:executing-plans
@@ -91,7 +95,9 @@ superpowers:writing-plans
 superpowers:writing-skills
 system:imagegen
 system:openai-docs
-system:plugin-creator
 system:review-agent
 system:skill-creator
 system:skill-installer
+work-pets:create-pet
+work-pets:pets
+work-pets:update-pet

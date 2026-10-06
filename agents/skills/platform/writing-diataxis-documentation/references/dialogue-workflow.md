@@ -2,6 +2,8 @@
 
 Use this state model to guide a documentation task from a vague request to a verified draft. Move forward as soon as a state has enough information; do not turn the workflow into a questionnaire.
 
+Explicit user instructions and delegated judgment govern this state model. When the user authorizes autonomous work and the brief can be established from evidence, choose the approach and outline, then draft and verify. The approval steps below apply when collaborative design is requested or a consequential decision remains unresolved. Never treat elapsed time as approval.
+
 ## Contents
 
 - [State 0: Inspect](#state-0-inspect)
@@ -91,7 +93,7 @@ Lead with the recommended approach and explain why it best fits the reader need.
 2. **Landing page plus focused child pages:** better when several distinct audiences or modes must be served; costs more to create and maintain.
 3. **Incremental revision of the existing page set:** smallest review surface; leaves some structural debt temporarily.
 
-Ask one choice question and wait. Skip this state only when the user has already approved a structure or a mandatory template leaves no meaningful alternative; state that reason briefly.
+Ask one choice question and wait. Skip this state when the user delegates judgment, has already approved a structure, or a mandatory template leaves no meaningful alternative; state that reason briefly.
 
 Exit this state with an approved content approach.
 
@@ -139,7 +141,7 @@ For each planned document section, say what is already known and ask for input o
 
 For landing pages and READMEs, walk through orientation, audience entry points, the smallest useful start, and links to each relevant reader need.
 
-Exit this state only when every planned section is confirmed, supported by a discoverable source, safely inferable, explicitly deferred, or removed from scope, and the user has approved the complete outline.
+Exit this state only when every planned section is confirmed, supported by a discoverable source, safely inferable, explicitly deferred, or removed from scope, and the complete outline has been approved or settled under delegated judgment.
 
 ## State 6: Draft
 
@@ -164,7 +166,7 @@ Review in this order:
 5. **Gaps:** Which unresolved items require a user decision or source?
 6. **Handoffs:** Can readers find adjacent tutorial, task, reference, or conceptual needs?
 
-Fix self-review findings before handoff. Present the completed artifact and ask the user to review it. Do not describe the document as accepted until the user approves it; if they request changes, revise, re-run the relevant checks, and ask for review again.
+Fix self-review findings before handoff. Present the completed artifact for review and finish any already-authorized save, commit, or publication steps. Do not describe the document as accepted until the user approves it; if they request changes, revise, re-run the relevant checks, and ask for review again.
 
 Ask a focused content question before handoff only when an unresolved item blocks a trustworthy result. Otherwise finish the draft and list material assumptions or deferred follow-ups briefly.
 

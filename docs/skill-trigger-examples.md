@@ -26,14 +26,13 @@ This is a practical prompt map for the vendored skills in this workstation boots
 | Skill | Example prompts that should trigger it |
 | --- | --- |
 | `brain` | "Train a micro classifier for risky kubectl commands", "Fine-tune a local model for alert triage", "Build a local command router", "Export a GGUF classifier" |
-| `observability-engineering` | "Build observability for this platform", "Define SLOs for this service", "Generate telemetry backend artifacts", "Migrate sre-rules into SLO intents", "Enforce OpenTelemetry semantic conventions" |
+| `observability-engineering` | "Build observability for this platform", "Bind this SLO to telemetry", "Generate telemetry backend artifacts", "Migrate sre-rules into SLO intents", "Enforce OpenTelemetry semantic conventions" |
 | `creating-observability-pipelines` | "Create a telemetry pipeline contract", "Review this pipeline topology", "Define source-to-sink lineage", "Specify transform contracts, buffers, delivery policy, and self-observability" |
-| `reliability-engineering` | "Build reliability model", "Assess service reliability", "Write a postmortem from incident evidence", "Turn postmortem findings into action items", "Define a miss policy", "Plan a resilience experiment" |
+| `reliability-engineering` | "Choose SLIs and SLO objectives for this service", "Build reliability model", "Assess service reliability", "Write a postmortem from incident evidence", "Turn postmortem findings into action items", "Define a miss policy", "Plan a resilience experiment" |
 | `openai-docs` | "What is the current OpenAI API for responses?", "How do I upgrade this prompt to GPT-5.4?", "Which current OpenAI model should I use?" |
 | `imagegen` | "Generate a transparent icon", "Create a raster illustration", "Edit this image into variants" |
 | `skill-installer` | "Install a skill from openai/skills", "List curated skills", "Install this skill from a GitHub URL" |
 | `skill-creator` | "Help me design a new skill", "What should go into a SKILL.md?" |
-| `plugin-creator` | "Scaffold a Codex plugin", "Create plugin.json and plugin folders" |
 
 ## Architectural Execution Pipeline
 
@@ -80,6 +79,19 @@ This is a practical prompt map for the vendored skills in this workstation boots
 | `google-slides-template-migration` | "Move this deck onto a new template", "Rebuild slides using this branded template" |
 | `google-slides-template-surgery` | "Batch-fix structural layout defects", "Repair repeated template issues in Slides" |
 | `google-slides-visual-iteration` | "Make this deck visually cleaner", "Fix slide alignment and overflow", "Iterate with thumbnails until it looks right" |
+
+## Routing boundaries
+
+| Request | Preferred workflow | Boundary |
+| --- | --- | --- |
+| Choose SLI/SLO objectives or error budgets | `reliability-engineering` | Use observability only for telemetry bindings and backend artifacts. |
+| Build collection, routing, buffers, or delivery | `creating-observability-pipelines` | Load observability intent only where it constrains the pipeline. |
+| Audit a CLI for agent use | `engineering-agent-ready-clis` | Running a CLI during unrelated work does not activate this skill. |
+| Explain classifier terminology | Ordinary explanation | `brain` applies when local model training or deployment is requested. |
+| Refresh README facts from observed setup | `writing-diataxis-documentation` | Preserve the existing structure and finish authorized updates. |
+| Create a document with an unclear audience | `writing-diataxis-documentation` | Ask for the consequential missing reader need before polishing. |
+
+These are review cases, not measured automatic-routing results. Native plugin workflows depend on availability in the current session. An enabled plugin or installed skill does not authorize external writes or agent delegation.
 
 ## Notes
 

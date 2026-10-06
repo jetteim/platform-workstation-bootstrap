@@ -1,6 +1,6 @@
 # Local setup snapshot; credentials and runtime UI/hook trust state are excluded.
 # Review machine-specific paths and tool approval policies before using elsewhere.
-model = "gpt-6-astra"
+model = "gpt-6.1-sol"
 model_reasoning_effort = "high"
 
 [features]
@@ -52,6 +52,8 @@ approval_mode = "approve"
 approval_mode = "approve"
 
 [mcp_servers.github]
+# Archived reference implementation; use the native GitHub plugin.
+enabled = false
 command = "npx"
 args = ["-y", "@modelcontextprotocol/server-github"]
 
@@ -97,6 +99,9 @@ approval_mode = "approve"
 approval_mode = "approve"
 
 [mcp_servers."zenmoney-receipts".tools.zenmoney_apply_receipt_reconciliation]
+approval_mode = "approve"
+
+[mcp_servers."zenmoney-receipts".tools.zenmoney_apply_category_consolidation]
 approval_mode = "approve"
 
 [plugins."github@openai-curated"]

@@ -1,6 +1,6 @@
 ---
 name: engineering-agent-ready-clis
-description: Design, review, retrofit, and test command-line interfaces that AI agents can use predictably and safely. Use when creating or auditing a CLI, exposing an API through a CLI or MCP server, adding structured JSON or NDJSON I/O, raw payload support, runtime schema discovery, bounded responses, headless authentication, adversarial input validation, dry-run behavior, response sanitization, agent skills, or an agent-readiness migration plan.
+description: Design, audit, or retrofit a CLI or MCP interface for agent use, including structured I/O, discovery, bounded responses, validation, and mutation previews. Use when agent readiness is part of the requested outcome.
 ---
 
 # Engineer Agent-Ready CLIs

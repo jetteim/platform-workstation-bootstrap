@@ -1,6 +1,6 @@
 ---
 name: observability-engineering
-description: Use when building platform or application observability, defining SLOs, preparing telemetry backend artifacts, enforcing OpenTelemetry semantic conventions, creating alert dashboards, or migrating SRE rules.
+description: Build or review instrumentation, OpenTelemetry conventions, telemetry bindings, alerts, dashboards, and generated backend artifacts. Use reliability-engineering for SLI/SLO objectives and incident aftercare; creating-observability-pipelines for collection and delivery topology.
 ---
 
 # Observability Engineering
@@ -29,7 +29,7 @@ Use this skill for:
 
 - building infra observability for a Kubernetes-based platform
 - preparing application observability for a service or product area
-- defining SLOs and SLIs
+- implementing telemetry bindings for SLOs and SLIs
 - generating alerts, notifications, dashboards, rules, or backend API/IaC artifacts
 - extending OpenTelemetry semantic conventions with org-wide attributes
 - enforcing semantic conventions through CI, Helm, admission policy, or runtime checks
@@ -37,7 +37,7 @@ Use this skill for:
 
 Do not use this skill for one-off debugging of a single incident unless the task asks to improve the observability model or generated artifacts.
 
-If the task is primarily about incident aftercare, postmortems, miss-policy, action items, resilience experiments, or operational readiness, use `reliability-engineering` instead. Use this skill only for the telemetry, SLO binding, alert, dashboard, or backend artifact portions.
+If the task is primarily about choosing SLIs, SLO objectives, error budgets, incident aftercare, postmortems, miss-policy, action items, resilience experiments, or operational readiness, use `reliability-engineering` instead. Use this skill only for the telemetry, SLO binding, alert, dashboard, or backend artifact portions.
 
 If the task is primarily about telemetry pipeline topology, source-to-sink lineage, transform contracts, routing, buffering, delivery guarantees, validation, or pipeline self-observability, use `creating-observability-pipelines` as the companion workflow. Keep this skill as the parent intent model for SLOs, semantic conventions, alert context, dashboards, and generated backend artifacts.
 

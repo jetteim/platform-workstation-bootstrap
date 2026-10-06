@@ -1,6 +1,6 @@
 ---
 name: writing-diataxis-documentation
-description: Guide the user through a dialogue-first Diátaxis workflow so each document serves a clear reader need as a tutorial, how-to guide, reference, or explanation. Use whenever creating, rewriting, restructuring, or reviewing technical or product documentation, including vague requests such as “write a doc on that thing,” README files, getting-started material, runbooks, troubleshooting guides, API/CLI reference, architecture and concept docs, ADRs, and documentation sites. Elicit missing audience, outcome, scope, evidence, and section-level input without asking for facts that can be discovered safely. Use alongside file-format or publishing skills; this agent-agnostic skill governs the authoring dialogue, documentation intent, information architecture, and prose rather than rendering or platform mechanics.
+description: Create, revise, or review technical documentation around a reader need using Diátaxis. Use for tutorials, how-to guides, reference, explanations, READMEs, and runbooks; preserve delegated judgment and scale dialogue to missing decisions.
 ---
 
 # Write Diátaxis Documentation
@@ -20,9 +20,9 @@ Treat adapter-specific metadata outside `SKILL.md` as optional integration. The 
 Treat an underspecified documentation prompt as the start of a collaborative authoring session. Inspect the available conversation, repository, product, and existing docs first. Then ask for only the consequential information that remains missing.
 
 <DIALOGUE-GATE>
-For a new document or material rewrite, do not write the polished draft until you have explored context, asked clarifying questions one at a time, recommended a content approach, presented the proposed outline in manageable sections, and received user approval. A short document can have a short design, but it still needs an explicit outline approval.
+For a new document or material rewrite with consequential unresolved reader, scope, or structure decisions, explore context and agree on a short outline before polishing the draft. Ask one focused question at a time when an answer is required. When the user delegates judgment or supplies enough context, choose the approach and outline, state material assumptions, and continue through verification without introducing an approval gate.
 
-Treat a bounded copy edit, typo fix, format conversion, or explicitly approved existing outline as already designed. Do not restart the dialogue unless the requested change exposes a consequential ambiguity.
+Explicit user instructions take precedence over this workflow. Existing authorization persists across turns. Treat a bounded copy edit, evidence update, typo fix, format conversion, or explicitly approved existing outline as already designed. Do not restart the dialogue unless the requested change exposes a consequential ambiguity.
 </DIALOGUE-GATE>
 
 Move through these checkpoints:
@@ -30,12 +30,12 @@ Move through these checkpoints:
 1. **Brief** — establish the topic, intended reader, reader competence, situation, desired outcome, destination, and constraints.
 2. **Mode** — propose the most likely Diátaxis mode and explain it in ordinary language. Ask for confirmation only when another plausible mode would materially change the document.
 3. **Contract** — agree on scope, starting state, ending state, authoritative evidence, version assumptions, safety needs, and explicit exclusions.
-4. **Approaches** — offer two or three plausible content designs with trade-offs, lead with a recommendation, and let the user choose. Skip artificial alternatives only when a mandated template or already-approved structure leaves no meaningful choice.
-5. **Outline** — present sections appropriate to the selected approach and mode. Walk through every section, marking what is known, safely inferred, discoverable, or still needs user input. Ask for approval after each substantial outline section.
-6. **Draft** — draft only after the outline is approved. Work section by section for complex or sensitive documents; draft as a whole for short, well-specified documents. Keep unresolved items visible rather than inventing them.
-7. **Review** — verify facts and examples, self-review the reader journey, present the completed artifact, and ask the user to review it before treating the document as accepted.
+4. **Approaches** — offer two or three plausible content designs with trade-offs, lead with a recommendation, and let the user choose. Skip artificial alternatives when a mandated template, already-approved structure, or delegated judgment settles the choice.
+5. **Outline** — present sections appropriate to the selected approach and mode. Walk through every section, marking what is known, safely inferred, discoverable, or still needs user input. Seek section approval when the user requested collaborative design or an unresolved decision would materially change the result.
+6. **Draft** — draft once the outline is settled by the user or delegated judgment. Work section by section for complex or sensitive documents; draft as a whole for short, well-specified documents. Keep unresolved items visible rather than inventing them.
+7. **Review** — verify facts and examples, self-review the reader journey, present the completed artifact, and handoff for review; complete any already-authorized save, commit, or publication steps.
 
-Ask exactly one clarifying or approval question per message. Prefer a small set of concrete choices when useful, with the recommended choice first and its trade-off explained. Use an open question when the user's own words matter more than predefined options. Do not demand Diátaxis terminology from the user.
+When clarification is needed, ask exactly one clarifying or approval question per message. Prefer a small set of concrete choices when useful, with the recommended choice first and its trade-off explained. Use an open question when the user's own words matter more than predefined options. Do not demand Diátaxis terminology from the user.
 
 Do not ask for information already available in the task context or authoritative local sources. Do not invent domain facts, organizational policy, commands, outcomes, quotations, user opinions, or risk decisions. When the user asks for speed, delegates judgment, or cannot provide an answer, proceed with clearly labeled assumptions or placeholders and state their impact.
 
@@ -57,9 +57,9 @@ For the exact conversational states, section prompts, and stop conditions, read 
 
 5. Read [authoring-contracts.md](references/authoring-contracts.md) for the selected mode. Apply its contract and QA checklist.
 6. Compare meaningful content approaches, recommend one, and let the user choose.
-7. Build a mode-appropriate outline, present it progressively, and obtain user approval before drafting. Resolve each section through available evidence, safe inference, or focused user input.
+7. Build a mode-appropriate outline; present it progressively when consequential decisions need user input, otherwise proceed using delegated judgment. Resolve each section through available evidence, safe inference, or focused user input.
 8. Keep the page focused. Move substantial material that serves another need into a separately titled section or page, and link to it at the point of need.
-9. Verify the result against current source material and runnable examples where applicable. Then review flow from the reader's perspective, return to dialogue for unresolved gaps, and request user review of the completed document.
+9. Verify the result against current source material and runnable examples where applicable. Then review flow from the reader's perspective, return to dialogue for unresolved gaps, and hand off the verified document with material assumptions or unresolved decisions.
 
 If the request is to audit, migrate, or reorganize an existing documentation set, also read [auditing-and-structure.md](references/auditing-and-structure.md).
 

@@ -61,7 +61,7 @@ Current Codex MCP config uses:
 - `@modelcontextprotocol/server-github`
 - `@modelcontextprotocol/server-memory`
 
-The `@modelcontextprotocol/server-github` package did not expose repository metadata during assessment. It is documented as a package dependency and associated with the MCP server family.
+The GitHub reference implementation is [archived by the MCP project](https://github.com/modelcontextprotocol/servers#archived). The reviewed setup disables this duplicate and uses the native GitHub plugin. For a separate MCP deployment, evaluate [GitHub’s maintained server](https://github.com/github/github-mcp-server); its authentication must be configured independently.
 
 ## Pinning Policy
 
@@ -71,7 +71,7 @@ For repeatable setup:
 - Prefer exact npm package versions for executable dependencies.
 - Use `@latest` only for tools where freshness is intentionally preferred over repeatability.
 
-Observed local versions and mirror commits (2026-09-11; inventories, not enforced installer pins):
+Observed local versions and mirror commits (2026-10-06; inventories, not enforced installer pins):
 
 - OpenAI skills local commit: `49f948faa9258a0c61caceaf225e179651397431`
 - Codex source mirror commit: `85fc4def358b7df21883e72ae8dda43a0f572f32`
@@ -87,9 +87,9 @@ Observed local versions and mirror commits (2026-09-11; inventories, not enforce
 - Reliability engineering skill mirror commit: `6785e245425ef5c84c57270fffc352000c893b8c`
 - Architectural execution skills mirror commit: `bb211111e000e679a8b5c12ea4cc9ae94790e719`
 - Diátaxis documentation skill mirror commit: `e84499968416a10baa909d613b67ca0f39533733`
-- Codex CLI npm package: `@openai/codex@0.154.0`
+- Codex CLI npm package: `@openai/codex@0.160.1`
 - Codex Homebrew cask present: `codex 0.111.0`
-- Playwright MCP npm package: `@playwright/mcp@0.0.80`
+- Playwright MCP npm package: `@playwright/mcp@0.0.81`
 - MCP memory server npm package: `@modelcontextprotocol/server-memory@2026.8.31`
 - MCP GitHub server npm package: `@modelcontextprotocol/server-github@2025.4.8`
 
@@ -113,25 +113,25 @@ Superpowers is installed only through the `superpowers@openai-curated` plugin. O
 
 `skills/codex/` comes from the local Codex user skill directory, including system skills and installed document/spreadsheet/PDF/notebook skills.
 
-The captured Codex `0.154.0` system bundle includes `review-agent` and the current image generation, OpenAI documentation, plugin creation, skill creation, and skill installation workflows.
+The captured Codex `0.160.1` system bundle includes `review-agent`, image generation, OpenAI documentation, skill creation and skill installation workflows. Codex regenerates system skills at startup; the obsolete `plugin-creator` snapshot and runtime marker are excluded from the reviewed bundle. Existing provider-managed system skills are preserved during reinstall.
 
 `skills/codex/brain/` comes from `jetteim/brain-skill` commit `73789527637114b2a3745b2da9afa64fa8c1b7fa`.
 
-`skills/codex/observability-engineering/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
+`skills/codex/observability-engineering/` comes from the local public skill repo and is installed from the reviewed snapshot by default.
 
-`skills/codex/creating-observability-pipelines/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
+`skills/codex/creating-observability-pipelines/` comes from the local public skill repo and is installed from the reviewed snapshot by default.
 
-`skills/codex/reliability-engineering/` comes from the local public skill repo and is installed as a fallback when the source mirror is unavailable.
+`skills/codex/reliability-engineering/` comes from the local public skill repo and is installed from the reviewed snapshot by default.
 
 `skills/codex/engineering-agent-ready-clis/` is the vendored fallback for the canonical platform skill under `agents/skills/platform/`.
 
-`skills/codex/writing-diataxis-documentation/` comes from `jetteim/diataxis-documentation-skill` and is installed as a fallback when the source mirror is unavailable.
+`skills/codex/writing-diataxis-documentation/` comes from `jetteim/diataxis-documentation-skill` and is installed from the reviewed snapshot by default.
 
-`skills/codex/orchestrating-architecture-execution/` and its companion value-stream, capability, feature, C4, story-slicing, and traceability skills come from `jetteim/architectural-execution-skills` and are installed as fallbacks when the source mirror is unavailable.
+`skills/codex/orchestrating-architecture-execution/` and its companion value-stream, capability, feature, C4, story-slicing, and traceability skills come from `jetteim/architectural-execution-skills` and are installed from reviewed snapshots by default.
 
 `skills/plugins/github/` and `skills/plugins/google-drive/` retain the locally installed Claude fallback bundles plus Codex Google Drive extensions. The active native Google Drive plugin has newer core skills; its version and skill hashes are recorded separately in `manifests/local-state.json`. Superpowers has no vendored fallback; the native plugin is its only install source.
 
-The vendored bundles are fallback/bootstrap material. Prefer refreshing the upstream forks first, then use these copies when a clean machine has not yet populated adapter skills or plugin caches. Codex uses plugin-provided GitHub, Superpowers, and core Google Drive skills; only local Google Drive helper skills are projected under `~/.codex/skills/plugin-google-drive`.
+The vendored bundles are the reviewed bootstrap inputs. Source refresh maintains reference mirrors; `USE_SOURCE_SKILLS=1` separately opts into clean mirror versions and may replace local refinements. Codex uses plugin-provided GitHub, Superpowers, and core Google Drive skills; only local Google Drive helper skills are projected under `~/.codex/skills/plugin-google-drive`.
 
 Managed skill destinations are synced from staged bootstrap trees, not overlaid indefinitely. Reinstalling prunes files that were removed from the managed source bundles.
 
